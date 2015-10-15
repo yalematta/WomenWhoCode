@@ -171,4 +171,5 @@ other apps
 
 <img src="https://cloud.githubusercontent.com/assets/11285573/10502938/0d96c6f4-72a6-11e5-9be4-80f4f2c4fdbd.png">
 <img src="https://cloud.githubusercontent.com/assets/11285573/10502937/0d966f7e-72a6-11e5-87b3-e8600803b29f.png">
-
+<img src="https://cloud.githubusercontent.com/assets/11285573/10502939/0da8f612-72a6-11e5-8b3d-dafc4967030a.png">
+<img src="https://cloud.githubusercontent.com/assets/11285573/10502940/0da96750-72a6-11e5-90e1-8e61465cdf68.png">
