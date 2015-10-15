@@ -167,7 +167,7 @@ contents of the fragment selected.
 other apps
 * [ ] Include an about WWCode fragment and make it accessible in the drawer
 
-## Video Walkthrough
+## Mocks for the required stories and an additional mock for the chat feature
 
 <img src="https://cloud.githubusercontent.com/assets/11285573/10502938/0d96c6f4-72a6-11e5-9be4-80f4f2c4fdbd.png">
 <img src="https://cloud.githubusercontent.com/assets/11285573/10502937/0d966f7e-72a6-11e5-87b3-e8600803b29f.png">
