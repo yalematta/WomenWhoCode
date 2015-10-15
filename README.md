@@ -24,7 +24,7 @@ The following **required** functionality is completed:
 Onboarding:
 * [ ] On app install we will ask user if we can access their location settings
 * [ ] Member will go through a personalization flow that is persisted via parse
-  * [ ] Personalization flow will include 3 questions with checkbox options (you 
+  * [ ] Personalization flow will include 3 views questions with checkbox options (you 
   can check on or many)
     * [ ] Engineering area of interest: Architecture, Security, Data Science/ 
     Analytics, Opensource, Other (will be a text box)
@@ -42,39 +42,52 @@ an account via github oauth or with email
   oauth sign up flow (https://developer.github.com/v3/oauth_authorizations/)
     * [ ] On successful log in we will push the Member data and personalization
     data to server via parse
-  * member model will include a fullname, geo location, image_url, password
+    * [ ] get image url from user's github profile save it to image_url
+  * member model will include a fullname, geo location, image_url, password, job description
+  * personalization_details: user_id, answers (hash with key (question): values (array of answers submitted)) --- check if this is 
+  supported in parse. 
+* After successful account creation, take user to profile preview: render user details, 
+include image, password field (we may not need this), full name, job description field. Auto display whatever we have and leave what we don't have blank for the user to fill in. 
+  * [ ] Add functionality so the user can upload their image or take a photo of themselves. 
 
 Timeline:
 * [ ] Timeline is the first listview page/fragment the member is taken to after
-log in, it will be the first tab in a 3 tab view.   
+they confirm profile details, it will be the first tab in a 3 tab view.   
 * [ ] Member will see location and interest based data:
-  * [ ] The timeline will be a multitype list and fragment
-  * [ ] Initial timeline details for each member will include:
-  	* [ ] an inspiration quote - will be a post from the "Get Inspired" subscription
+  * [ ] The timeline will be a listview and fragment
+  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings):
+  	* [ ] an inspiration quote - will be a post from the "Get Inspired" feature
   	* [ ] notification style alerts about which subscriptions they are 
   	subscribed to, initial subscriptions include network events closest to their 
   	location, the applaud her, the code review, the blog, get inspired
-* [ ] On click of an listview item will take them to the details view of that post/item. 
+* [ ] On click of an listview post/item will take them to the details view of that post. 
+* [ ] endless scroll on list view
 
-Subscribing:
-* [ ] Member can tab to see the subscription
-* [ ] Subscription will be modeled locally and pushed to parsed
-    * [ ] each subscription will be a local data seed 
+Posts (directly relates to timeline):
+* [ ] Each item in the timeline view is a post that belongs to a feature or event. 
+  * [ ] Persist a post model, post will include user_id, subscription_id, 
+  title, details/description, awesome_count
+  * [ ] We will pre-seed posts for now
+  * [ ] sort post in listview by most recent
+
+Subscribing (tab in mock that says features):
+* [ ] Member can tab to see the feature they are subscribed to and can join
+* [ ] feature will be modeled locally and pushed to parsed
+    * [ ] each feature will be a local data seed 
     (pending from Zassmin) 
-      * [ ] A Subscription has title/name, description, joined_count
-      * [ ] A member belongs to many subscriptions
-* [ ] Subscription fragment will include a listview with subscription title and 
+      * [ ] A feature has title/name, description, joined_count
+      * [ ] A member belongs to many features
+* [ ] feature fragment will include a listview with feature title and 
 short details
-* [ ] member can choose which subscription to join by clicking the 
-subscription and being taken to a detail view
+* [ ] member can choose which feature to join by clicking the 
+feature and being taken to a detail view
   * [ ] In the detail view the member can subscribe or unsubscribe 
-  * [ ] subscriptions alerts such as, 'you just subscribed to #java, learn more 
+  * [ ] features alerts such as, 'you just subscribed to #java, learn more 
   here' will be rendered to the timeline fragment 
-* on click of a subscription will take them to a details view of that subscription
+* on click of a feature will take them to a details view of that feature
 * detail view: 
   * member can see the title, description, number of people joined, post history 
   and choose to subscribe
-  * Where are we doing the post model?
 
 Events: 
 * [ ] listview fragment for only event details
@@ -92,6 +105,7 @@ to better learn member's interests
   * [ ] language data (https://developer.github.com/v3/repos/#list-languages)
   * [ ] Persist language data locally on a Language model that has: user_id, 
   repo, language_bytes, language. One row per language for now. 
+* [ ] add a character limit to the option stuff
 
 Timeline:
 * [ ] On click of an listview item's description post will take them to the 
@@ -123,7 +137,7 @@ be on the wait list, by adding email and fullname
   * We will also push their personalization data with name and email to parse
 
 Timeline
-* [ ] 
+* [ ] Add new posts based on relevent converstations! 
 
 Subscribing
 * [ ] Member can swipe the item on the listview to see subscribe or unsubscribe 
