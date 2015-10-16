@@ -65,6 +65,7 @@ public class Profile extends ParseObject {
         return getParseGeoPoint(LOCATION_KEY);
     }
 
+    // NOTE: this a stretch goal getter and setter
     public void setYearsExperience(String range) {
         put(ABOUT_YEARS_EXPERIENCE_KEY, range);
     }
