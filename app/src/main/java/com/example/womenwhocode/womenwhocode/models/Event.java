@@ -16,6 +16,7 @@ public class Event extends ParseObject {
     public static String RSVP_COUNT_KEY = "rsvp_count";
     public static String RSVP_LIMIT_KEY = "rsvp_limit";
     public static String AWESOME_COUNT_KEY = "awesome_count";
+    public static String DESCRIPTION_KEY = "description";
 
     public void setNetwork(Network network) {
         put(NETWORK_KEY, network);
@@ -87,6 +88,14 @@ public class Event extends ParseObject {
 
     public int getRsvpLimit() {
         return this.getInt(RSVP_LIMIT_KEY);
+    }
+
+    public void setDescription(String description) {
+        put(DESCRIPTION_KEY, description);
+    }
+
+    public String getDescription() {
+        return this.get(DESCRIPTION_KEY).toString();
     }
 
     // awesomeCount is for our stretch goals
