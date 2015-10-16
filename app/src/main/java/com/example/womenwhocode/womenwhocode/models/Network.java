@@ -9,6 +9,7 @@ public class Network extends ParseObject {
     public static String TITLE_KEY = "title";
     public static String MEETUP_GROUP_ID_KEY = "meetup_group_id";
     public static String MEETUP_URL_KEY = "meetup_url";
+    public static String IMAGE_URL_KEY = "image_url";
 
     public void setTitle(String title) {
         put(TITLE_KEY, title);
@@ -32,5 +33,13 @@ public class Network extends ParseObject {
 
     public String getMeetupUrl() {
         return this.get(MEETUP_URL_KEY).toString();
+    }
+
+    public void setImageUrl(String url) {
+        put(IMAGE_URL_KEY, url);
+    }
+
+    public String getImageUrl() {
+        return this.get(IMAGE_URL_KEY).toString();
     }
 }
