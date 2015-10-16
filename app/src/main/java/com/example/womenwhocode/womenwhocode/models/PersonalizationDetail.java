@@ -2,7 +2,6 @@ package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 
 import org.json.JSONArray;
 
@@ -18,12 +17,12 @@ public class PersonalizationDetail extends ParseObject {
         put(ANSWERS_KEY, answers);
     }
 
-    public void setUser(ParseUser user) {
+    public void setUser(User user) {
         put(USER_KEY, user);
     }
 
-    public ParseUser getUser()  {
-        return getParseUser(USER_KEY);
+    public User getUser()  {
+        return (User) getParseObject(USER_KEY);
     }
 
     // parse array data type is json array
