@@ -1,10 +1,12 @@
 package com.example.womenwhocode.womenwhocode.models;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
  * Created by zassmin on 10/16/15.
  */
+@ParseClassName("Feature")
 public class Feature extends ParseObject {
     public static String AUTO_SUBSCRIBE_KEY = "auto_subscribe";
     public static String IMAGE_URL_KEY = "image_url";

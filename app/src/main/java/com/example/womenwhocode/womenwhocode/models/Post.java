@@ -1,10 +1,12 @@
 package com.example.womenwhocode.womenwhocode.models;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
  * Created by zassmin on 10/16/15.
  */
+@ParseClassName("Post")
 public class Post extends ParseObject {
     public static String DESCRIPTION_KEY = "description";
     public static String IMAGE_URL_KEY = "image_url";
