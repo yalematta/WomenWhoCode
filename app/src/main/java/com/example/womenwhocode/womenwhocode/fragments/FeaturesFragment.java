@@ -21,9 +21,7 @@ public class FeaturesFragment extends Fragment {
     // Inflate the fragment layout we defined above for this fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feature, container, false);
-        //TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
-        //tvTitle.setText("Fragment #" + mPage);
+        View view = inflater.inflate(R.layout.fragment_features, container, false);
         return view;
     }
 }
