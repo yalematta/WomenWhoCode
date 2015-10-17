@@ -1,11 +1,19 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
+import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +21,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the viewpager
+        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+
+        // Set the viewpager adapter for the pager
+        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+
+        // Find the sliding tabstrip
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+
+        // Attach the tabstrip to the viewpager
+        tabStrip.setViewPager(vpPager);
     }
 
     @Override
@@ -35,5 +55,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Return the order of the fragments in the view pager
+    public class PagerAdapter extends FragmentPagerAdapter {
+        private final String[] tabTitles = {"Timeline", "Features", "Events"};
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // The order and creation fo fragments within the pager
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return new TimelineFragment();
+            } else if (position == 1) {
+                return new FeaturesFragment();
+            } else if (position == 2) {
+                return new EventsFragment();
+            } else return null;
+        }
+
+        // Return the tab title
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        // How many fragments there are to swipe between
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
     }
 }
