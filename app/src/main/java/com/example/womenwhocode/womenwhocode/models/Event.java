@@ -1,10 +1,12 @@
 package com.example.womenwhocode.womenwhocode.models;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
  * Created by zassmin on 10/16/15.
  */
+@ParseClassName("Event")
 public class Event extends ParseObject {
     public static String NETWORK_KEY = "network";
     public static String DATETIME_KEY = "event_date";
