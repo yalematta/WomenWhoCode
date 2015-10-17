@@ -15,12 +15,12 @@ import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_timeline);
 
         // Get the viewpager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);

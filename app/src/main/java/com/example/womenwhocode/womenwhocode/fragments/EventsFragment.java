@@ -21,9 +21,7 @@ public class EventsFragment extends Fragment {
     // Inflate the fragment layout we defined above for this fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_event, container, false);
-        //TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
-        //tvTitle.setText("Fragment #" + mPage);
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
         return view;
     }
 }
