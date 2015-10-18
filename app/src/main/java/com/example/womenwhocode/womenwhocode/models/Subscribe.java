@@ -12,6 +12,7 @@ public class Subscribe extends ParseObject {
     public static String EVENT_KEY = "event";
     public static String FEATURE_KEY = "feature";
     public static String SUBSCRIBED_KEY = "subscribed";
+    private static String USER_KEY = "user";
 
     public void setNetwork(Network network) {
         put(NETWORK_KEY, network);
@@ -43,5 +44,13 @@ public class Subscribe extends ParseObject {
 
     public boolean getSubscribed() {
         return getBoolean(SUBSCRIBED_KEY);
+    }
+
+    public void setUser(User user) {
+        put(USER_KEY, user);
+    }
+
+    public User getUser()  {
+        return (User) getParseObject(USER_KEY);
     }
 }
