@@ -1,7 +1,10 @@
 package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 /**
  * Created by zassmin on 10/16/15.
@@ -12,6 +15,7 @@ public class Network extends ParseObject {
     public static String MEETUP_GROUP_ID_KEY = "meetup_group_id";
     public static String MEETUP_URL_KEY = "meetup_url";
     public static String IMAGE_URL_KEY = "image_url";
+    public static String LOCATION_KEY = "location";
 
     public void setTitle(String title) {
         put(TITLE_KEY, title);
@@ -43,5 +47,26 @@ public class Network extends ParseObject {
 
     public String getImageUrl() {
         return this.get(IMAGE_URL_KEY).toString();
+    }
+
+    public void setLocation(ParseGeoPoint geoPoint) {
+        put(LOCATION_KEY, geoPoint);
+    }
+
+    public ParseGeoPoint getLocation() {
+        return getParseGeoPoint(LOCATION_KEY);
+    }
+
+    public static Network findByMeetupId(String meetupId) {
+        ParseQuery<Network> networkParseQuery = ParseQuery.getQuery(Network.class);
+        networkParseQuery.whereEqualTo(Network.MEETUP_GROUP_ID_KEY, meetupId);
+        Network network = null;
+        try {
+            // FIXME: get from local data store!
+            network = networkParseQuery.getFirst();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return network;
     }
 }

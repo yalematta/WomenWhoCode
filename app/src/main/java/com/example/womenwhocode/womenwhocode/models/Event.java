@@ -1,7 +1,16 @@
 package com.example.womenwhocode.womenwhocode.models;
 
+import com.example.womenwhocode.womenwhocode.utils.ModelJSONObject;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by zassmin on 10/16/15.
@@ -9,8 +18,8 @@ import com.parse.ParseObject;
 @ParseClassName("Event")
 public class Event extends ParseObject {
     public static String NETWORK_KEY = "network";
-    public static String DATETIME_KEY = "event_date";
-    public static String LOCATION_KEY = "location"; // more like the name where the place is held
+    public static String DATETIME_KEY = "event_date"; // UTC start time of the event, in milliseconds since the epoch
+    public static String LOCATION_KEY = "location"; // venue should be attribute name here
     public static String URL_KEY = "url"; // could be an event url from meetup, facebook, eventbrite, etc
     public static String TITLE_KEY = "title";
     public static String FEATURED_KEY = "featured";
@@ -19,6 +28,7 @@ public class Event extends ParseObject {
     public static String RSVP_LIMIT_KEY = "rsvp_limit";
     public static String AWESOME_COUNT_KEY = "awesome_count";
     public static String DESCRIPTION_KEY = "description";
+    public static String TIMEZONE_KEY = "timezone";
 
     public void setNetwork(Network network) {
         put(NETWORK_KEY, network);
@@ -84,7 +94,7 @@ public class Event extends ParseObject {
         return this.getInt(RSVP_COUNT_KEY);
     }
 
-    public void getRsvpLimit(int rsvpLimit) {
+    public void setRsvpLimit(int rsvpLimit) {
         put(RSVP_LIMIT_KEY, rsvpLimit);
     }
 
@@ -107,5 +117,75 @@ public class Event extends ParseObject {
 
     public int getAwesomeCount() {
         return this.getInt(AWESOME_COUNT_KEY);
+    }
+
+    public void setTimeZone(String timeZone) {
+        put(TIMEZONE_KEY, timeZone);
+    }
+
+    public String getTimezone() {
+        return this.getString(TIMEZONE_KEY);
+    }
+
+    public static Event fromJSON(ModelJSONObject jsonObject) {
+        String eventId = "";
+        try {
+            eventId = jsonObject.getString("id"); // this should never be null!
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Event event = new Event();
+        // Find the event object
+        ParseQuery<Event> eventParseQuery = ParseQuery.getQuery(Event.class);
+        eventParseQuery.whereEqualTo(Event.MEETUP_EVENT_ID_KEY, eventId);
+        try {
+            if (eventParseQuery.count() > 0) {
+                event = eventParseQuery.getFirst();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            event.setMeetupEventId(jsonObject.getString("id"));
+            event.setDescription(jsonObject.getString("description"));
+            event.setFeatured(jsonObject.getBoolean("featured"));
+            event.setTitle(jsonObject.getString("name"));
+            event.setLocation(jsonObject.getString("venue"));
+            event.setEventDateTime(jsonObject.getString("time"));
+            event.setTimeZone(jsonObject.getString("timezone"));
+            event.setUrl(jsonObject.getString("event_url"));
+            event.setRsvpLimit(jsonObject.getInt("rsvp_limit"));
+            event.setRsvpCount(jsonObject.getInt("yes_rsvp_count"));
+            String networkMeetupId = String.valueOf(jsonObject.getJSONObject("group").getInt("id"));
+            event.setNetwork(Network.findByMeetupId(networkMeetupId)); // FIXME: optimization needed, don't find the network for each event
+            event.save();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return event;
+
+    }
+
+    public static ArrayList<Event> fromJSONArray(JSONArray jsonArray) {
+        ArrayList<Event> events = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                JSONObject eventJSON = jsonArray.getJSONObject(i);
+                ModelJSONObject modelJSONObject = new ModelJSONObject(eventJSON);
+                Event event = fromJSON(modelJSONObject);
+                if (event != null) {
+                    events.add(event);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return events;
     }
 }

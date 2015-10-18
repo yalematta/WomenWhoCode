@@ -15,6 +15,7 @@ public class Post extends ParseObject {
     public static String EVENT_KEY = "event";
     public static String FEATURE_KEY = "feature";
     public static String AWESOME_COUNT_KEY = "awesome_count";
+    public static String USER_KEY = "user";
 
     public void setDescription(String description) {
         put(DESCRIPTION_KEY, description);
@@ -62,6 +63,14 @@ public class Post extends ParseObject {
 
     public String getImageUrl() {
         return this.get(IMAGE_URL_KEY).toString();
+    }
+
+    public void setUser(User user) {
+        put(USER_KEY, user);
+    }
+
+    public User getUser()  {
+        return (User) getParseObject(USER_KEY);
     }
 
     // awesomeCount is for our stretch goals
