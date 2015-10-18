@@ -24,8 +24,9 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Register parse models
         Parse.enableLocalDatastore(this);
+
+        // Register parse models
         ParseObject.registerSubclass(Network.class);
         ParseObject.registerSubclass(Event.class);
         ParseObject.registerSubclass(Feature.class);
@@ -34,6 +35,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Profile.class);
         ParseObject.registerSubclass(Subscribe.class);
         ParseObject.registerSubclass(User.class);
+
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
     }
