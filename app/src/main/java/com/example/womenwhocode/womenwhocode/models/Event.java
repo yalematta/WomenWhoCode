@@ -10,7 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by zassmin on 10/16/15.
@@ -151,14 +153,17 @@ public class Event extends ParseObject {
             event.setDescription(jsonObject.getString("description"));
             event.setFeatured(jsonObject.getBoolean("featured"));
             event.setTitle(jsonObject.getString("name"));
-            event.setLocation(jsonObject.getString("venue"));
+            event.setLocation(jsonObject.getJSONObject("venue").getString("name"));
             event.setEventDateTime(jsonObject.getString("time"));
             event.setTimeZone(jsonObject.getString("timezone"));
             event.setUrl(jsonObject.getString("event_url"));
             event.setRsvpLimit(jsonObject.getInt("rsvp_limit"));
             event.setRsvpCount(jsonObject.getInt("yes_rsvp_count"));
             String networkMeetupId = String.valueOf(jsonObject.getJSONObject("group").getInt("id"));
-            event.setNetwork(Network.findByMeetupId(networkMeetupId)); // FIXME: optimization needed, don't find the network for each event
+            Network network = Network.findByMeetupId(networkMeetupId);
+            if (network != null) {
+                event.setNetwork(network); // FIXME: optimization needed, don't find the network for each event
+            }
             event.save();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -187,5 +192,13 @@ public class Event extends ParseObject {
         }
 
         return events;
+    }
+
+    public static String getDateTime(String milliseconds) {
+        Long ms = Long.parseLong(milliseconds);
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SSS");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(ms); // is this timezone agnostic? odds are it needs to be the tz on the app
+        return format.format(calendar.getTime());
     }
 }

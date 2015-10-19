@@ -6,17 +6,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.network.MeetupClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -25,10 +27,15 @@ import cz.msebera.android.httpclient.Header;
  */
 public class EventsFragment extends Fragment {
     MeetupClient meetupClient;
+    ArrayList<Event> events;
+    EventsAdapter aEvents;
+    ListView lvEvents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        events = new ArrayList<>();
+        aEvents = new EventsAdapter(getActivity(), events);
         populateEvents(); // FIXME: look into making this call happen on a daily basis and/or when there is a change in the user's location
 
     }
@@ -50,7 +57,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    Event.fromJSONArray(response.getJSONArray("results"));
+                    aEvents.addAll(Event.fromJSONArray(response.getJSONArray("results")));
                     Toast.makeText(getContext(), "success!" + response.getJSONArray("results").length() + " result " + response.getJSONArray("results").getJSONObject(0).getString("name"), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -72,6 +79,8 @@ public class EventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
+        lvEvents = (ListView) view.findViewById(R.id.lvEvents);
+        lvEvents.setAdapter(aEvents);
         return view;
     }
 }

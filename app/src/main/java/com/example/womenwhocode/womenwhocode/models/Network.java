@@ -1,7 +1,6 @@
 package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -59,14 +58,10 @@ public class Network extends ParseObject {
 
     public static Network findByMeetupId(String meetupId) {
         ParseQuery<Network> networkParseQuery = ParseQuery.getQuery(Network.class);
-        networkParseQuery.whereEqualTo(Network.MEETUP_GROUP_ID_KEY, meetupId);
-        Network network = null;
-        try {
-            // FIXME: get from local data store!
-            network = networkParseQuery.getFirst();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // networkParseQuery.fromLocalDatastore();
+        // FIXME: get from local data store!
+        Network network = networkParseQuery.whereEqualTo(
+                Network.MEETUP_GROUP_ID_KEY, meetupId).getFirstInBackground().getResult();
         return network;
     }
 }
