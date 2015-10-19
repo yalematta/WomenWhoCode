@@ -19,6 +19,10 @@ public class Subscribe extends ParseObject {
     public static String SUBSCRIBED_KEY = "subscribed";
     private static String USER_KEY = "user";
 
+    public static ParseQuery<Subscribe> subscribeParseQuery;
+    // FIXME: temp pointer, should remove when currentUser is in!
+    public static boolean subscribed = false;
+
     public void setNetwork(Network network) {
         put(NETWORK_KEY, network);
     }
@@ -76,5 +80,60 @@ public class Subscribe extends ParseObject {
             }
         });
         return count[0];
+    }
+
+    public static boolean isSubscribed(User user, Event event) {
+        // FIXME: this should check getSubscribed after querying for user and event
+        return subscribed;
+    }
+
+    public static boolean unSubscribeUserToEvent(User user, Event event) {
+        if (user == null) {
+            subscribed = false;
+            return subscribed; // FIXME: remove once we have the concept of currentUser testing purposes
+        }
+
+        // FIXME: query locally
+        // check if a subscribe object exists
+        subscribeParseQuery = Subscribe.getQuery();
+        subscribeParseQuery.whereEqualTo(USER_KEY, user).whereEqualTo(EVENT_KEY, event);
+        Subscribe subscribe = subscribeParseQuery.getFirstInBackground().getResult();
+        if (subscribe == null) {
+            subscribe = new Subscribe();
+            subscribe.setEvent(event);
+            subscribe.setUser(user);
+        }
+
+        subscribe.setSubscribed(false);
+        subscribe.saveInBackground();
+
+        return true;
+    }
+
+    public static boolean subscribeUserToEvent(User user, Event event) {
+        if (user == null) {
+            subscribed = true;
+            return subscribed; // FIXME: remove once we have the concept of currentUser testing purposes
+        }
+
+        // FIXME: query locally
+        // check if a subscribe object exists
+        subscribeParseQuery = Subscribe.getQuery();
+        subscribeParseQuery.whereEqualTo(USER_KEY, user).whereEqualTo(EVENT_KEY, event);
+        Subscribe subscribe = subscribeParseQuery.getFirstInBackground().getResult();
+        if (subscribe == null) {
+            subscribe = new Subscribe();
+            subscribe.setEvent(event);
+            subscribe.setUser(user);
+        }
+
+        subscribe.setSubscribed(true);
+        subscribe.saveInBackground();
+
+        return true; // FIXME: return true if success false if done, run block for in background
+    }
+
+    public static ParseQuery<Subscribe> getQuery() {
+        return ParseQuery.getQuery(Subscribe.class);
     }
 }
