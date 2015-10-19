@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.models.User;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         TextView tvSubscribeCount;
         TextView tvEventTime;
         TextView tvEventDate;
+        TextView tvEventSubscribeIcon;
     }
 
     public EventsAdapter(Context context, ArrayList<Event> events) {
@@ -32,7 +35,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Event event = getItem(position);
+        final Event event = getItem(position);
         int eventSubscribe = 0;
         try {
               eventSubscribe = Subscribe.getCountFor(event);
@@ -52,7 +55,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
             // TODO: decide layout for time!
             viewHolder.tvEventDate = (TextView) convertView.findViewById(R.id.tvEventDate);
             // TODO: set the subscribe icon (needs true or false switches), until then display default
-            // TextView tvEventSubscribeIcon = (TextView) convertView.findViewById(R.id.tvSubscribeIcon);
+            viewHolder.tvEventSubscribeIcon = (TextView) convertView.findViewById(R.id.tvSubscribeIcon);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -64,6 +67,24 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         viewHolder.tvEventLocation.setText(event.getLocation());
         String prettyDateTime = Event.getDateTime(event.getEventDateTime());
         viewHolder.tvEventDate.setText(prettyDateTime);
+
+        // onClickSubscribeListener
+        viewHolder.tvEventSubscribeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tvEventSubscribeIcon = (TextView) v.findViewById(R.id.tvSubscribeIcon);
+                // if it's not subscribed - subscribe and do ++
+                // could make a parse user for fun right now? -> try to do it without a parse user
+                User currentUser = null;
+                if (Subscribe.isSubscribed(currentUser, event)) {
+                    Subscribe.unSubscribeUserToEvent(currentUser, event);
+                    tvEventSubscribeIcon.setText("+");
+                } else {
+                    Subscribe.subscribeUserToEvent(currentUser, event);
+                    tvEventSubscribeIcon.setText("++");
+                }
+            }
+        });
 
         return convertView;
     }
