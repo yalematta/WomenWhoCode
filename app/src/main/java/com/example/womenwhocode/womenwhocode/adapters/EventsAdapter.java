@@ -18,6 +18,14 @@ import java.util.ArrayList;
  * Created by zassmin on 10/18/15.
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
+    private static class ViewHolder {
+        TextView tvEventTitle;
+        TextView tvEventLocation;
+        TextView tvSubscribeCount;
+        TextView tvEventTime;
+        TextView tvEventDate;
+    }
+
     public EventsAdapter(Context context, ArrayList<Event> events) {
         super(context, android.R.layout.simple_list_item_1, events);
     }
@@ -32,27 +40,30 @@ public class EventsAdapter extends ArrayAdapter<Event> {
             e.printStackTrace();
         }
 
+        ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_event, parent, false);
+            viewHolder = new ViewHolder();
+            convertView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.item_event, parent, false);
+            viewHolder.tvEventTitle = (TextView) convertView.findViewById(R.id.tvEventTitle);
+            viewHolder.tvEventLocation = (TextView) convertView.findViewById(R.id.tvEventLocation);
+            viewHolder.tvSubscribeCount = (TextView) convertView.findViewById(R.id.tvSubscribeCount);
+            // viewHolder.tvEventTime = (TextView) convertView.findViewById(R.id.tvEventTime);
+            // TODO: decide layout for time!
+            viewHolder.tvEventDate = (TextView) convertView.findViewById(R.id.tvEventDate);
+            // TODO: set the subscribe icon (needs true or false switches), until then display default
+            // TextView tvEventSubscribeIcon = (TextView) convertView.findViewById(R.id.tvSubscribeIcon);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView tvEventTitle = (TextView) convertView.findViewById(R.id.tvEventTitle);
-        TextView tvEventLocation = (TextView) convertView.findViewById(R.id.tvEventLocation);
-        // TODO: add \o/ icon next to count!!!!
-        TextView tvSubscribeCount = (TextView) convertView.findViewById(R.id.tvSubscribeCount);
-        // TODO: display time in a really basic way for now...
-        TextView tvEventTime = (TextView) convertView.findViewById(R.id.tvEventTime);
-        TextView tvEventDate = (TextView) convertView.findViewById(R.id.tvEventDate);
-        // TODO: set the subscribe icon (needs true or false switches), until then display default
-        // TextView tvEventSubscribeIcon = (TextView) convertView.findViewById(R.id.tvSubscribeIcon);
-
-        tvEventTitle.setText(event.getTitle());
-        tvSubscribeCount.setText(String.valueOf(eventSubscribe + " subscribers"));
-        tvEventLocation.setText(event.getLocation());
-        String prettyTime = Event.getDateTime(event.getEventDateTime());
-        tvEventDate.setText(prettyTime);
-
-        // TODO: render adapter in the event fragment!
+        // populate data
+        viewHolder.tvEventTitle.setText(event.getTitle());
+        viewHolder.tvSubscribeCount.setText(String.valueOf(eventSubscribe + " subscribers"));
+        viewHolder.tvEventLocation.setText(event.getLocation());
+        String prettyDateTime = Event.getDateTime(event.getEventDateTime());
+        viewHolder.tvEventDate.setText(prettyDateTime);
 
         return convertView;
     }
