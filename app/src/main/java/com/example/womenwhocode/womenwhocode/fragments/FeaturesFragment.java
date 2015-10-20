@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.adapters.FeaturesArrayAdapter;
+import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by shehba.shahab on 10/16/15.
  */
 public class FeaturesFragment extends Fragment {
-    FeaturesArrayAdapter aFeatures;
+    FeaturesAdapter aFeatures;
     ArrayList<Feature> features;
     ListView lvFeatures;
 
@@ -30,7 +30,7 @@ public class FeaturesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         features = new ArrayList<>();
-        aFeatures = new FeaturesArrayAdapter(getActivity(), features);
+        aFeatures = new FeaturesAdapter(getActivity(), features);
         populateFeaturesList();
     }
 

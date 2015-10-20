@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.adapters.PostsArrayAdapter;
+import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Post;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by shehba.shahab on 10/16/15.
  */
 public class TimelineFragment extends Fragment {
-    PostsArrayAdapter aPosts;
+    PostsAdapter aPosts;
     ArrayList<Post> posts;
     ListView lvPosts;
 
@@ -26,7 +26,7 @@ public class TimelineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         posts = new ArrayList<>();
-        aPosts = new PostsArrayAdapter(getActivity(), posts);
+        aPosts = new PostsAdapter(getActivity(), posts);
         populatePostsList();
     }
 

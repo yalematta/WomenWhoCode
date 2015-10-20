@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.activities.FeatureDetailActivity;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.squareup.picasso.Picasso;
 
@@ -17,9 +19,25 @@ import java.util.List;
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class FeaturesArrayAdapter extends ArrayAdapter<Feature> {
+public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
-    public FeaturesArrayAdapter(Context context, List<Feature> objects) {
+    String title;
+    String description;
+    int awesomeCount;
+    String imageUrl;
+
+    private View.OnClickListener featureClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), FeatureDetailActivity.class);
+            i.putExtra("title", title);
+            i.putExtra("description", description);
+            i.putExtra("awesomeCount", awesomeCount);
+            i.putExtra("imageUrl", imageUrl);
+            getContext().startActivity(i);
+        }
+    };
+
+    public FeaturesAdapter(Context context, List<Feature> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
 
@@ -42,16 +60,22 @@ public class FeaturesArrayAdapter extends ArrayAdapter<Feature> {
         ivFeaturePhoto.setImageResource(0);
 
         // Insert the model data into each of the view items
-        String title = feature.getTitle();
-        String description = feature.getDescription();
-        int awesomeCount = feature.getAwesomeCount();
+        title = feature.getTitle();
+        description = feature.getDescription();
+        awesomeCount = feature.getAwesomeCount();
+        imageUrl = feature.getImageUrl();
 
         tvFeatureTitle.setText(title);
         tvFeatureDescription.setText(description);
         tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
         // Insert the image using picasso
-        Picasso.with(getContext()).load(feature.getImageUrl()).into(ivFeaturePhoto);
+        Picasso.with(getContext()).load(imageUrl).into(ivFeaturePhoto);
+
+        // Launch detail view
+        ivFeaturePhoto.setOnClickListener(featureClickListener);
+        tvFeatureTitle.setOnClickListener(featureClickListener);
+        tvFeatureDescription.setOnClickListener(featureClickListener);
 
         return convertView;
     }

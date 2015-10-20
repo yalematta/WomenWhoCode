@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class PostsArrayAdapter extends ArrayAdapter<Post> {
+public class PostsAdapter extends ArrayAdapter<Post> {
 
-    public PostsArrayAdapter(Context context, List<Post> objects) {
+    public PostsAdapter(Context context, List<Post> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
 
