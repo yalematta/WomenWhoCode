@@ -91,9 +91,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Event event = aEvents.getItem(position);
-                // get the event object from the position
-                // how do I get the activity to listen to the listener here
-                listener.onEventClickListener(event); // activity will call the other fragment
+                listener.onEventClickListener(event);
             }
         });
         return view;
