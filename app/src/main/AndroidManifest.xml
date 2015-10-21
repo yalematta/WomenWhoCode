@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:name=".ParseApplication"
@@ -21,10 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.PersonalizationActivity"
-            android:label="">
-        </activity>
-        <activity
             android:name=".activities.FeatureDetailActivity"
             android:label="Feature Detail">
         </activity>
@@ -36,6 +33,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.TimelineActivity" />
 
+        </activity>
+        <activity
+            android:name="com.example.womenwhocode.womenwhocode.activities.PersonalizationActivity"
+            android:label="" >
+        </activity>
+        <activity
+            android:name="com.example.womenwhocode.womenwhocode.activities.LoginEmailActivity"
+            android:label="" >
+        </activity>
+        <activity
+            android:name="com.example.womenwhocode.womenwhocode.activities.UserProfileActivity"
+            android:label="" >
+        </activity>
+        <activity
+            android:name="com.example.womenwhocode.womenwhocode.activities.TimelineActivity"
+            android:label="" >
         </activity>
     </application>
 
