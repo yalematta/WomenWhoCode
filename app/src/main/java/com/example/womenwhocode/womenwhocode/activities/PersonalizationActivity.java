@@ -21,21 +21,22 @@ public class PersonalizationActivity extends AppCompatActivity {
     public Question2Fragment question2Fragment=new Question2Fragment();
     public Question3Fragment question3Fragment=new Question3Fragment();
     public LogInFragment logInFragment=new LogInFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalization);
 
-        //create a fragment trasaction
+        //create a fragment transaction
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
 
 
-        //replace contents of frament with first fragment
+        //replace contents of fragment with first fragment
         ft.replace(R.id.flPersonalization,question1Fragment);
 
         ft.addToBackStack(null);
 
-        //commit the trasaction
+        //commit the transaction
         ft.commit();
     }
 
@@ -61,9 +62,7 @@ public class PersonalizationActivity extends AppCompatActivity {
         }
             ft.addToBackStack(null);
 
-            //commit the trasaction
+            //commit the transaction
             ft.commit();
-
-
     }
 }

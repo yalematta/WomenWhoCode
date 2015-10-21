@@ -1,5 +1,7 @@
 package com.example.womenwhocode.womenwhocode.models;
 
+import android.text.Editable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
@@ -13,10 +15,6 @@ public class User extends ParseUser {
     
     public void setUserName(String userName) {
         this.setUsername(userName);
-    }
-
-    public String getUserName() {
-        return this.getUserName();
     }
 
     // set a random password for a github user
@@ -42,12 +40,8 @@ public class User extends ParseUser {
     }
 
     // for user's email after github oauth call GET https://api.github.com/user
-    public void setEmail(String email) {
+    public void setEmailAddress(String email) {
         // using parse email behavior we can leverage email validations
         this.setEmail(email);
-    }
-
-    public String getEmail() {
-        return this.getEmail();
     }
 }
