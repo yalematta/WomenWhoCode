@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.womenwhocode.womenwhocode.activities.EventDetailsActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Security with Expert" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventDate"
+            android:layout_below="@id/tvEventTitle"
+            android:layout_alignParentLeft="true"
+            android:text="Oct 29, 2015" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventTime"
+            android:layout_toRightOf="@+id/tvEventDate"
+            android:layout_below="@id/tvEventTitle"
+            android:text="at 7pm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventVenue"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvEventDate"
+            android:text="at Slack" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventUrl"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvEventVenue"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="some url" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventDescription"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvEventUrl"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="super super super super super super super super super super super super super super super long description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAwesomeCount"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvEventDescription"
+            android:text="30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAwesomeIcon"
+            android:layout_marginLeft="6dp"
+            android:layout_below="@id/tvEventDescription"
+            android:layout_toRightOf="@+id/tvAwesomeCount"
+            android:text="\\o/" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSubscribeCount"
+            android:layout_below="@id/tvAwesomeCount"
+            android:layout_alignParentLeft="true"
+            android:text="260 Subscribed" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSubscribeIcon"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvSubscribeCount"
+            android:text="subscribe"
+            android:onClick="onSubscribe"/>
+
+    </RelativeLayout>
+</ScrollView>

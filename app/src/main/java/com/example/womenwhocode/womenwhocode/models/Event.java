@@ -165,6 +165,7 @@ public class Event extends ParseObject {
                 event.setNetwork(network); // FIXME: optimization needed, don't find the network for each event
             }
             event.save();
+            // save in background and the callback!
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
