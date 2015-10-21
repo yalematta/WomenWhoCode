@@ -6,11 +6,14 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.models.User;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -23,6 +26,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventDescription;
     TextView tvAwesomeCount;
     TextView tvSubscribeCount;
+    Button btnSubscribeIcon;
+    Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_details);
 
         setUpView();
-
     }
 
     private void setUpView() {
@@ -53,10 +57,11 @@ public class EventDetailsActivity extends AppCompatActivity {
         // query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
         // Execute the query to find the object with ID
         query.getInBackground(event_id, new GetCallback<Event>() {
-            public void done(Event event, ParseException e) {
+            public void done(Event parseEvent, ParseException e) {
                 if (e == null) {
-                    if (event != null) {
-                        setEventData(event);
+                    if (parseEvent != null) {
+                        event = parseEvent;
+                        setEventData();
                     } else {
                         Log.d("EVENT_PS_NO_DATA", e.toString());
                     }
@@ -68,7 +73,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void setEventData(Event event) {
+    private void setEventData() {
         // setup views
         tvEventTitle.setText(event.getTitle());
         tvEventDate.setText(Event.getDateTime(event.getEventDateTime()));
@@ -107,5 +112,18 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSubscribe(View view) {
+        btnSubscribeIcon = (Button) view.findViewById(R.id.btnSubscribeIcon);
+        // could make a parse user for fun right now? -> try to do it without a parse user
+        User currentUser = null;
+        if (Subscribe.isSubscribed(currentUser, event)) {
+            Subscribe.unSubscribeUserToEvent(currentUser, event);
+            btnSubscribeIcon.setText("subscribe");
+        } else {
+            Subscribe.subscribeUserToEvent(currentUser, event);
+            btnSubscribeIcon.setText("you're subscribed");
+        }
     }
 }

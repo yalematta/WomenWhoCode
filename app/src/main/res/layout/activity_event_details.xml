@@ -93,7 +93,8 @@
             android:id="@+id/btnSubscribeIcon"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/tvSubscribeCount"
-            android:text="Subscribe" />
+            android:text="subscribe"
+            android:onClick="onSubscribe"/>
 
     </RelativeLayout>
 </ScrollView>
