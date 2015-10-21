@@ -22,11 +22,16 @@
         </activity>
         <activity
             android:name=".activities.PersonalizationActivity"
-            android:label=""></activity>
-
+            android:label="">
+        </activity>
         <activity
             android:name=".activities.FeatureDetailActivity"
-            android:label="Feature Detail"></activity>
+            android:label="Feature Detail">
+        </activity>
+        <activity
+            android:name=".activities.EventDetailsActivity"
+            android:label="@string/title_activity_event_details" >
+        </activity>
     </application>
 
 </manifest>
