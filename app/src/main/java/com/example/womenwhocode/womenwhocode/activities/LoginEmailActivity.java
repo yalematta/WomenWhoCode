@@ -20,17 +20,15 @@ import com.parse.SignUpCallback;
  */
 public class LoginEmailActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emaillogin);
     }
+
     public void signUpUser(View view) {
-
-
-            //ParseUser userDetail = new ParseUser();
-            EditText tvName = (EditText) findViewById(R.id.txtName);
+        //ParseUser userDetail = new ParseUser();
+        EditText tvName = (EditText) findViewById(R.id.txtName);
         EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
         EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
 
@@ -42,9 +40,5 @@ public class LoginEmailActivity extends AppCompatActivity {
         i.putExtra("Email",email);
         i.putExtra("Password",password);
         startActivity(i);
-
-
-
-
     }
 }

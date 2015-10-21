@@ -56,20 +56,18 @@ public class LoginActivity extends AppCompatActivity {
     public void JoinApp(View view) {
         Intent i = new Intent(this, PersonalizationActivity.class);
         startActivity(i);
-
-
     }
 
     public void LogInToApp(View view) {
-        ParseUser.logInInBackground("Puja Roy", "Puja", new LogInCallback() {
-            public void done(ParseUser user, ParseException e) {
-                if (user != null) {
-                    Intent i = new Intent(LoginActivity.this, TimelineActivity.class);
-                    startActivity(i);
-                } else {
-                    // Signup failed. Look at the ParseException to see what happened.
-                }
-            }
-        });
+//        ParseUser.logInInBackground("Puja Roy", "Puja", new LogInCallback() {
+//            public void done(ParseUser user, ParseException e) {
+//                if (user != null) {
+//                    Intent i = new Intent(LoginActivity.this, TimelineActivity.class);
+//                    startActivity(i);
+//                } else {
+//                    // Signup failed. Look at the ParseException to see what happened.
+//                }
+//            }
+//        });
     }
 }

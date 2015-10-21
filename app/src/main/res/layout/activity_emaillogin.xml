@@ -6,20 +6,19 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Full Name"
         android:id="@+id/txtName"
         android:inputType="text"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="113dp"
-        android:hint="Full Name" />
+        android:hint="full name" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Address"
         android:id="@+id/txtEmail"
         android:inputType="text"
+        android:hint="email address"
         android:layout_below="@+id/txtName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp" />
@@ -27,9 +26,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
         android:id="@+id/txtPwd"
         android:layout_below="@+id/txtEmail"
+        android:hint="password"
         android:inputType="textPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp" />
