@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +15,9 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
+import com.example.womenwhocode.womenwhocode.models.Event;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements EventsFragment.OnEventItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,13 @@ public class TimelineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onEventClickListener(Event event) {
+        Intent i = new Intent(TimelineActivity.this, EventDetailsActivity.class);
+        i.putExtra("event_id", event.getObjectId());
+        startActivity(i);
     }
 
     // Return the order of the fragments in the view pager

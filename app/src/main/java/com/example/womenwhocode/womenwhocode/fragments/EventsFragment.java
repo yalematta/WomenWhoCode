@@ -1,13 +1,14 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
@@ -30,6 +31,11 @@ public class EventsFragment extends Fragment {
     ArrayList<Event> events;
     EventsAdapter aEvents;
     ListView lvEvents;
+    private OnEventItemClickListener listener;
+
+    public interface OnEventItemClickListener {
+        public void onEventClickListener(Event event);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,6 @@ public class EventsFragment extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     aEvents.addAll(Event.fromJSONArray(response.getJSONArray("results")));
-                    Toast.makeText(getContext(), "success!" + response.getJSONArray("results").length() + " result " + response.getJSONArray("results").getJSONObject(0).getString("name"), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -81,6 +86,28 @@ public class EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
         lvEvents = (ListView) view.findViewById(R.id.lvEvents);
         lvEvents.setAdapter(aEvents);
+
+        lvEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Event event = aEvents.getItem(position);
+                // get the event object from the position
+                // how do I get the activity to listen to the listener here
+                listener.onEventClickListener(event); // activity will call the other fragment
+            }
+        });
         return view;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnEventItemClickListener) {
+            listener = (OnEventItemClickListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implement EventsFragment.OnEventItemClickListener");
+        }
+    }
+
 }
