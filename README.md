@@ -26,18 +26,18 @@ Onboarding:
 * [ ] Member will go through a personalization flow that is persisted via parse
   * [ ] Personalization flow will include 3 views questions with checkbox options (you 
   can check on or many)
-    * [ ] Engineering area of interest: Architecture, Security, Data Science/ 
+    * [X] Engineering area of interest: Architecture, Security, Data Science/ 
     Analytics, Opensource, Other (will be a text box)
-    * [ ] What do you hope to get out of WWCode: enhance technical skills, 
+    * [X] What do you hope to get out of WWCode: enhance technical skills, 
     leadership skills, career development e.g. negotiation, interviewing…, 
     friends and professional network, other (will be text box)
-    * [ ] What skill-set level would you say you are currently: Advanced 
+    * [X] What skill-set level would you say you are currently: Advanced 
     technical 3+, Intermediate technical 1-3 years, Beginner technical under 
     1 year, other (will be text box)
 * [ ] Member will be taken to a view where they can click an option to create 
 an account via github oauth or with email
-  * [ ] When a member clicks on sign up with email, render a view so a member can 
-  sign up with email, persist locally and on the server via parse
+  * [X] When a member clicks on sign up with email, render a view so a member can 
+  sign up with email, persist on the server via parse
   * [ ] When a member clicks sign up with github, take member through github 
   oauth sign up flow (https://developer.github.com/v3/oauth_authorizations/)
     * [ ] On successful log in we will push the Member data and personalization
@@ -48,52 +48,45 @@ an account via github oauth or with email
   supported in parse. 
 * After successful account creation, take user to profile preview: render user details, 
 include image, password field (we may not need this), full name, job description field. Auto display whatever we have and leave what we don't have blank for the user to fill in. 
-  * [ ] Add functionality so the user can upload their image or take a photo of themselves. 
+  * [ ] Add functionality so the user can upload their image
+  * [X] Add functionality so the user can take a photo of themselves
 
 Timeline:
-* [ ] Timeline is the first listview page/fragment the member is taken to after
-they confirm profile details, it will be the first tab in a 3 tab view.   
-* [ ] Member will see location and interest based data:
+* [X] Timeline is the first listview page/fragment the member is taken to after
+they confirm profile details, it will be the first tab in a 3 tab view.  
+* [X] member will see a listview of posts 
+* [ ] Member will see posts in priority based on location and interest based data:
   * [ ] The timeline will be a listview and fragment
-  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings):
-  	* [ ] an inspiration quote - will be a post from the "Get Inspired" feature
-  	* [ ] notification style alerts about which subscriptions they are 
-  	subscribed to, initial subscriptions include network events closest to their 
-  	location, the applaud her, the code review, the blog, get inspired
-* [ ] On click of an listview post/item will take them to the details view of that post. 
-* [ ] endless scroll on list view
+  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings)
 
 Posts (directly relates to timeline):
-* [ ] Each item in the timeline view is a post that belongs to a feature or event. 
-  * [ ] Persist a post model, post will include user_id, subscription_id, 
+* [X] Each item in the timeline view is a post that belongs to a feature or event. 
+  * [X] Persist a post model, post will include user_id, subscription_id, 
   title, details/description, awesome_count
-  * [ ] We will pre-seed posts for now
-  * [ ] sort post in listview by most recent
+  * [X] We will pre-seed posts for now
 
 Subscribing (tab in mock that says features):
 * [ ] Member can tab to see the feature they are subscribed to and can join
-* [ ] feature will be modeled locally and pushed to parsed
-    * [ ] each feature will be a local data seed 
+* [X] feature will be modeled locally and pushed to parsed
+    * [X] each feature will be a local data seed 
     (pending from Zassmin) 
-      * [ ] A feature has title/name, description, joined_count
-      * [ ] A member belongs to many features
-* [ ] feature fragment will include a listview with feature title and 
-short details
+      * [X] A feature has title/name, description, joined_count
+      * [X] A member belongs to many features
+* [X] feature fragment will include a listview with feature attributes
 * [ ] member can choose which feature to join by clicking the 
 feature and being taken to a detail view
   * [ ] In the detail view the member can subscribe or unsubscribe 
-  * [ ] features alerts such as, 'you just subscribed to #java, learn more 
-  here' will be rendered to the timeline fragment 
-* on click of a feature will take them to a details view of that feature
+* [X] on click of a feature will take them to a details view of that feature
 * detail view: 
-  * member can see the title, description, number of people joined, post history 
-  and choose to subscribe
+  * [X] member can see the title, description, number of people joined
+  * [ ] feature detail view will also render the post history timeline for the given 
+  feature
 
 Events: 
-* [ ] listview fragment for only event details
-* [ ] on click of the event will render a view with event details
-* [ ] event data will be from meetup api (w/o user oauth)
-  * [ ] Event model (based on meetup data): network_id, event_date, 
+* [X] listview fragment for only event details
+* [X] on click of the event will render a view with event details
+* [X] event data will be from meetup api (w/o user oauth)
+  * [X] Event model (based on meetup data): network_id, event_date, 
         event_date, location, url, title, featured (boolean), meetup_event_id, 
         rsvp_count, rsvp_limit 
 
@@ -167,11 +160,6 @@ contents of the fragment selected.
 other apps
 * [ ] Include an about WWCode fragment and make it accessible in the drawer
 
-## Mocks for the required stories and an additional mock for the chat feature
+## Sprint 1 Demo
 
-<img src="https://cloud.githubusercontent.com/assets/11285573/10502938/0d96c6f4-72a6-11e5-9be4-80f4f2c4fdbd.png">
-<img src="https://cloud.githubusercontent.com/assets/11285573/10502937/0d966f7e-72a6-11e5-87b3-e8600803b29f.png">
-<img src="https://cloud.githubusercontent.com/assets/11285573/10502939/0da8f612-72a6-11e5-8b3d-dafc4967030a.png">
-<img src="https://cloud.githubusercontent.com/assets/11285573/10502940/0da96750-72a6-11e5-90e1-8e61465cdf68.png">
-<img src="https://cloud.githubusercontent.com/assets/3621826/10502999/af2c17b2-72a6-11e5-8a82-a13be5460f7a.png">
-<img src="https://cloud.githubusercontent.com/assets/3621826/10502998/af2a6160-72a6-11e5-8f82-f818c3e41aba.png">
+![initial_demo_wwcodeapp](https://cloud.githubusercontent.com/assets/1654151/10651944/6a353ef2-7807-11e5-9df1-dd3fd254c2e6.gif)
