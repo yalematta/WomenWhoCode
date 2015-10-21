@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  * Created by zassmin on 10/16/15.
@@ -65,12 +66,12 @@ public class Post extends ParseObject {
         return this.get(IMAGE_URL_KEY).toString();
     }
 
-    public void setUser(User user) {
+    public void setUser(ParseUser user) {
         put(USER_KEY, user);
     }
 
-    public User getUser()  {
-        return (User) getParseObject(USER_KEY);
+    public ParseUser getUser()  {
+        return (ParseUser) getParseObject(USER_KEY);
     }
 
     // awesomeCount is for our stretch goals

@@ -7,6 +7,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 /**
  * Created by zassmin on 10/16/15.
@@ -55,12 +56,12 @@ public class Subscribe extends ParseObject {
         return getBoolean(SUBSCRIBED_KEY);
     }
 
-    public void setUser(User user) {
+    public void setUser(ParseUser user) {
         put(USER_KEY, user);
     }
 
-    public User getUser()  {
-        return (User) getParseObject(USER_KEY);
+    public ParseUser getUser()  {
+        return (ParseUser) getParseObject(USER_KEY);
     }
 
     public static int getCountFor(Event event) throws ParseException {
@@ -82,12 +83,12 @@ public class Subscribe extends ParseObject {
         return count[0];
     }
 
-    public static boolean isSubscribed(User user, Event event) {
+    public static boolean isSubscribed(ParseUser user, Event event) {
         // FIXME: this should check getSubscribed after querying for user and event
         return subscribed;
     }
 
-    public static boolean unSubscribeUserToEvent(User user, Event event) {
+    public static boolean unSubscribeUserToEvent(ParseUser user, Event event) {
         if (user == null) {
             subscribed = false;
             return subscribed; // FIXME: remove once we have the concept of currentUser testing purposes
@@ -110,7 +111,7 @@ public class Subscribe extends ParseObject {
         return true;
     }
 
-    public static boolean subscribeUserToEvent(User user, Event event) {
+    public static boolean subscribeUserToEvent(ParseUser user, Event event) {
         if (user == null) {
             subscribed = true;
             return subscribed; // FIXME: remove once we have the concept of currentUser testing purposes
