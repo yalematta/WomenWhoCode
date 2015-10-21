@@ -14,10 +14,10 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.models.User;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventTitle;
@@ -117,7 +117,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void onSubscribe(View view) {
         btnSubscribeIcon = (Button) view.findViewById(R.id.btnSubscribeIcon);
         // could make a parse user for fun right now? -> try to do it without a parse user
-        User currentUser = null;
+        ParseUser currentUser = null;
         if (Subscribe.isSubscribed(currentUser, event)) {
             Subscribe.unSubscribeUserToEvent(currentUser, event);
             btnSubscribeIcon.setText("subscribe");

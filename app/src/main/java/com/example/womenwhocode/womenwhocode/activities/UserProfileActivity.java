@@ -11,18 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.User;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import java.util.List;
 
 /**
  * Created by pnroy on 10/19/15.

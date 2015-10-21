@@ -3,9 +3,13 @@ package com.example.womenwhocode.womenwhocode.models;
 import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  * Created by zassmin on 10/16/15.
+ * To create a user, we are currently using the ParseUser, which includes a email, username,
+ * password. This model is meant to store all the other data for a user we need that isn't
+ * bound by the ParseUser implementation details.
  */
 @ParseClassName("Profile")
 public class Profile extends ParseObject {
@@ -16,6 +20,8 @@ public class Profile extends ParseObject {
     public static String LOCATION_KEY = "location";
     public static String USER_KEY = "user";
     public static String ABOUT_YEARS_EXPERIENCE_KEY = "about_years_experience";
+    public static String GITHUB_ACCESS_TOKEN = "github_access_token";
+    public static String GITHUB_ID = "github_id";
 
     public void setFullName(String fullName) {
         put(FULL_NAME_KEY, fullName);
@@ -49,12 +55,12 @@ public class Profile extends ParseObject {
         return (Network) getParseObject(NETWORK_KEY);
     }
 
-    public void setUser(User user) {
+    public void setUser(ParseUser user) {
         put(USER_KEY, user);
     }
 
-    public User getUser() {
-        return (User) getParseObject(USER_KEY);
+    public ParseUser getUser() {
+        return (ParseUser) getParseObject(USER_KEY);
     }
 
     public void setLocation(ParseGeoPoint geoPoint) {
@@ -72,5 +78,22 @@ public class Profile extends ParseObject {
 
     public String getAboutYearsExperience() {
         return this.get(ABOUT_YEARS_EXPERIENCE_KEY).toString();
+    }
+
+    public void setGithubAccessToken(String token) {
+        this.put(GITHUB_ACCESS_TOKEN, token);
+    }
+
+    public String getGithubAccessToken() {
+        return this.get(GITHUB_ACCESS_TOKEN).toString();
+    }
+
+    // for user's github id after github oauth call GET https://api.github.com/user
+    public void setGithubId(long githubId) {
+        this.put(GITHUB_ID, githubId);
+    }
+
+    public long getGithubId() {
+        return (long) this.get(GITHUB_ID);
     }
 }

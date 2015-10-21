@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.models.User;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -74,7 +74,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
                 TextView tvEventSubscribeIcon = (TextView) v.findViewById(R.id.tvSubscribeIcon);
                 // if it's not subscribed - subscribe and do ++
                 // could make a parse user for fun right now? -> try to do it without a parse user
-                User currentUser = null;
+                ParseUser currentUser = null;
                 if (Subscribe.isSubscribed(currentUser, event)) {
                     Subscribe.unSubscribeUserToEvent(currentUser, event);
                     tvEventSubscribeIcon.setText("+");

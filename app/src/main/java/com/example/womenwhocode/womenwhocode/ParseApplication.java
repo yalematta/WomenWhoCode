@@ -9,7 +9,6 @@ import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -34,7 +33,6 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Profile.class);
         ParseObject.registerSubclass(Subscribe.class);
-        ParseObject.registerSubclass(User.class);
 
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
