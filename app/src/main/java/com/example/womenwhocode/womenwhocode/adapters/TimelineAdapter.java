@@ -5,21 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Post;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class PostsAdapter extends ArrayAdapter<Post> {
+public class TimelineAdapter extends ArrayAdapter<Post> {
 
-    public PostsAdapter(Context context, List<Post> objects) {
+    public TimelineAdapter(Context context, List<Post> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
 
@@ -33,13 +31,13 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         }
 
         // Look up views to populate data
-        ImageView ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
+        //ImageView ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
         TextView tvPostTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
         TextView tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
         TextView tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
 
         // Clear out the image views
-        ivPostPhoto.setImageResource(0);
+        //ivPostPhoto.setImageResource(0);
 
         // Insert the model data into each of the view items
         String title = post.getTitle();
@@ -51,7 +49,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
         // Insert the image using picasso
-        Picasso.with(getContext()).load(post.getImageUrl()).into(ivPostPhoto);
+        //Picasso.with(getContext()).load(post.getImageUrl()).into(ivPostPhoto);
 
         return convertView;
     }
