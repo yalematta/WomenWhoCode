@@ -11,7 +11,6 @@ import com.parse.ParseUser;
 public class Post extends ParseObject {
     public static String DESCRIPTION_KEY = "description";
     public static String IMAGE_URL_KEY = "image_url";
-    public static String TITLE_KEY = "title";
     public static String NETWORK_KEY = "network";
     public static String EVENT_KEY = "event";
     public static String FEATURE_KEY = "feature";
@@ -24,14 +23,6 @@ public class Post extends ParseObject {
 
     public String getDescription() {
         return this.get(DESCRIPTION_KEY).toString();
-    }
-
-    public void setTitle(String title) {
-        put(TITLE_KEY, title);
-    }
-
-    public String getTitle() {
-        return this.get(TITLE_KEY).toString();
     }
 
     public void setNetwork(Network network) {
