@@ -24,7 +24,6 @@ import com.parse.SignUpCallback;
 public class UserProfileActivity extends AppCompatActivity {
     EditText txtName;
     EditText txtEmail;
-    EditText txtPwd;
     String name="";
     String email="";
     String password="";
@@ -45,34 +44,17 @@ private static final int SELECTED_PICTURE=1;
         }
         txtName=(EditText)findViewById(R.id.txtName);
         txtEmail=(EditText)findViewById(R.id.txtEmail);
-        txtPwd=(EditText)findViewById(R.id.txtPwd);
         txtName.setText(name);
         txtEmail.setText(email);
-        txtPwd.setText(password);
+//        txtPwd.setText(password);
     }
 
     public void OnFinalize(View view) {
         // Save user with the updated input
-        ParseUser user = new ParseUser();
-        user.setUsername(txtName.getText().toString());
-        user.setPassword(txtPwd.getText().toString());
-        user.setEmail(txtEmail.getText().toString());
-        // TODO: save the user image
-        // FIXME: get parse user to work with User model
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    Toast.makeText(getBaseContext(), "FINALIZE WIN", Toast.LENGTH_SHORT).show();
-                    // [ ] TODO: auto subscribe user to features with auto subscribe true
-                    Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(getBaseContext(), "FINALIZE FAIL" + e.toString(), Toast.LENGTH_SHORT).show();
-                    Log.d("FINALIZE_FAIL", e.toString());
-                }
-            }
-        });
+
+        Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
+        startActivity(i);
     }
 
     public void onSelectImage(View view) {

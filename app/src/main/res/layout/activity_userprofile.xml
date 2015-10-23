@@ -23,29 +23,23 @@ android:background="@drawable/shape_gradient"
         android:layout_height="wrap_content"
         android:text="Full Name"
         android:id="@+id/txtName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="210dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email address"
         android:id="@+id/txtEmail"
-        android:layout_below="@+id/txtName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/etJob"
+        android:layout_alignLeft="@+id/ivphoto"
+        android:layout_alignStart="@+id/ivphoto" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:inputType="textPassword"
-        android:id="@+id/txtPwd"
-        android:layout_below="@+id/txtEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="30dp" />
+   <Spinner
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       ></Spinner>
 
     <Button
         style="@style/MyCustomButtonOther"
@@ -54,9 +48,10 @@ android:background="@drawable/shape_gradient"
         android:text="Finalize Profile"
         android:id="@+id/txtFinalize"
         android:onClick="OnFinalize"
-        android:layout_below="@+id/txtPwd"
-        android:layout_alignLeft="@+id/txtEmail"
-        android:layout_alignStart="@+id/txtEmail" />
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignLeft="@+id/txtName"
+        android:layout_alignStart="@+id/txtName"
+        android:layout_marginTop="53dp" />
 
     <Button
         style="@style/MyCustomButtonOther"
@@ -78,8 +73,16 @@ android:background="@drawable/shape_gradient"
         android:layout_alignStart="@+id/txtReview"
         android:layout_alignRight="@+id/txtReview"
         android:layout_alignEnd="@+id/txtReview"
-        android:layout_alignBottom="@+id/txtName"
         android:layout_below="@+id/txtReview"
-        android:layout_marginBottom="20dp" />
+        android:layout_above="@+id/txtName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Job title"
+        android:id="@+id/etJob"
+        android:layout_below="@+id/txtName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp" />
 
 </RelativeLayout>

@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/shape_gradient"
+    android:padding="15dp">
+
+
+    <Button
+        style="@style/MyCustomButtonOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up with github"
+        android:id="@+id/btnGitHubSignUp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btnEmailSignUp" />
+
+    <Button
+        style="@style/MyCustomButtonOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up with Email"
+        android:id="@+id/btnEmailSignUp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp" />
+
+</RelativeLayout>
