@@ -15,7 +15,6 @@ public class FeatureDetailActivity extends AppCompatActivity {
 
     String title;
     String description;
-    int awesomeCount;
     String imageUrl;
 
     @Override
@@ -34,12 +33,10 @@ public class FeatureDetailActivity extends AppCompatActivity {
         // Insert the model data into each of the view items
         title = getIntent().getStringExtra("title");
         description = getIntent().getStringExtra("description");
-        //awesomeCount = getIntent().getIntExtra("awesomeCount");
         imageUrl = getIntent().getStringExtra("imageUrl");
 
         tvFeatureTitle.setText(title);
         tvFeatureDescription.setText(description);
-        //tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
         // Insert the image using picasso
         Picasso.with(getApplicationContext()).load(imageUrl).into(ivFeaturePhoto);

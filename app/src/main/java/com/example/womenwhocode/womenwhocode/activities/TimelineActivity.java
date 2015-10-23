@@ -71,13 +71,10 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
     public void onFeatureClickListener(Feature feature) {
         Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
         i.putExtra("title", feature.getTitle());
-        i.putExtra("description", feature.getDescription());
-        i.putExtra("awesomeCount", feature.getAwesomeCount());
         i.putExtra("imageUrl", feature.getImageUrl());
-        startActivity(i);
+        i.putExtra("description", feature.getDescription());
         startActivity(i);
     }
-
 
     // Return the order of the fragments in the view pager
     public class PagerAdapter extends FragmentPagerAdapter {
