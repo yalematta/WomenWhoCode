@@ -60,7 +60,7 @@ public class Subscribe extends ParseObject {
         put(USER_KEY, user);
     }
 
-    public ParseUser getUser()  {
+    public ParseUser getUser() {
         return (ParseUser) getParseObject(USER_KEY);
     }
 
@@ -68,6 +68,25 @@ public class Subscribe extends ParseObject {
         // Find Subscribe = true where event id is eq to this one
         ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
         subscribeParseQuery.whereEqualTo(EVENT_KEY, event).whereEqualTo(SUBSCRIBED_KEY, true);
+        final int[] count = {0};
+        subscribeParseQuery.countInBackground(new CountCallback() {
+            @Override
+            public void done(int i, ParseException e) {
+                if (e == null) {
+                    count[0] = i;
+                    Log.d("SUBSCRIPTION_COUNT", "Subscribe count" + i);
+                } else {
+                    Log.d("SUBSCRIPTION_CNT_ERROR", "0 count data");
+                }
+            }
+        });
+        return count[0];
+    }
+
+    public static int getCountFor(Feature feature) throws ParseException {
+        // Find Subscribe = true where event id is eq to this one
+        ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
+        subscribeParseQuery.whereEqualTo(FEATURE_KEY, feature).whereEqualTo(SUBSCRIBED_KEY, true);
         final int[] count = {0};
         subscribeParseQuery.countInBackground(new CountCallback() {
             @Override
