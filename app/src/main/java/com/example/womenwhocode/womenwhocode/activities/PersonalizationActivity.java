@@ -12,6 +12,7 @@ import com.example.womenwhocode.womenwhocode.fragments.Question1Fragment;
 import com.example.womenwhocode.womenwhocode.fragments.Question2Fragment;
 import com.example.womenwhocode.womenwhocode.fragments.Question3Fragment;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.SignUpFragment;
 
 /**
  * Created by pnroy on 10/19/15.
@@ -21,18 +22,30 @@ public class PersonalizationActivity extends AppCompatActivity {
     public Question2Fragment question2Fragment=new Question2Fragment();
     public Question3Fragment question3Fragment=new Question3Fragment();
     public LogInFragment logInFragment=new LogInFragment();
-
+    public SignUpFragment signUpFragment=new SignUpFragment();
+    Button btnNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalization);
+        btnNext=(Button)findViewById(R.id.btnNext);
+        Bundle extras=getIntent().getExtras();
+        String type="";
+        if(extras!=null){
+            type=extras.getString("type");
+        }
 
         //create a fragment transaction
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
-
-
-        //replace contents of fragment with first fragment
-        ft.replace(R.id.flPersonalization,question1Fragment);
+//for join us
+        if(type.equals("Join")) {
+            //replace contents of fragment with first fragment
+            ft.replace(R.id.flPersonalization, question1Fragment);
+        }//for login
+        else{
+            ft.replace(R.id.flPersonalization, logInFragment);
+            btnNext.setVisibility(View.INVISIBLE);
+        }
 
         ft.addToBackStack(null);
 
@@ -56,8 +69,8 @@ public class PersonalizationActivity extends AppCompatActivity {
             ft.replace(R.id.flPersonalization, question3Fragment);
         }
         else{
-            ft.replace(R.id.flPersonalization, logInFragment);
-            Button btnNext=(Button)findViewById(R.id.btnNext);
+            ft.replace(R.id.flPersonalization, signUpFragment);
+
             btnNext.setVisibility(View.INVISIBLE);
         }
             ft.addToBackStack(null);

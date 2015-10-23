@@ -57,11 +57,16 @@ public class LoginActivity extends AppCompatActivity {
         questionnaire.getQuestionnaire();
 
         Intent i = new Intent(this, PersonalizationActivity.class);
+        i.putExtra("type","Join");
         startActivity(i);
     }
 
     public void LogInToApp(View view) {
-//        ParseUser.logInInBackground("Puja Roy", "Puja", new LogInCallback() {
+
+        Intent i = new Intent(this, PersonalizationActivity.class);
+        i.putExtra("type","Login");
+        startActivity(i);
+//      ParseUser.logInInBackground("Puja Roy", "Puja", new LogInCallback() {
 //            public void done(ParseUser user, ParseException e) {
 //                if (user != null) {
 //                    Intent i = new Intent(LoginActivity.this, TimelineActivity.class);
