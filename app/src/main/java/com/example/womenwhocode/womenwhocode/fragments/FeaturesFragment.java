@@ -1,11 +1,13 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -26,6 +28,12 @@ public class FeaturesFragment extends Fragment {
     ArrayList<Feature> features;
     ListView lvFeatures;
 
+    private OnFeatureItemClickListener listener;
+
+    public interface OnFeatureItemClickListener {
+        public void onFeatureClickListener(Feature feature);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +47,16 @@ public class FeaturesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_features, container, false);
         lvFeatures = (ListView) view.findViewById(R.id.lvFeatures);
         lvFeatures.setAdapter(aFeatures);
+
+        lvFeatures.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Feature feature = aFeatures.getItem(position);
+                listener.onFeatureClickListener(feature);
+            }
+        });
+
+
         return view;
     }
 
@@ -60,5 +78,16 @@ public class FeaturesFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnFeatureItemClickListener) {
+            listener = (OnFeatureItemClickListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implement FeaturesFragment.OnFeaureItemClickListener");
+        }
     }
 }

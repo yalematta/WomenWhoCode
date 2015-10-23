@@ -16,8 +16,9 @@ import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.models.Feature;
 
-public class TimelineActivity extends AppCompatActivity implements EventsFragment.OnEventItemClickListener {
+public class TimelineActivity extends AppCompatActivity implements EventsFragment.OnEventItemClickListener, FeaturesFragment.OnFeatureItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,18 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
         i.putExtra("event_id", event.getObjectId());
         startActivity(i);
     }
+
+    @Override
+    public void onFeatureClickListener(Feature feature) {
+        Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
+        i.putExtra("title", feature.getTitle());
+        i.putExtra("description", feature.getDescription());
+        i.putExtra("awesomeCount", feature.getAwesomeCount());
+        i.putExtra("imageUrl", feature.getImageUrl());
+        startActivity(i);
+        startActivity(i);
+    }
+
 
     // Return the order of the fragments in the view pager
     public class PagerAdapter extends FragmentPagerAdapter {
