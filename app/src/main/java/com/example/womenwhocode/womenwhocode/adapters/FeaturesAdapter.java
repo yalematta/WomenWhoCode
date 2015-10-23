@@ -1,7 +1,6 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.activities.FeatureDetailActivity;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.squareup.picasso.Picasso;
 
@@ -25,17 +23,6 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
     String description;
     int awesomeCount;
     String imageUrl;
-
-    private View.OnClickListener featureClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            Intent i = new Intent(getContext(), FeatureDetailActivity.class);
-            i.putExtra("title", title);
-            i.putExtra("description", description);
-            i.putExtra("awesomeCount", awesomeCount);
-            i.putExtra("imageUrl", imageUrl);
-            getContext().startActivity(i);
-        }
-    };
 
     public FeaturesAdapter(Context context, List<Feature> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -71,11 +58,6 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
         // Insert the image using picasso
         Picasso.with(getContext()).load(imageUrl).into(ivFeaturePhoto);
-
-        // Launch detail view
-        ivFeaturePhoto.setOnClickListener(featureClickListener);
-        tvFeatureTitle.setOnClickListener(featureClickListener);
-        tvFeatureDescription.setOnClickListener(featureClickListener);
 
         return convertView;
     }
