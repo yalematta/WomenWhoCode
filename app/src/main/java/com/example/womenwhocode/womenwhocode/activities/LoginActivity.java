@@ -1,6 +1,5 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,19 +8,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
 
 
 public class LoginActivity extends AppCompatActivity {
+    PersonalizationQuestionnaire questionnaire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        questionnaire = new PersonalizationQuestionnaire();
+        questionnaire.build();
+
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_laptop);
@@ -54,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void JoinApp(View view) {
+        // Puja, you can use this to get the questionnaire data.
+        questionnaire.getQuestionnaire();
+
         Intent i = new Intent(this, PersonalizationActivity.class);
         startActivity(i);
     }
