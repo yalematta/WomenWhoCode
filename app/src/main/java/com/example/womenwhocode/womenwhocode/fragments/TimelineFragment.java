@@ -48,7 +48,7 @@ public class TimelineFragment extends Fragment {
 
     void populatePostsList() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.orderByAscending("title");
+        query.whereExists(Post.DESCRIPTION_KEY);
         query.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> lvPosts, ParseException e) {
                 if (e == null) {

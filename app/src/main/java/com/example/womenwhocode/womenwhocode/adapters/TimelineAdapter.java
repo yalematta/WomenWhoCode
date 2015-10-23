@@ -32,7 +32,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
 
         // Look up views to populate data
         //ImageView ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
-        TextView tvPostTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
         TextView tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
         TextView tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
 
@@ -40,11 +39,9 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         //ivPostPhoto.setImageResource(0);
 
         // Insert the model data into each of the view items
-        String title = post.getTitle();
         String description = post.getDescription();
         int awesomeCount = post.getAwesomeCount();
 
-        tvPostTitle.setText(title);
         tvPostDescription.setText(description);
         tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
