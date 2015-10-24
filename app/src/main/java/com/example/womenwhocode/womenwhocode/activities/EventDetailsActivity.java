@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -70,8 +73,11 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        // First try to find from the cache and only then go to network
-        // query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(this)) {
+            query.fromPin(LocalDataStore.EVENT_PIN);
+        }
+
         // Execute the query to find the object with ID
         query.getInBackground(event_id, new GetCallback<Event>() {
             public void done(Event parseEvent, ParseException e) {
@@ -83,11 +89,12 @@ public class EventDetailsActivity extends AppCompatActivity {
                         pb.setVisibility(ProgressBar.GONE);
                         sv.setVisibility(ScrollView.VISIBLE);
                     } else {
+                        Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("EVENT_PS_NO_DATA", e.toString());
                     }
-
                 } else {
                     Log.d("EVENT_PS_ERROR", e.toString());
+                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });
