@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
@@ -27,6 +28,7 @@ public class FeaturesFragment extends Fragment {
     FeaturesAdapter aFeatures;
     ArrayList<Feature> features;
     ListView lvFeatures;
+    ProgressBar pb;
 
     private OnFeatureItemClickListener listener;
 
@@ -39,7 +41,6 @@ public class FeaturesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         features = new ArrayList<>();
         aFeatures = new FeaturesAdapter(getActivity(), features);
-        populateFeaturesList();
     }
 
     @Override
@@ -47,6 +48,15 @@ public class FeaturesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_features, container, false);
         lvFeatures = (ListView) view.findViewById(R.id.lvFeatures);
         lvFeatures.setAdapter(aFeatures);
+
+        // hide list view until data is fully loaded
+        lvFeatures.setVisibility(ListView.INVISIBLE);
+
+        // show progress bar in the meantime
+        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
+        populateFeaturesList();
 
         lvFeatures.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,6 +83,9 @@ public class FeaturesFragment extends Fragment {
                     aFeatures.clear();
                     addAll(lFeatures);
                     aFeatures.notifyDataSetChanged();
+                    // hide progress bar, make list view appear
+                    pb.setVisibility(ProgressBar.GONE);
+                    lvFeatures.setVisibility(ListView.VISIBLE);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
