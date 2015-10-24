@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -29,6 +31,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     TextView tvSubscribeCount;
     Button btnSubscribeIcon;
     Event event;
+    ProgressBar pb;
+    ScrollView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,14 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void setUpView() {
+        // set the progress bar
+        pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
+        // hide scroll view so the progress bar is the center of attention
+        sv = (ScrollView) findViewById(R.id.svEventDetails);
+        sv.setVisibility(ScrollView.INVISIBLE);
+
         // look up views
         tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
         tvEventDate = (TextView) findViewById(R.id.tvEventDate);
@@ -67,6 +79,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (parseEvent != null) {
                         event = parseEvent;
                         setEventData();
+                        // hide the progress bar, show the main view
+                        pb.setVisibility(ProgressBar.GONE);
+                        sv.setVisibility(ScrollView.VISIBLE);
                     } else {
                         Log.d("EVENT_PS_NO_DATA", e.toString());
                     }
