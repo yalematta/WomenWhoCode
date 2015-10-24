@@ -10,17 +10,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.network.MeetupClient;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -84,7 +92,6 @@ public class EventsFragment extends Fragment {
     }
 
     private void populateEvents() {
-        meetupClient = new MeetupClient();
         /*
         * TODO: will need to know the user's location
         * with something like below:
@@ -93,28 +100,28 @@ public class EventsFragment extends Fragment {
         * networkParseQuery.whereWithinMiles(Network.LOCATION_KEY, parseGeoPoint, 25);
         */
 
-        // FIXME: when ^^^ is added dynamically add in value below!
-        String[] groupIds = new String[]{"11940602"};
+        // TODO: sort events by specific groups
+        // String[] groupIds = new String[]{"11940602"};
 
-        meetupClient.getLocalEventsByGroups(groupIds, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    aEvents.addAll(Event.fromJSONArray(response.getJSONArray("results")));
-                    // remove progress bar
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
+            query.fromPin(LocalDataStore.EVENT_PIN);
+        }
+
+        query.findInBackground(new FindCallback<Event>() {
+            public void done(List<Event> eventList, ParseException e) {
+                if (eventList == null) {
+                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                } else if (e == null) {
+                    aEvents.clear();
+                    aEvents.addAll(eventList);
+                    // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
                     lvEvents.setVisibility(ListView.VISIBLE);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                if (errorResponse != null) {
-                    Log.i("MEETUP_EVENTS_FAILURE", errorResponse.toString());
+                    LocalDataStore.unpinAndRepin(eventList, LocalDataStore.EVENT_PIN);
                 } else {
-                    Log.d("MEETUP_EVENTS_FAILURE", "null error");
+                    Log.d("PARSE_EVENTS_FAIL", "Error: " + e.getMessage());
                 }
             }
         });
