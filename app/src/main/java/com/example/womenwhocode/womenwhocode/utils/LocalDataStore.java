@@ -13,6 +13,10 @@ import java.util.List;
  * Created by zassmin on 10/23/15.
  */
 public class LocalDataStore {
+    public static String EVENT_PIN = "events";
+    public static String FEATURES_PIN = "features";
+    public static String POSTS_PIN = "posts";
+
     public static void unpinAndRepin(final List data, final String pinName) {
        // Unpin old data and pin new data to local datastore
         ParseObject.unpinAllInBackground(pinName, new DeleteCallback() {

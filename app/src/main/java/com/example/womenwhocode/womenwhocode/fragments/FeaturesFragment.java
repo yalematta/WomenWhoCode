@@ -32,7 +32,6 @@ public class FeaturesFragment extends Fragment {
     ArrayList<Feature> features;
     ListView lvFeatures;
     ProgressBar pb;
-    LocalDataStore localDataStore;
 
     private OnFeatureItemClickListener listener;
 
@@ -82,7 +81,7 @@ public class FeaturesFragment extends Fragment {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
-            query.fromPin("features");
+            query.fromPin(LocalDataStore.FEATURES_PIN);
         }
 
         query.orderByAscending("title");
@@ -97,7 +96,7 @@ public class FeaturesFragment extends Fragment {
                     // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
                     lvFeatures.setVisibility(ListView.VISIBLE);
-                    LocalDataStore.unpinAndRepin(lFeatures, "features");
+                    LocalDataStore.unpinAndRepin(lFeatures, LocalDataStore.FEATURES_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
