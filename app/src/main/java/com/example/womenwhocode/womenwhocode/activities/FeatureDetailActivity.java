@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,16 @@ public class FeatureDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feature_detail);
 
+        // Enable Up button
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setUpView();
+
+        // Set Activity Title to Feature Title
+        this.setTitle(title);
+    }
+
+    private void setUpView() {
         // Look up views to populate data
         ImageView ivFeaturePhoto = (ImageView) findViewById(R.id.ivFeaturePhoto);
         TextView tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
@@ -40,9 +51,6 @@ public class FeatureDetailActivity extends AppCompatActivity {
 
         // Insert the image using picasso
         Picasso.with(getApplicationContext()).load(imageUrl).into(ivFeaturePhoto);
-
-        // Set Activity Title to Feature Title
-        this.setTitle(title);
     }
 }
 
