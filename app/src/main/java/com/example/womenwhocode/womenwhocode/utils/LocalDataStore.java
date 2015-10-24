@@ -1,7 +1,6 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.ParseException;

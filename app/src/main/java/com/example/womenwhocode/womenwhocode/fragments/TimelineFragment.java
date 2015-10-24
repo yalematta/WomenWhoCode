@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.TimelineAdapter;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -59,16 +62,25 @@ public class TimelineFragment extends Fragment {
 
     void populatePostsList() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
+            query.fromPin(LocalDataStore.POSTS_PIN);
+        }
+
         query.whereExists(Post.DESCRIPTION_KEY);
         query.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> listPosts, ParseException e) {
-                if (e == null) {
+                if (listPosts == null) {
+                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                } else if (e == null) {
                     aPosts.clear();
                     addAll(listPosts);
                     aPosts.notifyDataSetChanged();
-
+                    // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
                     lvPosts.setVisibility(ListView.VISIBLE);
+
+                    LocalDataStore.unpinAndRepin(listPosts, LocalDataStore.POSTS_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
