@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -27,6 +31,7 @@ public class FeaturesFragment extends Fragment {
     FeaturesAdapter aFeatures;
     ArrayList<Feature> features;
     ListView lvFeatures;
+    ProgressBar pb;
 
     private OnFeatureItemClickListener listener;
 
@@ -39,7 +44,6 @@ public class FeaturesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         features = new ArrayList<>();
         aFeatures = new FeaturesAdapter(getActivity(), features);
-        populateFeaturesList();
     }
 
     @Override
@@ -47,6 +51,15 @@ public class FeaturesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_features, container, false);
         lvFeatures = (ListView) view.findViewById(R.id.lvFeatures);
         lvFeatures.setAdapter(aFeatures);
+
+        // hide list view until data is fully loaded
+        lvFeatures.setVisibility(ListView.INVISIBLE);
+
+        // show progress bar in the meantime
+        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
+        populateFeaturesList();
 
         lvFeatures.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,13 +79,24 @@ public class FeaturesFragment extends Fragment {
 
     void populateFeaturesList() {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
+            query.fromPin(LocalDataStore.FEATURES_PIN);
+        }
+
         query.orderByAscending("title");
         query.findInBackground(new FindCallback<Feature>() {
             public void done(List<Feature> lFeatures, ParseException e) {
-                if (e == null) {
+                if (lFeatures == null) {
+                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                } else if (e == null) {
                     aFeatures.clear();
                     addAll(lFeatures);
                     aFeatures.notifyDataSetChanged();
+                    // hide progress bar, make list view appear
+                    pb.setVisibility(ProgressBar.GONE);
+                    lvFeatures.setVisibility(ListView.VISIBLE);
+                    LocalDataStore.unpinAndRepin(lFeatures, LocalDataStore.FEATURES_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }

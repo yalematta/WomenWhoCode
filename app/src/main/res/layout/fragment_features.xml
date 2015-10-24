@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/pbLoading"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
     <ListView
         android:id="@+id/lvFeatures"
         android:layout_width="wrap_content"
