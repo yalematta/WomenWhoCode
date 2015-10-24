@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -29,6 +32,7 @@ public class FeaturesFragment extends Fragment {
     ArrayList<Feature> features;
     ListView lvFeatures;
     ProgressBar pb;
+    LocalDataStore localDataStore;
 
     private OnFeatureItemClickListener listener;
 
@@ -76,16 +80,24 @@ public class FeaturesFragment extends Fragment {
 
     void populateFeaturesList() {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
+            query.fromPin("features");
+        }
+
         query.orderByAscending("title");
         query.findInBackground(new FindCallback<Feature>() {
             public void done(List<Feature> lFeatures, ParseException e) {
-                if (e == null) {
+                if (lFeatures == null) {
+                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                } else if (e == null) {
                     aFeatures.clear();
                     addAll(lFeatures);
                     aFeatures.notifyDataSetChanged();
                     // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
                     lvFeatures.setVisibility(ListView.VISIBLE);
+                    LocalDataStore.unpinAndRepin(lFeatures, "features");
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
