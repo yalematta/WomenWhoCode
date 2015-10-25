@@ -29,6 +29,7 @@
         android:id="@+id/txtPwd"
         android:layout_below="@+id/txtEmail"
         android:hint="password"
+        android:inputType="textPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp" />
 
