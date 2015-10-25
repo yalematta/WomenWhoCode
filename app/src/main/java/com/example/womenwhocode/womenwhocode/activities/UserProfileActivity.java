@@ -40,6 +40,7 @@ public class UserProfileActivity extends AppCompatActivity {
     String email="";
     String password="";
     Profile userProfile;
+   String filepath;
     ArrayAdapter<String> adapterForSpinner;
 private static final int SELECTED_PICTURE=1;
     @Override
@@ -103,6 +104,7 @@ final ArrayList<String> networks=new ArrayList<String>();
 
             userProfile.setJobTitle(txtjobTitle.getText().toString());
             userProfile.setUser(ParseUser.getCurrentUser());
+            userProfile.setImageUrl(filepath);
             userProfile.save();
             Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
             startActivity(i);
@@ -136,7 +138,7 @@ final ArrayList<String> networks=new ArrayList<String>();
                 cursor.moveToFirst();
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String filepath = cursor.getString(columnIndex);
+                 filepath = cursor.getString(columnIndex);
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.ivphoto);
                 // Set the Image in ImageView after decoding the String
