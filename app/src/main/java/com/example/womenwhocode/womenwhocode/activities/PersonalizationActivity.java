@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -30,7 +31,7 @@ public class PersonalizationActivity extends AppCompatActivity {
     public SignUpFragment signUpFragment=new SignUpFragment();
     PersonalizationQuestionnaire pq;
     PersonalizationDetail pd;
-    Button btnNext;
+int pageCnt=0;
 
     ArrayList<String> Question = new ArrayList<String>();
     ArrayList<String[]> Ans = new ArrayList<String[]>();
@@ -59,6 +60,8 @@ public class PersonalizationActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("Questions", Question.get(0));
             bundle.putStringArray("Answers", Ans.get(0));
+            bundle.putInt("clickCnt",0);
+
             question1Fragment.setArguments(bundle);
            // btnNext.setVisibility(View.VISIBLE);
         }//for login
@@ -71,6 +74,23 @@ public class PersonalizationActivity extends AppCompatActivity {
 
         //commit the transaction
         ft.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
+        //Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        //startActivity(i);
+
     }
 
     public void setFragmentData() {

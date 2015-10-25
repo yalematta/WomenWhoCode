@@ -94,7 +94,13 @@ final ArrayList<String> networks=new ArrayList<String>();
             // Save user with the updated input in Profile model
             userProfile = new Profile();
             userProfile.setFullName(txtName.getText().toString());
-            userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
+            if(spnNetwork.getSelectedItem().toString().equals("select")){
+                userProfile.setNetwork("");
+            }
+            else{
+                userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
+            }
+
             userProfile.setJobTitle(txtjobTitle.getText().toString());
             userProfile.setUser(ParseUser.getCurrentUser());
             userProfile.save();
