@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -31,22 +33,29 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         }
 
         // Look up views to populate data
-        //ImageView ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
+        ImageView ivFeaturePhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
         TextView tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
         TextView tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
+        TextView tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
+        TextView tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
 
         // Clear out the image views
-        //ivPostPhoto.setImageResource(0);
+        ivFeaturePhoto.setImageResource(0);
 
         // Insert the model data into each of the view items
         String description = post.getDescription();
         int awesomeCount = post.getAwesomeCount();
+        String relativeDate = post.getPostDateTime();
+        String featureImageUrl = post.getFeatureImageUrl();
+        String featureTitle = post.getFeatureTitle();
 
         tvPostDescription.setText(description);
-        tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+        tvAwesomeCount.setText("\\o/" + Integer.valueOf(awesomeCount).toString());
+        tvRelativeDate.setText(relativeDate);
+        tvFeatureTitle.setText(featureTitle);
 
         // Insert the image using picasso
-        //Picasso.with(getContext()).load(post.getImageUrl()).into(ivPostPhoto);
+        Picasso.with(getContext()).load(featureImageUrl).into(ivFeaturePhoto);
 
         return convertView;
     }
