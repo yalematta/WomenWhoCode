@@ -9,11 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -29,6 +34,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     TextView tvSubscribeCount;
     Button btnSubscribeIcon;
     Event event;
+    ProgressBar pb;
+    ScrollView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,14 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void setUpView() {
+        // set the progress bar
+        pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
+        // hide scroll view so the progress bar is the center of attention
+        sv = (ScrollView) findViewById(R.id.svEventDetails);
+        sv.setVisibility(ScrollView.INVISIBLE);
+
         // look up views
         tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
         tvEventDate = (TextView) findViewById(R.id.tvEventDate);
@@ -58,8 +73,11 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        // First try to find from the cache and only then go to network
-        // query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(this)) {
+            query.fromPin(LocalDataStore.EVENT_PIN);
+        }
+
         // Execute the query to find the object with ID
         query.getInBackground(event_id, new GetCallback<Event>() {
             public void done(Event parseEvent, ParseException e) {
@@ -67,12 +85,16 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (parseEvent != null) {
                         event = parseEvent;
                         setEventData();
+                        // hide the progress bar, show the main view
+                        pb.setVisibility(ProgressBar.GONE);
+                        sv.setVisibility(ScrollView.VISIBLE);
                     } else {
+                        Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("EVENT_PS_NO_DATA", e.toString());
                     }
-
                 } else {
                     Log.d("EVENT_PS_ERROR", e.toString());
+                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });
