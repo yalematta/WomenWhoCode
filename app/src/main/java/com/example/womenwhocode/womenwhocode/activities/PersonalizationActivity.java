@@ -76,8 +76,8 @@ int pageCnt=0;
         ft.commit();
     }
 
-    @Override
-    public void onBackPressed() {
+   // @Override
+   /* public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
@@ -91,7 +91,7 @@ int pageCnt=0;
         //Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         //startActivity(i);
 
-    }
+    }*/
 
     public void setFragmentData() {
         pd = new PersonalizationDetail();
