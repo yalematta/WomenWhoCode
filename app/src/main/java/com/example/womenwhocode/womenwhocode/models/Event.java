@@ -26,9 +26,6 @@ public class Event extends ParseObject {
     public static String TITLE_KEY = "title";
     public static String FEATURED_KEY = "featured";
     public static String MEETUP_EVENT_ID_KEY = "meetup_event_id";
-    public static String RSVP_COUNT_KEY = "rsvp_count";
-    public static String RSVP_LIMIT_KEY = "rsvp_limit";
-    public static String AWESOME_COUNT_KEY = "awesome_count";
     public static String DESCRIPTION_KEY = "description";
     public static String TIMEZONE_KEY = "timezone";
 
@@ -88,37 +85,12 @@ public class Event extends ParseObject {
         return this.get(MEETUP_EVENT_ID_KEY).toString();
     }
 
-    public void setRsvpCount(int rsvpCount) {
-        put(RSVP_COUNT_KEY, rsvpCount);
-    }
-
-    public int getRsvpCount() {
-        return this.getInt(RSVP_COUNT_KEY);
-    }
-
-    public void setRsvpLimit(int rsvpLimit) {
-        put(RSVP_LIMIT_KEY, rsvpLimit);
-    }
-
-    public int getRsvpLimit() {
-        return this.getInt(RSVP_LIMIT_KEY);
-    }
-
     public void setDescription(String description) {
         put(DESCRIPTION_KEY, description);
     }
 
     public String getDescription() {
         return this.get(DESCRIPTION_KEY).toString();
-    }
-
-    // awesomeCount is for our stretch goals
-    public void setAwesomeCount(int awesomeCount) {
-        put(AWESOME_COUNT_KEY, awesomeCount);
-    }
-
-    public int getAwesomeCount() {
-        return this.getInt(AWESOME_COUNT_KEY);
     }
 
     public void setTimeZone(String timeZone) {
@@ -157,8 +129,6 @@ public class Event extends ParseObject {
             event.setEventDateTime(jsonObject.getString("time"));
             event.setTimeZone(jsonObject.getString("timezone"));
             event.setUrl(jsonObject.getString("event_url"));
-            event.setRsvpLimit(jsonObject.getInt("rsvp_limit"));
-            event.setRsvpCount(jsonObject.getInt("yes_rsvp_count"));
             String networkMeetupId = String.valueOf(jsonObject.getJSONObject("group").getInt("id"));
             Network network = Network.findByMeetupId(networkMeetupId);
             if (network != null) {
@@ -195,11 +165,5 @@ public class Event extends ParseObject {
         return events;
     }
 
-    public static String getDateTime(String milliseconds) {
-        Long ms = Long.parseLong(milliseconds);
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SSS");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(ms); // is this timezone agnostic? odds are it needs to be the tz on the app
-        return format.format(calendar.getTime());
-    }
+    // FIXME: display time according to local time zone
 }

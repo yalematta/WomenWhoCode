@@ -15,28 +15,19 @@ import android.widget.Toast;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Event;
-import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.network.MeetupClient;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by shehba.shahab on 10/16/15.
  */
 public class EventsFragment extends Fragment {
-    MeetupClient meetupClient;
     ArrayList<Event> events;
     EventsAdapter aEvents;
     ListView lvEvents;

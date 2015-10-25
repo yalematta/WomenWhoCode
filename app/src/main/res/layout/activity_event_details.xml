@@ -78,25 +78,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvAwesomeCount"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/tvEventDescription"
-                android:text="30" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvAwesomeIcon"
-                android:layout_marginLeft="6dp"
-                android:layout_below="@id/tvEventDescription"
-                android:layout_toRightOf="@+id/tvAwesomeCount"
-                android:text="\\o/" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/tvSubscribeCount"
-                android:layout_below="@id/tvAwesomeCount"
+                android:layout_below="@id/tvEventDescription"
                 android:layout_alignParentLeft="true"
                 android:text="260 Subscribed" />
 

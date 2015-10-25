@@ -30,7 +30,6 @@ public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventVenue;
     TextView tvEventUrl;
     TextView tvEventDescription;
-    TextView tvAwesomeCount;
     TextView tvSubscribeCount;
     Button btnSubscribeIcon;
     Event event;
@@ -65,7 +64,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvEventVenue = (TextView) findViewById(R.id.tvEventVenue);
         tvEventUrl = (TextView) findViewById(R.id.tvEventUrl);
         tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
-        tvAwesomeCount = (TextView) findViewById(R.id.tvAwesomeCount);
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
 
         // get event from intent
@@ -103,12 +101,11 @@ public class EventDetailsActivity extends AppCompatActivity {
     private void setEventData() {
         // setup views
         tvEventTitle.setText(event.getTitle());
-        tvEventDate.setText(Event.getDateTime(event.getEventDateTime()));
+        tvEventDate.setText(event.getEventDateTime());
         // tvEventTime.setText(event.getDateTime(event.getEventDateTime()));
         tvEventVenue.setText(event.getLocation());
         tvEventUrl.setText(event.getUrl());
         tvEventDescription.setText(Html.fromHtml(event.getDescription()));
-        tvAwesomeCount.setText(String.valueOf(event.getAwesomeCount()));
         int subscribeCount = 0;
         try {
             subscribeCount = Subscribe.getCountFor(event);
