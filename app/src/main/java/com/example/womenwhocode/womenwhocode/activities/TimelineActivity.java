@@ -78,7 +78,7 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
 
     // Return the order of the fragments in the view pager
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = {"Timeline", "Features", "Events"};
+        private final String[] tabTitles = {(String) getResources().getText(R.string.title_fragment_timeline), (String) getResources().getText(R.string.title_fragment_topics), (String) getResources().getText(R.string.title_fragment_events)};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);

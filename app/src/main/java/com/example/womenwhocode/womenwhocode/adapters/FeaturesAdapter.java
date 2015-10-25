@@ -19,10 +19,10 @@ import java.util.List;
  */
 public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
-    String title;
-    String imageUrl;
-    String description;
-    int featureSubscribe = 0;
+    private String title;
+    private String imageUrl;
+    private String description;
+    private int featureSubscribe = 0;
 
     public FeaturesAdapter(Context context, List<Feature> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);

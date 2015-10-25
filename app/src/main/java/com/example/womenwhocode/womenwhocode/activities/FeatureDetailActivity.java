@@ -14,9 +14,9 @@ import com.squareup.picasso.Picasso;
  */
 public class FeatureDetailActivity extends AppCompatActivity {
 
-    String title;
-    String description;
-    String imageUrl;
+    private String title;
+    private String description;
+    private String imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
