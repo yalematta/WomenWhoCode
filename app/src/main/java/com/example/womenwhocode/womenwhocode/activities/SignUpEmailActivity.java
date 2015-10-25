@@ -29,6 +29,9 @@ public class SignUpEmailActivity extends AppCompatActivity {
         EditText tvName = (EditText) findViewById(R.id.txtName);
         EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
         EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
+       final String name=tvName.getText().toString();
+        final String email=tvEmail.getText().toString();
+       final String password=tvPassword.getText().toString();
 //create the parse user and save it
         ParseUser user = new ParseUser();
         user.setUsername(tvName.getText().toString());
@@ -41,7 +44,11 @@ public class SignUpEmailActivity extends AppCompatActivity {
                 if (e == null) {
                     Toast.makeText(getBaseContext(), "User created", Toast.LENGTH_SHORT).show();
                     // [ ] TODO: auto subscribe user to features with auto subscribe true
-
+                    Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
+                    i.putExtra("Name",name);
+                    i.putExtra("Email",email);
+                    i.putExtra("Password",password);
+                    startActivity(i);
                 } else {
                     Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
                     Log.d("User Creation failed", e.toString());
@@ -49,14 +56,9 @@ public class SignUpEmailActivity extends AppCompatActivity {
             }
         });
 
-        String name=tvName.getText().toString();
-        String email=tvEmail.getText().toString();
-        String password=tvPassword.getText().toString();
-        Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
-        i.putExtra("Name",name);
-        i.putExtra("Email",email);
-        i.putExtra("Password",password);
-        startActivity(i);
+
+
+
 
     }
 }

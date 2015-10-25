@@ -9,14 +9,24 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Network;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pnroy on 10/19/15.
@@ -24,9 +34,13 @@ import com.parse.SignUpCallback;
 public class UserProfileActivity extends AppCompatActivity {
     EditText txtName;
     EditText txtEmail;
+    EditText txtjobTitle;
+    Spinner spnNetwork;
     String name="";
     String email="";
     String password="";
+    Profile userProfile;
+    ArrayAdapter<String> adapterForSpinner;
 private static final int SELECTED_PICTURE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +48,61 @@ private static final int SELECTED_PICTURE=1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
         Bundle extras = getIntent().getExtras();
-
+final ArrayList<String> networks=new ArrayList<String>();
         // TODO: needs a take photo intent for when where is no camera
 
         if (extras != null) {
-            name = extras.getString("Name");
+
             email = extras.getString("Email");
-            password = extras.getString("Password");
+
         }
         txtName=(EditText)findViewById(R.id.txtName);
         txtEmail=(EditText)findViewById(R.id.txtEmail);
-        txtName.setText(name);
+        txtjobTitle=(EditText)findViewById(R.id.etJob);
+        spnNetwork=(Spinner)findViewById(R.id.spnNetwork);
+       //get the Network data
+        Network ntwkAll=new Network();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Network");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> networkList, ParseException e) {
+                if (e == null) {
+                    for (int i = 0; i < networkList.size(); i++) {
+                        networks.add(networkList.get(i).getString("title"));
+                    }
+
+                    //  Toast.makeText(getApplicationContext(),networkList.get(0).getString("title"),Toast.LENGTH_LONG).show();
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+       // txtName.setText(name);
         txtEmail.setText(email);
+        networks.add("select");
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, networks);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        spnNetwork.setAdapter(spinnerArrayAdapter);
+
+        spnNetwork.setSelection(0);
 //        txtPwd.setText(password);
     }
 
     public void OnFinalize(View view) {
-        // Save user with the updated input
+        try {
+            // Save user with the updated input in Profile model
+            userProfile = new Profile();
+            userProfile.setFullName(txtName.getText().toString());
+            userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
+            userProfile.setJobTitle(txtjobTitle.getText().toString());
+            userProfile.setUser(ParseUser.getCurrentUser());
+            userProfile.save();
+            Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
+            startActivity(i);
+        }catch(ParseException p){
 
-
-        Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
-        startActivity(i);
+        }
     }
 
     public void onSelectImage(View view) {

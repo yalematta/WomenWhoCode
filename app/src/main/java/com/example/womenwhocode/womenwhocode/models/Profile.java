@@ -47,7 +47,7 @@ public class Profile extends ParseObject {
         return this.get(IMAGE_URL_KEY).toString();
     }
 
-    public void setNetwork(Network network) {
+    public void setNetwork(String network) {
         put(NETWORK_KEY, network);
     }
 

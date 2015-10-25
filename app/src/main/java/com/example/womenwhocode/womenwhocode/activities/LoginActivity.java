@@ -12,14 +12,13 @@ import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire
 
 
 public class LoginActivity extends AppCompatActivity {
-    PersonalizationQuestionnaire questionnaire;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        questionnaire = new PersonalizationQuestionnaire();
-        questionnaire.build();
+
 
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void JoinApp(View view) {
         // Puja, you can use this to get the questionnaire data.
-        questionnaire.getQuestionnaire();
+
 
         Intent i = new Intent(this, PersonalizationActivity.class);
         i.putExtra("type","Join");

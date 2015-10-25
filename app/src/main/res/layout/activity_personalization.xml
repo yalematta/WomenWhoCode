@@ -8,16 +8,8 @@
     <FrameLayout
         android:id="@+id/flPersonalization"
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="match_parent">
     </FrameLayout>
-    <Button
-        style="@style/MyCustomButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:onClick="goToNextPage"
-        android:text="Next"
-        android:id="@+id/btnNext"
-        android:layout_gravity="right"
-        android:layout_weight="0.17" />
+
 
 </LinearLayout>

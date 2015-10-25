@@ -36,7 +36,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         final String pwd=etPassword.getText().toString();
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("email", email); // find adults
+        query.whereEqualTo("email", email); //
         query.findInBackground(new FindCallback<ParseUser>() {
 
             public void done(List<ParseUser> objects, ParseException e) {
