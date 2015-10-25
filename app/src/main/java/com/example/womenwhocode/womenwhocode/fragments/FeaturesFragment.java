@@ -28,15 +28,15 @@ import java.util.List;
  * Created by shehba.shahab on 10/16/15.
  */
 public class FeaturesFragment extends Fragment {
-    FeaturesAdapter aFeatures;
-    ArrayList<Feature> features;
-    ListView lvFeatures;
-    ProgressBar pb;
+    private FeaturesAdapter aFeatures;
+    private ArrayList<Feature> features;
+    private ListView lvFeatures;
+    private ProgressBar pb;
 
     private OnFeatureItemClickListener listener;
 
     public interface OnFeatureItemClickListener {
-        public void onFeatureClickListener(Feature feature);
+        void onFeatureClickListener(Feature feature);
     }
 
     @Override
@@ -73,11 +73,11 @@ public class FeaturesFragment extends Fragment {
         return view;
     }
 
-    void addAll(List<Feature> features) {
+    private void addAll(List<Feature> features) {
         aFeatures.addAll(features);
     }
 
-    void populateFeaturesList() {
+    private void populateFeaturesList() {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {

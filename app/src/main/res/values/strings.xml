@@ -21,5 +21,7 @@
     <string name="answer_3c">"Beginner technical under 1 year"</string>
     <string name="title_activity_event_details">Event Details</string>
     <string name="spinnerPrompt">Select item</string>
-
+    <string name="title_fragment_timeline">Timeline</string>
+    <string name="title_fragment_topics">Topics</string>
+    <string name="title_fragment_events">Events</string>
 </resources>
