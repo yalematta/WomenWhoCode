@@ -6,45 +6,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/question1"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp" />
+        android:id="@+id/tvQuestion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/answer_1a"
-        android:id="@+id/checkBox"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/answer_1b"
-        android:id="@+id/checkBox2"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignLeft="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/answer_1c"
-        android:id="@+id/checkBox3"
-        android:layout_below="@+id/checkBox2"
-        android:layout_alignLeft="@+id/checkBox2"
-        android:layout_alignStart="@+id/checkBox2" />
-
+    <LinearLayout android:id="@+id/chkLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+        android:layout_below="@id/tvQuestion"></LinearLayout>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_below="@+id/checkBox3"
-        android:layout_alignLeft="@+id/checkBox3"
-        android:layout_alignStart="@+id/checkBox3"
-        android:text="Other" />
-</RelativeLayout>
+        android:layout_below="@+id/chkLayout"
+        android:layout_alignLeft="@+id/chkLayout"
+        android:layout_alignStart="@+id/chkLayout"
+        android:hint="Other" />
+    <Button
+        style="@style/MyCustomButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:onClick="goToNextPage"
+        android:text="Next"
+        android:id="@+id/btnNext"
+        android:layout_gravity="right"
+        android:layout_weight="0.17"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/chkLayout"
+        android:layout_alignEnd="@+id/chkLayout" />
+    </RelativeLayout>

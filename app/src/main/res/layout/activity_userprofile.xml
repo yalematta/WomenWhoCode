@@ -12,16 +12,18 @@ android:background="@drawable/shape_gradient"
         android:layout_height="wrap_content"
         android:text="@string/reviewProfile"
         android:id="@+id/txtReview"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="30dp"
         android:focusable="false"
-        android:textSize="@dimen/abc_text_size_large_material" />
+        android:textSize="@dimen/abc_text_size_large_material"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentTop="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Full Name"
+        android:hint="Full Name"
         android:id="@+id/txtName"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -31,27 +33,20 @@ android:background="@drawable/shape_gradient"
         android:layout_height="wrap_content"
         android:text="email address"
         android:id="@+id/txtEmail"
-        android:layout_marginTop="53dp"
         android:layout_below="@+id/etJob"
-        android:layout_alignLeft="@+id/ivphoto"
-        android:layout_alignStart="@+id/ivphoto" />
-
-   <Spinner
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       ></Spinner>
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="@style/MyCustomButtonOther"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Finalize Profile"
-        android:id="@+id/txtFinalize"
+        android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
         android:layout_below="@+id/txtEmail"
-        android:layout_alignLeft="@+id/txtName"
-        android:layout_alignStart="@+id/txtName"
-        android:layout_marginTop="53dp" />
+        android:layout_alignLeft="@+id/etJob"
+        android:layout_alignStart="@+id/etJob"
+        android:layout_marginTop="67dp" />
 
     <Button
         style="@style/MyCustomButtonOther"
@@ -69,11 +64,11 @@ android:background="@drawable/shape_gradient"
         android:layout_height="wrap_content"
         android:id="@+id/ivphoto"
         android:src="@drawable/wwc_image"
+        android:layout_below="@+id/txtReview"
         android:layout_alignLeft="@+id/txtReview"
         android:layout_alignStart="@+id/txtReview"
-        android:layout_alignRight="@+id/txtReview"
-        android:layout_alignEnd="@+id/txtReview"
-        android:layout_below="@+id/txtReview"
+        android:layout_alignRight="@+id/txtEmail"
+        android:layout_alignEnd="@+id/txtEmail"
         android:layout_above="@+id/txtName" />
 
     <EditText
@@ -83,6 +78,18 @@ android:background="@drawable/shape_gradient"
         android:id="@+id/etJob"
         android:layout_below="@+id/txtName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnNetwork"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignLeft="@+id/btnUpload"
+        android:layout_alignStart="@+id/btnUpload"
+        android:prompt="@string/spinnerPrompt"
+        android:minHeight="20dp"
+        android:focusable="true"
+        android:clickable="true" />
 
 </RelativeLayout>
