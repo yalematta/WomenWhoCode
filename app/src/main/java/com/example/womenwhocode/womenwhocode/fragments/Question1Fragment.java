@@ -76,7 +76,7 @@ PersonalizationDetail pd;
                     ja.put(jo);
                 }
             }
-
+pd.setAnswers(ja);
 
         } catch (Exception e) {
 
