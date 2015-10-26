@@ -63,7 +63,7 @@ android:background="@drawable/shape_gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ivphoto"
-        android:src="@drawable/wwc_image"
+        android:src="@drawable/placeholder_image"
         android:layout_below="@+id/txtReview"
         android:layout_alignLeft="@+id/txtReview"
         android:layout_alignStart="@+id/txtReview"
@@ -91,5 +91,17 @@ android:background="@drawable/shape_gradient"
         android:minHeight="20dp"
         android:focusable="true"
         android:clickable="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take photo"
+        android:id="@+id/btnCamera"
+        android:onClick="onLaunchCamera"
+        android:layout_below="@+id/txtReview"
+        android:layout_toEndOf="@+id/ivphoto"
+        android:layout_toRightOf="@+id/ivphoto"
+        android:layout_alignBottom="@+id/btnUpload"
+        android:textSize="@dimen/abc_text_size_small_material" />
 
 </RelativeLayout>
