@@ -111,7 +111,7 @@ public class FeaturesFragment extends Fragment {
             listener = (OnFeatureItemClickListener) activity;
         } else {
             throw new ClassCastException(activity.toString()
-                    + " must implement FeaturesFragment.OnFeaureItemClickListener");
+                    + " must implement FeaturesFragment.OnFeatureItemClickListener");
         }
     }
 }

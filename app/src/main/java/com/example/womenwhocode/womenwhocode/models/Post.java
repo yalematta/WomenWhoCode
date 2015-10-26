@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.models;
 
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -50,12 +51,23 @@ public class Post extends ParseObject {
     }
 
     public String getFeatureImageUrl() {
-        return this.getFeature().getImageUrl();
+        Feature feature = null;
+        try {
+            feature = this.getFeature().fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return feature.getImageUrl();
     }
 
-    public String getFeatureTitle()
-    {
-        return this.getFeature().getTitle();
+    public String getFeatureTitle() {
+        Feature feature = null;
+        try {
+            feature = this.getFeature().fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return feature.getTitle();
     }
 
     public ParseUser getUser() {
