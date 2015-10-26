@@ -104,7 +104,7 @@ final ArrayList<String> networks=new ArrayList<String>();
 
             userProfile.setJobTitle(txtjobTitle.getText().toString());
             userProfile.setUser(ParseUser.getCurrentUser());
-            userProfile.setImageUrl(filepath);
+//            userProfile.setImageUrl(filepath);
             userProfile.save();
             Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
             startActivity(i);
