@@ -70,9 +70,7 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
     @Override
     public void onFeatureClickListener(Feature feature) {
         Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
-        i.putExtra("title", feature.getTitle());
-        i.putExtra("imageUrl", feature.getImageUrl());
-        i.putExtra("description", feature.getDescription());
+        i.putExtra("feature_id", feature.getObjectId());
         startActivity(i);
     }
 
