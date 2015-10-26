@@ -106,12 +106,14 @@ public class TimelineActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     protected void onStart() {
         super.onStart();
         // Connect the client.
         connectClient();
     }
 
+    @Override
     protected void onStop() {
         // Disconnecting the client invalidates it.
         if (mGoogleApiClient != null) {
