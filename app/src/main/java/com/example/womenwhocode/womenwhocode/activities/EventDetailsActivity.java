@@ -1,20 +1,22 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -33,7 +35,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     Button btnSubscribeIcon;
     Event event;
     ProgressBar pb;
-    ScrollView sv;
+    RelativeLayout rlEvents;
+    String event_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class EventDetailsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setUpView();
+
+        if (savedInstanceState == null) {
+            // set up Event Post Fragment
+            EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
+            // display fragment within activity
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flEventContainer, eventPostsFragment);
+            ft.commit();
+        }
     }
 
     private void setUpView() {
@@ -53,8 +65,8 @@ public class EventDetailsActivity extends AppCompatActivity {
         pb.setVisibility(ProgressBar.VISIBLE);
 
         // hide scroll view so the progress bar is the center of attention
-        sv = (ScrollView) findViewById(R.id.svEventDetails);
-        sv.setVisibility(ScrollView.INVISIBLE);
+        rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
+        rlEvents.setVisibility(ScrollView.INVISIBLE);
 
         // look up views
         tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
@@ -65,7 +77,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
 
         // get event from intent
-        String event_id = getIntent().getStringExtra("event_id");
+        event_id = getIntent().getStringExtra("event_id");
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -83,7 +95,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                         setEventData();
                         // hide the progress bar, show the main view
                         pb.setVisibility(ProgressBar.GONE);
-                        sv.setVisibility(ScrollView.VISIBLE);
+                        rlEvents.setVisibility(ScrollView.VISIBLE);
                     } else {
                         Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("EVENT_PS_NO_DATA", e.toString());
