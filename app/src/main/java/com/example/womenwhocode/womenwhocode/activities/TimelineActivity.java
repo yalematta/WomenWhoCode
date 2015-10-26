@@ -61,13 +61,6 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
-
-        ParseUser.logInInBackground("zzzzdemo", "password", new LogInCallback() {
-            @Override
-            public void done(ParseUser parseUser, ParseException e) {
-
-            }
-        });
     }
 
     @Override
