@@ -1,12 +1,7 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,12 +23,7 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
+import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -48,28 +38,17 @@ import java.util.ArrayList;
 public class TimelineActivity extends AppCompatActivity implements
         EventsFragment.OnEventItemClickListener,
         FeaturesFragment.OnFeatureItemClickListener,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationProvider.LocationCallback {
 
-    private GoogleApiClient mGoogleApiClient;
-    private long UPDATE_INTERVAL = 60000;  /* 60 secs, change to 10800000 - 3hrs */
-    private long FASTEST_INTERVAL = 5000; /* 5 secs, change to 3600000 - 60 min */
-    LocationRequest mLocationRequest;
-    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private LocationProvider mLocationProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        if (isLocationPermissionGranted()) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(LocationServices.API)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this).build();
-        }
-
+        // set up location
+        mLocationProvider = new LocationProvider(this, this);
 
         // Get the viewpager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -82,6 +61,13 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+
+        ParseUser.logInInBackground("zzzzdemo", "password", new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+
+            }
+        });
     }
 
     @Override
@@ -110,83 +96,14 @@ public class TimelineActivity extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
         // Connect the client.
-        connectClient();
+        mLocationProvider.connectClient();
     }
 
     @Override
     protected void onStop() {
         // Disconnecting the client invalidates it.
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.disconnect();
-        }
+        mLocationProvider.disconnect();
         super.onStop();
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        // everything up until this point is not null...is does the map app trigger this but not this app?
-        if (mCurrentLocation != null) {
-            Log.d("DEBUG", "current location: " + mCurrentLocation.toString());
-            LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-            // set the latlng to user profile
-            updateUserProfile(latLng);
-            // setting intervals on the frequency this should be updated
-            startLocationUpdates();
-        } else {
-            Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        if (i == CAUSE_SERVICE_DISCONNECTED) {
-            Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
-        } else if (i == CAUSE_NETWORK_LOST) {
-            Toast.makeText(this, "Network lost. Please re-connect.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-         /*
-		 * Google Play services can resolve some errors it detects. If the error
-		 * has a resolution, try sending an Intent to start a Google Play
-		 * services activity that can resolve error.
-		 */
-        if (connectionResult.hasResolution()) {
-            try {
-                // Start an Activity that tries to resolve the error
-                connectionResult.startResolutionForResult(this,
-                        CONNECTION_FAILURE_RESOLUTION_REQUEST);
-				/*
-				 * Thrown if Google Play services canceled the original
-				 * PendingIntent
-				 */
-            } catch (IntentSender.SendIntentException e) {
-                // Log the error
-                e.printStackTrace();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    protected void startLocationUpdates() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                mLocationRequest, this);
-    }
-
-    protected void connectClient() {
-        // Connect the client.
-        if (isGooglePlayServicesAvailable() && mGoogleApiClient != null) {
-            mGoogleApiClient.connect();
-        }
     }
 
     /*
@@ -197,55 +114,17 @@ public class TimelineActivity extends AppCompatActivity implements
         // Decide what to do based on the original request code
         switch (requestCode) {
 
-            case CONNECTION_FAILURE_RESOLUTION_REQUEST:
+            case LocationProvider.CONNECTION_FAILURE_RESOLUTION_REQUEST:
 			/*
 			 * If the result code is Activity.RESULT_OK, try to connect again
 			 */
                 switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        mGoogleApiClient.connect();
-                        break;
+                case Activity.RESULT_OK:
+                    mLocationProvider.connectClient();
+                    break;
                 }
 
         }
-    }
-
-    private boolean isGooglePlayServicesAvailable() {
-        // Check that Google Play services is available
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        // If Google Play services is available
-        if (ConnectionResult.SUCCESS == resultCode) {
-            // In debug mode, log the status
-            Log.d("Location Updates", "Google Play services is available.");
-            return true;
-        } else {
-            // Get the error dialog from Google Play services
-            Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-                    CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
-            // display error dialog
-            if (errorDialog != null) {
-                Toast.makeText(this, "Google Play Services Error:" + errorDialog.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            return false;
-        }
-    }
-
-    private boolean isLocationPermissionGranted() {
-        return checkCallingOrSelfPermission(
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                checkCallingOrSelfPermission(
-                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        // Report to the UI that the location was updated
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -262,8 +141,14 @@ public class TimelineActivity extends AppCompatActivity implements
         startActivity(i);
     }
 
+    @Override
+    public void handleNewLocation(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        updateUserProfile(latLng);
+    }
+
     public void updateUserProfile(final LatLng latLng) {
-        // only update if the location has changed.
+        // FIXME: only update if the location has changed.
         ParseQuery<Profile> query = ParseQuery.getQuery(Profile.class);
         query.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
         query.getFirstInBackground(new GetCallback<Profile>() {

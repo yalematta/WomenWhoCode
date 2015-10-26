@@ -109,10 +109,8 @@ public class EventsFragment extends Fragment {
             profileParseQuery.fromPin(LocalDataStore.PROFILE_PIN);
         }
 
-        // TODO: before you start querying verify user has gps data
         // TODO: sort events by most recent
         // TODO: reduce # of network calls for profile
-        // TODO: only update location if it's changed approximately
 
         profileParseQuery.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
         profileParseQuery.getFirstInBackground(new GetCallback<Profile>() {
