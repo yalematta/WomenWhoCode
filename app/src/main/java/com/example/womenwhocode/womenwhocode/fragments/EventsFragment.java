@@ -109,6 +109,7 @@ public class EventsFragment extends Fragment {
             profileParseQuery.fromPin(LocalDataStore.PROFILE_PIN);
         }
 
+        // TODO: before you start querying verify user has gps data
         // TODO: sort events by most recent
         // TODO: reduce # of network calls for profile
         // TODO: only update location if it's changed approximately
@@ -119,6 +120,9 @@ public class EventsFragment extends Fragment {
             @Override
             public void done(Profile profile, ParseException e) {
                 if (profile != null) {
+                    if (profile.getLocation() == null) {
+                        return;
+                    }
                     networkParseQuery.whereWithinMiles(Network.LOCATION_KEY, profile.getLocation(), MILE_RANGE);
                     query.whereMatchesQuery(Event.NETWORK_KEY, networkParseQuery);
                     query.findInBackground(new FindCallback<Event>() {
