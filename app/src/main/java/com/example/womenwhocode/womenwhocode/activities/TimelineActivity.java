@@ -1,7 +1,11 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -32,6 +36,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.GetCallback;
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
@@ -118,6 +123,7 @@ public class TimelineActivity extends AppCompatActivity implements
     @Override
     public void onConnected(Bundle bundle) {
         Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        // everything up until this point is not null...is does the map app trigger this but not this app?
         if (mCurrentLocation != null) {
             Log.d("DEBUG", "current location: " + mCurrentLocation.toString());
             LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
@@ -125,6 +131,8 @@ public class TimelineActivity extends AppCompatActivity implements
             updateUserProfile(latLng);
             // setting intervals on the frequency this should be updated
             startLocationUpdates();
+        } else {
+            Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -139,8 +147,28 @@ public class TimelineActivity extends AppCompatActivity implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d("LOCATION_CNNT_FAIL", connectionResult.toString());
-        Toast.makeText(this, "Connection Failed", Toast.LENGTH_SHORT).show();
+         /*
+		 * Google Play services can resolve some errors it detects. If the error
+		 * has a resolution, try sending an Intent to start a Google Play
+		 * services activity that can resolve error.
+		 */
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(this,
+                        CONNECTION_FAILURE_RESOLUTION_REQUEST);
+				/*
+				 * Thrown if Google Play services canceled the original
+				 * PendingIntent
+				 */
+            } catch (IntentSender.SendIntentException e) {
+                // Log the error
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void startLocationUpdates() {
@@ -159,6 +187,27 @@ public class TimelineActivity extends AppCompatActivity implements
         }
     }
 
+    /*
+    * Handle results returned to the FragmentActivity by Google Play services
+    */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Decide what to do based on the original request code
+        switch (requestCode) {
+
+            case CONNECTION_FAILURE_RESOLUTION_REQUEST:
+			/*
+			 * If the result code is Activity.RESULT_OK, try to connect again
+			 */
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        mGoogleApiClient.connect();
+                        break;
+                }
+
+        }
+    }
+
     private boolean isGooglePlayServicesAvailable() {
         // Check that Google Play services is available
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -168,7 +217,14 @@ public class TimelineActivity extends AppCompatActivity implements
             Log.d("Location Updates", "Google Play services is available.");
             return true;
         } else {
-            // try to connect again...
+            // Get the error dialog from Google Play services
+            Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                    CONNECTION_FAILURE_RESOLUTION_REQUEST);
+
+            // display error dialog
+            if (errorDialog != null) {
+                Toast.makeText(this, "Google Play Services Error:" + errorDialog.toString(), Toast.LENGTH_SHORT).show();
+            }
 
             return false;
         }
@@ -179,6 +235,15 @@ public class TimelineActivity extends AppCompatActivity implements
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 checkCallingOrSelfPermission(
                         Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        // Report to the UI that the location was updated
+        String msg = "Updated Location: " +
+                Double.toString(location.getLatitude()) + "," +
+                Double.toString(location.getLongitude());
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -193,15 +258,6 @@ public class TimelineActivity extends AppCompatActivity implements
         Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         startActivity(i);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        // Report to the UI that the location was updated
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     public void updateUserProfile(final LatLng latLng) {
