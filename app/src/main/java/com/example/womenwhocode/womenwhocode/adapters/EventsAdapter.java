@@ -64,8 +64,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         viewHolder.tvEventTitle.setText(event.getTitle());
         viewHolder.tvSubscribeCount.setText(String.valueOf(eventSubscribe + " subscribers"));
         viewHolder.tvEventLocation.setText(event.getLocation());
-        String prettyDateTime = Event.getDateTime(event.getEventDateTime());
-        viewHolder.tvEventDate.setText(prettyDateTime);
+        viewHolder.tvEventDate.setText(event.getEventDateTime());
 
         // onClickSubscribeListener
         viewHolder.tvEventSubscribeIcon.setOnClickListener(new View.OnClickListener() {

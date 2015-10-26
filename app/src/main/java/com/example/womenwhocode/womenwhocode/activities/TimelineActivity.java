@@ -1,14 +1,18 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
@@ -17,13 +21,34 @@ import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
+import com.google.android.gms.maps.model.LatLng;
+import com.parse.GetCallback;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
-public class TimelineActivity extends AppCompatActivity implements EventsFragment.OnEventItemClickListener, FeaturesFragment.OnFeatureItemClickListener {
+import java.util.ArrayList;
+
+public class TimelineActivity extends AppCompatActivity implements
+        EventsFragment.OnEventItemClickListener,
+        FeaturesFragment.OnFeatureItemClickListener,
+        LocationProvider.LocationCallback {
+
+    private LocationProvider mLocationProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        // set up location
+        mLocationProvider = new LocationProvider(this, this);
 
         // Get the viewpager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -61,6 +86,41 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        // Connect the client.
+        mLocationProvider.connectClient();
+    }
+
+    @Override
+    protected void onStop() {
+        // Disconnecting the client invalidates it.
+        mLocationProvider.disconnect();
+        super.onStop();
+    }
+
+    /*
+    * Handle results returned to the FragmentActivity by Google Play services
+    */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Decide what to do based on the original request code
+        switch (requestCode) {
+
+            case LocationProvider.CONNECTION_FAILURE_RESOLUTION_REQUEST:
+			/*
+			 * If the result code is Activity.RESULT_OK, try to connect again
+			 */
+                switch (resultCode) {
+                case Activity.RESULT_OK:
+                    mLocationProvider.connectClient();
+                    break;
+                }
+
+        }
+    }
+
+    @Override
     public void onEventClickListener(Event event) {
         Intent i = new Intent(TimelineActivity.this, EventDetailsActivity.class);
         i.putExtra("event_id", event.getObjectId());
@@ -72,6 +132,49 @@ public class TimelineActivity extends AppCompatActivity implements EventsFragmen
         Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         startActivity(i);
+    }
+
+    @Override
+    public void handleNewLocation(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        updateUserProfile(latLng);
+    }
+
+    public void updateUserProfile(final LatLng latLng) {
+        // FIXME: only update if the location has changed.
+        ParseQuery<Profile> query = ParseQuery.getQuery(Profile.class);
+        query.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
+        query.getFirstInBackground(new GetCallback<Profile>() {
+            @Override
+            public void done(Profile profile, ParseException e) {
+                if (e == null && profile != null) {
+                    // build object
+                    ParseGeoPoint pLocation = new ParseGeoPoint();
+                    pLocation.setLatitude(latLng.latitude);
+                    pLocation.setLongitude(latLng.longitude);
+                    profile.setLocation(pLocation);
+                    // save to parse and pin locally for offline mode
+                    final ArrayList<Profile> profiles = new ArrayList<>();
+                    profiles.add(profile);
+                    profile.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Log.d("LOCATION_SAVED", "on profile");
+                                LocalDataStore.unpinAndRepin(profiles, LocalDataStore.PROFILE_PIN);
+                            } else {
+                                Log.d("LOCATION_NOT_SAVED", e.toString());
+                            }
+                        }
+                    });
+                } else if (profile == null) {
+                    Toast.makeText(getBaseContext(), "profile null", Toast.LENGTH_LONG).show();
+                    Log.d("PROFILE_NULL", "");
+                } else {
+                    Log.d("PROFILE_ERROR", e.toString());
+                }
+            }
+        });
     }
 
     // Return the order of the fragments in the view pager
