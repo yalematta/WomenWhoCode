@@ -3,11 +3,19 @@ package com.example.womenwhocode.womenwhocode.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.squareup.picasso.Picasso;
+import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 /**
  * Created by shehba.shahab on 10/18/15.
@@ -15,42 +23,75 @@ import com.squareup.picasso.Picasso;
 public class FeatureDetailActivity extends AppCompatActivity {
 
     private String title;
-    private String description;
-    private String imageUrl;
+    private ProgressBar pb;
+    private ScrollView sv;
+    private Feature feature;
+    private TextView tvFeatureTitle;
+    private TextView tvFeatureDescription;
+    private TextView tvSubscriberCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feature_detail);
 
-        // Enable Up button
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         setUpView();
 
-        // Set Activity Title to Feature Title
         this.setTitle(title);
     }
 
+
     private void setUpView() {
-        // Look up views to populate data
-        ImageView ivFeaturePhoto = (ImageView) findViewById(R.id.ivFeaturePhoto);
-        TextView tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
-        TextView tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
+        pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+        sv = (ScrollView) findViewById(R.id.svFeatureDetails);
+        sv.setVisibility(ScrollView.INVISIBLE);
 
-        // Clear out the image views
-        ivFeaturePhoto.setImageResource(0);
+        tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
+        tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
+        tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
 
-        // Insert the model data into each of the view items
-        title = getIntent().getStringExtra("title");
-        description = getIntent().getStringExtra("description");
-        imageUrl = getIntent().getStringExtra("imageUrl");
+        String feature_id = getIntent().getStringExtra("feature_id");
+
+        ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
+
+        if (!NetworkConnectivityReceiver.isNetworkAvailable(this)) {
+            query.fromPin(LocalDataStore.FEATURES_PIN);
+        }
+
+        query.getInBackground(feature_id, new GetCallback<Feature>() {
+            public void done(Feature parseFeature, ParseException e) {
+                if (e == null) {
+                    if (parseFeature != null) {
+                        feature = parseFeature;
+                        setFeatureData();
+
+                        // Hide the progress bar, show the main view
+                        pb.setVisibility(ProgressBar.GONE);
+                        sv.setVisibility(ScrollView.VISIBLE);
+                    } else {
+                        Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                        Log.d("FEATURE_PS_NO_DATA", e.toString());
+                    }
+                } else {
+                    Log.d("FEATURE_PS_ERROR", e.toString());
+                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void setFeatureData() {
+        title = feature.getTitle();
+        String description = feature.getDescription();
+        int subscriberCount = feature.getAwesomeCount();
 
         tvFeatureTitle.setText(title);
         tvFeatureDescription.setText(description);
-
-        // Insert the image using picasso
-        Picasso.with(getApplicationContext()).load(imageUrl).into(ivFeaturePhoto);
+        tvSubscriberCount.setText(Integer.valueOf(subscriberCount).toString() + " Following!");
     }
 }
 
