@@ -12,29 +12,74 @@ android:background="@drawable/shape_gradient"
         android:layout_height="wrap_content"
         android:text="@string/reviewProfile"
         android:id="@+id/txtReview"
-        android:layout_centerHorizontal="true"
         android:focusable="false"
         android:textSize="@dimen/abc_text_size_large_material"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+
+    <ImageView
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:id="@+id/ivphoto"
+        android:src="@drawable/placeholder_image"
+        android:layout_below="@+id/txtReview"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take photo"
+        android:id="@+id/btnCamera"
+        android:onClick="onLaunchCamera"
+        android:layout_below="@+id/ivphoto"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/abc_text_size_small_material" />
+
+    <Button
+        style="@style/MyCustomButtonOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Photo"
+        android:id="@+id/btnUpload"
+        android:onClick="onSelectImage"
+        android:layout_below="@+id/ivphoto"
+        android:layout_toRightOf="@+id/btnCamera" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Full Name"
         android:id="@+id/txtName"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/btnCamera"
+        android:layout_alignParentLeft="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email address"
         android:id="@+id/txtEmail"
+        android:layout_below="@+id/txtName"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Job title"
+        android:id="@+id/etJob"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnNetwork"
         android:layout_below="@+id/etJob"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:prompt="@string/spinnerPrompt"
+        android:minHeight="20dp"
+        android:focusable="true"
+        android:clickable="true" />
 
     <Button
         style="@style/MyCustomButtonOther"
@@ -43,65 +88,7 @@ android:background="@drawable/shape_gradient"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
-        android:layout_below="@+id/txtEmail"
-        android:layout_alignLeft="@+id/etJob"
-        android:layout_alignStart="@+id/etJob"
-        android:layout_marginTop="67dp" />
-
-    <Button
-        style="@style/MyCustomButtonOther"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/btnUpload"
-        android:onClick="onSelectImage"
-        android:layout_toLeftOf="@+id/txtReview"
-        android:layout_toStartOf="@+id/txtReview"
-        android:layout_below="@+id/txtReview" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivphoto"
-        android:src="@drawable/placeholder_image"
-        android:layout_below="@+id/txtReview"
-        android:layout_alignLeft="@+id/txtReview"
-        android:layout_alignStart="@+id/txtReview"
-        android:layout_alignRight="@+id/txtEmail"
-        android:layout_alignEnd="@+id/txtEmail"
-        android:layout_above="@+id/txtName" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Job title"
-        android:id="@+id/etJob"
-        android:layout_below="@+id/txtName"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Spinner
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spnNetwork"
-        android:layout_below="@+id/txtEmail"
-        android:layout_alignLeft="@+id/btnUpload"
-        android:layout_alignStart="@+id/btnUpload"
-        android:prompt="@string/spinnerPrompt"
-        android:minHeight="20dp"
-        android:focusable="true"
-        android:clickable="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take photo"
-        android:id="@+id/btnCamera"
-        android:onClick="onLaunchCamera"
-        android:layout_below="@+id/txtReview"
-        android:layout_toEndOf="@+id/ivphoto"
-        android:layout_toRightOf="@+id/ivphoto"
-        android:layout_alignBottom="@+id/btnUpload"
-        android:textSize="@dimen/abc_text_size_small_material" />
+        android:layout_below="@+id/spnNetwork"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>
