@@ -21,8 +21,10 @@ import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Network;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -59,6 +61,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
+
         Bundle extras = getIntent().getExtras();
         final ArrayList<String> networks=new ArrayList<String>();
         // TODO: needs a take photo intent for when where is no camera
@@ -167,7 +170,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                     Bitmap rotateImg = rotateBitmapOrientation(takenPhotoUri.getPath());
 
-                    finalImg = Bitmap.createScaledBitmap(rotateImg, 200, 200, true);
+                    finalImg = Bitmap.createScaledBitmap(rotateImg, 150, 150, true);
                     // Load the taken image into a preview
                     ImageView ivPreview = (ImageView) findViewById(R.id.ivphoto);
                     ivPreview.setImageBitmap(finalImg );
