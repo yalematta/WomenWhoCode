@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -39,12 +40,12 @@ public class Profile extends ParseObject {
         return this.get(JOB_TITLE_KEY).toString();
     }
 
-    public void setImageUrl(String imageUrl) {
-        put(IMAGE_URL_KEY, imageUrl);
+    public ParseFile getPhotoFile() {
+        return getParseFile("photo");
     }
 
-    public String getImageUrl() {
-        return this.get(IMAGE_URL_KEY).toString();
+    public void setPhotoFile(ParseFile file) {
+        put("photo", file);
     }
 
     public void setNetwork(String network) {

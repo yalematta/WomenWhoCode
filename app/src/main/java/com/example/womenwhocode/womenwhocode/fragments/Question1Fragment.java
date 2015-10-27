@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,8 @@ Button btnNext;
 PersonalizationDetail pd;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
         //return super.onCreateView(inflater, container, savedInstanceState);ssz
         View view = inflater.inflate(R.layout.fragment_question1, container, false);
         try {
