@@ -28,7 +28,7 @@
             android:name=".activities.TimelineActivity"
             android:label=""></activity>
         <activity
-            android:name=".activities.FeatureDetailActivity"
+            android:name=".activities.FeatureDetailsActivity"
             android:label="Feature Detail"
             android:parentActivityName=".activities.TimelineActivity">
             <meta-data
