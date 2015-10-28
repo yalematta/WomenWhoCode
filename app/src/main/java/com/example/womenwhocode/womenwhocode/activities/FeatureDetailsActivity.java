@@ -1,6 +1,8 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -79,6 +81,19 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         tabStrip.setViewPager(vpPager);
 
         this.setTitle(title);
+    }
+
+    @Nullable
+    @Override
+    public Intent getSupportParentActivityIntent() {
+        // get fragment position from parent class
+        int fragmentPosition = getIntent().getIntExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, 0);
+        // send position back to parent
+        Intent newIntent = new Intent(this, TimelineActivity.class);
+        newIntent.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, fragmentPosition);
+        // Return the created intent as the "up" activity
+        return newIntent;
+
     }
 
     private void setUpView() {

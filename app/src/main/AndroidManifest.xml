@@ -29,19 +29,11 @@
             android:label=""></activity>
         <activity
             android:name=".activities.FeatureDetailsActivity"
-            android:label="Feature Detail"
-            android:parentActivityName=".activities.TimelineActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.TimelineActivity" />
+            android:label="Feature Detail">
         </activity>
         <activity
             android:name=".activities.EventDetailsActivity"
-            android:label="@string/title_activity_event_details"
-            android:parentActivityName=".activities.TimelineActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.TimelineActivity" />
+            android:label="@string/title_activity_event_details">
         </activity>
         <activity
             android:name=".activities.PersonalizationActivity"
