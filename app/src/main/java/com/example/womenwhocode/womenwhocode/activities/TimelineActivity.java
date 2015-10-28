@@ -71,7 +71,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
     public void setSelectedTab() {
         // Fetch the selected tab index with default
-        int selectedTabIndex = getIntent().getIntExtra(SELECTED_TAB_EXTRA_KEY,  TIMELINE_TAB);
+        int selectedTabIndex = getIntent().getIntExtra(SELECTED_TAB_EXTRA_KEY, TIMELINE_TAB);
         // Switch to page based on index
         vpPager.setCurrentItem(selectedTabIndex);
     }
@@ -150,6 +150,7 @@ public class TimelineActivity extends AppCompatActivity implements
     public void onFeatureClickListener(Feature feature) {
         Intent i = new Intent(TimelineActivity.this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
+        i.putExtra(SELECTED_TAB_EXTRA_KEY, TOPICS_TAB);
         startActivity(i);
     }
 
