@@ -50,6 +50,8 @@ Timeline:
 * [X] Timeline is the first listview page/fragment the member is taken to after
 they confirm profile details, it will be the first tab in a 3 tab view.  
 * [X] member will see a listview of posts 
+* [X] member can make a post awesome or unawesome
+* [X] Initial timeline view for each member will include posts 
  
 Posts (directly relates to timeline):
 * [X] Each item in the timeline view is a post that belongs to a feature or event. 
@@ -58,20 +60,20 @@ Posts (directly relates to timeline):
   * [X] We will pre-seed posts for now
 
 Subscribing (tab in mock that says features):
-* [ ] Member can tab to see the feature they are subscribed to and can join
+* [X] Member can tab to see the feature they are subscribed to and can join
 * [X] feature will be modeled locally and pushed to parsed
     * [X] each feature will be a local data seed 
     (pending from Zassmin) 
       * [X] A feature has title/name, description, joined_count
       * [X] A member belongs to many features
 * [X] feature fragment will include a listview with feature attributes
-* [ ] member can choose which feature to join by clicking the 
+* [X] member can choose which feature to join by clicking the 
 feature and being taken to a detail view
-  * [ ] In the detail view the member can subscribe or unsubscribe 
+  * [X] In the detail view the member can subscribe or unsubscribe 
 * [X] on click of a feature will take them to a details view of that feature
 * detail view: 
   * [X] member can see the title, description, number of people joined
-  * [ ] feature detail view will also render the post history timeline for the given 
+  * [X] feature detail view will also render the post history timeline for the given 
   feature
 
 Events: 
@@ -98,9 +100,7 @@ to better learn member's interests
 * [ ] add a character limit to the option stuff
 
 Timeline:
-* [X] Member will see posts in priority based on location and interest based data:
-  * [ ] The timeline will be a listview and fragment
-  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings)
+* [ ] Member will see posts in priority based on location and interest based data and location settings
 * [ ] On click of an listview post will take them to the 
 details view of that feature.
 
@@ -110,9 +110,6 @@ to that subscription
 * [ ] Member can chat to that subscription directly from that view
 
 Communication:
-* [ ] By clicking a subscription or event from their own list view fragments, 
-the member will be taken to a detail view with that subscription, with most 
-recent chat history and the ability to chat. 
 * [ ] Model the ability to chat:
   * [ ] A member can write many posts to the subscriptions they are a part of
 * [ ] Member will see a list of all the places it can currently chat in, there is 
