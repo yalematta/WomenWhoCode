@@ -23,7 +23,7 @@ import com.parse.ParseQuery;
 /**
  * Created by shehba.shahab on 10/18/15.
  */
-public class FeatureDetailActivity extends AppCompatActivity {
+public class FeatureDetailsActivity extends AppCompatActivity {
 
     private String feature_id;
     private ProgressBar pb;
@@ -37,7 +37,7 @@ public class FeatureDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feature_detail);
+        setContentView(R.layout.activity_feature_details);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

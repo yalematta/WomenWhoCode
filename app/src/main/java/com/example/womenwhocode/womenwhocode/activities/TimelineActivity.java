@@ -26,7 +26,6 @@ import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.GetCallback;
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
@@ -129,7 +128,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
     @Override
     public void onFeatureClickListener(Feature feature) {
-        Intent i = new Intent(TimelineActivity.this, FeatureDetailActivity.class);
+        Intent i = new Intent(TimelineActivity.this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         startActivity(i);
     }
