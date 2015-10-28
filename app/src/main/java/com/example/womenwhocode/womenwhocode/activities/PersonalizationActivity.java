@@ -1,20 +1,25 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.womenwhocode.womenwhocode.fragments.LogInFragment;
 import com.example.womenwhocode.womenwhocode.fragments.Question1Fragment;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.SignUpFragment;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,16 +30,19 @@ import java.util.Map;
  * Created by pnroy on 10/19/15.
  */
 public class PersonalizationActivity extends AppCompatActivity {
-    public Question1Fragment question1Fragment=new Question1Fragment();
+    public Question1Fragment question1Fragment = new Question1Fragment();
 
-    public LogInFragment logInFragment=new LogInFragment();
-    public SignUpFragment signUpFragment=new SignUpFragment();
+    public LogInFragment logInFragment = new LogInFragment();
+    public SignUpFragment signUpFragment = new SignUpFragment();
     PersonalizationQuestionnaire pq;
-    PersonalizationDetail pd;
-int pageCnt=0;
-
+    PersonalizationDetails pd;
+    int pageCnt = 0;
+    JSONArray arr1=null;
+    JSONArray arr2=null;
+    JSONArray arr3=null;
     ArrayList<String> Question = new ArrayList<String>();
     ArrayList<String[]> Ans = new ArrayList<String[]>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pq = new PersonalizationQuestionnaire();
@@ -42,41 +50,41 @@ int pageCnt=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalization);
 
-      //  btnNext=(Button)findViewById(R.id.btnNext);
-        Bundle extras=getIntent().getExtras();
-        String type="";
-        if(extras!=null){
-            type=extras.getString("type");
+        //  btnNext=(Button)findViewById(R.id.btnNext);
+        Bundle extras = getIntent().getExtras();
+        String type = "";
+        if (extras != null) {
+            type = extras.getString("type");
         }
 
         //create a fragment transaction
-        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //for join us
         setFragmentData();
-        if(type.equals("Join")) {
+        if (type.equals("Join")) {
             //replace contents of fragment with first fragment
 
             ft.replace(R.id.flPersonalization, question1Fragment);
             Bundle bundle = new Bundle();
             bundle.putString("Questions", Question.get(0));
             bundle.putStringArray("Answers", Ans.get(0));
-            bundle.putInt("clickCnt",0);
+            bundle.putInt("clickCnt", 0);
 
             question1Fragment.setArguments(bundle);
-           // btnNext.setVisibility(View.VISIBLE);
+            // btnNext.setVisibility(View.VISIBLE);
         }//for login
-        else{
+        else {
             ft.replace(R.id.flPersonalization, logInFragment);
-          //  btnNext.setVisibility(View.INVISIBLE);
+            //  btnNext.setVisibility(View.INVISIBLE);
         }
 
-        ft.addToBackStack(null);
+       // ft.addToBackStack(null);
 
         //commit the transaction
         ft.commit();
     }
 
-   // @Override
+    // @Override
    /* public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
 
@@ -94,7 +102,7 @@ int pageCnt=0;
     }*/
 
     public void setFragmentData() {
-        pd = new PersonalizationDetail();
+        pd = new PersonalizationDetails();
         pq.build();
         HashMap<String, String[]> ques = pq.getQuestionnaire();
 
@@ -111,48 +119,97 @@ int pageCnt=0;
                 it.remove(); // avoids a ConcurrentModificationException
 
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
         }
     }
 
-   public void goToNextPage(View view) {
+    public void goToNextPage(View view) {
+        try {
 
-       //Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_LONG).show();
 
-        Fragment currentFragment =getSupportFragmentManager().findFragmentById(R.id.flPersonalization);
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flPersonalization);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-       Bundle bundle = new Bundle();
+            Bundle bundle = new Bundle();
 //Toast.makeText(getApplicationContext(), String.valueOf(view.getId()),Toast.LENGTH_LONG).show();
-       switch(view.getId()){
-           case 1:
-               Question1Fragment question2Fragment=new Question1Fragment();
-              ft.replace(R.id.flPersonalization, question2Fragment);
 
-               bundle.putString("Questions", Question.get(1));
-               bundle.putStringArray("Answers", Ans.get(1));
-               bundle.putInt("clickCnt",1);
-               question2Fragment.setArguments(bundle);
-               break;
-           case 2:
-               Question1Fragment question3Fragment=new Question1Fragment();
-               ft.replace(R.id.flPersonalization, question3Fragment);
+            switch (view.getId()) {
+                case 1:
+                    //ParseObject.unpinAll("pDetail");
+                    Question1Fragment question2Fragment = new Question1Fragment();
+                    ft.replace(R.id.flPersonalization, question2Fragment);
 
-               bundle.putString("Questions", Question.get(2));
-               bundle.putStringArray("Answers", Ans.get(2));
-               bundle.putInt("clickCnt",2);
-               question3Fragment.setArguments(bundle);
-               break;
-           case 3:
-               ft.replace(R.id.flPersonalization, signUpFragment);
+                    bundle.putString("Questions", Question.get(1));
+                    bundle.putStringArray("Answers", Ans.get(1));
+                    bundle.putInt("clickCnt", 1);
+                    question2Fragment.setArguments(bundle);
+                     arr1 = getAnswersArray(view);
+                    ft.addToBackStack(null);
+                    break;
+                case 2:
 
-       }
+                    Question1Fragment question3Fragment = new Question1Fragment();
+                    ft.replace(R.id.flPersonalization, question3Fragment);
 
-            ft.addToBackStack(null);
+                    bundle.putString("Questions", Question.get(2));
+                    bundle.putStringArray("Answers", Ans.get(2));
+                    bundle.putInt("clickCnt", 2);
+                    question3Fragment.setArguments(bundle);
+                     arr2 = getAnswersArray(view);
+                    ft.addToBackStack(null);
+                    break;
+                case 3:
+                     arr3 = getAnswersArray(view);
+                    JSONArray finalArray=concatArray(arr1,arr2,arr3);
+                    ft.replace(R.id.flPersonalization, signUpFragment);
 
-            //commit the transaction
+                    bundle.putString("userAns", finalArray.toString());
+                    signUpFragment.setArguments(bundle);
+                    ft.addToBackStack(null);
+                    break;
+                default:
+
+            }
+
             ft.commit();
+        } catch (Exception e) {
+
+        }
     }
+
+    public JSONArray getAnswersArray(View view) {
+        final JSONArray ja = new JSONArray();
+
+        RelativeLayout formLayout = (RelativeLayout) view.getParent();
+        EditText etOther=(EditText)formLayout.findViewById(R.id.etOther);
+        LinearLayout layout = (LinearLayout) formLayout.findViewById(R.id.chkLayout);
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            CheckBox cb = (CheckBox) layout.getChildAt(i);
+            if (cb.isChecked()) {
+
+                ja.put(cb.getText());
+
+            }
+        }
+        if(etOther.getText().length()>0) {
+            ja.put(etOther.getText());
+        }
+        return ja;
+    }
+
+    private JSONArray concatArray(JSONArray... arrs)
+            throws JSONException {
+        JSONArray result = new JSONArray();
+        for (JSONArray arr : arrs) {
+            for (int i = 0; i < arr.length(); i++) {
+                result.put(arr.get(i));
+            }
+        }
+        return result;
+    }
+
+
 }
