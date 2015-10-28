@@ -15,7 +15,14 @@ android:paddingTop="15dp"
         android:layout_marginRight="15dp"
         card_view:cardCornerRadius="1.5dp"
         card_view:cardElevation="0.01dp"
-        card_view:cardBackgroundColor="#FF33B5E5" >
+        card_view:cardBackgroundColor="#FF33B5E5">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pbLoading"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -23,7 +30,8 @@ android:paddingTop="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:id="@+id/rlEvent">
 
             <TextView
                 android:id="@+id/tvEventTitle"
@@ -60,17 +68,6 @@ android:paddingTop="15dp"
                 android:autoLink="all"
                 android:linksClickable="true"
                 android:text="3pm" />
-
-            <TextView
-                android:id="@+id/tvSubscribeCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/tvEventTime"
-                android:layout_alignParentBottom="true"
-                android:gravity="bottom"
-                android:singleLine="true"
-                android:text="205 Subscribers" />
 
             <TextView
                 android:id="@+id/tvSubscribeIcon"

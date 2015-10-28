@@ -21,10 +21,12 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.parse.CountCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventTitle;
@@ -37,6 +39,9 @@ public class EventDetailsActivity extends AppCompatActivity {
     ProgressBar pb;
     RelativeLayout rlEvents;
     String event_id;
+    ParseQuery<Subscribe> subscribeParseQuery;
+    ParseUser currentUser;
+    Subscribe subscribe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class EventDetailsActivity extends AppCompatActivity {
         // for up button
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        currentUser = ParseUser.getCurrentUser();
 
         setUpView();
 
@@ -75,12 +82,14 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvEventVenue = (TextView) findViewById(R.id.tvEventVenue);
         tvEventUrl = (TextView) findViewById(R.id.tvEventUrl);
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
+        btnSubscribeIcon = (Button) findViewById(R.id.btnSubscribeIcon);
 
         // get event from intent
         event_id = getIntent().getStringExtra("event_id");
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        // TODO: include subscriptions
 
         if (!NetworkConnectivityReceiver.isNetworkAvailable(this)) {
             query.fromPin(LocalDataStore.EVENT_PIN);
@@ -93,9 +102,40 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (parseEvent != null) {
                         event = parseEvent;
                         setEventData();
-                        // hide the progress bar, show the main view
-                        pb.setVisibility(ProgressBar.GONE);
-                        rlEvents.setVisibility(ScrollView.VISIBLE);
+                        ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
+                        subscribeParseQuery.whereEqualTo(Subscribe.EVENT_KEY, event);
+                        subscribeParseQuery.whereEqualTo(Subscribe.USER_KEY, currentUser);
+                        subscribeParseQuery.getFirstInBackground(new GetCallback<Subscribe>() {
+                            @Override
+                            public void done(Subscribe sub, ParseException e) {
+                                if (sub != null && sub.getSubscribed() == true) {
+                                    subscribe = sub;
+                                    btnSubscribeIcon.setText("subscribed");
+                                } else {
+                                    btnSubscribeIcon.setText("subscribe!");
+                                }
+
+                                ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
+                                subscribeParseQuery.whereEqualTo(Subscribe.EVENT_KEY, event);
+                                subscribeParseQuery.whereEqualTo(Subscribe.SUBSCRIBED_KEY, true);
+                                subscribeParseQuery.countInBackground(new CountCallback() {
+                                    @Override
+                                    public void done(int i, ParseException e) {
+                                        if (e == null) {
+                                            tvSubscribeCount.setText(String.valueOf(i + " Subscribed"));
+                                            // hide the progress bar, show the main view
+                                            pb.setVisibility(ProgressBar.GONE);
+                                            rlEvents.setVisibility(ScrollView.VISIBLE);
+                                        } else {
+                                            tvSubscribeCount.setText(String.valueOf(0 + " Subscribed"));
+                                            // hide the progress bar, show the main view
+                                            pb.setVisibility(ProgressBar.GONE);
+                                            rlEvents.setVisibility(ScrollView.VISIBLE);
+                                        }
+                                    }
+                                });
+                            }
+                        });
                     } else {
                         Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("EVENT_PS_NO_DATA", e.toString());
@@ -116,15 +156,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvEventVenue.setText(event.getLocation());
         tvEventUrl.setText(event.getUrl());
 
-        int subscribeCount = 0;
-        try {
-            subscribeCount = Subscribe.getCountFor(event);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -146,13 +178,36 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void onSubscribe(View view) {
         btnSubscribeIcon = (Button) view.findViewById(R.id.btnSubscribeIcon);
         // could make a parse user for fun right now? -> try to do it without a parse user
-        ParseUser currentUser = null;
-        if (Subscribe.isSubscribed(currentUser, event)) {
-            Subscribe.unSubscribeUserToEvent(currentUser, event);
-            btnSubscribeIcon.setText("subscribe");
+        if (subscribe != null) {
+            if (subscribe.getSubscribed() == true) { // maybe just check against icon value
+                subscribe.setSubscribed(false);
+                subscribe.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        btnSubscribeIcon.setText("Subscribe");
+                    }
+                });
+            } else {
+                subscribe.setSubscribed(true);
+                subscribe.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        btnSubscribeIcon.setText("Subscribed");
+                    }
+                });
+            }
         } else {
-            Subscribe.subscribeUserToEvent(currentUser, event);
-            btnSubscribeIcon.setText("you're subscribed");
+            // create subscription - stays the same
+            Subscribe subscribe = new Subscribe();
+            subscribe.setSubscribed(true);
+            subscribe.setUser(currentUser);
+            subscribe.setEvent(event);
+            subscribe.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    btnSubscribeIcon.setText("Subscribed");
+                }
+            });
         }
     }
 }

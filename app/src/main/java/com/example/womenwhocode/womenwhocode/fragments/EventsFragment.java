@@ -99,7 +99,7 @@ public class EventsFragment extends Fragment {
 
     private void populateEvents() {
         // load queries
-        profileParseQuery = ParseQuery.getQuery(Profile.class); // maybe put this is shared prefs!
+        profileParseQuery = ParseQuery.getQuery(Profile.class); // maybe put this in shared prefs!
         query = ParseQuery.getQuery(Event.class);
         networkParseQuery = ParseQuery.getQuery(Network.class);
 
@@ -111,6 +111,8 @@ public class EventsFragment extends Fragment {
 
         // TODO: sort events by most recent
         // TODO: reduce # of network calls for profile
+        // TODO: check for location updates
+        // TODO: add a no events view when there are no events to show
 
         profileParseQuery.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
         profileParseQuery.getFirstInBackground(new GetCallback<Profile>() {
@@ -135,14 +137,12 @@ public class EventsFragment extends Fragment {
                             } else if (e != null) {
                                 Log.d("PARSE_EVENTS_FAIL", "Error: " + e.getMessage());
                             } else {
-                                Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "who knows events", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
                 }
             }
         });
-
-
     }
 }
