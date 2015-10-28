@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.squareup.picasso.Picasso;
 
@@ -18,12 +19,16 @@ import java.util.ArrayList;
  * Created by zassmin on 10/26/15.
  */
 public class PostsAdapter extends ArrayAdapter<Post> {
+
+    Post post;
+
     private static class ViewHolder {
         ImageView ivUserPhoto;
         TextView tvPostNameBy;
         TextView tvPostDescription;
         TextView tvAwesomeCount;
         TextView tvAwesomeIcon;
+        TextView tvUnawesomeIcon;
         TextView tvRelativeTime;
     }
 
@@ -33,9 +38,9 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Post post = getItem(position);
+        post = getItem(position);
 
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(
@@ -45,6 +50,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
+            viewHolder.tvUnawesomeIcon = (TextView) convertView.findViewById(R.id.tvUnawesomeIcon); // TODO: Remove this icon
             viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
             convertView.setTag(viewHolder);
         } else {
@@ -59,8 +65,24 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
         viewHolder.tvPostDescription.setText(post.getDescription());
 
-        // TODO: Crashes with error android.content.res.Resources$NotFoundException: String resource ID #0x0 - Shehba to fix
-        //viewHolder.tvAwesomeCount.setText(post.getAwesomeCount());
+        int awesomeCount = Awesome.getAwesomeCountFor(post);
+        viewHolder.tvAwesomeCount.setText(Integer.toString(awesomeCount));
+
+        // TODO: Hack - will consolidate into single icon for awesome/unawesome
+        viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Awesome.awesomePostForCurrentUser(post);
+                viewHolder.tvAwesomeCount.setText("Awesomed");
+            }
+        });
+        viewHolder.tvUnawesomeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Awesome.unAwesomePostForCurrentUser(post);
+                viewHolder.tvAwesomeCount.setText("Unawesomed");
+            }
+        });
 
         // TODO: load awesome icon
 
