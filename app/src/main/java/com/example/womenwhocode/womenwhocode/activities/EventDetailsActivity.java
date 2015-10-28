@@ -1,6 +1,9 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +18,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -55,18 +60,26 @@ public class EventDetailsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        // get event from intent
+        event_id = getIntent().getStringExtra("event_id");
         currentUser = ParseUser.getCurrentUser();
 
         setUpView();
 
-        if (savedInstanceState == null) {
-            // set up Event Post Fragment
-            EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
-            // display fragment within activity
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flEventContainer, eventPostsFragment);
-            ft.commit();
-        }
+        // get event from intent
+        event_id = getIntent().getStringExtra("event_id");
+
+        // Get the viewpager
+        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+
+        // Set the viewpager adapter for the pager
+        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+
+        // Find the sliding tabstrip
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+
+        // Attach the tabstrip to the viewpager
+        tabStrip.setViewPager(vpPager);
     }
 
     private void setUpView() {
@@ -86,9 +99,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvEventUrl = (TextView) findViewById(R.id.tvEventUrl);
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
         btnSubscribeIcon = (Button) findViewById(R.id.btnSubscribeIcon);
-
-        // get event from intent
-        event_id = getIntent().getStringExtra("event_id");
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -215,6 +225,37 @@ public class EventDetailsActivity extends AppCompatActivity {
                     tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                 }
             });
+        }
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+        private final String[] tabTitles = { "posts", "chatter" };
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // The order and creation fo fragments within the pager
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
+                return eventPostsFragment;
+            } else if (position == 1) {
+                return new TimelineFragment();
+            } else return null;
+        }
+
+        // Return the tab title
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        // How many fragments there are to swipe between
+        @Override
+        public int getCount() {
+            return tabTitles.length;
         }
     }
 }
