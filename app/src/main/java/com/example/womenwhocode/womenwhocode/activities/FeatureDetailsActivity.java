@@ -1,7 +1,11 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,8 +17,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -61,13 +68,18 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         setUpView();
 
-        if (savedInstanceState == null) {
-            FeaturePostsFragment featurePostsFragment = FeaturePostsFragment.newInstance(feature_id);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flFeatureContainer, featurePostsFragment);
-            ft.commit();
-        }
+        // Get the viewpager
+        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
 
+        // Set the viewpager adapter for the pager
+        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+
+        // Find the sliding tabstrip
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+
+        // Attach the tabstrip to the viewpager
+        tabStrip.setViewPager(vpPager);
+        
         this.setTitle(title);
     }
 
@@ -189,6 +201,37 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                     tvSubscriberCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                 }
             });
+        }
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+        private final String[] tabTitles = { "posts", "chatter" };
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // The order and creation fo fragments within the pager
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                FeaturePostsFragment featurePostsFragment = FeaturePostsFragment.newInstance(feature_id);
+                return featurePostsFragment;
+            } else if (position == 1) {
+                return new TimelineFragment();
+            } else return null;
+        }
+
+        // Return the tab title
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        // How many fragments there are to swipe between
+        @Override
+        public int getCount() {
+            return tabTitles.length;
         }
     }
 }
