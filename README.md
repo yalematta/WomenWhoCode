@@ -22,9 +22,9 @@ direct way to connect regardless of where you are located.
 The following **required** functionality is completed:
 
 Onboarding:
-* [ ] On app install we will ask user if we can access their location settings
-* [ ] Member will go through a personalization flow that is persisted via parse
-  * [ ] Personalization flow will include 3 views questions with checkbox options (you 
+* [X] On app install we will ask user if we can access their location settings
+* [X] Member will go through a personalization flow that is persisted via parse
+  * [X] Personalization flow will include 3 views questions with checkbox options (you 
   can check on or many)
     * [X] Engineering area of interest: Architecture, Security, Data Science/ 
     Analytics, Opensource, Other (will be a text box)
@@ -34,31 +34,23 @@ Onboarding:
     * [X] What skill-set level would you say you are currently: Advanced 
     technical 3+, Intermediate technical 1-3 years, Beginner technical under 
     1 year, other (will be text box)
-* [ ] Member will be taken to a view where they can click an option to create 
+* [X] Member will be taken to a view where they can click an option to create 
 an account via github oauth or with email
   * [X] When a member clicks on sign up with email, render a view so a member can 
   sign up with email, persist on the server via parse
-  * [ ] When a member clicks sign up with github, take member through github 
-  oauth sign up flow (https://developer.github.com/v3/oauth_authorizations/)
-    * [ ] On successful log in we will push the Member data and personalization
-    data to server via parse
-    * [ ] get image url from user's github profile save it to image_url
   * member model will include a fullname, geo location, image_url, password, job description
   * personalization_details: user_id, answers (hash with key (question): values (array of answers submitted)) --- check if this is 
   supported in parse. 
 * After successful account creation, take user to profile preview: render user details, 
 include image, password field (we may not need this), full name, job description field. Auto display whatever we have and leave what we don't have blank for the user to fill in. 
-  * [ ] Add functionality so the user can upload their image
+  * [X] Add functionality so the user can upload their image
   * [X] Add functionality so the user can take a photo of themselves
 
 Timeline:
 * [X] Timeline is the first listview page/fragment the member is taken to after
 they confirm profile details, it will be the first tab in a 3 tab view.  
 * [X] member will see a listview of posts 
-* [ ] Member will see posts in priority based on location and interest based data:
-  * [ ] The timeline will be a listview and fragment
-  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings)
-
+ 
 Posts (directly relates to timeline):
 * [X] Each item in the timeline view is a post that belongs to a feature or event. 
   * [X] Persist a post model, post will include user_id, subscription_id, 
@@ -92,6 +84,11 @@ Events:
 
 The following **optional** features are implemented:
 Onboarding:
+ * [ ] When a member clicks sign up with github, take member through github 
+  oauth sign up flow (https://developer.github.com/v3/oauth_authorizations/)
+    * [ ] On successful log in we will push the Member data and personalization
+    data to server via parse
+    * [ ] get image url from user's github profile save it to image_url
 * [ ] on successful signup member will be auto subscribed to WWCode specific features
 * [ ] If the members signs in via github, we will make additional calls to the api
 to better learn member's interests
@@ -101,10 +98,11 @@ to better learn member's interests
 * [ ] add a character limit to the option stuff
 
 Timeline:
-* [ ] On click of an listview item's description post will take them to the 
-details view of that item. 
-* [ ] On click of the chat icon will take the user to the subsciption's detail 
-view.  
+* [X] Member will see posts in priority based on location and interest based data:
+  * [ ] The timeline will be a listview and fragment
+  * [ ] Initial timeline details for each member will include posts (we'll prepop this based on user's personalization info and location settings)
+* [ ] On click of an listview post will take them to the 
+details view of that feature.
 
 Subscribing:
 * [ ] The subscription view will now a include a group chat for anyone joined 
@@ -159,6 +157,10 @@ contents of the fragment selected.
 * [ ] Include a fragment that allow's a member to authenticate with oauth from
 other apps
 * [ ] Include an about WWCode fragment and make it accessible in the drawer
+
+## Sprint 2 Demo
+
+![demo_wwcodeapp_take_2](https://cloud.githubusercontent.com/assets/1654151/10802450/2e76131e-7d7a-11e5-874b-0f0e12257d64.gif)
 
 ## Sprint 1 Demo
 
