@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="fill_parent"
@@ -14,68 +15,69 @@
         card_view:cardElevation="0.01dp">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rlPost"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:id="@+id/rlPost">
+            android:paddingTop="15dp">
 
             <ImageView
+                android:id="@+id/ivUserPhoto"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/ivUserPhoto"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:background="@color/material_deep_teal_200" />
 
             <TextView
                 android:id="@+id/tvPostNameBy"
-                android:layout_toRightOf="@+id/ivUserPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:layout_toRightOf="@+id/ivUserPhoto"
                 android:autoLink="all"
                 android:linksClickable="true"
+                android:padding="5dp"
                 android:text="Rosie Riveter" />
 
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
+            <TextView
                 android:id="@+id/tvRelativeTime"
-                android:text="1s"
-                android:layout_alignParentRight="true"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:text="1s" />
 
             <TextView
                 android:id="@+id/tvPostDescription"
-                android:layout_toRightOf="@+id/ivUserPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvPostNameBy"
-                android:padding="5dp"
+                android:layout_toRightOf="@+id/ivUserPhoto"
                 android:autoLink="all"
                 android:linksClickable="true"
+                android:padding="5dp"
                 android:text="Description" />
 
             <TextView
+                android:id="@+id/tvAwesomeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
-                android:id="@+id/tvAwesomeCount"
-                android:textStyle="bold"
-                android:padding="5dp"
                 android:layout_below="@+id/tvPostDescription"
-                android:layout_toLeftOf="@+id/tvAwesomeIcon" />
+                android:layout_toLeftOf="@+id/tvAwesomeIcon"
+                android:padding="5dp"
+                android:text="50"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvAwesomeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\\o/"
-                android:padding="5dp"
-                android:id="@+id/tvAwesomeIcon"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/tvPostDescription"
-                android:layout_alignParentRight="true"/>
+                android:padding="5dp"
+                android:text="\\o/" />
 
         </RelativeLayout>
 

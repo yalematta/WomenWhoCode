@@ -29,9 +29,9 @@ import java.util.List;
  */
 public class FeaturesFragment extends Fragment {
     private FeaturesAdapter aFeatures;
-    private ArrayList<Feature> features;
     private ListView lvFeatures;
     private ProgressBar pb;
+    private ParseQuery<Feature> query;
 
     private OnFeatureItemClickListener listener;
 
@@ -42,22 +42,22 @@ public class FeaturesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        features = new ArrayList<>();
+        ArrayList<Feature> features = new ArrayList<>();
         aFeatures = new FeaturesAdapter(getActivity(), features);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_features, container, false);
-        lvFeatures = (ListView) view.findViewById(R.id.lvFeatures);
-        lvFeatures.setAdapter(aFeatures);
 
-        // hide list view until data is fully loaded
+        lvFeatures = (ListView) view.findViewById(R.id.lvFeatures);
         lvFeatures.setVisibility(ListView.INVISIBLE);
 
         // show progress bar in the meantime
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
+
+        lvFeatures.setAdapter(aFeatures);
 
         populateFeaturesList();
 
@@ -73,12 +73,8 @@ public class FeaturesFragment extends Fragment {
         return view;
     }
 
-    private void addAll(List<Feature> features) {
-        aFeatures.addAll(features);
-    }
-
     private void populateFeaturesList() {
-        ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
+        query = ParseQuery.getQuery(Feature.class);
 
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             query.fromPin(LocalDataStore.FEATURES_PIN);
@@ -91,7 +87,7 @@ public class FeaturesFragment extends Fragment {
                     Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                 } else if (e == null) {
                     aFeatures.clear();
-                    addAll(lFeatures);
+                    aFeatures.addAll(lFeatures);
                     aFeatures.notifyDataSetChanged();
                     // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);

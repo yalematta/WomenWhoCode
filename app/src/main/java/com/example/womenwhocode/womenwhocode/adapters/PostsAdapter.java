@@ -46,6 +46,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
             viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
+            convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -57,7 +58,10 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         }
 
         viewHolder.tvPostDescription.setText(post.getDescription());
-        viewHolder.tvAwesomeCount.setText(post.getAwesomeCount());
+
+        // TODO: Crashes with error android.content.res.Resources$NotFoundException: String resource ID #0x0 - Shehba to fix
+        //viewHolder.tvAwesomeCount.setText(post.getAwesomeCount());
+
         // TODO: load awesome icon
 
         viewHolder.tvRelativeTime.setText(post.getPostDateTime());
