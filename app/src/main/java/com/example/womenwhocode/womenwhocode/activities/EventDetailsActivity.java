@@ -1,5 +1,7 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -33,6 +35,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+
 public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventTitle;
     TextView tvEventDate;
@@ -50,6 +53,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private static String SUBSCRIBED_TEXT = "your subscribed";
     private static String SUBSCRIBE_TEXT = "subscribe!";
+    public static final String PACKAGE_NAME = "com.example.womenwhocode.womenwhocode.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,19 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+    }
+
+    @Nullable
+    @Override
+    public Intent getSupportParentActivityIntent() {
+        // get fragment position from parent class
+        int fragmentPosition = getIntent().getIntExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, 0);
+        // send position back to parent
+        Intent newIntent = new Intent(this, TimelineActivity.class);
+        newIntent.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, fragmentPosition);
+        // Return the created intent as the "up" activity
+        return newIntent;
+
     }
 
     private void setUpView() {

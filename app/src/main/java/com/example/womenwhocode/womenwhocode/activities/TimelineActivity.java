@@ -40,6 +40,11 @@ public class TimelineActivity extends AppCompatActivity implements
         LocationProvider.LocationCallback {
 
     private LocationProvider mLocationProvider;
+    private ViewPager vpPager;
+    public final static String SELECTED_TAB_EXTRA_KEY = "selectedTabIndex";
+    public final static int TIMELINE_TAB = 0;
+    public final static int TOPICS_TAB = 1;
+    public final static int EVENTS_TAB = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class TimelineActivity extends AppCompatActivity implements
         mLocationProvider = new LocationProvider(this, this);
 
         // Get the viewpager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Set the viewpager adapter for the pager
         vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
@@ -60,6 +65,15 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+
+        setSelectedTab();
+    }
+
+    public void setSelectedTab() {
+        // Fetch the selected tab index with default
+        int selectedTabIndex = getIntent().getIntExtra(SELECTED_TAB_EXTRA_KEY,  TIMELINE_TAB);
+        // Switch to page based on index
+        vpPager.setCurrentItem(selectedTabIndex);
     }
 
     @Override
@@ -126,8 +140,9 @@ public class TimelineActivity extends AppCompatActivity implements
 
     @Override
     public void onEventClickListener(Event event) {
-        Intent i = new Intent(TimelineActivity.this, EventDetailsActivity.class);
+        Intent i = new Intent(this, EventDetailsActivity.class);
         i.putExtra("event_id", event.getObjectId());
+        i.putExtra(SELECTED_TAB_EXTRA_KEY, EVENTS_TAB);
         startActivity(i);
     }
 
