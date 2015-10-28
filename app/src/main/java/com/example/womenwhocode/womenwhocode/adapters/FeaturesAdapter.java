@@ -45,11 +45,7 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
         title = feature.getTitle();
         imageUrl = feature.getImageUrl();
         description = feature.getDescription();
-        try {
-            featureSubscribe = Subscribe.getCountFor(feature);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        int featureSubscribe = Subscribe.getCountFor(feature);
 
         tvFeatureTitle.setText(title);
         tvSubscriberCount.setText(String.valueOf(featureSubscribe + " FOLLOWERS"));
