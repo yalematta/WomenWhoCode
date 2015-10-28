@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -242,7 +242,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
                 return eventPostsFragment;
             } else if (position == 1) {
-                return new TimelineFragment();
+                return new ChatFragment();
             } else return null;
         }
 

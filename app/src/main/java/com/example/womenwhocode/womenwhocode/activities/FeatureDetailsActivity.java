@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +18,8 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -79,7 +77,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
-        
+
         this.setTitle(title);
     }
 
@@ -218,7 +216,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 FeaturePostsFragment featurePostsFragment = FeaturePostsFragment.newInstance(feature_id);
                 return featurePostsFragment;
             } else if (position == 1) {
-                return new TimelineFragment();
+                return new ChatFragment();
             } else return null;
         }
 
