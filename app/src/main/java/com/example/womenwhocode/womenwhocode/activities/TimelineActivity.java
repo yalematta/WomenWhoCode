@@ -80,6 +80,11 @@ public class TimelineActivity extends AppCompatActivity implements
         if (id == R.id.action_settings) {
             return true;
         }
+       else if(id==R.id.action_logout){
+            ParseUser.logOut();
+            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_LONG).show();
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

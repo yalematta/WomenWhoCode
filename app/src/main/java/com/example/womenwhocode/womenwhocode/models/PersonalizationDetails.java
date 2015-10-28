@@ -9,12 +9,12 @@ import org.json.JSONArray;
 /**
  * Created by zassmin on 10/15/15.
  */
-@ParseClassName("PersonalizationDetail")
-public class PersonalizationDetail extends ParseObject {
-    private static String USER_KEY = "user";
-    private static String ANSWERS_KEY = "answers";
+@ParseClassName("PersonalizationDetails")
+public class PersonalizationDetails extends ParseObject {
+    public static String USER_KEY = "user";
+    public static String ANSWERS_KEY = "answers";
 
-    public void setAnswers(JSONArray answers) {
+    public void setAnswers(String answers) {
         put(ANSWERS_KEY, answers);
     }
 
@@ -27,7 +27,7 @@ public class PersonalizationDetail extends ParseObject {
     }
 
     // parse array data type is json array
-    public JSONArray getAnswers() {
-        return this.getJSONArray(ANSWERS_KEY);
+    public String getAnswers() {
+        return this.get(ANSWERS_KEY).toString();
     }
 }

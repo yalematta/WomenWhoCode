@@ -17,46 +17,57 @@ import com.parse.SignUpCallback;
  * Created by pnroy on 10/22/15.
  */
 public class SignUpEmailActivity extends AppCompatActivity {
-
+    String userAns = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_sign_up);
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            userAns = extras.getString("userAns");
+        }
     }
 
     public void signUpUser(View view) {
-        //ParseUser userDetail = new ParseUser();
-        EditText tvName = (EditText) findViewById(R.id.txtName);
-        EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
-        EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
-       final String name=tvName.getText().toString();
-        final String email=tvEmail.getText().toString();
-       final String password=tvPassword.getText().toString();
+
+    //ParseUser userDetail = new ParseUser();
+    EditText tvName = (EditText) findViewById(R.id.txtName);
+    EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
+    EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
+    final String name = tvName.getText().toString();
+    final String email = tvEmail.getText().toString();
+    final String password = tvPassword.getText().toString();
 //create the parse user and save it
-        ParseUser user = new ParseUser();
-        user.setUsername(tvName.getText().toString());
-        user.setPassword(tvPassword.getText().toString());
-        user.setEmail(tvEmail.getText().toString());
+    ParseUser user = new ParseUser();
+    user.setUsername(tvName.getText().toString());
+    user.setPassword(tvPassword.getText().toString());
+    user.setEmail(tvEmail.getText().toString());
 
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
+
+    user.signUpInBackground(new SignUpCallback() {
+        public void done(ParseException e) {
+            if (e == null) {
+                try {
                     Toast.makeText(getBaseContext(), "User created", Toast.LENGTH_SHORT).show();
                     // [ ] TODO: auto subscribe user to features with auto subscribe true
+
                     Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
-                    i.putExtra("Name",name);
-                    i.putExtra("Email",email);
-                    i.putExtra("Password",password);
+                    i.putExtra("Name", name);
+                    i.putExtra("Email", email);
+                    i.putExtra("Password", password);
+                    i.putExtra("userAns",userAns);
                     startActivity(i);
-                } else {
-                    Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
-                    Log.d("User Creation failed", e.toString());
+                }catch(Exception ex){
+
                 }
+            } else {
+                Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("User Creation failed", e.toString());
             }
-        });
-
-
+        }
+    });
 
 
 

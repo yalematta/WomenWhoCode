@@ -19,7 +19,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/etOther"
         android:layout_below="@+id/chkLayout"
         android:layout_alignLeft="@+id/chkLayout"
         android:layout_alignStart="@+id/chkLayout"

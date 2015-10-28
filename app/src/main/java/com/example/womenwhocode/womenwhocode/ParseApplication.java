@@ -5,7 +5,7 @@ import android.app.Application;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Network;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
@@ -29,7 +29,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Network.class);
         ParseObject.registerSubclass(Event.class);
         ParseObject.registerSubclass(Feature.class);
-        ParseObject.registerSubclass(PersonalizationDetail.class);
+        ParseObject.registerSubclass(PersonalizationDetails.class);
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Profile.class);
         ParseObject.registerSubclass(Subscribe.class);

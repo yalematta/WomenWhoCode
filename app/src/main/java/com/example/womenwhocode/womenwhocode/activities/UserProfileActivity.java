@@ -21,16 +21,14 @@ import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Network;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetail;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,10 +44,12 @@ public class UserProfileActivity extends AppCompatActivity {
     EditText txtEmail;
     EditText txtjobTitle;
     Spinner spnNetwork;
+    String userAns;
     String name="";
     String email="";
     String password="";
-    Profile userProfile= new Profile();;
+    Profile userProfile= new Profile();
+    PersonalizationDetails pd = new PersonalizationDetails();
     String filepath;
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -69,6 +69,7 @@ public class UserProfileActivity extends AppCompatActivity {
         if (extras != null) {
 
             email = extras.getString("Email");
+            userAns = extras.getString("userAns");
 
         }
         txtName=(EditText)findViewById(R.id.txtName);
@@ -119,6 +120,10 @@ public class UserProfileActivity extends AppCompatActivity {
             userProfile.setJobTitle(txtjobTitle.getText().toString());
             userProfile.setUser(ParseUser.getCurrentUser());
             userProfile.save();
+
+            pd.setAnswers(userAns);
+             pd.setUser(ParseUser.getCurrentUser());
+            pd.save();
             Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
             startActivity(i);
         }catch(ParseException p){
