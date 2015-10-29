@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="teal" type="color">#00b5a9</item>
-    <item name="blackish" type="color">#19191A</item>
+    <item name="blackish" type="color">#212121</item>
     <item name="darkGray" type="color">#454545</item>
-    <item name="whitish" type="color">#f5f5f5</item>
+    <item name="whitish" type="color">#ffffff</item>
     <item name="lightestGray" type="color">#d4d4d4</item>
     <item name="mediumGray" type="color">#6d6d6d</item>
     <item name="lightGray" type="color">#A7A9AB</item>
