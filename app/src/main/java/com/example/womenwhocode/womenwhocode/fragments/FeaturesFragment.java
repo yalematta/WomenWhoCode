@@ -80,11 +80,11 @@ public class FeaturesFragment extends Fragment {
             query.fromPin(LocalDataStore.FEATURES_PIN);
         }
 
-        query.orderByAscending("title");
+        query.orderByAscending(Feature.TITLE_KEY);
         query.findInBackground(new FindCallback<Feature>() {
             public void done(List<Feature> lFeatures, ParseException e) {
                 if (lFeatures == null) {
-                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "who knows features", Toast.LENGTH_LONG).show();
                 } else if (e == null) {
                     aFeatures.clear();
                     aFeatures.addAll(lFeatures);
