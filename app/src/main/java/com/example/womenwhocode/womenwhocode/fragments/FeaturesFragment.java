@@ -68,8 +68,6 @@ public class FeaturesFragment extends Fragment {
                 listener.onFeatureClickListener(feature);
             }
         });
-
-
         return view;
     }
 
@@ -88,7 +86,6 @@ public class FeaturesFragment extends Fragment {
                 } else if (e == null) {
                     aFeatures.clear();
                     aFeatures.addAll(lFeatures);
-                    aFeatures.notifyDataSetChanged();
                     // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
                     lvFeatures.setVisibility(ListView.VISIBLE);

@@ -1,6 +1,8 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
     private static class ViewHolder {
         TextView tvFeatureTitle;
         ImageView ivFeatureImage;
+        CardView cvFeature;
     }
 
     @Override
@@ -44,11 +47,17 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
             // Look up views to populate data
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvFeatureTitle);
             viewHolder.ivFeatureImage = (ImageView) convertView.findViewById(R.id.ivFeatureImage);
+            viewHolder.cvFeature = (CardView) convertView.findViewById(R.id.cvFeature);
+
         }
 
         // Insert the model data into each of the view items
         title = feature.getTitle();
         imageUrl = feature.getImageUrl();
+
+        // set color!
+        int color = Color.parseColor(String.valueOf(feature.getHexColor()));
+        viewHolder.cvFeature.setCardBackgroundColor(color);
 
         viewHolder.ivFeatureImage.setImageResource(0);
         viewHolder.tvFeatureTitle.setText(title);
