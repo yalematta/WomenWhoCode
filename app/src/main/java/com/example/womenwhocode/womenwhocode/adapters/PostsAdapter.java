@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ import java.util.ArrayList;
 public class PostsAdapter extends ArrayAdapter<Post> {
 
     Post post;
+    private ParseUser currentUser;
+    private Awesome awesome;
+    private int awesomeCount;
 
     private static class ViewHolder {
         ImageView ivUserPhoto;
@@ -28,7 +34,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         TextView tvPostDescription;
         TextView tvAwesomeCount;
         TextView tvAwesomeIcon;
-        TextView tvUnawesomeIcon;
         TextView tvRelativeTime;
     }
 
@@ -39,6 +44,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         post = getItem(position);
+        currentUser = ParseUser.getCurrentUser();
 
         final ViewHolder viewHolder;
         if (convertView == null) {
@@ -50,7 +56,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
-            viewHolder.tvUnawesomeIcon = (TextView) convertView.findViewById(R.id.tvUnawesomeIcon); // TODO: Remove this icon
             viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
             convertView.setTag(viewHolder);
         } else {
@@ -72,15 +77,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Awesome.awesomePostForCurrentUser(post);
-                viewHolder.tvAwesomeCount.setText("Awesomed");
-            }
-        });
-        viewHolder.tvUnawesomeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Awesome.unAwesomePostForCurrentUser(post);
-                viewHolder.tvAwesomeCount.setText("Unawesomed");
+                onAwesome(viewHolder.tvAwesomeCount);
             }
         });
 
@@ -89,5 +86,54 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         viewHolder.tvRelativeTime.setText(post.getPostDateTime());
 
         return convertView;
+    }
+
+    private void onAwesome(TextView tvAwesomeCount) {
+        if (awesome != null) {
+            if (awesome.getAwesomed()) {
+
+                // Update UI thread
+                awesomeCount--;
+                tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+
+                // Send data to Parse
+                awesome.setAwesomed(false);
+                awesome.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        // TODO: Sync Parse response with UI thread
+                    }
+                });
+            } else {
+                // Update UI thread
+                awesomeCount++;
+                tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+
+                // Send data to Parse
+                awesome.setAwesomed(true);
+                awesome.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        // TODO: Sync Parse response with UI thread
+                    }
+                });
+            }
+        } else {
+            // Update UI thread
+            awesomeCount++;
+            tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+
+            // Send data to Parse
+            awesome = new Awesome();
+            awesome.setAwesomed(true);
+            awesome.setUser(currentUser);
+            awesome.setPost(post);
+            awesome.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    // TODO: Sync Parse response with UI thread
+                }
+            });
+        }
     }
 }

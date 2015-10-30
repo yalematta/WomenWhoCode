@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode;
 
 import android.app.Application;
 
+import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Network;
@@ -35,6 +36,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Profile.class);
         ParseObject.registerSubclass(Subscribe.class);
+        ParseObject.registerSubclass(Awesome.class);
 
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
