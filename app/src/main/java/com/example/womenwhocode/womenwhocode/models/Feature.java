@@ -15,6 +15,8 @@ public class Feature extends ParseObject {
     public static final String DESCRIPTION_KEY = "description";
     public static final String AWESOME_COUNT_KEY = "awesome_count";
 
+    public static final String HEX_COLOR_KEY = "hex_color";
+
     public void setAutoSubscribe(boolean autoSubscribe) {
         put(AUTO_SUBSCRIBE_KEY, autoSubscribe);
     }
@@ -55,12 +57,11 @@ public class Feature extends ParseObject {
         return this.get(IMAGE_URL_KEY).toString();
     }
 
-    // awesomeCount is for our stretch goals
-    public void setAwesomeCount(int awesomeCount) {
-        put(AWESOME_COUNT_KEY, awesomeCount);
+    public String getHexColor() {
+        return this.get(HEX_COLOR_KEY).toString();
     }
 
-    public int getAwesomeCount() {
-        return this.getInt(AWESOME_COUNT_KEY);
+    public void setHexColor(String hexColor) {
+        put(HEX_COLOR_KEY, hexColor);
     }
 }
