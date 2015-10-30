@@ -65,31 +65,23 @@
                 android:text="2s" />
 
             <TextView
-                android:id="@+id/tvAwesomeIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ivPostPhoto"
-                android:layout_alignLeft="@+id/tvPostTitle"
-                android:layout_alignStart="@+id/tvPostTitle"
-                android:layout_below="@+id/tvPostTitle"
-                android:alpha="0.8"
-                android:gravity="right"
-                android:singleLine="true"
-                android:text="\\o/"
-                android:textColor="#ff272727" />
-
-            <TextView
                 android:id="@+id/tvAwesomeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/tvAwesomeIcon"
-                android:layout_toRightOf="@+id/tvAwesomeIcon"
-                android:alpha="0.8"
-                android:gravity="right"
-                android:singleLine="true"
-                android:text="2015"
-                android:textColor="#ff272727" />
+                android:layout_below="@+id/tvPostTitle"
+                android:layout_toLeftOf="@+id/tvAwesomeIcon"
+                android:padding="5dp"
+                android:text="50"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAwesomeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvPostTitle"
+                android:padding="5dp"
+                android:text="\\o/" />
 
         </RelativeLayout>
 
