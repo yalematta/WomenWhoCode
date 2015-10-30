@@ -11,16 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/cvFeature"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         card_view:cardCornerRadius="1.5dp"
-        card_view:cardElevation="0.01dp">
+        card_view:cardElevation="@dimen/card_elevation">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:paddingBottom="15dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_horizontal_padding"
             android:id="@+id/rlFeature"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"

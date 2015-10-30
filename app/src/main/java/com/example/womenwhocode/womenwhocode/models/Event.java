@@ -34,7 +34,13 @@ public class Event extends ParseObject {
     }
 
     public Network getNetwork() {
-        return (Network) getParseObject(NETWORK_KEY);
+        Network network= null;
+        try {
+            network = this.getParseObject(NETWORK_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return network;
     }
 
     public void setEventDateTime(String datetime) {
