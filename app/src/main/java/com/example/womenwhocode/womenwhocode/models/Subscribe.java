@@ -70,18 +70,6 @@ public class Subscribe extends ParseObject {
         return (ParseUser) getParseObject(USER_KEY);
     }
 
-    public static int getCountFor(Feature feature) {
-        // Find Subscribe = true where event id is eq to this one
-        subscribeParseQuery = Subscribe.getQuery();
-        subscribeParseQuery.whereEqualTo(FEATURE_KEY, feature);
-        subscribeParseQuery.whereEqualTo(SUBSCRIBED_KEY, true);
-        Integer count = subscribeParseQuery.countInBackground().getResult();
-        if (count == null) {
-            return 0;
-        }
-        return count;
-    }
-
     public static ParseQuery<Subscribe> getQuery() {
         return ParseQuery.getQuery(Subscribe.class);
     }
