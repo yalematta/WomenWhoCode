@@ -13,14 +13,13 @@ import com.parse.SaveCallback;
 
 @ParseClassName("Awesome")
 public class Awesome extends ParseObject {
-    private static String USER_KEY = "user";
-    private static String POST_KEY = "post";
-    private static String AWESOMED_KEY = "awesomed";
+    public static String USER_KEY = "user";
+    public static String POST_KEY = "post";
+    public static String AWESOMED_KEY = "awesomed";
 
     private static ParseQuery<Awesome> query;
 
-
-    private static ParseQuery<Awesome> getQuery() {
+    public static ParseQuery<Awesome> getQuery() {
         return ParseQuery.getQuery(Awesome.class);
     }
 
@@ -74,27 +73,27 @@ public class Awesome extends ParseObject {
     }
 
     public static void awesomePostForCurrentUser(final Post post) {
-        final ParseObject newEntry = new ParseObject("Awesome");
+        final ParseObject awesome = new ParseObject("Awesome");
         final ParseUser user = ParseUser.getCurrentUser();
-        newEntry.saveInBackground(new SaveCallback() {
+        awesome.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
-                newEntry.put(USER_KEY, user);
-                newEntry.put(POST_KEY, post);
-                newEntry.put(AWESOMED_KEY, true);
-                newEntry.saveInBackground();
+                awesome.put(USER_KEY, user);
+                awesome.put(POST_KEY, post);
+                awesome.put(AWESOMED_KEY, true);
+                awesome.saveInBackground();
             }
         });
     }
 
     public static void unAwesomePostForCurrentUser(final Post post) {
-        final ParseObject newEntry = new ParseObject("Awesome");
+        final ParseObject awesome = new ParseObject("Awesome");
         final ParseUser user = ParseUser.getCurrentUser();
-        newEntry.saveInBackground(new SaveCallback() {
+        awesome.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
-                newEntry.put(USER_KEY, user);
-                newEntry.put(POST_KEY, post);
-                newEntry.put(AWESOMED_KEY, false);
-                newEntry.saveInBackground();
+                awesome.put(USER_KEY, user);
+                awesome.put(POST_KEY, post);
+                awesome.put(AWESOMED_KEY, false);
+                awesome.saveInBackground();
             }
         });
     }
