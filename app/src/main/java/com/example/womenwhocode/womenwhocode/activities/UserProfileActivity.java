@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -35,6 +36,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by pnroy on 10/19/15.
@@ -103,6 +106,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
         spnNetwork.setSelection(0);
 //        txtPwd.setText(password);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public void OnFinalize(View view) {
