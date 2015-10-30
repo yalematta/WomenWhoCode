@@ -1,7 +1,9 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
@@ -34,6 +38,8 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class TimelineActivity extends AppCompatActivity implements
         EventsFragment.OnEventItemClickListener,
         FeaturesFragment.OnFeatureItemClickListener,
@@ -51,6 +57,13 @@ public class TimelineActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+        // set tool bar to replace actionbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText(R.string.app_name);
+
         // set up location
         mLocationProvider = new LocationProvider(this, this);
 
@@ -62,6 +75,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
@@ -74,6 +88,11 @@ public class TimelineActivity extends AppCompatActivity implements
         int selectedTabIndex = getIntent().getIntExtra(SELECTED_TAB_EXTRA_KEY, TIMELINE_TAB);
         // Switch to page based on index
         vpPager.setCurrentItem(selectedTabIndex);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

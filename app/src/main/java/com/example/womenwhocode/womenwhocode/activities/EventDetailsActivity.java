@@ -1,6 +1,8 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +38,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventTitle;
@@ -50,10 +55,11 @@ public class EventDetailsActivity extends AppCompatActivity {
     ParseUser currentUser;
     Subscribe subscribe;
     int subscribeCount;
+    Toolbar toolbar;
+    TextView tvToolbarTitle;
 
     private static String SUBSCRIBED_TEXT = "your subscribed";
     private static String SUBSCRIBE_TEXT = "subscribe!";
-    public static final String PACKAGE_NAME = "com.example.womenwhocode.womenwhocode.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_details);
 
         // for up button
+        // set tool bar to replace actionbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -81,9 +91,15 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // Find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Nullable
@@ -107,6 +123,9 @@ public class EventDetailsActivity extends AppCompatActivity {
         // hide scroll view so the progress bar is the center of attention
         rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
         rlEvents.setVisibility(ScrollView.INVISIBLE);
+
+        // get title on tool bar
+        tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 
         // look up views
         tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
@@ -178,6 +197,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private void setEventData() {
         // setup views
+        tvToolbarTitle.setText(event.getTitle());
         tvEventTitle.setText(event.getTitle());
         tvEventDate.setText(event.getEventDateTime());
         // tvEventTime.setText(event.getDateTime(event.getEventDateTime()));
