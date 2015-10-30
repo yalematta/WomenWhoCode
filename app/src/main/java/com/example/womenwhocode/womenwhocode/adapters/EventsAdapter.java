@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.utils.Utilities;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         TextView tvEventLocation;
         TextView tvEventTime;
         TextView tvEventDate;
+        TextView tvEventNetwork;
     }
 
     Event event;
@@ -44,17 +46,26 @@ public class EventsAdapter extends ArrayAdapter<Event> {
                     R.layout.item_event, parent, false);
             viewHolder.tvEventTitle = (TextView) convertView.findViewById(R.id.tvEventTitle);
             viewHolder.tvEventLocation = (TextView) convertView.findViewById(R.id.tvEventLocation);
-             viewHolder.tvEventTime = (TextView) convertView.findViewById(R.id.tvEventTime);
-            // TODO: decide layout for time!
+            viewHolder.tvEventTime = (TextView) convertView.findViewById(R.id.tvEventTime);
+            viewHolder.tvEventNetwork = (TextView) convertView.findViewById(R.id.tvEventNetwork);
             viewHolder.tvEventDate = (TextView) convertView.findViewById(R.id.tvEventDate);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        if (event.getNetwork() != null) {
+            viewHolder.tvEventNetwork.setText(event.getNetwork().getTitle() + " network");
+        }
+
+        long time = Utilities.setLocalDateTime(event.getEventDateTime());
+        String date = Utilities.dateTimeParser(time, Utilities.DATE_FORMAT);
+        String prettyTime = Utilities.dateTimeParser(time, Utilities.TIME_FORMAT);
+
         viewHolder.tvEventTitle.setText(event.getTitle());
-        viewHolder.tvEventLocation.setText(event.getLocation());
-        viewHolder.tvEventDate.setText(event.getEventDateTime());
+        viewHolder.tvEventLocation.setText("at " + event.getLocation());
+        viewHolder.tvEventTime.setText(prettyTime);
+        viewHolder.tvEventDate.setText(date);
 
         return convertView;
     }
