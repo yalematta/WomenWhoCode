@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by pnroy on 10/22/15.
@@ -27,6 +30,11 @@ public class SignUpEmailActivity extends AppCompatActivity {
         if (extras != null) {
             userAns = extras.getString("userAns");
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public void signUpUser(View view) {
