@@ -5,6 +5,12 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- action bar -->
+    <include
+        layout="@layout/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"

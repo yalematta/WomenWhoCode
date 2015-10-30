@@ -1,6 +1,8 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +36,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 /**
  * Created by shehba.shahab on 10/18/15.
  */
@@ -47,7 +52,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private TextView tvFeatureDescription;
     private TextView tvSubscriberCount;
     private Button btnSubscribe;
-
+    Toolbar toolbar;
+    TextView tvToolbarTitle;
     ParseUser currentUser;
     Subscribe subscribe;
     int subscribeCount;
@@ -59,6 +65,10 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feature_details);
+
+        // set tool bar to replace actionbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -76,11 +86,18 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         // Find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
 
         this.setTitle(title);
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Nullable
@@ -105,6 +122,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures);
         rlFeatures.setVisibility(ScrollView.INVISIBLE);
 
+        tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
         tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
         tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
@@ -172,6 +190,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         String description = feature.getDescription();
 
         tvFeatureTitle.setText(title);
+        tvToolbarTitle.setText(title);
         tvFeatureDescription.setText(description);
     }
 

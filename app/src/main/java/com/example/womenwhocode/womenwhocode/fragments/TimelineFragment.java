@@ -70,9 +70,9 @@ public class TimelineFragment extends Fragment {
         query.whereExists(Post.DESCRIPTION_KEY);
         query.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> listPosts, ParseException e) {
-                if (listPosts == null) {
-                    Toast.makeText(getContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
-                } else if (e == null) {
+                if (e != null) {
+                    Log.d("Message", "Error: " + e.getMessage());
+                } else if (listPosts != null) {
                     aPosts.clear();
                     addAll(listPosts);
                     aPosts.notifyDataSetChanged();
@@ -82,7 +82,7 @@ public class TimelineFragment extends Fragment {
 
                     LocalDataStore.unpinAndRepin(listPosts, LocalDataStore.POSTS_PIN);
                 } else {
-                    Log.d("Message", "Error: " + e.getMessage());
+                    Toast.makeText(getContext(), "who knows timeline", Toast.LENGTH_LONG).show();
                 }
             }
         });

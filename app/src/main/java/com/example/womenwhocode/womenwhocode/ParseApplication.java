@@ -12,6 +12,8 @@ import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 /**
  * Created by zassmin on 10/15/15.
  */
@@ -36,5 +38,11 @@ public class ParseApplication extends Application {
 
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/Hind-Regular.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
     }
 }
