@@ -9,7 +9,7 @@
     <dimen name="text_subheader_text_size">12sp</dimen>
     <dimen name="icon_padding">4dp</dimen>
     <dimen name="icon_paddingTop">8dp</dimen>
-    <dimen name="detail_padding_top">24dp</dimen>
+    <dimen name="detail_padding_top">28dp</dimen>
     <dimen name="text_subheader_padTop">4dp</dimen>
     <dimen name="image_view_height_width">50dp</dimen>
     <dimen name="text_regular_text_size">12sp</dimen>
@@ -23,7 +23,8 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="button_radius">2dp</dimen>
     <dimen name="button_border">0.5dp</dimen>
-    <dimen name="button_horizontal_padding">8dp</dimen>
-    <dimen name="button_vertical_padding">4dp</dimen>
-    <dimen name="description_padding">8dp</dimen>
+    <dimen name="button_horizontal_padding">32dp</dimen>
+    <dimen name="button_vertical_padding">12dp</dimen>
+    <dimen name="description_padding_top">12dp</dimen>
+    <dimen name="description_padding_bottom">8dp</dimen>
 </resources>

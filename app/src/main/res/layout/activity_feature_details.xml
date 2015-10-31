@@ -68,7 +68,9 @@
             <TextView
                 android:id="@+id/tvSubscriberCount"
                 android:layout_width="match_parent"
-                android:padding="@dimen/icon_padding"
+                android:paddingBottom="@dimen/icon_padding"
+                android:paddingLeft="@dimen/icon_padding"
+                android:paddingRight="@dimen/icon_padding"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvFeatureTitle"
                 android:layout_toRightOf="@+id/ivFeatureImage"
@@ -78,7 +80,10 @@
                 android:id="@+id/tvFeatureDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/description_padding"
+                android:paddingTop="@dimen/description_padding_top"
+                android:paddingBottom="@dimen/description_padding_bottom"
+                android:paddingLeft="@dimen/icon_padding"
+                android:paddingRight="@dimen/icon_padding"
                 android:layout_below="@+id/tvSubscriberCount"
                 android:layout_toRightOf="@+id/ivFeatureImage"
                 style="@style/TextView.DetailDescription"/>
@@ -89,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvFeatureDescription"
                 android:layout_toRightOf="@+id/ivFeatureImage"
-                android:padding="@dimen/icon_padding"
+                android:layout_margin="@dimen/icon_padding"
+                android:onClick="onSubscribe"
                 style="@style/FollowButton"
                 android:text="Follow" />
 
