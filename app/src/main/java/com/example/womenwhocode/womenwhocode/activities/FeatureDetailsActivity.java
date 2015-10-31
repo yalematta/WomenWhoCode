@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,10 +12,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -35,6 +38,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -57,6 +61,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     ParseUser currentUser;
     Subscribe subscribe;
     int subscribeCount;
+    private CardView cvFeatureDetails;
+    private ImageView ivFeatureImage;
 
     private static String SUBSCRIBED_TEXT = "unfollow";
     private static String SUBSCRIBE_TEXT = "follow";
@@ -128,6 +134,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
         tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
         btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
+        cvFeatureDetails = (CardView) findViewById(R.id.cvFeatureDetails);
+        ivFeatureImage = (ImageView) findViewById(R.id.ivFeatureImage);
 
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
@@ -181,6 +189,13 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private void setFeatureData() {
         title = feature.getTitle();
         String description = feature.getDescription();
+
+        int color = Color.parseColor(String.valueOf(feature.getHexColor()));
+        cvFeatureDetails.setCardBackgroundColor(color);
+
+        Picasso.with(this)
+                .load(feature.getImageUrl())
+                .into(ivFeatureImage);
 
         tvFeatureTitle.setText(title);
         tvToolbarTitle.setText(title);

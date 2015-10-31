@@ -75,6 +75,11 @@
         <item name="android:alpha">0.8</item>
     </style>
 
+    <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_details</item>
+    </style>
+
     <!-- general fonts are changed, can't seem to get the header working -->
     <!-- will update the some of the text views in the mean time -->
     <style name="HeaderTextDefault" parent="android:TextAppearance">
