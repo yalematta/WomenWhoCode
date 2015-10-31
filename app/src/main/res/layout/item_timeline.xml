@@ -31,6 +31,7 @@
                 android:id="@+id/rlPostFeature"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
+                android:background="@color/teal"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <ImageView
@@ -50,6 +51,16 @@
                     android:text="Title"
                     android:padding="@dimen/icon_padding"
                     style="@style/TextView.TitleText" />
+
+                <TextView
+                    android:id="@+id/tvPostNameBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivPostPhoto"
+                    android:layout_below="@+id/tvPostTitle"
+                    android:padding="@dimen/icon_padding"
+                    android:text="WWCode"
+                    style="@style/TextView.Subtitle"/>
 
                 <TextView
                     android:id="@+id/tvRelativeDate"
