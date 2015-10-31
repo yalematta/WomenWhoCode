@@ -28,6 +28,22 @@ public class Event extends ParseObject {
     public static String MEETUP_EVENT_ID_KEY = "meetup_event_id";
     public static String DESCRIPTION_KEY = "description";
     public static String TIMEZONE_KEY = "timezone";
+    public static String SUBSCRIBE_COUNT = "subscribe_count";
+
+    public void setSubscribeCount(int count) {
+        put(SUBSCRIBE_COUNT, count);
+    }
+
+    public int getSubscribeCount() {
+        int count;
+        Object c = this.get(SUBSCRIBE_COUNT);
+        if (c != null) {
+            count = Integer.parseInt(c.toString());
+        } else {
+            count = 0;
+        }
+        return count;
+    }
 
     public void setNetwork(Network network) {
         put(NETWORK_KEY, network);
