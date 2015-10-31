@@ -49,7 +49,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/ivPostPhoto"
                     android:text="Title"
-                    android:padding="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:paddingRight="@dimen/icon_padding"
                     style="@style/TextView.TitleText" />
 
                 <TextView

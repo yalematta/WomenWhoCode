@@ -8,6 +8,7 @@
         <item name="colorPrimary">@color/blackish</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/teal</item>
+        <item name="android:buttonStyle">@style/FollowButton</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -75,6 +76,11 @@
         <item name="android:alpha">0.8</item>
     </style>
 
+    <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_details</item>
+    </style>
+
     <!-- general fonts are changed, can't seem to get the header working -->
     <!-- will update the some of the text views in the mean time -->
     <style name="HeaderTextDefault" parent="android:TextAppearance">
@@ -83,11 +89,26 @@
 
     <!-- light background color: #fafafa -->
     <!-- dark background color: #212121 -->
+    <style name="FollowButton" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">@dimen/text_subheader_text_size</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingTop">@dimen/button_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/button_vertical_padding</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_padding</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_padding</item>
+        <item name="android:background">@drawable/follow_button</item>
+    </style>
 
     <style name="MyCustomButton">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/states_button</item>
+
     </style>
     <style name="MyCustomButtonOther">
         <item name="android:textSize">14sp</item>
