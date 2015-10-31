@@ -58,8 +58,9 @@ public class EventDetailsActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView tvToolbarTitle;
 
-    private static String SUBSCRIBED_TEXT = "your subscribed";
-    private static String SUBSCRIBE_TEXT = "subscribe!";
+    private static String SUBSCRIBED_TEXT = "unfollow";
+    private static String SUBSCRIBE_TEXT = "follow";
+    private static String SUBSCRIBERS_TEXT = " followers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,37 +151,29 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (parseEvent != null) {
                         event = parseEvent;
                         setEventData();
+
+                        // set up count
+                        subscribeCount = event.getSubscribeCount();
+                        tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
                         ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
                         subscribeParseQuery.whereEqualTo(Subscribe.EVENT_KEY, event);
                         subscribeParseQuery.whereEqualTo(Subscribe.USER_KEY, currentUser);
                         subscribeParseQuery.getFirstInBackground(new GetCallback<Subscribe>() {
                             @Override
                             public void done(Subscribe sub, ParseException e) {
-                                if (sub != null && sub.getSubscribed() == true) {
+                                if (sub != null) {
                                     subscribe = sub;
-                                    btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                                    if (sub.getSubscribed() == true) {
+                                        btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                                    }
                                 } else {
                                     btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
                                 }
 
-                                ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
-                                subscribeParseQuery.whereEqualTo(Subscribe.EVENT_KEY, event);
-                                subscribeParseQuery.whereEqualTo(Subscribe.SUBSCRIBED_KEY, true);
-                                subscribeParseQuery.countInBackground(new CountCallback() {
-                                    @Override
-                                    public void done(int i, ParseException e) {
-                                        if (e == null) {
-                                            subscribeCount = i;
-                                        } else {
-                                            subscribeCount = 0;
-                                        }
-
-                                        tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
-                                        // hide the progress bar, show the main view
-                                        pb.setVisibility(ProgressBar.GONE);
-                                        rlEvents.setVisibility(ScrollView.VISIBLE);
-                                    }
-                                });
+                                // hide the progress bar, show the main view
+                                pb.setVisibility(ProgressBar.GONE);
+                                rlEvents.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -203,7 +196,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         // tvEventTime.setText(event.getDateTime(event.getEventDateTime()));
         tvEventVenue.setText(event.getLocation());
         tvEventUrl.setText(event.getUrl());
-
     }
 
     @Override
@@ -224,27 +216,37 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     public void onSubscribe(View view) {
-        btnSubscribeIcon = (Button) view.findViewById(R.id.btnSubscribeIcon);
-        // could make a parse user for fun right now? -> try to do it without a parse user
         if (subscribe != null) {
             if (subscribe.getSubscribed() == true) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
+
+                // decrement counter
+                subscribeCount --;
+                event.setSubscribeCount(subscribeCount);
+                event.saveInBackground();
+                tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
+                // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
-                        subscribeCount --;
-                        tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                     }
                 });
             } else {
                 subscribe.setSubscribed(true);
+
+                // increment counter
+                subscribeCount ++;
+                event.setSubscribeCount(subscribeCount);
+                event.saveInBackground();
+                tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
+                // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
-                        subscribeCount ++;
-                        tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                     }
                 });
             }
@@ -254,12 +256,17 @@ public class EventDetailsActivity extends AppCompatActivity {
             subscribe.setSubscribed(true);
             subscribe.setUser(currentUser);
             subscribe.setEvent(event);
+
+            // increment counter
+            subscribeCount ++;
+            event.setSubscribeCount(subscribeCount);
+            event.saveInBackground();
+            tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
             subscribe.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
-                    subscribeCount ++;
-                    tvSubscribeCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                 }
             });
         }
