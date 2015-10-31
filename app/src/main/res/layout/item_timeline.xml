@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:id="@+id/cvPostFeature"
         card_view:cardCornerRadius="1.5dp"
         card_view:cardElevation="@dimen/card_elevation">
 

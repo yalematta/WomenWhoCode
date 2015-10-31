@@ -1,20 +1,23 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.activities.FeatureDetailsActivity;
+import com.example.womenwhocode.womenwhocode.activities.TimelineActivity;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
+import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.parse.CountCallback;
 import com.parse.ParseException;
@@ -34,6 +37,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     private Post post;
     private Awesome awesome;
     private int awesomeCount;
+    private Feature feature;
 
     public TimelineAdapter(Context context, List<Post> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -48,9 +52,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_timeline, parent, false);
             viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
-
-            // Hide scroll view so the progress bar is the center of attention
-            viewHolder.llTimelineItems = (LinearLayout) convertView.findViewById(R.id.llTimelineItems);
+            // top level relative layout
+            viewHolder.cvPostFeature = (CardView) convertView.findViewById(R.id.cvPostFeature);
 
             // Look up views to populate data
             viewHolder.ivFeaturePhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
@@ -59,7 +62,9 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
             viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
+            // header relative layout
             viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -68,9 +73,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         // Set the progress bar
         viewHolder.pb.setVisibility(ProgressBar.VISIBLE);
 
-        // Hide scroll view so the progress bar is the center of attention
-        viewHolder.llTimelineItems = (LinearLayout) convertView.findViewById(R.id.llTimelineItems);
-        viewHolder.llTimelineItems.setVisibility(ScrollView.INVISIBLE);
+        // Hide relative layout so the progress bar is the center of attention
+        viewHolder.cvPostFeature.setVisibility(CardView.INVISIBLE);
 
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,9 +101,10 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                 // Insert the model data into each of the view items
                 String description = post.getDescription();
                 String relativeDate = post.getPostDateTime();
-                String featureImageUrl = post.getFeatureImageUrl();
-                String featureTitle = post.getFeatureTitle();
-                String featureColor = post.getFeature().getHexColor();
+                feature = post.getFeature();
+                String featureImageUrl = feature.getImageUrl();
+                String featureTitle = feature.getTitle();
+                String featureColor = feature.getHexColor();
 
                 // set feature background color
                 // set color!
@@ -116,7 +121,17 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
 
                 // Hide the progress bar, show the main view
                 viewHolder.pb.setVisibility(ProgressBar.GONE);
-                viewHolder.llTimelineItems.setVisibility(ScrollView.VISIBLE);
+                viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
+            }
+        });
+
+        viewHolder.rlPostFeature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), FeatureDetailsActivity.class);
+                i.putExtra("feature_id", feature.getObjectId());
+                i.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
+                getContext().startActivity(i);
             }
         });
 
@@ -177,7 +192,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         TextView tvPostDescription;
         TextView tvAwesomeCount;
         TextView tvAwesomeIcon;
-        LinearLayout llTimelineItems;
+        CardView cvPostFeature;
         TextView tvRelativeDate;
         TextView tvFeatureTitle;
         ProgressBar pb;
