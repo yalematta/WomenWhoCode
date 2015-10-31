@@ -24,12 +24,14 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Network;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -172,6 +174,7 @@ public class UserProfileActivity extends AppCompatActivity {
                finalImg = Bitmap.createScaledBitmap(bmap, 200, 200, true);
                 ImageView imgView = (ImageView) findViewById(R.id.ivphoto);
                 // Set the Image in ImageView after decoding the String
+               // Picasso.with(getContext()).load(photo.proPic).transform(new CircleTransform()).into(viewHolder.ivProPic);
                 imgView.setImageBitmap(finalImg);
             }
 

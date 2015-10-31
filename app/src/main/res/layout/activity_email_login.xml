@@ -4,33 +4,41 @@
     style="@style/page_background_bl">
 
     <EditText
+        style="EditBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etEmail"
         android:inputType="text"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="113dp"
-        android:hint="Email" />
+        android:hint="Email"
+        android:layout_marginTop="200dp"
+        android:textStyle="normal"
+        android:textColorHint="@color/lightGray"
+        android:textColorLink="@color/whitish"
+        android:textColor="@color/whitish" />
 
     <EditText
+        style="EditBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etPwd"
         android:inputType="textPassword"
         android:hint="Password"
-        android:layout_below="@+id/etEmail"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:textColorHint="@color/lightGray"
+        android:textColor="@color/whitish" />
 
 
     <Button
         style="@style/button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Log In"
         android:onClick="Login"
         android:id="@+id/txtSignUp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/etPwd"
+        android:layout_alignRight="@+id/etPwd"
+        android:layout_alignEnd="@+id/etPwd" />
 </RelativeLayout>

@@ -48,6 +48,7 @@ PersonalizationDetails pd;
             for (int i = 0; i < ansArray.length; i++) {
                 CheckBox cb = new CheckBox(getContext());
                 cb.setText(ansArray[i]);
+
                 cb.setTextColor(getResources().getColor(R.color.whitish));
                 l.addView(cb);
             }

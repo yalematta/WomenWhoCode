@@ -8,14 +8,17 @@ style="@style/page_background_bl"
 
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reviewProfile"
         android:id="@+id/txtReview"
         android:focusable="false"
         android:textSize="@dimen/abc_text_size_large_material"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:textColor="@color/whitish"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="125dp"
@@ -23,73 +26,89 @@ style="@style/page_background_bl"
         android:id="@+id/ivphoto"
         android:src="@drawable/placeholder_image"
         android:layout_below="@+id/txtReview"
-        android:layout_alignParentLeft="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
 
     <Button
         style="@style/button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Take photo"
+        android:drawableLeft="@drawable/ic_camera"
         android:id="@+id/btnCamera"
         android:onClick="onLaunchCamera"
-        android:layout_below="@+id/ivphoto"
-        android:layout_alignParentLeft="true"
-        android:textSize="@dimen/abc_text_size_small_material" />
+        android:layout_alignTop="@+id/btnUpload"
+        android:layout_alignLeft="@+id/txtName"
+        android:layout_alignStart="@+id/txtName" />
 
     <Button
         style="@style/button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Upload Photo"
+        android:drawableLeft="@drawable/ic_fileimage"
         android:id="@+id/btnUpload"
         android:onClick="onSelectImage"
         android:layout_below="@+id/ivphoto"
-        android:layout_toRightOf="@+id/btnCamera" />
+        android:layout_alignRight="@+id/txtName"
+        android:layout_alignEnd="@+id/txtName" />
 
     <EditText
-        android:layout_width="wrap_content"
+        style="@style/EditBoxStyle"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Full Name"
         android:id="@+id/txtName"
-        android:layout_below="@+id/btnCamera"
-        android:layout_alignParentLeft="true" />
+        android:layout_below="@+id/btnUpload"
+        android:layout_alignParentLeft="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        style="@style/EditBoxStyle"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="email address"
         android:id="@+id/txtEmail"
         android:layout_below="@+id/txtName"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="false"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="false" />
 
     <EditText
-        android:layout_width="wrap_content"
+        style="@style/EditBoxStyle"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Job title"
         android:id="@+id/etJob"
         android:layout_below="@+id/txtEmail"
-        android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentLeft="false"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true" />
 
     <Spinner
-        android:layout_width="fill_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spnNetwork"
         android:layout_below="@+id/etJob"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="false"
         android:prompt="@string/spinnerPrompt"
         android:minHeight="20dp"
         android:focusable="true"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
 
     <Button
         style="@style/button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
         android:layout_below="@+id/spnNetwork"
-        android:layout_toRightOf="@+id/ivphoto" />
+        android:layout_toLeftOf="@+id/btnUpload"
+        android:layout_toStartOf="@+id/btnUpload" />
 
 </RelativeLayout>
