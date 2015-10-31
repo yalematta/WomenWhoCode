@@ -13,9 +13,23 @@ public class Feature extends ParseObject {
     public static final String TITLE_KEY = "title";
     public static final String NETWORK_KEY = "network";
     public static final String DESCRIPTION_KEY = "description";
-    public static final String AWESOME_COUNT_KEY = "awesome_count";
-
     public static final String HEX_COLOR_KEY = "hex_color";
+    public static final String SUBSCRIBE_COUNT = "subscribe_count";
+
+    public void setSubscribeCount(int count) {
+        put(SUBSCRIBE_COUNT, count);
+    }
+
+    public int getSubscribeCount() {
+        int count;
+        Object c = this.get(SUBSCRIBE_COUNT);
+        if (c != null) {
+            count = Integer.parseInt(c.toString());
+        } else {
+            count = 0;
+        }
+        return count;
+    }
 
     public void setAutoSubscribe(boolean autoSubscribe) {
         put(AUTO_SUBSCRIBE_KEY, autoSubscribe);

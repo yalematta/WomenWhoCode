@@ -58,8 +58,9 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     Subscribe subscribe;
     int subscribeCount;
 
-    private static String SUBSCRIBED_TEXT = "your subscribed";
-    private static String SUBSCRIBE_TEXT = "subscribe!";
+    private static String SUBSCRIBED_TEXT = "unfollow";
+    private static String SUBSCRIBE_TEXT = "follow";
+    private static String SUBSCRIBERS_TEXT = " followers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,37 +141,29 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                     if (parseFeature != null) {
                         feature = parseFeature;
                         setFeatureData();
+
+                        // set up count
+                        subscribeCount = feature.getSubscribeCount();
+                        tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
                         ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
                         subscribeParseQuery.whereEqualTo(Subscribe.FEATURE_KEY, feature);
                         subscribeParseQuery.whereEqualTo(Subscribe.USER_KEY, currentUser);
                         subscribeParseQuery.getFirstInBackground(new GetCallback<Subscribe>() {
                             @Override
                             public void done(Subscribe sub, ParseException e) {
-                                if (sub != null && sub.getSubscribed() == true) {
+                                if (sub != null) {
                                     subscribe = sub;
-                                    btnSubscribe.setText(SUBSCRIBED_TEXT);
+                                    if (sub.getSubscribed() == true) {
+                                        btnSubscribe.setText(SUBSCRIBED_TEXT);
+                                    }
                                 } else {
                                     btnSubscribe.setText(SUBSCRIBE_TEXT);
                                 }
 
-                                ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
-                                subscribeParseQuery.whereEqualTo(Subscribe.FEATURE_KEY, feature);
-                                subscribeParseQuery.whereEqualTo(Subscribe.SUBSCRIBED_KEY, true);
-                                subscribeParseQuery.countInBackground(new CountCallback() {
-                                    @Override
-                                    public void done(int i, ParseException e) {
-                                        if (e == null) {
-                                            subscribeCount = i;
-                                        } else {
-                                            subscribeCount = 0;
-                                        }
-
-                                        tvSubscriberCount.setText(String.valueOf(subscribeCount + " Subscribed"));
-                                        // hide the progress bar, show the main view
-                                        pb.setVisibility(ProgressBar.GONE);
-                                        rlFeatures.setVisibility(ScrollView.VISIBLE);
-                                    }
-                                });
+                                // hide the progress bar, show the main view
+                                pb.setVisibility(ProgressBar.GONE);
+                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -200,22 +193,32 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         if (subscribe != null) {
             if (subscribe.getSubscribed() == true) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
+
+                // decrement counter
+                subscribeCount --;
+                feature.setSubscribeCount(subscribeCount);
+                feature.saveInBackground();
+                tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         btnSubscribe.setText(SUBSCRIBE_TEXT);
-                        subscribeCount --;
-                        tvSubscriberCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                     }
                 });
             } else {
                 subscribe.setSubscribed(true);
+
+                // increment counter
+                subscribeCount ++;
+                feature.setSubscribeCount(subscribeCount);
+                feature.saveInBackground();
+                tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         btnSubscribe.setText(SUBSCRIBED_TEXT);
-                        subscribeCount ++;
-                        tvSubscriberCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                     }
                 });
             }
@@ -225,12 +228,17 @@ public class FeatureDetailsActivity extends AppCompatActivity {
             subscribe.setSubscribed(true);
             subscribe.setUser(currentUser);
             subscribe.setFeature(feature);
+
+            // increment counter
+            subscribeCount ++;
+            feature.setSubscribeCount(subscribeCount);
+            feature.saveInBackground();
+            tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+
             subscribe.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     btnSubscribe.setText(SUBSCRIBED_TEXT);
-                    subscribeCount ++;
-                    tvSubscriberCount.setText(String.valueOf(subscribeCount + " Subscribed"));
                 }
             });
         }
