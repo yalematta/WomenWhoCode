@@ -11,12 +11,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
@@ -45,12 +45,12 @@ public class TimelineActivity extends AppCompatActivity implements
         FeaturesFragment.OnFeatureItemClickListener,
         LocationProvider.LocationCallback {
 
-    private LocationProvider mLocationProvider;
-    private ViewPager vpPager;
     public final static String SELECTED_TAB_EXTRA_KEY = "selectedTabIndex";
     public final static int TIMELINE_TAB = 0;
-    public final static int TOPICS_TAB = 1;
-    public final static int EVENTS_TAB = 2;
+    private final static int TOPICS_TAB = 1;
+    private final static int EVENTS_TAB = 2;
+    private LocationProvider mLocationProvider;
+    private ViewPager vpPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class TimelineActivity extends AppCompatActivity implements
         setSelectedTab();
     }
 
-    public void setSelectedTab() {
+    private void setSelectedTab() {
         // Fetch the selected tab index with default
         int selectedTabIndex = getIntent().getIntExtra(SELECTED_TAB_EXTRA_KEY, TIMELINE_TAB);
         // Switch to page based on index
@@ -112,10 +112,11 @@ public class TimelineActivity extends AppCompatActivity implements
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-       else if(id==R.id.action_logout){
+        } else if (id == R.id.action_logout) {
             ParseUser.logOut();
-            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            this.finish();
         }
 
 
@@ -145,15 +146,14 @@ public class TimelineActivity extends AppCompatActivity implements
         switch (requestCode) {
 
             case LocationProvider.CONNECTION_FAILURE_RESOLUTION_REQUEST:
-			/*
-			 * If the result code is Activity.RESULT_OK, try to connect again
+            /*
+             * If the result code is Activity.RESULT_OK, try to connect again
 			 */
                 switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mLocationProvider.connectClient();
-                    break;
+                    case Activity.RESULT_OK:
+                        mLocationProvider.connectClient();
+                        break;
                 }
-
         }
     }
 
@@ -179,7 +179,7 @@ public class TimelineActivity extends AppCompatActivity implements
         updateUserProfile(latLng);
     }
 
-    public void updateUserProfile(final LatLng latLng) {
+    private void updateUserProfile(final LatLng latLng) {
         // FIXME: only update if the location has changed.
         ParseQuery<Profile> query = ParseQuery.getQuery(Profile.class);
         query.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
