@@ -6,17 +6,16 @@
 
     <Button
         style="@style/button"
-        android:drawableLeft="@drawable/ic_action_name"
+        android:drawableLeft="@drawable/ic_github"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginWithGitHub"
         android:id="@+id/button"
-        android:layout_above="@+id/btnEmailLogin"
-        android:layout_alignRight="@+id/btnEmailLogin"
-        android:layout_alignEnd="@+id/btnEmailLogin" />
+        android:layout_above="@+id/btnEmailLogin" />
 
     <Button
         style="@style/button"
+        android:drawableLeft="@drawable/ic_email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginWithEmail"

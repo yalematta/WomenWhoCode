@@ -56,13 +56,10 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
-<<<<<<< HEAD
     <style name="TextView.Subtitle.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/blackish</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
-=======
->>>>>>> merged files
 
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
@@ -111,20 +108,15 @@
         <item name="android:background">@drawable/follow_button</item>
     </style>
 
-
-
     <style name="button">
-
         <item name="android:textSize">16sp</item>
-<<<<<<< HEAD
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/states_button</item>
-=======
+        <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
         <item name="android:textColor">@color/whitish</item>
         <item name="android:background">@color/teal</item>
->>>>>>> merged files
-
     </style>
+
     <style name="MyCustomButtonOther">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@android:color/black</item>
