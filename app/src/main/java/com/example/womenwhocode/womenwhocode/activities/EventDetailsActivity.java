@@ -221,7 +221,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 subscribe.setSubscribed(false);
 
                 // decrement counter
-                subscribeCount --;
+                subscribeCount = event.getSubscribeCount() - 1;
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
                 tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
@@ -237,7 +237,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 subscribe.setSubscribed(true);
 
                 // increment counter
-                subscribeCount ++;
+                subscribeCount = event.getSubscribeCount() + 1;
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
                 tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
@@ -258,7 +258,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             subscribe.setEvent(event);
 
             // increment counter
-            subscribeCount ++;
+            subscribeCount = event.getSubscribeCount() + 1;
             event.setSubscribeCount(subscribeCount);
             event.saveInBackground();
             tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));

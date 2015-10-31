@@ -210,7 +210,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 subscribe.setSubscribed(false);
 
                 // decrement counter
-                subscribeCount --;
+                subscribeCount = feature.getSubscribeCount() - 1;
                 feature.setSubscribeCount(subscribeCount);
                 feature.saveInBackground();
                 tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
@@ -225,7 +225,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 subscribe.setSubscribed(true);
 
                 // increment counter
-                subscribeCount ++;
+                subscribeCount = feature.getSubscribeCount() + 1;
                 feature.setSubscribeCount(subscribeCount);
                 feature.saveInBackground();
                 tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
@@ -245,7 +245,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
             subscribe.setFeature(feature);
 
             // increment counter
-            subscribeCount ++;
+            subscribeCount = feature.getSubscribeCount() + 1;
             feature.setSubscribeCount(subscribeCount);
             feature.saveInBackground();
             tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
