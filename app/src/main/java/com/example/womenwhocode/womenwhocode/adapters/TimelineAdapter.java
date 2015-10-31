@@ -21,11 +21,7 @@ import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
-import com.parse.CountCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -83,6 +79,46 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         // Clear out the image views
         viewHolder.ivFeaturePhoto.setImageResource(0);
 
+        String title = "WWCode";
+        if (feature != null) {
+            String imageUrl = feature.getImageUrl();
+            title = feature.getTitle();
+            String hexColor = feature.getHexColor();
+
+            // set feature background color
+            // set color!
+            int color = Color.parseColor(String.valueOf(hexColor));
+            viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
+
+            // Insert the image using picasso
+            Picasso.with(getContext()).load(imageUrl).into(viewHolder.ivFeaturePhoto);
+        } else if (event != null) {
+            title = event.getTitle();
+
+            // insert icon
+            viewHolder.ivFeaturePhoto.setImageResource(R.drawable.ic_calendar_check);
+        }
+
+        // in case a post has a user
+        ParseUser postUser = post.getUser();
+        if (postUser != null) {
+            viewHolder.tvPostNameBy.setText(postUser.getUsername());
+        }
+
+        // Insert the model data into each of the view items
+        String description = post.getDescription();
+        String relativeDate = post.getPostDateTime();
+        awesomeCount = post.getAwesomeCount();
+
+        viewHolder.tvPostDescription.setText(description);
+        viewHolder.tvRelativeDate.setText(relativeDate);
+        viewHolder.tvFeatureTitle.setText(title);
+        viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+
+        // Hide the progress bar, show the main view
+        viewHolder.pb.setVisibility(ProgressBar.GONE);
+        viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
+
         event = post.getEvent();
         feature = post.getFeature();
 
@@ -90,60 +126,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 onAwesome();
-            }
-        });
-
-        ParseQuery<Awesome> query = Awesome.getQuery();
-        query.whereEqualTo(Awesome.POST_KEY, post);
-        query.whereEqualTo(Awesome.AWESOMED_KEY, true);
-        query.countInBackground(new CountCallback() {
-            @Override
-            public void done(int i, ParseException e) {
-                if (e == null) {
-                    awesomeCount = i;
-                } else {
-                    awesomeCount = 0;
-                }
-
-                String title = "WWCode";
-                if (feature != null) {
-                    String imageUrl = feature.getImageUrl();
-                    title = feature.getTitle();
-                    String hexColor = feature.getHexColor();
-
-                    // set feature background color
-                    // set color!
-                    int color = Color.parseColor(String.valueOf(hexColor));
-                    viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
-
-                    // Insert the image using picasso
-                    Picasso.with(getContext()).load(imageUrl).into(viewHolder.ivFeaturePhoto);
-                } else if (event != null) {
-                    title = event.getTitle();
-
-                    // insert icon
-                    viewHolder.ivFeaturePhoto.setImageResource(R.drawable.ic_calendar_check);
-                }
-
-                // in case a post has a user
-                ParseUser postUser = post.getUser();
-                if (postUser != null) {
-                    viewHolder.tvPostNameBy.setText(postUser.getUsername());
-                }
-
-                // Insert the model data into each of the view items
-                String description = post.getDescription();
-                String relativeDate = post.getPostDateTime();
-
-                viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
-                viewHolder.tvPostDescription.setText(description);
-                viewHolder.tvRelativeDate.setText(relativeDate);
-                viewHolder.tvFeatureTitle.setText(title);
-
-
-                // Hide the progress bar, show the main view
-                viewHolder.pb.setVisibility(ProgressBar.GONE);
-                viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
             }
         });
 
@@ -169,52 +151,40 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     }
 
     private void onAwesome() {
+        awesomeCount = post.getAwesomeCount(); // Get latest value
         if (awesome != null) {
             if (awesome.getAwesomed()) {
-
                 // Update UI thread
                 awesomeCount--;
-                viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
-                // Send data to Parse
+                // Build parse request
                 awesome.setAwesomed(false);
-                awesome.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        // TODO: Sync Parse response with UI thread
-                    }
-                });
             } else {
+
                 // Update UI thread
                 awesomeCount++;
-                viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
-                // Send data to Parse
+                // Build parse request
                 awesome.setAwesomed(true);
-                awesome.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        // TODO: Sync Parse response with UI thread
-                    }
-                });
             }
         } else {
             // Update UI thread
             awesomeCount++;
-            viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
 
-            // Send data to Parse
+            // Build parse request
             awesome = new Awesome();
             awesome.setAwesomed(true);
             awesome.setUser(currentUser);
             awesome.setPost(post);
-            awesome.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    // TODO: Sync Parse response with UI thread
-                }
-            });
         }
+
+        // Update the UI thread
+        viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+
+        // Send data to parse
+        awesome.saveInBackground();
+        post.setAwesomeCount(awesomeCount);
+        post.saveInBackground();
     }
 
     private static class ViewHolder {
