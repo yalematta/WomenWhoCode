@@ -14,9 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.activities.EventDetailsActivity;
 import com.example.womenwhocode.womenwhocode.activities.FeatureDetailsActivity;
 import com.example.womenwhocode.womenwhocode.activities.TimelineActivity;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
+import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.parse.CountCallback;
@@ -38,6 +40,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     private Awesome awesome;
     private int awesomeCount;
     private Feature feature;
+    private Event event;
 
     public TimelineAdapter(Context context, List<Post> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -62,6 +65,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
             viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
+            viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
             // header relative layout
             viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
 
@@ -75,6 +79,12 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
 
         // Hide relative layout so the progress bar is the center of attention
         viewHolder.cvPostFeature.setVisibility(CardView.INVISIBLE);
+
+        // Clear out the image views
+        viewHolder.ivFeaturePhoto.setImageResource(0);
+
+        event = post.getEvent();
+        feature = post.getFeature();
 
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,29 +105,41 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                     awesomeCount = 0;
                 }
 
-                // Clear out the image views
-                viewHolder.ivFeaturePhoto.setImageResource(0);
+                String title = "WWCode";
+                if (feature != null) {
+                    String imageUrl = feature.getImageUrl();
+                    title = feature.getTitle();
+                    String hexColor = feature.getHexColor();
+
+                    // set feature background color
+                    // set color!
+                    int color = Color.parseColor(String.valueOf(hexColor));
+                    viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
+
+                    // Insert the image using picasso
+                    Picasso.with(getContext()).load(imageUrl).into(viewHolder.ivFeaturePhoto);
+                } else if (event != null) {
+                    title = event.getTitle();
+
+                    // insert icon
+                    viewHolder.ivFeaturePhoto.setImageResource(R.drawable.ic_calendar_check);
+                }
+
+                // in case a post has a user
+                ParseUser postUser = post.getUser();
+                if (postUser != null) {
+                    viewHolder.tvPostNameBy.setText(postUser.getUsername());
+                }
 
                 // Insert the model data into each of the view items
                 String description = post.getDescription();
                 String relativeDate = post.getPostDateTime();
-                feature = post.getFeature();
-                String featureImageUrl = feature.getImageUrl();
-                String featureTitle = feature.getTitle();
-                String featureColor = feature.getHexColor();
-
-                // set feature background color
-                // set color!
-                int color = Color.parseColor(String.valueOf(featureColor));
-                viewHolder.rlPostFeature.setBackgroundColor(color);
 
                 viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
                 viewHolder.tvPostDescription.setText(description);
                 viewHolder.tvRelativeDate.setText(relativeDate);
-                viewHolder.tvFeatureTitle.setText(featureTitle);
+                viewHolder.tvFeatureTitle.setText(title);
 
-                // Insert the image using picasso
-                Picasso.with(getContext()).load(featureImageUrl).into(viewHolder.ivFeaturePhoto);
 
                 // Hide the progress bar, show the main view
                 viewHolder.pb.setVisibility(ProgressBar.GONE);
@@ -128,10 +150,18 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.rlPostFeature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), FeatureDetailsActivity.class);
-                i.putExtra("feature_id", feature.getObjectId());
-                i.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
-                getContext().startActivity(i);
+                if (feature != null) {
+                    Intent i = new Intent(getContext(), FeatureDetailsActivity.class);
+                    i.putExtra("feature_id", feature.getObjectId());
+                    i.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
+                    getContext().startActivity(i);
+                } else if (event != null) {
+                    Intent i = new Intent(getContext(), EventDetailsActivity.class);
+                    i.putExtra("event_id", event.getObjectId());
+                    i.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
+                    getContext().startActivity(i);
+                }
+
             }
         });
 
@@ -197,5 +227,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         TextView tvFeatureTitle;
         ProgressBar pb;
         RelativeLayout rlPostFeature;
+        TextView tvPostNameBy;
     }
 }

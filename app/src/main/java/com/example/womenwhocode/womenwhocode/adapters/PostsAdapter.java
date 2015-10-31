@@ -27,6 +27,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
     private ParseUser currentUser;
     private Awesome awesome;
     private int awesomeCount;
+    private ParseUser postUser;
 
     private static class ViewHolder {
         ImageView ivUserPhoto;
@@ -62,10 +63,14 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (post.getUser() != null) {
-            // TODO: find the profile for that user to load image and full name
-            viewHolder.tvPostNameBy.setText("Fun Name");
-            Picasso.with(getContext()).load(post.getFeatureImageUrl()).into(viewHolder.ivUserPhoto); // FIXME: for now
+        postUser = post.getUser();
+        if (postUser != null) {
+            viewHolder.tvPostNameBy.setText(postUser.getUsername());
+            // TODO: find the profile for user to get their image :(
+            // TODO: maybe add image icon instead
+            Picasso.with(getContext()).load(post.getFeatureImageUrl()).into(viewHolder.ivUserPhoto);
+        } else {
+            viewHolder.ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
 
         viewHolder.tvPostDescription.setText(post.getDescription());

@@ -40,6 +40,13 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <style name="TextView.TitleText.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
     <style name="TextView.Subtitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_subheader_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -49,11 +56,23 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <style name="TextView.Subtitle.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/blackish</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
         <item name="android:textColor">@color/whitish</item>
+    </style>
+
+    <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:alpha">0.8</item>
     </style>
 
     <!-- general fonts are changed, can't seem to get the header working -->

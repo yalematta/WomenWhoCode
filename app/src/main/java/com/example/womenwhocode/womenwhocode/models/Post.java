@@ -35,7 +35,15 @@ public class Post extends ParseObject {
     }
 
     public Event getEvent() {
-        return (Event) getParseObject(EVENT_KEY);
+        Event event = null;
+        try {
+            event = getParseObject(EVENT_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
+        }
+        return event;
     }
 
     public void setEvent(Event event) {
@@ -45,9 +53,11 @@ public class Post extends ParseObject {
     public Feature getFeature() {
         Feature feature = null;
         try {
-            feature = (Feature) getParseObject(FEATURE_KEY).fetchIfNeeded();
+            feature = getParseObject(FEATURE_KEY).fetchIfNeeded();
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
         }
         return feature;
     }
@@ -62,6 +72,8 @@ public class Post extends ParseObject {
             feature = this.getFeature().fetchIfNeeded();
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
         }
         return feature.getImageUrl();
     }
@@ -72,12 +84,22 @@ public class Post extends ParseObject {
             feature = this.getFeature().fetchIfNeeded();
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
         }
         return feature.getTitle();
     }
 
     public ParseUser getUser() {
-        return (ParseUser) getParseObject(USER_KEY);
+        ParseUser user = null;
+        try {
+            user = getParseObject(USER_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
+        }
+        return user;
     }
 
     public void setUser(ParseUser user) {
