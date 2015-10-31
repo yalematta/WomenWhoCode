@@ -8,7 +8,6 @@
         <item name="colorPrimary">@color/blackish</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/teal</item>
-        <item name="android:buttonStyle">@style/FollowButton</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
