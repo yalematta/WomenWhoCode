@@ -56,16 +56,23 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+<<<<<<< HEAD
     <style name="TextView.Subtitle.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/blackish</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
+=======
+>>>>>>> merged files
 
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/whitish</item></style>
+
+    <style name="page_background_bl">
+        <item name="android:background">@color/blackish</item>
+
     </style>
 
     <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
@@ -86,6 +93,7 @@
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
     </style>
 
+
     <!-- light background color: #fafafa -->
     <!-- dark background color: #212121 -->
     <style name="FollowButton" parent="Widget.AppCompat.Button">
@@ -103,10 +111,18 @@
         <item name="android:background">@drawable/follow_button</item>
     </style>
 
-    <style name="MyCustomButton">
+
+
+    <style name="button">
+
         <item name="android:textSize">16sp</item>
+<<<<<<< HEAD
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/states_button</item>
+=======
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:background">@color/teal</item>
+>>>>>>> merged files
 
     </style>
     <style name="MyCustomButtonOther">
