@@ -24,6 +24,5 @@
     <string name="title_fragment_timeline">Timeline</string>
     <string name="title_fragment_topics">Topics</string>
     <string name="title_fragment_events">Events</string>
-    <string name="action_logout">logout</string>
-
+    <string name="action_logout">Logout</string>
 </resources>
