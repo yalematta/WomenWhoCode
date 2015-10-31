@@ -21,4 +21,9 @@
     <dimen name="card_margin_top">40dp</dimen>
     <dimen name="between_card_margin_top">4dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
+    <dimen name="button_radius">2dp</dimen>
+    <dimen name="button_border">0.5dp</dimen>
+    <dimen name="button_horizontal_padding">8dp</dimen>
+    <dimen name="button_vertical_padding">4dp</dimen>
+    <dimen name="description_padding">8dp</dimen>
 </resources>

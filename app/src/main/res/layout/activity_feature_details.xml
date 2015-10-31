@@ -78,7 +78,7 @@
                 android:id="@+id/tvFeatureDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/icon_padding"
+                android:padding="@dimen/description_padding"
                 android:layout_below="@+id/tvSubscriberCount"
                 android:layout_toRightOf="@+id/ivFeatureImage"
                 style="@style/TextView.DetailDescription"/>
@@ -90,7 +90,9 @@
                 android:layout_below="@+id/tvFeatureDescription"
                 android:layout_toRightOf="@+id/ivFeatureImage"
                 android:padding="@dimen/icon_padding"
+                style="@style/FollowButton"
                 android:text="Follow" />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
