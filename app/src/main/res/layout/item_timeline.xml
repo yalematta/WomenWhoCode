@@ -3,8 +3,7 @@
     android:id="@+id/llTimelineItems"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="15dp">
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -14,108 +13,110 @@
         android:visibility="gone" />
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        card_view:cardBackgroundColor="#FF33B5E5"
+        android:id="@+id/cvPostFeature"
         card_view:cardCornerRadius="1.5dp"
-        card_view:cardElevation="0.01dp">
+        card_view:cardElevation="@dimen/card_elevation">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp">
+            android:id="@+id/rlFeaturePosts">
 
-            <TextView
-                android:id="@+id/tvPostTitle"
-                android:layout_width="wrap_content"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/ivPostPhoto"
-                android:layout_toRightOf="@+id/ivPostPhoto"
-                android:alpha="0.8"
-                android:text="Title"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#fff"
-                android:textSize="22sp" />
-
-            <ImageView
-                android:id="@+id/ivPostPhoto"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/rlPostFeature"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="5dp"
-                android:layout_marginRight="5dp" />
-
-            <TextView
-                android:id="@+id/tvRelativeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:singleLine="true"
-                android:text="2s" />
+                android:padding="@dimen/activity_horizontal_padding">
 
-            <TextView
-                android:id="@+id/tvAwesomeCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvPostTitle"
-                android:layout_toLeftOf="@+id/tvAwesomeIcon"
-                android:padding="5dp"
-                android:text="50"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/ivPostPhoto"
+                    android:layout_width="@dimen/image_view_height_width"
+                    android:layout_height="@dimen/image_view_height_width"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/icon_padding"
+                    android:layout_alignParentTop="true"/>
 
-            <TextView
-                android:id="@+id/tvAwesomeIcon"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvPostTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/ivPostPhoto"
+                    android:text="Title"
+                    android:padding="@dimen/icon_padding"
+                    style="@style/TextView.TitleText" />
+
+                <TextView
+                    android:id="@+id/tvRelativeDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/icon_padding"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="2s"
+                    style="@style/TextView.RelativeDate"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/rlPost"
+                android:layout_below="@+id/rlPostFeature"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/tvPostTitle"
-                android:padding="5dp"
-                android:text="\\o/" />
+                android:padding="@dimen/activity_horizontal_padding">
 
+                <TextView
+                    android:id="@+id/tvEmpty"
+                    android:layout_width="@dimen/image_view_height_width"
+                    android:layout_height="@dimen/image_view_height_width"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tvPostDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tvEmpty"
+                    android:autoLink="all"
+                    android:linksClickable="true"
+                    android:text="Description" />
+
+                <TextView
+                    android:id="@+id/tvAwesomeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tvAwesomeCount"
+                    android:layout_below="@+id/tvPostDescription"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:paddingBottom="@dimen/icon_padding"
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:text="\\o/" />
+
+                <TextView
+                    android:id="@+id/tvAwesomeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPostDescription"
+                    android:layout_alignParentRight="true"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:paddingBottom="@dimen/icon_padding"
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:text="50" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        card_view:cardCornerRadius="1.5dp"
-        card_view:cardElevation="0.01dp">
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp">
-
-            <TextView
-                android:id="@+id/tvPostDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autoLink="all"
-                android:linksClickable="true"
-                android:text="Description" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
 
 </LinearLayout>
