@@ -7,7 +7,10 @@
     <dimen name="text_large_margin_top">40dp</dimen>
     <dimen name="text_large_text_size">18sp</dimen>
     <dimen name="text_subheader_text_size">12sp</dimen>
+    <dimen name="icon_padding">4dp</dimen>
+    <dimen name="icon_paddingTop">8dp</dimen>
     <dimen name="text_subheader_padTop">4dp</dimen>
+    <dimen name="image_view_height_width">50dp</dimen>
     <dimen name="text_regular_text_size">12sp</dimen>
     <dimen name="view_margin">20dp</dimen>
     <dimen name="white_background_padding">20dp</dimen>

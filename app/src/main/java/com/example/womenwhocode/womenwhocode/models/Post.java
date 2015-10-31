@@ -43,7 +43,13 @@ public class Post extends ParseObject {
     }
 
     public Feature getFeature() {
-        return (Feature) getParseObject(FEATURE_KEY);
+        Feature feature = null;
+        try {
+            feature = (Feature) getParseObject(FEATURE_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return feature;
     }
 
     public void setFeature(Feature feature) {

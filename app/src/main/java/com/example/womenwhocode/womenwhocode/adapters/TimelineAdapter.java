@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -38,7 +40,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         post = getItem(position);
         currentUser = ParseUser.getCurrentUser();
 
@@ -57,6 +59,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
             viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
+            viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -96,6 +99,12 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                 String relativeDate = post.getPostDateTime();
                 String featureImageUrl = post.getFeatureImageUrl();
                 String featureTitle = post.getFeatureTitle();
+                String featureColor = post.getFeature().getHexColor();
+
+                // set feature background color
+                // set color!
+                int color = Color.parseColor(String.valueOf(featureColor));
+                viewHolder.rlPostFeature.setBackgroundColor(color);
 
                 viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
                 viewHolder.tvPostDescription.setText(description);
@@ -172,5 +181,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         TextView tvRelativeDate;
         TextView tvFeatureTitle;
         ProgressBar pb;
+        RelativeLayout rlPostFeature;
     }
 }

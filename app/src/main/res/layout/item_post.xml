@@ -18,18 +18,15 @@
             android:id="@+id/rlPost"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp">
+            android:padding="@dimen/activity_horizontal_padding">
 
             <ImageView
                 android:id="@+id/ivUserPhoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/image_view_height_width"
+                android:layout_height="@dimen/image_view_height_width"
+                android:padding="@dimen/icon_padding"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:background="@color/material_deep_teal_200" />
+                android:layout_alignParentTop="true" />
 
             <TextView
                 android:id="@+id/tvPostNameBy"
@@ -38,7 +35,7 @@
                 android:layout_toRightOf="@+id/ivUserPhoto"
                 android:autoLink="all"
                 android:linksClickable="true"
-                android:padding="5dp"
+                android:padding="@dimen/icon_padding"
                 android:text="Rosie Riveter" />
 
             <TextView
@@ -46,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:padding="5dp"
+                android:padding="@dimen/icon_padding"
                 android:text="1s" />
 
             <TextView
@@ -66,7 +63,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvPostDescription"
                 android:layout_toLeftOf="@+id/tvAwesomeIcon"
-                android:padding="5dp"
+                android:paddingTop="@dimen/icon_paddingTop"
+                android:paddingBottom="@dimen/icon_padding"
+                android:paddingRight="@dimen/icon_padding"
+                android:paddingLeft="@dimen/icon_padding"
                 android:text="50"
                 android:textStyle="bold" />
 
@@ -76,7 +76,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/tvPostDescription"
-                android:padding="5dp"
+                android:paddingTop="@dimen/icon_paddingTop"
+                android:paddingBottom="@dimen/icon_padding"
+                android:paddingRight="@dimen/icon_padding"
+                android:paddingLeft="@dimen/icon_padding"
                 android:text="\\o/" />
 
 
