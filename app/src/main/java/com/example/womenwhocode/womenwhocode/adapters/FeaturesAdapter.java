@@ -44,6 +44,9 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
             viewHolder.ivFeatureImage = (ImageView) convertView.findViewById(R.id.ivFeatureImage);
             viewHolder.cvFeature = (CardView) convertView.findViewById(R.id.cvFeature);
 
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         // Insert the model data into each of the view items
