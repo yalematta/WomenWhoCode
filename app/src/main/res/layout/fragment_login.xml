@@ -1,27 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/shape_gradient"
+    style="@style/page_background_bl"
     android:padding="15dp">
 
 
     <Button
-        style="@style/MyCustomButtonOther"
-        android:layout_width="wrap_content"
+        style="@style/button"
+        android:drawableLeft="@drawable/ic_github"
+        android:drawablePadding="-30dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="@string/loginWithGitHub"
         android:id="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btnEmailLogin" />
+        android:layout_above="@+id/btnEmailLogin"
+        android:layout_alignLeft="@+id/btnEmailLogin"
+        android:layout_alignStart="@+id/btnEmailLogin" />
 
     <Button
-        style="@style/MyCustomButtonOther"
-        android:layout_width="wrap_content"
+        style="@style/button"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="-30dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="@string/loginWithEmail"
         android:id="@+id/btnEmailLogin"
         android:onClick="loginWithEmail"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
