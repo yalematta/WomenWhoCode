@@ -21,6 +21,7 @@ import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -88,7 +89,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
 
             // Insert the image using picasso
-            Picasso.with(getContext()).load(imageUrl).into(viewHolder.ivFeaturePhoto);
+            Picasso.with(getContext()).load(imageUrl).transform(new CircleTransform()).into(viewHolder.ivFeaturePhoto);
         } else if (event != null) {
             title = event.getTitle();
 
