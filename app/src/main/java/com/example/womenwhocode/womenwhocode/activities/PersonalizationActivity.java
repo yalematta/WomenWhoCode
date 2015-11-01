@@ -53,7 +53,7 @@ public class PersonalizationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalization);
 
-        //  btnNext=(Button)findViewById(R.id.btnNext);
+
         Bundle extras = getIntent().getExtras();
         String type = "";
         if (extras != null) {
@@ -62,11 +62,10 @@ public class PersonalizationActivity extends AppCompatActivity {
 
         //create a fragment transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//for join us
+        //for join us
         setFragmentData();
         if (type.equals("Join")) {
             //replace contents of fragment with first fragment
-
             ft.replace(R.id.flPersonalization, question1Fragment);
             Bundle bundle = new Bundle();
             bundle.putString("Questions", Question.get(0));
@@ -74,41 +73,23 @@ public class PersonalizationActivity extends AppCompatActivity {
             bundle.putInt("clickCnt", 0);
 
             question1Fragment.setArguments(bundle);
-            // btnNext.setVisibility(View.VISIBLE);
         }//for login
         else {
             ft.replace(R.id.flPersonalization, logInFragment);
-            //  btnNext.setVisibility(View.INVISIBLE);
         }
-
-       // ft.addToBackStack(null);
 
         //commit the transaction
         ft.commit();
     }
 
-    // @Override
-   /* public void onBackPressed() {
-        int count = getFragmentManager().getBackStackEntryCount();
 
-        if (count == 0) {
-            super.onBackPressed();
-            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(i);
-            //additional code
-        } else {
-            getFragmentManager().popBackStack();
-        }
-        //Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        //startActivity(i);
-
-    }*/
 
 
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
 
     public void setFragmentData() {
         pd = new PersonalizationDetails();
@@ -119,12 +100,8 @@ public class PersonalizationActivity extends AppCompatActivity {
         try {
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-
-                //tvQuestion.setText(pair.getKey().toString());
                 Question.add(pair.getKey().toString());
                 Ans.add((String[]) pair.getValue());
-
-
                 it.remove(); // avoids a ConcurrentModificationException
 
             }
@@ -136,20 +113,16 @@ public class PersonalizationActivity extends AppCompatActivity {
     public void goToNextPage(View view) {
         try {
 
-            //Toast.makeText(getApplicationContext(),"done",Toast.LENGTH_LONG).show();
-
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flPersonalization);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             Bundle bundle = new Bundle();
-//Toast.makeText(getApplicationContext(), String.valueOf(view.getId()),Toast.LENGTH_LONG).show();
 
             switch (view.getId()) {
                 case 1:
                     //ParseObject.unpinAll("pDetail");
                     Question1Fragment question2Fragment = new Question1Fragment();
                     ft.replace(R.id.flPersonalization, question2Fragment);
-
                     bundle.putString("Questions", Question.get(1));
                     bundle.putStringArray("Answers", Ans.get(1));
                     bundle.putInt("clickCnt", 1);
@@ -158,10 +131,8 @@ public class PersonalizationActivity extends AppCompatActivity {
                     ft.addToBackStack(null);
                     break;
                 case 2:
-
                     Question1Fragment question3Fragment = new Question1Fragment();
                     ft.replace(R.id.flPersonalization, question3Fragment);
-
                     bundle.putString("Questions", Question.get(2));
                     bundle.putStringArray("Answers", Ans.get(2));
                     bundle.putInt("clickCnt", 2);
@@ -173,13 +144,11 @@ public class PersonalizationActivity extends AppCompatActivity {
                      arr3 = getAnswersArray(view);
                     JSONArray finalArray=concatArray(arr1,arr2,arr3);
                     ft.replace(R.id.flPersonalization, signUpFragment);
-
                     bundle.putString("userAns", finalArray.toString());
                     signUpFragment.setArguments(bundle);
                     ft.addToBackStack(null);
                     break;
                 default:
-
             }
 
             ft.commit();
@@ -190,7 +159,6 @@ public class PersonalizationActivity extends AppCompatActivity {
 
     public JSONArray getAnswersArray(View view) {
         final JSONArray ja = new JSONArray();
-
         RelativeLayout formLayout = (RelativeLayout) view.getParent();
         EditText etOther=(EditText)formLayout.findViewById(R.id.etOther);
         LinearLayout layout = (LinearLayout) formLayout.findViewById(R.id.chkLayout);

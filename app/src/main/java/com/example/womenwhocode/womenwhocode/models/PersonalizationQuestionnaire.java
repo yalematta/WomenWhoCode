@@ -17,7 +17,7 @@ public class PersonalizationQuestionnaire {
     }
 
     public HashMap<String, String[]> build() {
-        String question1 = "engineering area of interest";
+        String question1 = "Engineering area of interest";
         String[] answersForQuestion1 = new String[]{"architecture", "security", "data science",
                 "analytics", "open source", "devops", "web", "mobile", "enterprise"};
         questionnaire.put(question1, answersForQuestion1);
