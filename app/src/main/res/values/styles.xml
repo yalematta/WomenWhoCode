@@ -115,8 +115,6 @@
     </style>
 
     <style name="button">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textColor">@color/whitish</item>
