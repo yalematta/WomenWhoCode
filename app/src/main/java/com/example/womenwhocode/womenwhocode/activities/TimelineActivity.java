@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
@@ -72,6 +73,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Set the viewpager adapter for the pager
         vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+        vpPager.setPageTransformer(true, new FlipHorizontalTransformer());
 
         // Find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
