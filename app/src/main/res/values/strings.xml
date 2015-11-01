@@ -25,4 +25,8 @@
     <string name="title_fragment_topics">Topics</string>
     <string name="title_fragment_events">Events</string>
     <string name="action_logout">Logout</string>
+    <string name="awesomeCount"> </string>
+    <string name="post"> </string>
+
+
 </resources>
