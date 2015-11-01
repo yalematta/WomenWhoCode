@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -70,9 +71,10 @@ public class PostsListFragment extends Fragment {
         aPosts.clear();
     }
 
-    protected void noPostsView() {
+    protected void noPostsView(String color) {
         RelativeLayout rlPostLists = (RelativeLayout) v.findViewById(R.id.rlPostLists);
-        rlPostLists.setBackgroundColor(GRAY);
+        int intColor = Color.parseColor(String.valueOf(color));
+        rlPostLists.setBackgroundColor(intColor);
     }
 
     protected void populatePosts() {

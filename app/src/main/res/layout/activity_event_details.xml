@@ -35,69 +35,69 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:paddingTop="@dimen/detail_padding_top"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingBottom="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
         android:id="@+id/rlEvents"
+        android:background="@color/teal"
         >
 
+        <ImageView
+            android:id="@+id/ivEventImage"
+            android:layout_width="@dimen/image_view_height_width"
+            android:layout_height="@dimen/image_view_height_width"
+            android:padding="@dimen/icon_padding"
+            android:layout_alignParentLeft="true" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvEventTitle"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivEventImage"
+            android:padding="@dimen/icon_padding"
+            style="@style/TextView.TitleText"
             android:text="Security with Expert" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEventDate"
-            android:layout_below="@id/tvEventTitle"
-            android:layout_alignParentLeft="true"
-            android:text="Oct 29, 2015" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEventTime"
-            android:layout_toRightOf="@+id/tvEventDate"
-            android:layout_below="@id/tvEventTitle"
-            android:text="at 7pm" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEventVenue"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/tvEventDate"
-            android:text="at Slack" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEventUrl"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/tvEventVenue"
-            android:autoLink="all"
-            android:linksClickable="true"
-            android:text="some url" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvSubscribeCount"
-            android:layout_below="@id/tvEventUrl"
-            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding"
+            android:paddingRight="@dimen/icon_padding"
+            android:layout_below="@+id/tvEventTitle"
+            android:layout_toRightOf="@+id/ivEventImage"
+            style="@style/TextView.Subtitle"
             android:text="260 Subscribed" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnEventUrl"
+            android:layout_toRightOf="@+id/ivEventImage"
+            android:layout_below="@id/tvSubscribeCount"
+            android:text="event info"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:layout_marginBottom="@dimen/icon_padding"
+            android:layout_marginLeft="@dimen/icon_padding"
+            android:layout_marginRight="@dimen/icon_padding"
+            android:onClick="onEventInfo"
+            style="@style/FollowButton"/>
 
         <!-- might want to make this linear layout for the animation piece -->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnSubscribeIcon"
-            android:layout_alignParentLeft="true"
             android:layout_below="@id/tvSubscribeCount"
-            android:text="subscribe"
-            android:onClick="onSubscribe"/>
+            android:layout_toRightOf="@id/btnEventUrl"
+            android:onClick="onSubscribe"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:layout_marginBottom="@dimen/icon_padding"
+            android:layout_marginLeft="@dimen/icon_padding"
+            android:layout_marginRight="@dimen/icon_padding"
+            style="@style/FollowButton"/>
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager

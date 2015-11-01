@@ -21,6 +21,7 @@ import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -48,13 +49,11 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         currentUser = ParseUser.getCurrentUser();
 
         if (convertView == null) {
-            viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_timeline, parent, false);
-            viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
-            // top level relative layout
-            viewHolder.cvPostFeature = (CardView) convertView.findViewById(R.id.cvPostFeature);
 
-            // Look up views to populate data
+            viewHolder = new ViewHolder();
+            viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
+            viewHolder.cvPostFeature = (CardView) convertView.findViewById(R.id.cvPostFeature);
             viewHolder.ivFeaturePhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
@@ -62,7 +61,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
             viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
-            // header relative layout
             viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
 
             convertView.setTag(viewHolder);
@@ -91,7 +89,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
 
             // Insert the image using picasso
-            Picasso.with(getContext()).load(imageUrl).into(viewHolder.ivFeaturePhoto);
+            Picasso.with(getContext()).load(imageUrl).transform(new CircleTransform()).into(viewHolder.ivFeaturePhoto);
         } else if (event != null) {
             title = event.getTitle();
 
@@ -109,18 +107,17 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         String description = post.getDescription();
         String relativeDate = post.getPostDateTime();
         awesomeCount = post.getAwesomeCount();
+        event = post.getEvent();
+        feature = post.getFeature();
 
         viewHolder.tvPostDescription.setText(description);
         viewHolder.tvRelativeDate.setText(relativeDate);
         viewHolder.tvFeatureTitle.setText(title);
-        viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Hide the progress bar, show the main view
         viewHolder.pb.setVisibility(ProgressBar.GONE);
         viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
-
-        event = post.getEvent();
-        feature = post.getFeature();
 
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,10 +140,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                     i.putExtra(TimelineActivity.SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
                     getContext().startActivity(i);
                 }
-
             }
         });
-
         return convertView;
     }
 
@@ -160,7 +155,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
-
                 // Update UI thread
                 awesomeCount++;
 
@@ -179,7 +173,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         }
 
         // Update the UI thread
-        viewHolder.tvAwesomeCount.setText(Integer.valueOf(awesomeCount).toString());
+        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();

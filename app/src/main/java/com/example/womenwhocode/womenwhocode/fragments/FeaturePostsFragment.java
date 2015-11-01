@@ -22,6 +22,7 @@ public class FeaturePostsFragment extends PostsListFragment {
     public static String featureId;
     protected ParseQuery<Feature> featureParseQuery;
     protected ParseQuery<Post> postParseQuery;
+    Feature feature;
 
     public static FeaturePostsFragment newInstance(String featureObjectId) {
         FeaturePostsFragment featurePostsFragment = new FeaturePostsFragment();
@@ -43,7 +44,8 @@ public class FeaturePostsFragment extends PostsListFragment {
 
         featureParseQuery.getInBackground(featureId, new GetCallback<Feature>() {
             @Override
-            public void done(Feature feature, ParseException e) {
+            public void done(Feature f, ParseException e) {
+                feature = f;
                 postParseQuery.whereEqualTo(Post.FEATURE_KEY, feature);
                 postParseQuery.findInBackground(new FindCallback<Post>() {
                     @Override
@@ -57,7 +59,7 @@ public class FeaturePostsFragment extends PostsListFragment {
                             Log.d("FEATURES_POST_FAIL", "Error: " + e.getMessage());
                         } else {
                             clearSpinners();
-                            noPostsView();
+                            noPostsView(feature.getHexColor());
                         }
                     }
                 });

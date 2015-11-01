@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -38,14 +40,13 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.net.URI;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EventDetailsActivity extends AppCompatActivity {
     TextView tvEventTitle;
-    TextView tvEventDate;
-    TextView tvEventVenue;
-    TextView tvEventUrl;
     TextView tvSubscribeCount;
     Button btnSubscribeIcon;
     Event event;
@@ -57,6 +58,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     int subscribeCount;
     Toolbar toolbar;
     TextView tvToolbarTitle;
+    ImageView ivEventImage;
 
     private static String SUBSCRIBED_TEXT = "unfollow";
     private static String SUBSCRIBE_TEXT = "follow";
@@ -130,12 +132,9 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // look up views
         tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
-        tvEventDate = (TextView) findViewById(R.id.tvEventDate);
-        // TextView tvEventTime = (TextView) findViewById(R.id.tvEventTime);
-        tvEventVenue = (TextView) findViewById(R.id.tvEventVenue);
-        tvEventUrl = (TextView) findViewById(R.id.tvEventUrl);
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
         btnSubscribeIcon = (Button) findViewById(R.id.btnSubscribeIcon);
+        ivEventImage = (ImageView) findViewById(R.id.ivEventImage);
 
         // query parse
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -166,9 +165,11 @@ public class EventDetailsActivity extends AppCompatActivity {
                                     subscribe = sub;
                                     if (sub.getSubscribed() == true) {
                                         btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                                        ivEventImage.setImageResource(R.drawable.ic_calendar_check);
                                     }
                                 } else {
                                     btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
+                                    ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                 }
 
                                 // hide the progress bar, show the main view
@@ -192,10 +193,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         // setup views
         tvToolbarTitle.setText(event.getTitle());
         tvEventTitle.setText(event.getTitle());
-        tvEventDate.setText(event.getEventDateTime());
-        // tvEventTime.setText(event.getDateTime(event.getEventDateTime()));
-        tvEventVenue.setText(event.getLocation());
-        tvEventUrl.setText(event.getUrl());
     }
 
     @Override
@@ -241,6 +238,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
                 tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                ivEventImage.setImageResource(R.drawable.ic_calendar_check);
 
                 // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
@@ -262,6 +260,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             event.setSubscribeCount(subscribeCount);
             event.saveInBackground();
             tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+            ivEventImage.setImageResource(R.drawable.ic_calendar_check);
 
             subscribe.saveInBackground(new SaveCallback() {
                 @Override
@@ -270,6 +269,11 @@ public class EventDetailsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void onEventInfo(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getUrl()));
+        startActivity(browserIntent);
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
