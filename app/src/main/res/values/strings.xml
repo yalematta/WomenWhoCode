@@ -25,8 +25,15 @@
     <string name="title_fragment_topics">Topics</string>
     <string name="title_fragment_events">Events</string>
     <string name="action_logout">Logout</string>
+<<<<<<< HEAD
     <string name="awesomeCount"> </string>
     <string name="post"> </string>
 
 
+=======
+    <string name="profile_other">other user</string>
+    <string name="profile_me">current user</string>
+    <string name="message_hint">say something</string>
+    <string name="send">send message</string>
+>>>>>>> update fragment view to have input fields and item chat
 </resources>
