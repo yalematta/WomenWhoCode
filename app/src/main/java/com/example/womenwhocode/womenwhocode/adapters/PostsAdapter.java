@@ -48,6 +48,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
             viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
             viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
+            viewHolder.post = post;
 
             convertView.setTag(viewHolder);
         } else {
@@ -66,56 +67,62 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         }
 
         viewHolder.tvPostDescription.setText(post.getDescription());
+        viewHolder.tvRelativeTime.setText(post.getPostDateTime());
 
         int awesomeCount = post.getAwesomeCount();
         viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
+        // Store all necessary data for click
+        viewHolder.tvAwesomeIcon.setTag(R.string.awesomeCount, viewHolder.tvAwesomeCount);
+        viewHolder.tvAwesomeIcon.setTag(R.string.post, viewHolder.post);
+
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAwesome();
+                TextView savedAwesomeCount = (TextView) v.getTag(R.string.awesomeCount);
+                Post savedPost = (Post) v.getTag(R.string.post);
+                onAwesome(savedAwesomeCount, savedPost);
             }
         });
-
-        viewHolder.tvRelativeTime.setText(post.getPostDateTime());
 
         return convertView;
     }
 
-    private void onAwesome() {
-        awesomeCount = post.getAwesomeCount(); // Get latest value
+    private void onAwesome(TextView savedAwesomeCount, Post savedPost) {
+        this.awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
-                awesomeCount--;
+                this.awesomeCount--;
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
-                awesomeCount++;
+                this.awesomeCount++;
 
                 // Build parse request
                 awesome.setAwesomed(true);
             }
         } else {
             // Update UI thread
-            awesomeCount++;
+            this.awesomeCount++;
 
             // Build parse request
             awesome = new Awesome();
             awesome.setAwesomed(true);
             awesome.setUser(currentUser);
-            awesome.setPost(post);
+            awesome.setPost(savedPost);
         }
 
         // Update the UI thread
-        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        savedAwesomeCount.setText(String.valueOf(this.awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();
-        post.setAwesomeCount(awesomeCount);
-        post.saveInBackground();
+        savedPost.setAwesomeCount(this.awesomeCount);
+        savedPost.saveInBackground();
     }
 
     private static class ViewHolder {
@@ -125,5 +132,6 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         TextView tvAwesomeCount;
         TextView tvAwesomeIcon;
         TextView tvRelativeTime;
+        Post post;
     }
 }
