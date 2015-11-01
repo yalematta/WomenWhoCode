@@ -115,7 +115,7 @@
     </style>
 
     <style name="button">
-        <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+       
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textColor">@color/whitish</item>
         <item name="android:background">@drawable/shape_button</item>
