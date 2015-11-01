@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,12 +28,6 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
     public FeaturesAdapter(Context context, List<Feature> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
-    }
-
-    private static class ViewHolder {
-        TextView tvFeatureTitle;
-        ImageView ivFeatureImage;
-        CardView cvFeature;
     }
 
     @Override
@@ -63,10 +58,17 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
         viewHolder.tvFeatureTitle.setText(title);
         Picasso.with(getContext())
                 .load(imageUrl)
+                .transform(new CircleTransform())
                 .resize(75, 75)
                 .centerCrop()
                 .into(viewHolder.ivFeatureImage);
 
         return convertView;
+    }
+
+    private static class ViewHolder {
+        TextView tvFeatureTitle;
+        ImageView ivFeatureImage;
+        CardView cvFeature;
     }
 }

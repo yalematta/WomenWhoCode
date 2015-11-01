@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -59,7 +60,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvPostNameBy.setText(postUser.getUsername());
             // TODO: find the profile for user to get their image :(
             // TODO: maybe add image icon instead
-            Picasso.with(getContext()).load(post.getFeatureImageUrl()).into(viewHolder.ivUserPhoto);
+            Picasso.with(getContext()).load(post.getFeatureImageUrl()).transform(new CircleTransform()).into(viewHolder.ivUserPhoto);
         } else {
             viewHolder.ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
