@@ -63,7 +63,7 @@ public class EventPostsFragment extends PostsListFragment {
                             Log.d("PARSE_EVENTS_POST_FAIL", "Error: " + e.getMessage());
                         } else {
                             clearSpinners();
-                            noPostsView();
+                            noPostsView("#00b5a9"); // teal
                         }
                     }
                 });
