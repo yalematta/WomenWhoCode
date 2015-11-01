@@ -31,7 +31,6 @@ import java.util.List;
  * Created by shehba.shahab on 10/17/15.
  */
 public class TimelineAdapter extends ArrayAdapter<Post> {
-    private ViewHolder viewHolder;
     private ParseUser currentUser;
     private Post post;
     private Awesome awesome;
@@ -48,6 +47,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         post = getItem(position);
         currentUser = ParseUser.getCurrentUser();
 
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_timeline, parent, false);
 
@@ -62,6 +62,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
             viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
             viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
+            viewHolder.post = post;
 
             convertView.setTag(viewHolder);
         } else {
@@ -115,6 +116,10 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.tvFeatureTitle.setText(title);
         viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
+        // Store all necessary data for click
+        viewHolder.tvAwesomeIcon.setTag(R.string.awesomeCount, viewHolder.tvAwesomeCount);
+        viewHolder.tvAwesomeIcon.setTag(R.string.post, viewHolder.post);
+
         // Hide the progress bar, show the main view
         viewHolder.pb.setVisibility(ProgressBar.GONE);
         viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
@@ -122,7 +127,9 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAwesome();
+                TextView savedAwesomeCount = (TextView) v.getTag(R.string.awesomeCount);
+                Post savedPost = (Post) v.getTag(R.string.post);
+                onAwesome(savedAwesomeCount, savedPost);
             }
         });
 
@@ -145,40 +152,41 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void onAwesome() {
-        awesomeCount = post.getAwesomeCount(); // Get latest value
+    private void onAwesome(TextView savedAwesomeCount, Post savedPost) {
+        this.awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
-                awesomeCount--;
+                this.awesomeCount--;
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
-                awesomeCount++;
+                this.awesomeCount++;
 
                 // Build parse request
                 awesome.setAwesomed(true);
             }
         } else {
             // Update UI thread
-            awesomeCount++;
+            this.awesomeCount++;
 
             // Build parse request
             awesome = new Awesome();
             awesome.setAwesomed(true);
             awesome.setUser(currentUser);
-            awesome.setPost(post);
+            awesome.setPost(savedPost);
         }
 
         // Update the UI thread
-        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        savedAwesomeCount.setText(String.valueOf(this.awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();
-        post.setAwesomeCount(awesomeCount);
-        post.saveInBackground();
+        savedPost.setAwesomeCount(this.awesomeCount);
+        savedPost.saveInBackground();
     }
 
     private static class ViewHolder {
@@ -192,5 +200,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         ProgressBar pb;
         RelativeLayout rlPostFeature;
         TextView tvPostNameBy;
+        Post post;
     }
 }
