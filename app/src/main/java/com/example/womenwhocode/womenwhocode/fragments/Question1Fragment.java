@@ -43,11 +43,13 @@ PersonalizationDetails pd;
             btnNext.setId(clickcnt+1);
 
             tvQuestion.setText(Question);
-
+            tvQuestion.setTextColor(getResources().getColor(R.color.whitish));
             String[] ansArray = (String[]) Ans;
             for (int i = 0; i < ansArray.length; i++) {
                 CheckBox cb = new CheckBox(getContext());
                 cb.setText(ansArray[i]);
+
+                cb.setTextColor(getResources().getColor(R.color.whitish));
                 l.addView(cb);
             }
 

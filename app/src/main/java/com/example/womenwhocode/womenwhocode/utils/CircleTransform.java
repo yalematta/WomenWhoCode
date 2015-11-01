@@ -26,10 +26,11 @@ import android.graphics.Paint;
 
 import com.squareup.picasso.Transformation;
 
-/**
- * Created by julian on 13/6/21.
+/*
+ * Created by pnroy on 10/31/15.
  */
 public class CircleTransform implements Transformation {
+
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
@@ -46,7 +47,10 @@ public class CircleTransform implements Transformation {
 
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
-        BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+
+        BitmapShader shader = new BitmapShader(squaredBitmap,
+                BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+
         paint.setShader(shader);
         paint.setAntiAlias(true);
 
@@ -62,5 +66,3 @@ public class CircleTransform implements Transformation {
         return "circle";
     }
 }
-
-
