@@ -61,7 +61,6 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     ParseUser currentUser;
     Subscribe subscribe;
     int subscribeCount;
-    private CardView cvFeatureDetails;
     private ImageView ivFeatureImage;
 
     private static String SUBSCRIBED_TEXT = "unfollow";
@@ -134,7 +133,6 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
         tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
         btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
-        cvFeatureDetails = (CardView) findViewById(R.id.cvFeatureDetails);
         ivFeatureImage = (ImageView) findViewById(R.id.ivFeatureImage);
 
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
@@ -191,10 +189,12 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         String description = feature.getDescription();
 
         int color = Color.parseColor(String.valueOf(feature.getHexColor()));
-        cvFeatureDetails.setCardBackgroundColor(color);
+        rlFeatures.setBackgroundColor(color);
 
         Picasso.with(this)
                 .load(feature.getImageUrl())
+                .resize(50, 50)
+                .centerCrop()
                 .into(ivFeatureImage);
 
         tvFeatureTitle.setText(title);
