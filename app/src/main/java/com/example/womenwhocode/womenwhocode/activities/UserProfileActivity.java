@@ -23,25 +23,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.Network;
+import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
-import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,23 +48,21 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by pnroy on 10/19/15.
  */
 public class UserProfileActivity extends AppCompatActivity {
-    EditText txtName;
-    EditText txtEmail;
-    EditText txtjobTitle;
-    Spinner spnNetwork;
-    String userAns;
-    String name="";
-    String email="";
-    String password="";
-    Profile userProfile= new Profile();
-    PersonalizationDetails pd = new PersonalizationDetails();
-    String filepath;
-    public final String APP_TAG = "MyCustomApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-    ArrayAdapter<String> adapterForSpinner;
-    private static final int SELECTED_PICTURE=1;
-    ImageView ivGif;
+    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    private static final int SELECTED_PICTURE = 1;
+    private final String APP_TAG = "MyCustomApp";
+    private final String photoFileName = "photo.jpg";
+    private final Profile userProfile = new Profile();
+    private final PersonalizationDetails pd = new PersonalizationDetails();
+    private EditText txtName;
+    private EditText txtEmail;
+    private EditText txtjobTitle;
+    private Spinner spnNetwork;
+    private String userAns;
+    private String email = "";
+    private String filepath;
+    private ImageView ivGif;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,21 +70,21 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_userprofile);
 
         Bundle extras = getIntent().getExtras();
-        final ArrayList<String> networks=new ArrayList<String>();
+        final ArrayList<String> networks = new ArrayList<>();
         // TODO: needs a take photo intent for when where is no camera
-        ivGif= (ImageView) findViewById(R.id.ivGif);
+        ivGif = (ImageView) findViewById(R.id.ivGif);
         if (extras != null) {
 
             email = extras.getString("Email");
             userAns = extras.getString("userAns");
 
         }
-        txtName=(EditText)findViewById(R.id.txtName);
-        txtEmail=(EditText)findViewById(R.id.txtEmail);
-        txtjobTitle=(EditText)findViewById(R.id.etJob);
-        spnNetwork=(Spinner)findViewById(R.id.spnNetwork);
-       //get the Network data
-        Network ntwkAll=new Network();
+        txtName = (EditText) findViewById(R.id.txtName);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        txtjobTitle = (EditText) findViewById(R.id.etJob);
+        spnNetwork = (Spinner) findViewById(R.id.spnNetwork);
+
+        //get the Network data
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Network");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> networkList, ParseException e) {
@@ -107,31 +102,23 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-       // txtName.setText(name);
         txtEmail.setText(email);
         networks.add("Select");
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, networks);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, networks);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
         spnNetwork.setAdapter(spinnerArrayAdapter);
 
         spnNetwork.setSelection(0);
-       final int iCurrentSelection = spnNetwork.getSelectedItemPosition();
 
         spnNetwork.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
-
-
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
                 return;
             }
         });
-
-
-
     }
 
     @Override
@@ -141,28 +128,61 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public void OnFinalize(View view) {
         try {
-            // Save user with the updated input in Profile model
+            final ParseUser currentUser;
 
+            // Save user with the updated input in Profile model
             userProfile.setFullName(txtName.getText().toString());
-            if(spnNetwork.getSelectedItem().toString().equals("select")){
+            if (spnNetwork.getSelectedItem().toString().equals("select")) {
                 userProfile.setNetwork("");
-            }
-            else{
+            } else {
                 userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
             }
 
             userProfile.setJobTitle(txtjobTitle.getText().toString());
-            userProfile.setUser(ParseUser.getCurrentUser());
+            currentUser = ParseUser.getCurrentUser();
+            userProfile.setUser(currentUser);
             userProfile.save();
 
             pd.setAnswers(userAns);
-             pd.setUser(ParseUser.getCurrentUser());
+            pd.setUser(currentUser);
             pd.save();
-            //Glide.with(this).load(R.raw.my_gif).asGif().into(ivGif);
-            Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
-            startActivity(i);
-        }catch(ParseException p){
 
+            // Auto subscribe user to features
+            final ArrayList<Feature> features = new ArrayList<>();
+            ParseQuery<Feature> featureQuery = ParseQuery.getQuery(Feature.class);
+            featureQuery.whereEqualTo(Feature.AUTO_SUBSCRIBE_KEY, true);
+            featureQuery.findInBackground(new FindCallback<Feature>() {
+                public void done(List<Feature> featureList, ParseException e) {
+                    if (e == null) {
+
+                        for (int i = 0; i < featureList.size(); i++) {
+                            features.add(featureList.get(i));
+                        }
+
+                        for (int j = 0; j < features.size(); j++) {
+
+                            Feature feature = features.get(j);
+
+                            final Subscribe subscribe = new Subscribe();
+                            subscribe.setSubscribed(true);
+                            subscribe.setUser(currentUser);
+                            subscribe.setFeature(feature);
+                            subscribe.saveInBackground();
+
+                            int subscribeCount = feature.getSubscribeCount() + 1;
+                            feature.setSubscribeCount(subscribeCount);
+                            feature.saveInBackground();
+                        }
+
+                        Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
+                        startActivity(i);
+                    } else {
+                        Log.d("AutoSubscribeError", "Error: " + e.getMessage());
+                    }
+                }
+            });
+        } catch (ParseException p) {
+            Log.d("FinalizationError", "Error: " + p.getMessage());
         }
     }
 
@@ -174,7 +194,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap finalImg=null;
+        Bitmap finalImg = null;
         try {
             // When an Image is picked
             if (requestCode == SELECTED_PICTURE && resultCode == RESULT_OK
@@ -194,13 +214,15 @@ public class UserProfileActivity extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 filepath = cursor.getString(columnIndex);
                 cursor.close();
+
                 //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.pic1);
-                Bitmap bmap=BitmapFactory
+                Bitmap bmap = BitmapFactory
                         .decodeFile(filepath);
-               finalImg = Bitmap.createScaledBitmap(bmap, 200, 200, true);
+                finalImg = Bitmap.createScaledBitmap(bmap, 200, 200, true);
                 ImageView imgView = (ImageView) findViewById(R.id.ivphoto);
+
                 // Set the Image in ImageView after decoding the String
-               // Picasso.with(getContext()).load(photo.proPic).transform(new CircleTransform()).into(viewHolder.ivProPic);
+                // Picasso.with(getContext()).load(photo.proPic).transform(new CircleTransform()).into(viewHolder.ivProPic);
                 imgView.setImageBitmap(finalImg);
             }
 
@@ -215,14 +237,14 @@ public class UserProfileActivity extends AppCompatActivity {
                     finalImg = Bitmap.createScaledBitmap(rotateImg, 150, 150, true);
                     // Load the taken image into a preview
                     ImageView ivPreview = (ImageView) findViewById(R.id.ivphoto);
-                    ivPreview.setImageBitmap(finalImg );
+                    ivPreview.setImageBitmap(finalImg);
                 } else { // Result was a failure
                     Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if(finalImg !=null) {
+            if (finalImg != null) {
                 finalImg.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 // get byte array here
                 byte[] bytearray = stream.toByteArray();
@@ -234,22 +256,19 @@ public class UserProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
                     .show();
         }
-
     }
-
 
     public void onLaunchCamera(View view) {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
+
         // Start the image capture intent to take photo
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 
-
-
     // Returns the Uri for a photo stored on disk given the fileName
-    public Uri getPhotoFileUri(String fileName) {
+    private Uri getPhotoFileUri(String fileName) {
         // Only continue if the SD Card is mounted
         if (isExternalStorageAvailable()) {
             // Get safe storage directory for photos
@@ -257,7 +276,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), APP_TAG);
 
             // Create the storage directory if it does not exist
-            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
                 Log.d(APP_TAG, "failed to create directory");
             }
 
@@ -275,7 +294,7 @@ public class UserProfileActivity extends AppCompatActivity {
         return false;
     }
 
-    public Bitmap rotateBitmapOrientation(String photoFilePath) {
+    private Bitmap rotateBitmapOrientation(String photoFilePath) {
         // Create and configure BitmapFactory
         BitmapFactory.Options bounds = new BitmapFactory.Options();
         bounds.inJustDecodeBounds = true;
