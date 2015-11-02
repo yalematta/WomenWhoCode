@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -33,14 +33,12 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.parse.CountCallback;
+import com.example.womenwhocode.womenwhocode.utils.ZoomOutPageTransformer;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
-import java.net.URI;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -98,6 +96,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+        vpPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
     @Override
