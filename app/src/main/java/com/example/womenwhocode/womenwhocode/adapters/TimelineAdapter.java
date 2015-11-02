@@ -23,6 +23,9 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -34,8 +37,6 @@ import java.util.List;
 public class TimelineAdapter extends ArrayAdapter<Post> {
     private ParseUser currentUser;
     private Post post;
-    private Awesome awesome;
-    private int awesomeCount;
     private Feature feature;
     private Event event;
 
@@ -114,7 +115,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         // Insert the model data into each of the view items
         String description = post.getDescription();
         String relativeDate = post.getPostDateTime();
-        awesomeCount = post.getAwesomeCount();
+        int awesomeCount = post.getAwesomeCount();
         event = post.getEvent();
         feature = post.getFeature();
 
@@ -124,8 +125,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Store all necessary data for click
-        viewHolder.tvAwesomeIcon.setTag(R.string.awesomeCount, viewHolder.tvAwesomeCount);
-        viewHolder.tvAwesomeIcon.setTag(R.string.post, viewHolder.post);
+        viewHolder.tvAwesomeIcon.setTag(post);
 
         // Hide the progress bar, show the main view
         viewHolder.pb.setVisibility(ProgressBar.GONE);
@@ -134,14 +134,35 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView savedAwesomeCount = (TextView) v.getTag(R.string.awesomeCount);
+                // TODO: start icon and counter animation here!
+                View parent = (View)v.getParent();
+                // check which icon is it - awesome or unawesome
+                // do animation on the icon
+                // switch them with a nice scale in out
+                // update count value based on awesome count (+||-)
 
-                ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
-                anim.setDuration(1000);
-                anim.start();
+                // grab the post object
+                final Post savedPost = (Post) v.getTag();
+                final TextView tvAwesomeCount = (TextView) parent.findViewById(R.id.tvAwesomeCount);
 
-                Post savedPost = (Post) v.getTag(R.string.post);
-                onAwesome(savedAwesomeCount, savedPost);
+                // get the awesome object
+                ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
+                awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, savedPost);
+                awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
+                awesomeParseQuery.getFirstInBackground(new GetCallback<Awesome>() {
+                    @Override
+                    public void done(Awesome a, ParseException e) {
+                        if (e == null) {
+                            onAwesome(tvAwesomeCount, a, savedPost);
+                        } else {
+                            onAwesome(tvAwesomeCount, null, savedPost);
+                        }
+                    }
+                });
+
+//                ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
+//                anim.setDuration(1000);
+//                anim.start();
             }
         });
 
@@ -164,26 +185,26 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void onAwesome(TextView savedAwesomeCount, Post savedPost) {
-        this.awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost) {
+        int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
 
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
-                this.awesomeCount--;
+                awesomeCount--;
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
-                this.awesomeCount++;
+                awesomeCount++;
 
                 // Build parse request
                 awesome.setAwesomed(true);
             }
         } else {
             // Update UI thread
-            this.awesomeCount++;
+            awesomeCount++;
 
             // Build parse request
             awesome = new Awesome();
@@ -193,11 +214,11 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         }
 
         // Update the UI thread
-        savedAwesomeCount.setText(String.valueOf(this.awesomeCount));
+        tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();
-        savedPost.setAwesomeCount(this.awesomeCount);
+        savedPost.setAwesomeCount(awesomeCount);
         savedPost.saveInBackground();
     }
 
