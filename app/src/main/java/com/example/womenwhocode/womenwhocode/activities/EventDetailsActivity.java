@@ -82,9 +82,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         setUpView();
 
-        // get event from intent
-        event_id = getIntent().getStringExtra("event_id");
-
         // Get the viewpager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
 

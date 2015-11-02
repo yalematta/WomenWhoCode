@@ -88,6 +88,14 @@ public class ChatFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // stop handler
+        handler.removeCallbacks(runnable);
+    }
+
     protected void setSpinners() {
         lvChat.setVisibility(ListView.INVISIBLE);
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
