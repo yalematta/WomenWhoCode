@@ -1,12 +1,18 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.os.Handler;
+import android.widget.TextView;
 
 /**
  * Created by zassmin on 10/28/15.
@@ -175,16 +182,24 @@ public class ChatFragment extends Fragment {
         // FIXME what do to about m boolean
         setFirstLoad(true);
         lvChat.setAdapter(aChatList);
-        btnSend.setOnClickListener(new View.OnClickListener() {
 
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String body = etMessage.getText().toString();
-
+                if (TextUtils.isEmpty(body)) {
+                    return;
+                }
                 // post message
                 setupMessagePosting(body, currentUser.getObjectId());
 
                 etMessage.setText("");
+                etMessage.clearFocus();
+                btnSend.clearFocus();
+
+                // disable keyboard
+                InputMethodManager imm =(InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         });
     }
