@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <!-- make one or the other gone depending whether message matches current user -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/rlCurrentUser">
+
+        <ImageView
+            android:id="@+id/ivCurrentUserProfile"
+            android:contentDescription="@string/profile_me"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/image_view_height_width"
+            android:layout_height="@dimen/image_view_height_width"
+            android:src="@mipmap/ic_wwc" />
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ivCurrentUserProfile"
+            android:text="Venus">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/tvFullName"
+            android:text="3 pm">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivCurrentUserProfile"
+            android:layout_below="@+id/tvFullName"
+            android:text="message body">
+        </TextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/rlOtherUser">
+
+        <ImageView
+            android:id="@+id/ivOtherProfileLeft"
+            android:contentDescription="@string/profile_other"
+            android:layout_width="@dimen/image_view_height_width"
+            android:layout_height="@dimen/image_view_height_width"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_wwc" />
+
+        <TextView
+            android:id="@+id/tvOtherFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivOtherProfileLeft"
+            android:text="Sailor Moon">
+        </TextView>
+        <TextView
+            android:id="@+id/tvOtherCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvOtherFullName"
+            android:text="3 pm">
+        </TextView>
+        <TextView
+            android:id="@+id/tvOtherBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivOtherProfileLeft"
+            android:layout_below="@id/tvOtherFullName"
+            android:text="message body">
+        </TextView>
+    </RelativeLayout>
+
+</RelativeLayout>

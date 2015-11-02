@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
+import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
@@ -80,9 +81,6 @@ public class EventDetailsActivity extends AppCompatActivity {
         currentUser = ParseUser.getCurrentUser();
 
         setUpView();
-
-        // get event from intent
-        event_id = getIntent().getStringExtra("event_id");
 
         // Get the viewpager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -276,7 +274,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = { "posts", "chatter" };
+        private final String[] tabTitles = { "posts", "chat" };
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -289,7 +287,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                 EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
                 return eventPostsFragment;
             } else if (position == 1) {
-                return new ChatFragment();
+                // TODO: figure out subscription value
+                EventChatFragment eventChatFragment = EventChatFragment.newInstance(event_id);
+                return eventChatFragment;
             } else return null;
         }
 

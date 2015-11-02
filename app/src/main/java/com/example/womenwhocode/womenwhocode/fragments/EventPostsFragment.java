@@ -55,7 +55,7 @@ public class EventPostsFragment extends PostsListFragment {
                             clear();
                             // add to adapter
                             add(list);
-                            // TODO: make progress bar invisible and data visible
+
                             clearSpinners();
                             // pin locally
                             LocalDataStore.unpinAndRepin(list, eventId);

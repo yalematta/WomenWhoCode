@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?><!-- This is the fragment  to be displayed for a section associated with a tab -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/rlChatMessagesFragment">
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/rlSend"
+        android:layout_centerHorizontal="true"
         android:id="@+id/pbLoading"
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
@@ -15,5 +19,37 @@
     <ListView
         android:id="@+id/lvChat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_above="@+id/rlSend" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlSend"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/etMessage"
+            android:layout_toLeftOf="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btnSend"
+            android:gravity="top"
+            android:hint="@string/message_hint"
+            android:imeOptions="actionSend"/>
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"
+            android:text="@string/send"
+            android:textSize="18sp" >
+        </Button>
+
+    </RelativeLayout>
+</RelativeLayout>

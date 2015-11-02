@@ -21,6 +21,7 @@ public class LocalDataStore {
     public static String EVENT_POSTS_PIN = "event_posts";
     public static String FEATURE_POSTS_PIN = "feature_posts";
     public static String PERSONALIZATION_DETAIL_PIN="personalization_detail";
+    public static String MESSAGE_PIN = "messages";
 
     public static void unpinAndRepin(final List data, final String pinName) {
        // Unpin old data and pin new data to local datastore

@@ -27,6 +27,8 @@
     <string name="action_logout">Logout</string>
     <string name="awesomeCount"> </string>
     <string name="post"> </string>
-
-
+    <string name="profile_other">other user</string>
+    <string name="profile_me">current user</string>
+    <string name="message_hint">say something</string>
+    <string name="send">send message</string>
 </resources>

@@ -5,13 +5,18 @@ import android.app.Application;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Network;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.parse.LogInCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -37,6 +42,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Profile.class);
         ParseObject.registerSubclass(Subscribe.class);
         ParseObject.registerSubclass(Awesome.class);
+        ParseObject.registerSubclass(Message.class);
 
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
