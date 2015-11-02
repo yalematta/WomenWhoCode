@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -128,6 +129,11 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             @Override
             public void onClick(View v) {
                 TextView savedAwesomeCount = (TextView) v.getTag(R.string.awesomeCount);
+
+                ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
+                anim.setDuration(1000);
+                anim.start();
+
                 Post savedPost = (Post) v.getTag(R.string.post);
                 onAwesome(savedAwesomeCount, savedPost);
             }
