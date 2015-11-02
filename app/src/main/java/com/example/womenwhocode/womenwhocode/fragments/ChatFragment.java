@@ -19,6 +19,7 @@ import com.example.womenwhocode.womenwhocode.models.Message;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import android.os.Handler;
 
@@ -40,6 +41,7 @@ public class ChatFragment extends Fragment {
     private Handler handler;
     private Runnable runnable;
     private int RUN_FREQUENCY = 1000; // ms
+    private Date recentCreatedAt;
 
     public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
@@ -66,6 +68,7 @@ public class ChatFragment extends Fragment {
             public void run() {
                 receiveMessages();
                 // FIXME: only do this when there are new messages - handler.postDelayed(this, RUN_FREQUENCY);
+                handler.postDelayed(this, RUN_FREQUENCY);
                 // query for any message more recent than the most recent
             }
         };
@@ -96,8 +99,16 @@ public class ChatFragment extends Fragment {
         pb.setVisibility(ProgressBar.GONE);
     }
 
-    protected void add(List<Message> messageList) {
+    protected void addAll(List<Message> messageList) {
         aChatList.addAll(messageList);
+    }
+
+    protected void add(List<Message> messageList) {
+        for (Message message : messageList) {
+            if (message != aChatList.getItem(aChatList.getCount() -1)) { // double post bug
+                aChatList.add(message);
+            }
+        }
     }
 
     protected void clear() {
@@ -133,7 +144,15 @@ public class ChatFragment extends Fragment {
 
     protected void setFirstLoad(boolean load) {
         // Keep track of initial load to scroll to the bottom of the ListView
-        mFirstLoad = load;
+        this.mFirstLoad = load;
+    }
+
+    protected void setMostRecentcreatedAt(Date createAt) {
+        this.recentCreatedAt = createAt;
+    }
+
+    protected Date getMostRecentcreatedAt() {
+        return this.recentCreatedAt;
     }
 
     private void setUpView() {

@@ -54,7 +54,9 @@ public class EventChatFragment extends ChatFragment {
 
     @Override
     protected void receiveMessages() {
-        setSpinners();
+        if (isFirstLoad()) {
+            setSpinners();
+        }
 
         eventId = getArguments().getString(EVENT_ID, "");
 
@@ -67,6 +69,10 @@ public class EventChatFragment extends ChatFragment {
         // TODO: only query if the user is subscribed
 
         messageParseQuery.whereEqualTo(Message.EVENT_ID_KEY, eventId);
+        if (!isFirstLoad()) {
+            messageParseQuery.whereGreaterThan(Message.CREATED_AT_KEY, getMostRecentcreatedAt());
+        }
+
         messageParseQuery.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
         messageParseQuery.orderByAscending(Message.CREATED_AT_KEY);
 
@@ -75,26 +81,31 @@ public class EventChatFragment extends ChatFragment {
             @Override
             public void done(List<Message> list, ParseException e) {
                 if (e == null && list.size() > 0) {
-                    // clear adapter
-                    clear();
-                    // add to adapter
-                    add(list);
-                    // TODO: make progress bar invisible and data visible
-                    clearSpinners();
+                    // assuming 0 position is most recent
+                    setMostRecentcreatedAt(list.get(list.size()-1).getCreatedAt());
+
                     // pin locally
                     LocalDataStore.unpinAndRepin(list, eventId + LocalDataStore.MESSAGE_PIN);
 
                     // Scroll to the bottom of the list on initial load
                     if (isFirstLoad()) {
+                        // clear adapter
+                        clear();
+                        // add to adapter
+                        addAll(list);
+                        // other things
                         scrollToBottom();
                         setFirstLoad(false);
+                        clearSpinners();
+                    } else {
+                        add(list);
+                        scrollToBottom();
                     }
 
                 } else if (e != null) {
                     Log.d("PARSE_EVENTS_POST_FAIL", "Error: " + e.getMessage());
                 } else {
                     clearSpinners();
-                    noMessagesView("#00b5a9"); // teal
                 }
             }
         });
