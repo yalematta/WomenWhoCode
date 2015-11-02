@@ -39,6 +39,9 @@ public class EventChatFragment extends ChatFragment {
         Message message = new Message();
         message.setUserId(userId);
         message.setBody(body);
+        if (getUserProfile() != null) {
+            message.setProfile(getUserProfile());
+        }
         message.setEventId(eventId); // FIXME: what do to if its null or empty
         message.saveInBackground(new SaveCallback() {
             @Override

@@ -22,6 +22,10 @@ import android.widget.RelativeLayout;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.ChatListAdapter;
 import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -49,12 +53,12 @@ public class ChatFragment extends Fragment {
     private Runnable runnable;
     private int RUN_FREQUENCY = 1000; // ms
     private Date recentCreatedAt;
+    private Profile profile;
 
     public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
     // TODO: use material icon for button, initial is gray and when you start typing make it teal
     // TODO: FeatureChatFragment - feature_id, subscribe_id?
-    // TODO: figure out to how get user profile data with less database calls
     // TODO: figure out how to get updated subscribed values, maybe a listener with instance implementation here
     // public interface OnSubscribeStatusChange {
     //     void onSubscribeStatusChange(); // call in EventDetailActivity and FeatureDetailActivity
@@ -79,6 +83,17 @@ public class ChatFragment extends Fragment {
                 // query for any message more recent than the most recent
             }
         };
+
+        ParseQuery<Profile> parseQuery = ParseQuery.getQuery(Profile.class);
+        parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
+        parseQuery.getFirstInBackground(new GetCallback<Profile>() {
+            @Override
+            public void done(Profile p, ParseException e) {
+                if (e == null) {
+                    profile = p;
+                }
+            }
+        });
     }
 
     @Override
@@ -168,6 +183,10 @@ public class ChatFragment extends Fragment {
 
     protected Date getMostRecentcreatedAt() {
         return this.recentCreatedAt;
+    }
+
+    protected Profile getUserProfile() {
+        return this.profile;
     }
 
     private void setUpView() {

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.example.womenwhocode.womenwhocode.utils.Utilities;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
         final Message message = getItem(position);
         final ViewHolder holder = (ViewHolder)convertView.getTag();
         final boolean isMe = message.getUserId().equals(mUserId);
-
+        String date = Utilities.dateTimeParser(message.getCreatedAt().getTime(), Utilities.TIME_FORMAT);
         // decide which rl to render
         if (isMe) {
             // make visible one RL rlCurrentUser
@@ -60,24 +62,44 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.rlOtherUser.setVisibility(View.GONE);
 
             // set views
-            // TODO: set holder.ivCurrentUserProfile; --> maybe profile should be a pointer
             holder.ivCurrentUserProfile.setImageResource(R.mipmap.ic_wwc_launcher);
             holder.tvBody.setText(message.getBody());
-            holder.tvCreatedAt.setText(message.getCreatedAt().toString());
-            // TODO: set profile holder.tvFullName.setText();
-            holder.tvFullName.setText("current user");
+            holder.tvCreatedAt.setText(date);
+            if (message.getProfile() != null) {
+                if (message.getProfile().getPhotoFile() != null) {
+                    Picasso.with(getContext())
+                            .load(message.getProfile().getPhotoFile().toString())
+                            .transform(new CircleTransform())
+                            .resize(50, 50)
+                            .centerCrop()
+                            .into(holder.ivCurrentUserProfile);
+                }
+                if (message.getProfile().getFullName() != null) {
+                    holder.tvFullName.setText(message.getProfile().getFullName());
+                }
+            }
         } else {
             // make visible the other RL rlOtherUser
             holder.rlOtherUser.setVisibility(View.VISIBLE);
             holder.rlCurrentUser.setVisibility(View.GONE);
 
             // set views
-            // TODO: set holder.ivOtherProfileLeft; --> maybe profile should be a pointer
             holder.ivOtherProfileLeft.setImageResource(R.mipmap.ic_wwc);
             holder.tvOtherBody.setText(message.getBody());
-            holder.tvOtherCreatedAt.setText(message.getCreatedAt().toString());
-            // TODO: set profile holder.tvOtherFullName.setText();
-            holder.tvOtherFullName.setText("other user");
+            holder.tvOtherCreatedAt.setText(date);
+            if (message.getProfile() != null) {
+                if (message.getProfile().getPhotoFile() != null) {
+                    Picasso.with(getContext())
+                            .load(message.getProfile().getPhotoFile().toString())
+                            .transform(new CircleTransform())
+                            .resize(50, 50)
+                            .centerCrop()
+                            .into(holder.ivOtherProfileLeft);
+                }
+                if (message.getProfile().getFullName() != null) {
+                    holder.tvOtherFullName.setText(message.getProfile().getFullName());
+                }
+            }
         }
 
         return convertView;

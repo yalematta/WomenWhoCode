@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
-            android:text="apple candy">
+            android:text="Venus">
         </TextView>
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
-            android:text="apple candy">
+            android:text="Sailor Moon">
         </TextView>
         <TextView
             android:id="@+id/tvOtherCreatedAt"

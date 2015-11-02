@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 import java.util.Date;
@@ -11,18 +12,26 @@ import java.util.Date;
 @ParseClassName("Message")
 public class Message extends ParseObject {
     public static final String USER_ID_KEY = "user_id";
-    public static final String PROFILE_ID_KEY = "user_id"; // to minimize search on profile - this might be better off with a pointer
     public static final String BODY_KEY = "body";
     public static final String EVENT_ID_KEY = "event_id";
     public static final String FEATURE_ID_KEY = "event_id";
     public static final String CREATED_AT_KEY = "createdAt";
+    public static final String PROFILE_KEY = "profile";
 
-    public String getProfileId() {
-        return getString(PROFILE_ID_KEY);
+    public Profile getProfile() {
+        Profile profile = null;
+        try {
+            profile = this.getParseObject(PROFILE_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException nullError) {
+            nullError.printStackTrace();
+        }
+        return profile;
     }
 
-    public void setProfileId(String profileId) {
-        put(PROFILE_ID_KEY, profileId);
+    public void setProfile(Profile profile) {
+        put(PROFILE_KEY, profile);
     }
 
     public void setFeatureId(String userId) {
