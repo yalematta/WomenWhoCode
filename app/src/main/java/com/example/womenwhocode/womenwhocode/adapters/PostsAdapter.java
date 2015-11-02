@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,6 +119,9 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
         // Update the UI thread
         savedAwesomeCount.setText(String.valueOf(this.awesomeCount));
+        ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
+        anim.setDuration(1000);
+        anim.start();
 
         // Send data to parse
         awesome.saveInBackground();
