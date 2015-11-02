@@ -62,7 +62,12 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvPostNameBy.setText(postUser.getUsername());
             // TODO: find the profile for user to get their image :(
             // TODO: maybe add image icon instead
-            Picasso.with(getContext()).load(post.getFeatureImageUrl()).transform(new CircleTransform()).into(viewHolder.ivUserPhoto);
+            Picasso.with(getContext())
+                    .load(post.getFeatureImageUrl())
+                    .transform(new CircleTransform())
+                    .resize(75, 75)
+                    .centerCrop()
+                    .into(viewHolder.ivUserPhoto);
         } else {
             viewHolder.ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
