@@ -28,6 +28,7 @@ import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
+import com.example.womenwhocode.womenwhocode.utils.ZoomOutPageTransformer;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -72,6 +73,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Set the viewpager adapter for the pager
         vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+        vpPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         // Find the sliding tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
