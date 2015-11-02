@@ -67,6 +67,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
                     i.putExtra("Password", password);
                     i.putExtra("userAns",userAns);
                     startActivity(i);
+                    overridePendingTransition(R.anim.activity_left_in,R.anim.activity_right_out);
                 }catch(Exception ex){
 
                 }

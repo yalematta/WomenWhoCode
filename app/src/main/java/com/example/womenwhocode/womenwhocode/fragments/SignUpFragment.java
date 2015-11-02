@@ -34,6 +34,7 @@ public class SignUpFragment extends Fragment {
                 Intent i = new Intent(getActivity(), SignUpEmailActivity.class);
                 i.putExtra("userAns",userAns);
                 startActivity(i);
+
             }
         });
         return view;
