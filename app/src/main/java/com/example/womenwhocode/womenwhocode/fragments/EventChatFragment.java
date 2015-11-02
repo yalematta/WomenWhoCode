@@ -34,9 +34,7 @@ public class EventChatFragment extends ChatFragment {
 
     @Override
     protected void setupMessagePosting(String body, String userId) {
-        if (eventId == null || eventId.equals("")) {
-            eventId = getArguments().getString(EVENT_ID, "");
-        }
+        eventId = getArguments().getString(EVENT_ID, "");
 
         Message message = new Message();
         message.setUserId(userId);
@@ -58,9 +56,7 @@ public class EventChatFragment extends ChatFragment {
     protected void receiveMessages() {
         setSpinners();
 
-        if (eventId == null || eventId.equals("")) {
-            eventId = getArguments().getString(EVENT_ID, "");
-        }
+        eventId = getArguments().getString(EVENT_ID, "");
 
         eventParseQuery = ParseQuery.getQuery(Event.class);
         messageParseQuery = ParseQuery.getQuery(Message.class);
