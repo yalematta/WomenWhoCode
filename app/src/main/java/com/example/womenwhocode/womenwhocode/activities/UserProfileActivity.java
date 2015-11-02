@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -14,11 +15,14 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Network;
@@ -37,6 +41,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -61,6 +67,7 @@ public class UserProfileActivity extends AppCompatActivity {
     public String photoFileName = "photo.jpg";
     ArrayAdapter<String> adapterForSpinner;
     private static final int SELECTED_PICTURE=1;
+    ImageView ivGif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,7 +77,7 @@ public class UserProfileActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final ArrayList<String> networks=new ArrayList<String>();
         // TODO: needs a take photo intent for when where is no camera
-
+        ivGif= (ImageView) findViewById(R.id.ivGif);
         if (extras != null) {
 
             email = extras.getString("Email");
@@ -89,6 +96,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 if (e == null) {
                     for (int i = 0; i < networkList.size(); i++) {
                         networks.add(networkList.get(i).getString("title"));
+                        Collections.sort(networks);
                     }
 
                     //  Toast.makeText(getApplicationContext(),networkList.get(0).getString("title"),Toast.LENGTH_LONG).show();
@@ -101,13 +109,29 @@ public class UserProfileActivity extends AppCompatActivity {
 
        // txtName.setText(name);
         txtEmail.setText(email);
-        networks.add("select");
+        networks.add("Select");
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, networks);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item); // The drop down view
         spnNetwork.setAdapter(spinnerArrayAdapter);
 
         spnNetwork.setSelection(0);
-//        txtPwd.setText(password);
+       final int iCurrentSelection = spnNetwork.getSelectedItemPosition();
+
+        spnNetwork.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+
+
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
+
+
     }
 
     @Override
@@ -134,6 +158,7 @@ public class UserProfileActivity extends AppCompatActivity {
             pd.setAnswers(userAns);
              pd.setUser(ParseUser.getCurrentUser());
             pd.save();
+            //Glide.with(this).load(R.raw.my_gif).asGif().into(ivGif);
             Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
             startActivity(i);
         }catch(ParseException p){
@@ -169,6 +194,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 filepath = cursor.getString(columnIndex);
                 cursor.close();
+                //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.pic1);
                 Bitmap bmap=BitmapFactory
                         .decodeFile(filepath);
                finalImg = Bitmap.createScaledBitmap(bmap, 200, 200, true);
@@ -276,4 +302,6 @@ public class UserProfileActivity extends AppCompatActivity {
         // Return result
         return rotatedBitmap;
     }
+
+
 }

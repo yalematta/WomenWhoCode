@@ -20,7 +20,7 @@ style="@style/page_background_bl"
         android:textColor="@color/whitish"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:id="@+id/ivphoto"
@@ -98,7 +98,9 @@ style="@style/page_background_bl"
         android:focusable="true"
         android:clickable="true"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:layout_margin="10dp"
+       />
 
     <Button
         style="@style/button"
@@ -107,8 +109,13 @@ style="@style/page_background_bl"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
-        android:layout_below="@+id/spnNetwork"
-        android:layout_toLeftOf="@+id/btnUpload"
-        android:layout_toStartOf="@+id/btnUpload" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnCamera"
+        android:layout_toEndOf="@+id/btnCamera" />
+    <ImageView
+        android:id="@+id/ivGif"
+        android:contentDescription="Gif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

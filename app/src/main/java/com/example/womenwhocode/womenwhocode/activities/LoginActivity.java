@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -58,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, PersonalizationActivity.class);
         i.putExtra("type","Join");
         startActivity(i);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
     public void LogInToApp(View view) {
@@ -65,15 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, PersonalizationActivity.class);
         i.putExtra("type","Login");
         startActivity(i);
-//      ParseUser.logInInBackground("Puja Roy", "Puja", new LogInCallback() {
-//            public void done(ParseUser user, ParseException e) {
-//                if (user != null) {
-//                    Intent i = new Intent(LoginActivity.this, TimelineActivity.class);
-//                    startActivity(i);
-//                } else {
-//                    // Signup failed. Look at the ParseException to see what happened.
-//                }
-//            }
-//        });
+
     }
 }

@@ -62,6 +62,8 @@ public class PersonalizationActivity extends AppCompatActivity {
 
         //create a fragment transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+
         //for join us
         setFragmentData();
         if (type.equals("Join")) {
@@ -116,6 +118,7 @@ public class PersonalizationActivity extends AppCompatActivity {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flPersonalization);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
             Bundle bundle = new Bundle();
 
             switch (view.getId()) {
