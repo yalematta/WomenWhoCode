@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    style="@style/page_background_bl">
+    style="@style/page_background_bl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/etEmail"
         style="EditBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etEmail"
-        android:inputType="text"
         android:layout_centerHorizontal="true"
-        android:hint="Email"
         android:layout_marginTop="200dp"
-        android:textStyle="normal"
+        android:hint="Email"
+        android:inputType="text"
+        android:textColor="@color/whitish"
         android:textColorHint="@color/lightGray"
         android:textColorLink="@color/whitish"
-        android:textColor="@color/whitish" />
+        android:textStyle="normal" />
 
     <EditText
+        android:id="@+id/etPwd"
         style="EditBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etPwd"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textColorHint="@color/lightGray"
-        android:textColor="@color/whitish" />
-
+        android:layout_centerVertical="true"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/whitish"
+        android:textColorHint="@color/lightGray" />
 
     <Button
+        android:id="@+id/txtSignUp"
         style="@style/button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:onClick="Login"
-        android:id="@+id/txtSignUp"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/etPwd"
+        android:layout_alignEnd="@+id/etPwd"
+        android:layout_alignLeft="@+id/etPwd"
         android:layout_alignRight="@+id/etPwd"
-        android:layout_alignEnd="@+id/etPwd" />
+        android:layout_alignStart="@+id/etPwd"
+        android:layout_below="@+id/etPwd"
+        android:layout_marginTop="70dp"
+        android:onClick="Login"
+        android:text="Log In" />
 </RelativeLayout>
