@@ -163,6 +163,7 @@ public class TimelineActivity extends AppCompatActivity implements
         i.putExtra("event_id", event.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, EVENTS_TAB);
         startActivity(i);
+        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
     }
 
     @Override
@@ -171,6 +172,7 @@ public class TimelineActivity extends AppCompatActivity implements
         i.putExtra("feature_id", feature.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TOPICS_TAB);
         startActivity(i);
+        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
     }
 
     @Override
