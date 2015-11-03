@@ -85,6 +85,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         setUpView();
         setUpViewPager();
+
+        this.setTitle(title);
     }
 
 
