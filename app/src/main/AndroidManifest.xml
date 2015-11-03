@@ -29,10 +29,10 @@
             android:label=""></activity>
         <activity
             android:name=".activities.FeatureDetailsActivity"
-            android:label="Feature Detail"></activity>
+            android:label=""></activity>
         <activity
             android:name=".activities.EventDetailsActivity"
-            android:label="@string/title_activity_event_details"></activity>
+            android:label=""></activity>
         <activity
             android:name=".activities.PersonalizationActivity"
             android:label=""></activity>
