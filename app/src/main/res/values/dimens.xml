@@ -28,5 +28,6 @@
     <dimen name="button_vertical_padding">12dp</dimen>
     <dimen name="description_padding_top">12dp</dimen>
     <dimen name="description_padding_bottom">8dp</dimen>
+    <dimen name="card_bottom_padding">8dp</dimen>
     <dimen name="button_margin_top">8dp</dimen>
 </resources>
