@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -54,6 +56,7 @@ public class ChatFragment extends Fragment {
     private int RUN_FREQUENCY = 1000; // ms
     private Date recentCreatedAt;
     private Profile profile;
+    private TextView noChats;
 
     public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
@@ -101,13 +104,15 @@ public class ChatFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_chat, container, false);
         lvChat = (ListView) view.findViewById(R.id.lvChat);
         rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
+        return view;
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // setup the view
         setUpView();
 
         handler.postDelayed(runnable, RUN_FREQUENCY);
-
-        return view;
     }
 
     @Override
@@ -147,16 +152,6 @@ public class ChatFragment extends Fragment {
 
     protected void scrollToBottom() {
         lvChat.setSelection(aChatList.getCount() - 1);
-    }
-
-    protected void noMessagesView(String color) { // feature or event color
-        int intColor = Color.parseColor(String.valueOf(color));
-        rlChatMessagesFragment.setBackgroundColor(intColor);
-    }
-
-    protected void notSubscribedView() {
-        rlChatMessagesFragment.setBackgroundColor(Color.BLUE); // temp
-        // display instead is not subscribed message
     }
 
     protected void setupMessagePosting(String body, String userId) { // maybe change to interface
