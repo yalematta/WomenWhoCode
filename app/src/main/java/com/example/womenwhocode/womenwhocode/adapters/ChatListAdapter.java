@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,6 +55,8 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             convertView.setTag(holder);
         }
         final Message message = getItem(position);
+        ParseUser user = message.getParseUser(Message.USER_KEY);
+        Profile profile = message.getProfile();
         final ViewHolder holder = (ViewHolder)convertView.getTag();
         final boolean isMe = message.getUserId().equals(mUserId);
         String date = Utilities.dateTimeParser(message.getCreatedAt().getTime(), Utilities.TIME_FORMAT);
@@ -65,17 +70,21 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.ivCurrentUserProfile.setImageResource(R.mipmap.ic_wwc_launcher);
             holder.tvBody.setText(message.getBody());
             holder.tvCreatedAt.setText(date);
-            if (message.getProfile() != null) {
-                if (message.getProfile().getPhotoFile() != null) {
+            if (profile != null) {
+                if (profile.getPhotoFile() != null) {
                     Picasso.with(getContext())
-                            .load(message.getProfile().getPhotoFile().toString())
+                            .load(profile.getPhotoFile().toString())
                             .transform(new CircleTransform())
                             .resize(50, 50)
                             .centerCrop()
                             .into(holder.ivCurrentUserProfile);
                 }
-                if (message.getProfile().getFullName() != null) {
-                    holder.tvFullName.setText(message.getProfile().getFullName());
+                if (!TextUtils.isEmpty(profile.getFullName())) {
+                    holder.tvFullName.setText(profile.getFullName());
+                } else {
+                    if (user != null) {
+                        holder.tvFullName.setText(user.getUsername());
+                    }
                 }
             }
         } else {
@@ -87,17 +96,21 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.ivOtherProfileLeft.setImageResource(R.mipmap.ic_wwc);
             holder.tvOtherBody.setText(message.getBody());
             holder.tvOtherCreatedAt.setText(date);
-            if (message.getProfile() != null) {
-                if (message.getProfile().getPhotoFile() != null) {
+            if (profile != null) {
+                if (profile.getPhotoFile() != null) {
                     Picasso.with(getContext())
-                            .load(message.getProfile().getPhotoFile().toString())
+                            .load(profile.getPhotoFile().toString())
                             .transform(new CircleTransform())
                             .resize(50, 50)
                             .centerCrop()
                             .into(holder.ivOtherProfileLeft);
                 }
-                if (message.getProfile().getFullName() != null) {
-                    holder.tvOtherFullName.setText(message.getProfile().getFullName());
+                if (!TextUtils.isEmpty(profile.getFullName())) {
+                    holder.tvOtherFullName.setText(profile.getFullName());
+                } else {
+                    if (user != null) {
+                        holder.tvOtherFullName.setText(user.getUsername());
+                    }
                 }
             }
         }

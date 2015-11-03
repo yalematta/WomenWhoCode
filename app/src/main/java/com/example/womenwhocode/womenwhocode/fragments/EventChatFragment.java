@@ -11,6 +11,7 @@ import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.List;
@@ -35,10 +36,12 @@ public class EventChatFragment extends ChatFragment {
     @Override
     protected void setupMessagePosting(String body, String userId) {
         eventId = getArguments().getString(EVENT_ID, "");
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
         Message message = new Message();
         message.setUserId(userId);
         message.setBody(body);
+        message.setUser(currentUser);
         if (getUserProfile() != null) {
             message.setProfile(getUserProfile());
         }

@@ -61,6 +61,15 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <style name="TextView.Subtitle.Dark.Small" parent="TextAppearance.AppCompat">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:alpha">0.8</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_small_text_size</item>
+        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -75,6 +84,14 @@
     <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/darkGray</item>
         <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+
+    <style name="TextView.RelativeDate.SmallText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textSize">@dimen/text_small_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
     </style>
