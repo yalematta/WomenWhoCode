@@ -1,6 +1,5 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,9 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -22,13 +24,7 @@ import java.util.ArrayList;
  * Created by zassmin on 10/26/15.
  */
 public class PostsAdapter extends ArrayAdapter<Post> {
-
-    Post post;
-    ViewHolder viewHolder;
     private ParseUser currentUser;
-    private Awesome awesome;
-    private int awesomeCount;
-    private ParseUser postUser;
 
     public PostsAdapter(Context context, ArrayList<Post> posts) {
         super(context, android.R.layout.simple_list_item_1, posts);
@@ -36,8 +32,10 @@ public class PostsAdapter extends ArrayAdapter<Post> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        post = getItem(position);
+        Post post = getItem(position);
         currentUser = ParseUser.getCurrentUser();
+
+        final ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.item_post, parent, false);
@@ -56,8 +54,24 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        postUser = post.getUser();
+        // TODO: set awesome icon here - default - not awesome yet
+        // get the awesome object
+        ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
+        awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
+        awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
+        awesomeParseQuery.getFirstInBackground(new GetCallback<Awesome>() {
+            @Override
+            public void done(Awesome a, ParseException e) {
+                if (e == null) {
+                    viewHolder.tvAwesomeIcon.setTag(a);
+                    // TODO if awesome.getAwesome == true change the icon to the awesomedd icon
+                } else {
+                    viewHolder.tvAwesomeIcon.setTag(null);
+                }
+            }
+        });
 
+        ParseUser postUser = post.getUser();
         if (postUser != null) {
             viewHolder.tvPostNameBy.setText(postUser.getUsername());
             // TODO: find the profile for user to get their image :(
@@ -79,41 +93,53 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Store all necessary data for click
-        viewHolder.tvAwesomeIcon.setTag(R.string.awesomeCount, viewHolder.tvAwesomeCount);
-        viewHolder.tvAwesomeIcon.setTag(R.string.post, viewHolder.post);
+        viewHolder.tvPostDescription.setTag(post);
 
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView savedAwesomeCount = (TextView) v.getTag(R.string.awesomeCount);
-                Post savedPost = (Post) v.getTag(R.string.post);
-                onAwesome(savedAwesomeCount, savedPost);
+                View parent = (View)v.getParent();
+                // grab the tagged objects
+                Post post = (Post) parent.findViewById(R.id.tvPostDescription).getTag();
+                Awesome awesome = (Awesome) v.getTag();
+                TextView tvAwesomeCount = (TextView) parent.findViewById(R.id.tvAwesomeCount);
+
+                // TODO: start icon and counter animation here!
+                // check which icon is it - awesome or unawesome
+                // do animation on the icon
+                // switch them with a nice scale in out
+                // update count value based on awesome count (+||-)
+                // ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
+                // anim.setDuration(1000);
+                // anim.start();
+
+                onAwesome(tvAwesomeCount, awesome, post, v);
             }
         });
 
         return convertView;
     }
 
-    private void onAwesome(TextView savedAwesomeCount, Post savedPost) {
-        this.awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View tvAwesomeIcon) {
+        int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
 
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
-                this.awesomeCount--;
+                awesomeCount--;
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
-                this.awesomeCount++;
+                awesomeCount++;
 
                 // Build parse request
                 awesome.setAwesomed(true);
             }
         } else {
             // Update UI thread
-            this.awesomeCount++;
+            awesomeCount++;
 
             // Build parse request
             awesome = new Awesome();
@@ -123,14 +149,18 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         }
 
         // Update the UI thread
-        savedAwesomeCount.setText(String.valueOf(this.awesomeCount));
-        ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
-        anim.setDuration(1000);
-        anim.start();
+        // TODO: it's probably safe to do this before the onAwesome
+        tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        // reset the awesome account in case it was null before!
+        tvAwesomeIcon.setTag(awesome);
+
+//        ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
+//        anim.setDuration(1000);
+//        anim.start();
 
         // Send data to parse
         awesome.saveInBackground();
-        savedPost.setAwesomeCount(this.awesomeCount);
+        savedPost.setAwesomeCount(awesomeCount);
         savedPost.saveInBackground();
     }
 
