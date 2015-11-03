@@ -8,6 +8,7 @@
         android:id="@+id/rlCurrentUser">
 
         <ImageView
+            android:padding="@dimen/icon_padding"
             android:id="@+id/ivCurrentUserProfile"
             android:contentDescription="@string/profile_me"
             android:layout_alignParentRight="true"
@@ -16,22 +17,27 @@
             android:src="@mipmap/ic_wwc" />
 
         <TextView
+            android:padding="@dimen/icon_padding"
             android:id="@+id/tvFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
-            android:text="Venus">
+            android:text="Venus"
+            style="@style/TextView.Subtitle.Dark.Small">
         </TextView>
 
         <TextView
+            android:padding="@dimen/icon_padding"
             android:id="@+id/tvCreatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tvFullName"
-            android:text="3 pm">
+            android:text="3 pm"
+            style="@style/TextView.RelativeDate.SmallText">
         </TextView>
 
         <TextView
+            android:paddingRight="@dimen/icon_padding"
             android:id="@+id/tvBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,23 +58,29 @@
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
             android:layout_alignParentLeft="true"
+            android:padding="@dimen/icon_padding"
             android:src="@mipmap/ic_wwc" />
 
         <TextView
+            android:padding="@dimen/icon_padding"
             android:id="@+id/tvOtherFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
-            android:text="Sailor Moon">
+            android:text="Sailor Moon"
+            style="@style/TextView.Subtitle.Dark.Small">
         </TextView>
         <TextView
+            android:padding="@dimen/icon_padding"
             android:id="@+id/tvOtherCreatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvOtherFullName"
-            android:text="3 pm">
+            android:text="3 pm"
+            style="@style/TextView.RelativeDate.SmallText">
         </TextView>
         <TextView
+            android:paddingLeft="@dimen/icon_padding"
             android:id="@+id/tvOtherBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

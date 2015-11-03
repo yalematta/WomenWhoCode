@@ -14,5 +14,8 @@
     <ListView
         android:id="@+id/lvFeatures"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:paddingTop="16dp"/>
 </LinearLayout>

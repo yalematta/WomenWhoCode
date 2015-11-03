@@ -13,6 +13,7 @@
     <dimen name="text_subheader_padTop">4dp</dimen>
     <dimen name="image_view_height_width">50dp</dimen>
     <dimen name="text_regular_text_size">12sp</dimen>
+    <dimen name="text_small_text_size">8sp</dimen>
     <dimen name="view_margin">20dp</dimen>
     <dimen name="line_spacing_details">-8dp</dimen>
     <dimen name="white_background_padding">20dp</dimen>
@@ -27,5 +28,6 @@
     <dimen name="button_vertical_padding">12dp</dimen>
     <dimen name="description_padding_top">12dp</dimen>
     <dimen name="description_padding_bottom">8dp</dimen>
+    <dimen name="card_bottom_padding">8dp</dimen>
     <dimen name="button_margin_top">8dp</dimen>
 </resources>

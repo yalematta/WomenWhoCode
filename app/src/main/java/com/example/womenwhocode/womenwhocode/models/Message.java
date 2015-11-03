@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.models;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
 
@@ -17,6 +18,11 @@ public class Message extends ParseObject {
     public static final String FEATURE_ID_KEY = "event_id";
     public static final String CREATED_AT_KEY = "createdAt";
     public static final String PROFILE_KEY = "profile";
+    public static final String USER_KEY = "user";
+
+    public void setUser(ParseUser user) {
+        put(USER_KEY, user);
+    }
 
     public Profile getProfile() {
         Profile profile = null;

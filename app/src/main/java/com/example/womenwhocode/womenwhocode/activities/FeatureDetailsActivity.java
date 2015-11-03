@@ -79,14 +79,13 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
 
         currentUser = ParseUser.getCurrentUser();
         feature_id = getIntent().getStringExtra("feature_id");
 
         setUpView();
         setUpViewPager();
-
-        this.setTitle(title);
     }
 
 
