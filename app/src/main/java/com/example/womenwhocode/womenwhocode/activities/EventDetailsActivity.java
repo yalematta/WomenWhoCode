@@ -77,6 +77,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
 
         // get event from intent
         event_id = getIntent().getStringExtra("event_id");
