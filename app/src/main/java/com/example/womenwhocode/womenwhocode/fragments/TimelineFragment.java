@@ -81,6 +81,7 @@ public class TimelineFragment extends Fragment {
 
         // Return all posts for features or events to which the user is subscribed
         postQuery = ParseQuery.or(subscribedFeaturesAndEvents);
+        postQuery.include(Post.FEATURE_KEY);
         postQuery.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> listPosts, ParseException e) {
                 if (e != null) {
