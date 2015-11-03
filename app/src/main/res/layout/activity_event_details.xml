@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/llEventView">
 
     <!-- action bar -->
     <include
@@ -17,7 +18,7 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
-    <com.astuetz.PagerSlidingTabStrip
+    <com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -100,7 +101,7 @@
             style="@style/FollowButton"/>
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.example.womenwhocode.womenwhocode.widgets.CustomViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
