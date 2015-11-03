@@ -33,7 +33,6 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.example.womenwhocode.womenwhocode.utils.ZoomOutPageTransformer;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -93,7 +92,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
-        vpPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
     @Override
