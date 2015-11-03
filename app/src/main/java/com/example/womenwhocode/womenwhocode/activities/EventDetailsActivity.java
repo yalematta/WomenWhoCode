@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;

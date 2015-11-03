@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
+import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
@@ -260,7 +260,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = { "posts", "chatter" };
+        private final String[] tabTitles = { "posts", "chat" };
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -273,7 +273,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 FeaturePostsFragment featurePostsFragment = FeaturePostsFragment.newInstance(feature_id);
                 return featurePostsFragment;
             } else if (position == 1) {
-                return new ChatFragment();
+                FeatureChatFragment featureChatFragment = FeatureChatFragment.newInstance(feature_id);
+                return featureChatFragment;
             } else return null;
         }
 
