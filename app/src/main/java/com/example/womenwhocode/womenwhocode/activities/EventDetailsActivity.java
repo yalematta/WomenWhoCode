@@ -33,7 +33,6 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.example.womenwhocode.womenwhocode.utils.ZoomOutPageTransformer;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
 import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
@@ -331,7 +330,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
-        vpPager.setPageTransformer(true, new ZoomOutPageTransformer());
     }
 
     private void setTab() {
