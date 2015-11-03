@@ -67,6 +67,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        // TODO: set awesome icon here - default - not awesome yet
         // get the awesome object
         ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
         awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
@@ -75,8 +76,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             @Override
             public void done(Awesome a, ParseException e) {
                 if (e == null) {
-                    // might be a bug for it to be final
                     viewHolder.tvAwesomeIcon.setTag(a);
+                    // TODO if awesome.getAwesome == true change the icon to the awesomedd icon
                 } else {
                     viewHolder.tvAwesomeIcon.setTag(null);
                 }
@@ -186,7 +187,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View viewToSet) {
+    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View tvAwesomeIcon) {
         int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
 
         if (awesome != null) {
@@ -215,9 +216,10 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         }
 
         // Update the UI thread
+        // TODO: it's probably safe to do this before the onAwesome
         tvAwesomeCount.setText(String.valueOf(awesomeCount));
         // reset the awesome account in case it was null before!
-        viewToSet.setTag(awesome);
+        tvAwesomeIcon.setTag(awesome);
 
         // Send data to parse
         awesome.saveInBackground();
