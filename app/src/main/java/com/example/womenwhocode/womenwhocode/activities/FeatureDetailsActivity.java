@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,6 +33,9 @@ import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.ZoomOutPageTransformer;
+import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
+import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -60,7 +65,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     Subscribe subscribe;
     int subscribeCount;
     private ImageView ivFeatureImage;
-
+    private CustomViewPager vpPager;
+    private CustomTabStrip tabStrip;
     private static String SUBSCRIBED_TEXT = "unfollow";
     private static String SUBSCRIBE_TEXT = "follow";
     private static String SUBSCRIBERS_TEXT = " followers";
@@ -81,21 +87,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         feature_id = getIntent().getStringExtra("feature_id");
 
         setUpView();
-
-        // Get the viewpager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
-
-        // Set the viewpager adapter for the pager
-        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
-
-        // Find the sliding tabstrip
-        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
-
-        // Attach the tabstrip to the viewpager
-        tabStrip.setViewPager(vpPager);
-
-        this.setTitle(title);
+        setUpViewPager();
     }
 
 
@@ -159,9 +151,14 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                                 if (sub != null) {
                                     subscribe = sub;
                                     if (sub.getSubscribed() == true) {
+                                        displayChat();
                                         btnSubscribe.setText(SUBSCRIBED_TEXT);
+                                    } else {
+                                        hideChat();
+                                        btnSubscribe.setText(SUBSCRIBE_TEXT);
                                     }
                                 } else {
+                                    hideChat();
                                     btnSubscribe.setText(SUBSCRIBE_TEXT);
                                 }
 
@@ -184,6 +181,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
     private void setFeatureData() {
         title = feature.getTitle();
+
         String description = feature.getDescription();
 
         int color = Color.parseColor(String.valueOf(feature.getHexColor()));
@@ -206,6 +204,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         if (subscribe != null) {
             if (subscribe.getSubscribed() == true) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
+                hideChat();
 
                 // decrement counter
                 subscribeCount = feature.getSubscribeCount() - 1;
@@ -221,6 +220,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 });
             } else {
                 subscribe.setSubscribed(true);
+                displayChat();
 
                 // increment counter
                 subscribeCount = feature.getSubscribeCount() + 1;
@@ -241,6 +241,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
             subscribe.setSubscribed(true);
             subscribe.setUser(currentUser);
             subscribe.setFeature(feature);
+            displayChat();
 
             // increment counter
             subscribeCount = feature.getSubscribeCount() + 1;
@@ -287,6 +288,41 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         public int getCount() {
             return tabTitles.length;
         }
+    }
+
+    private void hideChat() {
+        vpPager.setPagingEnabled(false);
+        tabStrip.setDisabled(true);
+        ViewGroup view = (ViewGroup) this.findViewById(R.id.llFeatureView);
+        Snackbar.make(view, "Please follow to chat!", Snackbar.LENGTH_LONG).show();
+        setTab();
+    }
+
+    private void displayChat() {
+        vpPager.setPagingEnabled(true);
+        tabStrip.setDisabled(false);
+    }
+
+    private void setUpViewPager() {
+        // Get the viewpager
+        vpPager = (CustomViewPager) findViewById(R.id.viewpager);
+
+        // Set the viewpager adapter for the pager
+        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+
+        // Find the sliding tabstrip
+        tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
+        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
+
+
+        // Attach the tabstrip to the viewpager
+        tabStrip.setViewPager(vpPager);
+        vpPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    }
+
+    private void setTab() {
+        // Switch to page based on index
+        vpPager.setCurrentItem(0);
     }
 }
 
