@@ -80,7 +80,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.tvBody.setText(message.getBody());
             holder.tvCreatedAt.setText(date);
             if (profile != null) {
-                if (profile.getPhotoFile() != null) {
+                if (profile.getPhotoFile() != null && !TextUtils.isEmpty(profile.getPhotoFile().getUrl())) {
                     Picasso.with(getContext())
                             .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
@@ -106,7 +106,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.tvOtherBody.setText(message.getBody());
             holder.tvOtherCreatedAt.setText(date);
             if (profile != null) {
-                if (profile.getPhotoFile() != null) {
+                if (profile.getPhotoFile() != null && !TextUtils.isEmpty(profile.getPhotoFile().getUrl())) {
                     Picasso.with(getContext())
                             .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
