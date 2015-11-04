@@ -54,7 +54,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder = new ViewHolder();
             viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
             viewHolder.cvPostFeature = (CardView) convertView.findViewById(R.id.cvPostFeature);
-            viewHolder.ivFeaturePhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
+            viewHolder.ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
             viewHolder.tvAwesomeIcon = (ImageButton) convertView.findViewById(R.id.btnAwesomeIcon);
@@ -93,7 +93,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.cvPostFeature.setVisibility(CardView.INVISIBLE);
 
         // Clear out the image views
-        viewHolder.ivFeaturePhoto.setImageResource(0);
+        viewHolder.ivPostPhoto.setImageResource(0);
 
         String title = "WWCode";
         // final so on click of feature has access to it, these values don't change anyway
@@ -115,13 +115,13 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                     .transform(new CircleTransform())
                     .resize(75, 75)
                     .centerCrop()
-                    .into(viewHolder.ivFeaturePhoto);
+                    .into(viewHolder.ivPostPhoto);
 
         } else if (event != null) {
             title = event.getTitle();
 
             // insert icon
-            viewHolder.ivFeaturePhoto.setImageResource(R.drawable.ic_calendar_check);
+            viewHolder.ivPostPhoto.setImageResource(R.drawable.ic_calendar_check);
         }
 
         // in case a post has a user
@@ -240,7 +240,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     }
 
     private static class ViewHolder {
-        ImageView ivFeaturePhoto;
+        ImageView ivPostPhoto;
         TextView tvPostDescription;
         TextView tvAwesomeCount;
         ImageButton tvAwesomeIcon;
