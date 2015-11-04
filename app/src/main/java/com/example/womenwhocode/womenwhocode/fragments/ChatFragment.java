@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -38,17 +40,17 @@ import java.util.List;
 public class ChatFragment extends Fragment {
 
     public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
+    private final int RUN_FREQUENCY = 1000; // ms
     private View view;
     private ListView lvChat;
     private ChatListAdapter aChatList;
     private ProgressBar pb;
     private ParseUser currentUser;
-    private Button btnSend;
+    private ImageButton btnSend;
     private EditText etMessage;
     private boolean mFirstLoad;
     private Handler handler;
     private Runnable runnable;
-    private final int RUN_FREQUENCY = 1000; // ms
     private Date recentCreatedAt;
     private Profile profile;
     private TextView noChats;
@@ -177,10 +179,35 @@ public class ChatFragment extends Fragment {
         return this.profile;
     }
 
+    private void setColorFilter() {
+        if (etMessage.getText().length() > 0) {
+            btnSend.setColorFilter(R.color.teal);
+
+        } else btnSend.clearColorFilter();
+    }
+
     private void setUpView() {
         // grab message posting views
-        btnSend = (Button) view.findViewById(R.id.btnSend);
+        btnSend = (ImageButton) view.findViewById(R.id.btnSend);
         etMessage = (EditText) view.findViewById(R.id.etMessage);
+
+        // Automatically scroll to the bottom when a data set change notification is received
+        // and only if the last item is already visible on screen. Don't scroll to the bottom otherwise.
+        lvChat.setTranscriptMode(1);
+
+        // FIXME what do to about m boolean
+        setFirstLoad(true);
+        lvChat.setAdapter(aChatList);
+
+        // Sends message when user clicks 'Send' button
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage();
+            }
+        });
+
+        // Sends message when user presses 'Enter' on keyboard
         etMessage.setOnEditorActionListener(
                 new EditText.OnEditorActionListener() {
                     @Override
@@ -196,18 +223,17 @@ public class ChatFragment extends Fragment {
                     }
                 });
 
-        // Automatically scroll to the bottom when a data set change notification is received
-        // and only if the last item is already visible on screen. Don't scroll to the bottom otherwise.
-        lvChat.setTranscriptMode(1);
+        etMessage.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                setColorFilter();
+            }
 
-        // FIXME what do to about m boolean
-        setFirstLoad(true);
-        lvChat.setAdapter(aChatList);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                setColorFilter();
+            }
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setColorFilter();
             }
         });
     }
@@ -217,14 +243,16 @@ public class ChatFragment extends Fragment {
         if (TextUtils.isEmpty(messageBody)) {
             return;
         }
-        // post message
+
+        // Post Message
         setupMessagePosting(messageBody, currentUser.getObjectId());
 
+        // Clear current message
         etMessage.setText("");
         etMessage.clearFocus();
         btnSend.clearFocus();
 
-        // disable keyboard
+        // Hide keyboard
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
