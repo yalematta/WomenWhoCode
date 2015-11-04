@@ -31,7 +31,6 @@ public class FeaturesFragment extends Fragment {
     private FeaturesAdapter aFeatures;
     private ListView lvFeatures;
     private ProgressBar pb;
-    private ParseQuery<Feature> query;
 
     private OnFeatureItemClickListener listener;
 
@@ -72,7 +71,7 @@ public class FeaturesFragment extends Fragment {
     }
 
     private void populateFeaturesList() {
-        query = ParseQuery.getQuery(Feature.class);
+        ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             query.fromPin(LocalDataStore.FEATURES_PIN);

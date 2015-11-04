@@ -9,12 +9,12 @@ import com.parse.ParseObject;
 @ParseClassName("Feature")
 public class Feature extends ParseObject {
     public static final String AUTO_SUBSCRIBE_KEY = "auto_subscribe";
-    public static final String IMAGE_URL_KEY = "image_url";
+    private static final String IMAGE_URL_KEY = "image_url";
     public static final String TITLE_KEY = "title";
-    public static final String NETWORK_KEY = "network";
-    public static final String DESCRIPTION_KEY = "description";
-    public static final String HEX_COLOR_KEY = "hex_color";
-    public static final String SUBSCRIBE_COUNT = "subscribe_count";
+    private static final String NETWORK_KEY = "network";
+    private static final String DESCRIPTION_KEY = "description";
+    private static final String HEX_COLOR_KEY = "hex_color";
+    private static final String SUBSCRIBE_COUNT = "subscribe_count";
 
     public void setSubscribeCount(int count) {
         put(SUBSCRIBE_COUNT, count);
