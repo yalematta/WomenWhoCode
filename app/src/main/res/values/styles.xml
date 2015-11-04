@@ -71,7 +71,7 @@
     </style>
 
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
         <item name="android:textColor">@color/whitish</item></style>
@@ -83,7 +83,7 @@
 
     <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/darkGray</item>
-        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
     </style>

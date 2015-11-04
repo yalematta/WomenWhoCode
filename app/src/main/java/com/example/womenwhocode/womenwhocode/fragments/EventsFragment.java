@@ -43,10 +43,10 @@ public class EventsFragment extends Fragment {
     EventsAdapter aEvents;
     ListView lvEvents;
     private OnEventItemClickListener listener;
-    ProgressBar pb;
-    ParseQuery<Profile> profileParseQuery;
-    ParseQuery<Event> query;
-    ParseQuery<Network> networkParseQuery;
+    private ProgressBar pb;
+    private ParseQuery<Profile> profileParseQuery;
+    private ParseQuery<Event> query;
+    private ParseQuery<Network> networkParseQuery;
     private static int MILE_RANGE = 25;
 
     public interface OnEventItemClickListener {

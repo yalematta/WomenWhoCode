@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@color/blackish"
+    android:padding="@dimen/activity_horizontal_padding">
+
+    <TextView
+        android:id="@+id/tvRecommendation"
+        android:text="Which app topic would you like added?"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView.TitleText"/>
+
+    <EditText
+        android:id="@+id/etRecommendation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:hint="javascript"
+        android:inputType="text"
+        android:textColorHint="@color/lightGray"
+        android:textColor="@color/lightestGray"
+        android:imeOptions="actionDone" />
+</LinearLayout>

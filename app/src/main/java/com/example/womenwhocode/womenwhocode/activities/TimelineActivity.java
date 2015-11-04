@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,9 +14,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
+import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog;
+import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
@@ -44,7 +49,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class TimelineActivity extends AppCompatActivity implements
         EventsFragment.OnEventItemClickListener,
         FeaturesFragment.OnFeatureItemClickListener,
-        LocationProvider.LocationCallback {
+        LocationProvider.LocationCallback,
+        RecommendFeatureDialogListener {
 
     public final static String SELECTED_TAB_EXTRA_KEY = "selectedTabIndex";
     public final static int TIMELINE_TAB = 0;
@@ -52,11 +58,13 @@ public class TimelineActivity extends AppCompatActivity implements
     private final static int EVENTS_TAB = 2;
     private LocationProvider mLocationProvider;
     private ViewPager vpPager;
+    private View parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        parentLayout = findViewById(R.id.timeline_activity_view);
 
         // set tool bar to replace actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -219,6 +227,15 @@ public class TimelineActivity extends AppCompatActivity implements
                 }
             }
         });
+    }
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        if (!TextUtils.isEmpty(inputText)) {
+            Snackbar.make(
+                    parentLayout, "We'll review and get back to you soon enough!", Snackbar.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     // Return the order of the fragments in the view pager

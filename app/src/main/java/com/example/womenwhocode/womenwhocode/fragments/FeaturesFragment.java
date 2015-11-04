@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
@@ -64,11 +64,22 @@ public class FeaturesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Feature feature = aFeatures.getItem(position);
-                listener.onFeatureClickListener(feature);
+                if (feature.getTitle().contains("Recommend")) {
+                    showEditDialog();
+                } else {
+                    listener.onFeatureClickListener(feature);
+                }
             }
         });
         return view;
     }
+
+    private void showEditDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        RecommendFeatureDialog recommendFeatureDialog = RecommendFeatureDialog.newInstance();
+        recommendFeatureDialog.show(fm, "fagment_dialog_recommend");
+    }
+
 
     private void populateFeaturesList() {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
@@ -80,9 +91,7 @@ public class FeaturesFragment extends Fragment {
         query.orderByAscending(Feature.TITLE_KEY);
         query.findInBackground(new FindCallback<Feature>() {
             public void done(List<Feature> lFeatures, ParseException e) {
-                if (lFeatures == null) {
-                    Toast.makeText(getContext(), "who knows features", Toast.LENGTH_LONG).show();
-                } else if (e == null) {
+                if (e == null && lFeatures.size() > 0) {
                     aFeatures.clear();
                     aFeatures.addAll(lFeatures);
                     // hide progress bar, make list view appear
