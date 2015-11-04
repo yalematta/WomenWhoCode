@@ -186,8 +186,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void animate(ImageButton btn) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(btn, "alpha", 1, 0, 1, 0, 1); // Flash
+    private void animate(ImageButton target) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25,15, -15, 6, -6, 0);
         anim.setDuration(1000);
         anim.start();
     }
