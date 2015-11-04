@@ -12,15 +12,20 @@
         android:id="@+id/tvQuestion"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:textSize="@dimen/text_large_text_size" />
+        android:textSize="@dimen/text_large_text_size"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
 
     <LinearLayout android:id="@+id/chkLayout"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
         android:layout_centerInParent="true"
         android:layout_below="@id/tvQuestion"
-        android:layout_marginTop="30dp"></LinearLayout>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentLeft="true"></LinearLayout>
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"

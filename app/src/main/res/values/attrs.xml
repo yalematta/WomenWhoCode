@@ -5,7 +5,7 @@
     <attr name="pageBackground" format="reference" />
     <attr name="button" format="reference" />
     <attr name="editBox" format="reference"/>
-
+    <attr name="textView" format="reference"/>
    <!-- <attr name="textSubheader" format="reference" />
     <attr name="textLarge" format="reference" />
     <attr name="textRegular" format="reference" />

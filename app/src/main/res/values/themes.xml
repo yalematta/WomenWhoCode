@@ -4,6 +4,7 @@
         <item name="pageBackground">@style/page_background_bl</item>
         <item name="button">@style/button</item>
         <item name="editBox">@style/EditBoxStyle</item>
+        <item name="textView">@style/TextViewLabels</item>
     </style>
 
     <style name="Theme.YOUR_CUSTOM_THEME" parent="Theme.AppCompat.Light">
