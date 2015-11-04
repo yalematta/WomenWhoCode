@@ -18,11 +18,11 @@ import java.util.List;
  * Created by shehba.shahab on 10/27/15.
  */
 public class FeaturePostsFragment extends PostsListFragment {
-    public static String FEATURE_ID = "feature_id";
-    public static String featureId;
-    protected ParseQuery<Feature> featureParseQuery;
-    protected ParseQuery<Post> postParseQuery;
-    Feature feature;
+    private static final String FEATURE_ID = "feature_id";
+    private static String featureId;
+    private ParseQuery<Feature> featureParseQuery;
+    private ParseQuery<Post> postParseQuery;
+    private Feature feature;
 
     public static FeaturePostsFragment newInstance(String featureObjectId) {
         FeaturePostsFragment featurePostsFragment = new FeaturePostsFragment();

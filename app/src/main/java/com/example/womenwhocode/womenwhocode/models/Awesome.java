@@ -11,9 +11,9 @@ import com.parse.ParseUser;
 
 @ParseClassName("Awesome")
 public class Awesome extends ParseObject {
-    public static String USER_KEY = "user";
-    public static String POST_KEY = "post";
-    public static String AWESOMED_KEY = "awesomed";
+    public static final String USER_KEY = "user";
+    public static final String POST_KEY = "post";
+    public static final String AWESOMED_KEY = "awesomed";
 
     private static ParseQuery<Awesome> query;
 

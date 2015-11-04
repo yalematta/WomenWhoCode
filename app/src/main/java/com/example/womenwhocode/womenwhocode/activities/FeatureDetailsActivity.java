@@ -51,23 +51,22 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private String feature_id;
     private ProgressBar pb;
     private RelativeLayout rlFeatures;
-    private String title;
     private Feature feature;
     private TextView tvFeatureTitle;
     private TextView tvFeatureDescription;
     private TextView tvSubscriberCount;
     private Button btnSubscribe;
-    Toolbar toolbar;
-    TextView tvToolbarTitle;
-    ParseUser currentUser;
-    Subscribe subscribe;
-    int subscribeCount;
+    private Toolbar toolbar;
+    private TextView tvToolbarTitle;
+    private ParseUser currentUser;
+    private Subscribe subscribe;
+    private int subscribeCount;
     private ImageView ivFeatureImage;
     private CustomViewPager vpPager;
     private CustomTabStrip tabStrip;
-    private static String SUBSCRIBED_TEXT = "unfollow";
-    private static String SUBSCRIBE_TEXT = "follow";
-    private static String SUBSCRIBERS_TEXT = " followers";
+    private static final String SUBSCRIBED_TEXT = "unfollow";
+    private static final String SUBSCRIBE_TEXT = "follow";
+    private static final String SUBSCRIBERS_TEXT = " followers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +178,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     }
 
     private void setFeatureData() {
-        title = feature.getTitle();
+        String title = feature.getTitle();
 
         String description = feature.getDescription();
 
@@ -269,11 +268,9 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                FeaturePostsFragment featurePostsFragment = FeaturePostsFragment.newInstance(feature_id);
-                return featurePostsFragment;
+                return FeaturePostsFragment.newInstance(feature_id);
             } else if (position == 1) {
-                FeatureChatFragment featureChatFragment = FeatureChatFragment.newInstance(feature_id);
-                return featureChatFragment;
+                return FeatureChatFragment.newInstance(feature_id);
             } else return null;
         }
 

@@ -22,10 +22,6 @@ import java.util.List;
  */
 public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
-    private String title;
-    private String imageUrl;
-    private ViewHolder viewHolder;
-
     public FeaturesAdapter(Context context, List<Feature> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
     }
@@ -35,6 +31,7 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
         Feature feature = getItem(position);
 
         // Check if we are using a recycled view, if not we need to inflate
+        ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_feature, parent, false);
@@ -50,8 +47,8 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
         }
 
         // Insert the model data into each of the view items
-        title = feature.getTitle();
-        imageUrl = feature.getImageUrl();
+        String title = feature.getTitle();
+        String imageUrl = feature.getImageUrl();
 
         // set color!
         int color = Color.parseColor(String.valueOf(feature.getHexColor()));

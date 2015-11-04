@@ -11,12 +11,12 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Post")
 public class Post extends ParseObject {
-    public static String DESCRIPTION_KEY = "description";
-    public static String NETWORK_KEY = "network";
-    public static String EVENT_KEY = "event";
-    public static String FEATURE_KEY = "feature";
-    public static String AWESOME_COUNT_KEY = "awesome_count";
-    public static String USER_KEY = "user";
+    private static final String DESCRIPTION_KEY = "description";
+    private static final String NETWORK_KEY = "network";
+    public static final String EVENT_KEY = "event";
+    public static final String FEATURE_KEY = "feature";
+    private static final String AWESOME_COUNT_KEY = "awesome_count";
+    private static final String USER_KEY = "user";
 
     public String getDescription() {
         return this.get(DESCRIPTION_KEY).toString();
@@ -75,7 +75,7 @@ public class Post extends ParseObject {
         } catch (NullPointerException nullError) {
             nullError.printStackTrace();
         }
-        return feature.getImageUrl();
+        return feature != null ? feature.getImageUrl() : null;
     }
 
     public String getFeatureTitle() {
@@ -87,7 +87,7 @@ public class Post extends ParseObject {
         } catch (NullPointerException nullError) {
             nullError.printStackTrace();
         }
-        return feature.getTitle();
+        return feature != null ? feature.getTitle() : null;
     }
 
     public ParseUser getUser() {
