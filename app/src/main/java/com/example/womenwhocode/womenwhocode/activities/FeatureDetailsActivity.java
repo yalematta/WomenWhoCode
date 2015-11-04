@@ -29,6 +29,7 @@ import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
@@ -187,6 +188,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         Picasso.with(this)
                 .load(feature.getImageUrl())
+                .transform(new CircleTransform())
                 .resize(50, 50)
                 .centerCrop()
                 .into(ivFeatureImage);
