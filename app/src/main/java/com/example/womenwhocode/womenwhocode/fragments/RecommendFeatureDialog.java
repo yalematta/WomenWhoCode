@@ -60,7 +60,7 @@ public class RecommendFeatureDialog extends DialogFragment implements EditText.O
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (EditorInfo.IME_ACTION_DONE == actionId) {
             RecommendFeatureDialogListener listener = (RecommendFeatureDialogListener) getActivity();
-            listener.onFinishEditDialog("");
+            listener.onFinishEditDialog(v.getText().toString());
             dismiss(); // FIXME: this takes me away from the app...
             return true;
         }

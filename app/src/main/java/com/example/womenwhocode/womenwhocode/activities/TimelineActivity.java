@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -230,7 +231,11 @@ public class TimelineActivity extends AppCompatActivity implements
 
     @Override
     public void onFinishEditDialog(String inputText) {
-        Snackbar.make(parentLayout, "We'll review and get back to you soon enough!", Snackbar.LENGTH_SHORT).show();
+        if (!TextUtils.isEmpty(inputText)) {
+            Snackbar.make(
+                    parentLayout, "We'll review and get back to you soon enough!", Snackbar.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     // Return the order of the fragments in the view pager
