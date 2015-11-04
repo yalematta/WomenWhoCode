@@ -29,6 +29,15 @@ public class Event extends ParseObject {
     public static String DESCRIPTION_KEY = "description";
     public static String TIMEZONE_KEY = "timezone";
     public static String SUBSCRIBE_COUNT = "subscribe_count";
+    public static String HEX_COLOR = "hex_color";
+
+    public void setHexColor(String hexColor) {
+        put(HEX_COLOR, hexColor);
+    }
+
+    public String getHexColor() {
+        return this.get(HEX_COLOR).toString();
+    }
 
     public void setSubscribeCount(int count) {
         put(SUBSCRIBE_COUNT, count);
