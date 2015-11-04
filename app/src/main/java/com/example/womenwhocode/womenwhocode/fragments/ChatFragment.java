@@ -1,16 +1,13 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -20,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.ChatListAdapter;
@@ -33,32 +31,27 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import android.os.Handler;
-import android.widget.TextView;
 
 /**
  * Created by zassmin on 10/28/15.
  */
 public class ChatFragment extends Fragment {
 
+    public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
     private View view;
     private ListView lvChat;
-    private ArrayList<Message> messages;
     private ChatListAdapter aChatList;
     private ProgressBar pb;
     private ParseUser currentUser;
-    private RelativeLayout rlChatMessagesFragment;
     private Button btnSend;
     private EditText etMessage;
     private boolean mFirstLoad;
     private Handler handler;
     private Runnable runnable;
-    private int RUN_FREQUENCY = 1000; // ms
+    private final int RUN_FREQUENCY = 1000; // ms
     private Date recentCreatedAt;
     private Profile profile;
     private TextView noChats;
-
-    public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
 
     // TODO: use material icon for button, initial is gray and when you start typing make it teal
     // TODO: FeatureChatFragment - feature_id, subscribe_id?
@@ -72,7 +65,7 @@ public class ChatFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         currentUser = ParseUser.getCurrentUser();
-        messages = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<>();
         aChatList = new ChatListAdapter(getActivity(), currentUser.getObjectId(), messages);
         handler = new Handler();
 
@@ -103,7 +96,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chat, container, false);
         lvChat = (ListView) view.findViewById(R.id.lvChat);
-        rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
+        RelativeLayout rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
         return view;
     }
 
@@ -140,7 +133,7 @@ public class ChatFragment extends Fragment {
 
     protected void add(List<Message> messageList) {
         for (Message message : messageList) {
-            if (message != aChatList.getItem(aChatList.getCount() -1)) { // double post bug
+            if (message != aChatList.getItem(aChatList.getCount() - 1)) { // double post bug
                 aChatList.add(message);
             }
         }
@@ -172,12 +165,12 @@ public class ChatFragment extends Fragment {
         this.mFirstLoad = load;
     }
 
-    protected void setMostRecentcreatedAt(Date createAt) {
-        this.recentCreatedAt = createAt;
-    }
-
     protected Date getMostRecentcreatedAt() {
         return this.recentCreatedAt;
+    }
+
+    protected void setMostRecentcreatedAt(Date createAt) {
+        this.recentCreatedAt = createAt;
     }
 
     protected Profile getUserProfile() {
@@ -188,6 +181,20 @@ public class ChatFragment extends Fragment {
         // grab message posting views
         btnSend = (Button) view.findViewById(R.id.btnSend);
         etMessage = (EditText) view.findViewById(R.id.etMessage);
+        etMessage.setOnEditorActionListener(
+                new EditText.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                                actionId == EditorInfo.IME_ACTION_SEND ||
+                                event.getAction() == KeyEvent.ACTION_DOWN &&
+                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                            sendMessage();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
 
         // Automatically scroll to the bottom when a data set change notification is received
         // and only if the last item is already visible on screen. Don't scroll to the bottom otherwise.
@@ -200,21 +207,25 @@ public class ChatFragment extends Fragment {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String body = etMessage.getText().toString();
-                if (TextUtils.isEmpty(body)) {
-                    return;
-                }
-                // post message
-                setupMessagePosting(body, currentUser.getObjectId());
-
-                etMessage.setText("");
-                etMessage.clearFocus();
-                btnSend.clearFocus();
-
-                // disable keyboard
-                InputMethodManager imm =(InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                sendMessage();
             }
         });
+    }
+
+    private void sendMessage() {
+        String messageBody = etMessage.getText().toString();
+        if (TextUtils.isEmpty(messageBody)) {
+            return;
+        }
+        // post message
+        setupMessagePosting(messageBody, currentUser.getObjectId());
+
+        etMessage.setText("");
+        etMessage.clearFocus();
+        btnSend.clearFocus();
+
+        // disable keyboard
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
