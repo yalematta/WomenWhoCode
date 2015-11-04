@@ -15,6 +15,7 @@ import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +56,15 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             convertView.setTag(holder);
         }
         final Message message = getItem(position);
-        ParseUser user = message.getParseUser(Message.USER_KEY);
+
+        // crash on parse user!
+        ParseUser user = null;
+        try {
+            user = message.getParseUser(Message.USER_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Profile profile = message.getProfile();
         final ViewHolder holder = (ViewHolder)convertView.getTag();
         final boolean isMe = message.getUserId().equals(mUserId);
@@ -73,7 +82,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             if (profile != null) {
                 if (profile.getPhotoFile() != null) {
                     Picasso.with(getContext())
-                            .load(profile.getPhotoFile().toString())
+                            .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
                             .resize(50, 50)
                             .centerCrop()
@@ -99,7 +108,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             if (profile != null) {
                 if (profile.getPhotoFile() != null) {
                     Picasso.with(getContext())
-                            .load(profile.getPhotoFile().toString())
+                            .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
                             .resize(50, 50)
                             .centerCrop()
