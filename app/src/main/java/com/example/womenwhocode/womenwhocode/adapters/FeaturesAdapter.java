@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,12 +57,16 @@ public class FeaturesAdapter extends ArrayAdapter<Feature> {
 
         viewHolder.ivFeatureImage.setImageResource(0);
         viewHolder.tvFeatureTitle.setText(title);
-        Picasso.with(getContext())
-                .load(imageUrl)
-                .transform(new CircleTransform())
-                .resize(75, 75)
-                .centerCrop()
-                .into(viewHolder.ivFeatureImage);
+        if (title.contains("Recommend")) { // this may not be accurate - only for the recommended piece
+            viewHolder.ivFeatureImage.setImageResource(R.drawable.ic_plus);
+        } else {
+            Picasso.with(getContext())
+                    .load(imageUrl)
+                    .transform(new CircleTransform())
+                    .resize(75, 75)
+                    .centerCrop()
+                    .into(viewHolder.ivFeatureImage);
+        }
 
         return convertView;
     }
