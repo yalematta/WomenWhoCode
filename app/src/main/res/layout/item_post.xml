@@ -82,17 +82,20 @@
                     android:padding="5dp"
                     android:text="Description" />
 
-                <TextView
-                    android:id="@+id/tvAwesomeIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/tvAwesomeCount"
+                <ImageButton
+                    android:id="@+id/btnAwesomeIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@+id/tvAwesomeCount"
                     android:layout_below="@+id/tvPostDescription"
-                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:layout_toLeftOf="@+id/tvAwesomeCount"
+                    android:background="@null"
                     android:paddingBottom="@dimen/icon_padding"
-                    android:paddingRight="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
-                    android:text="\\o/" />
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/awesome" />>
 
                 <TextView
                     android:id="@+id/tvAwesomeCount"
