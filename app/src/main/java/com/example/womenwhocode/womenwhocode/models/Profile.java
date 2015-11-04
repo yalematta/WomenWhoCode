@@ -29,7 +29,13 @@ public class Profile extends ParseObject {
     }
 
     public String getFullName() {
-        return this.get(FULL_NAME_KEY).toString();
+        String fn = "";
+        try {
+            fn = this.get(FULL_NAME_KEY).toString();
+        } catch (NullPointerException n) {
+            n.printStackTrace();
+        }
+        return fn;
     }
 
     public void setJobTitle(String jobTitle) {
