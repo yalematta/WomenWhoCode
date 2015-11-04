@@ -156,9 +156,22 @@
         <item name="android:paddingLeft">@dimen/activity_horizontal_padding</item>
     </style>
 
+    <style name="finalizeProfile" parent="Widget.AppCompat.Button">
+        <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:background">@drawable/shape_button</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">200dp</item>
+        <item name="android:paddingTop">@dimen/button_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/button_vertical_padding</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_padding</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_padding</item>
+    </style>
+
     <style name="TextViewLabels">
         <item name="android:textColor">@color/lightGray</item>
-        <item name="android:textSize">@dimen/text_medium_text_size</item>
+        <item name="android:textSize">@dimen/text_normal_text_size</item>
     </style>
 
 

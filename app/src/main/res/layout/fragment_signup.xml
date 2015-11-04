@@ -6,24 +6,27 @@
 
     <Button
         style="@style/button"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
+        android:minWidth="200dp"
         android:drawableLeft="@drawable/ic_github"
-        android:drawablePadding="-20dp"
         android:layout_height="wrap_content"
         android:text="Sign up with github"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
         android:id="@+id/btnGitHubSignUp"
         android:layout_centerHorizontal="true"
-
         android:layout_marginTop="200dp" />
 
     <Button
         style="@style/button"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
+        android:minWidth="200dp"
         android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="-20dp"
         android:layout_height="wrap_content"
         android:text="Sign up with Email"
         android:id="@+id/btnEmailSignUp"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btnGitHubSignUp"
         android:layout_marginTop="20dp"

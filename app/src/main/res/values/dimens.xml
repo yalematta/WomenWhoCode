@@ -9,6 +9,7 @@
     <dimen name="text_large_margin_top">40dp</dimen>
     <dimen name="text_large_text_size">18sp</dimen>
     <dimen name="text_medium_text_size">16sp</dimen>
+    <dimen name="text_normal_text_size">12sp</dimen>
     <dimen name="text_subheader_text_size">12sp</dimen>
     <dimen name="icon_padding">4dp</dimen>
     <dimen name="icon_paddingTop">8dp</dimen>
