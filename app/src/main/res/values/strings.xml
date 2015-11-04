@@ -30,5 +30,9 @@
     <string name="profile_other">other user</string>
     <string name="profile_me">current user</string>
     <string name="message_hint">say something</string>
+    <string name="tvName">Full Name</string>
+    <string name="tvJob">Job Title</string>
+    <string name="tvEmail">Email Address</string>
+    <string name="tvNetwrks">Network You Belong To</string>
     <string name="send">send message</string>
 </resources>

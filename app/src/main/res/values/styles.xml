@@ -107,7 +107,6 @@
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
     </style>
 
-
     <!-- light background color: #fafafa -->
     <!-- dark background color: #212121 -->
     <style name="FollowButton" parent="Widget.AppCompat.Button">
@@ -137,6 +136,12 @@
         <item name="android:textColor">@color/whitish</item>
         <item name="android:background">@drawable/shape_button</item>
     </style>
+
+    <style name="TextViewLabels">
+        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+    </style>
+
 
     <style name="Multicolor_1">
         <item name="android:background">@drawable/layers_multicolor_border</item>

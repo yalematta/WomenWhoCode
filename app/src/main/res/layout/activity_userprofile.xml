@@ -24,74 +24,100 @@ style="@style/page_background_bl"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:id="@+id/ivphoto"
-        android:src="@drawable/placeholder_image"
-        android:layout_below="@+id/txtReview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:src="@drawable/ic_placeholder"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
 
-    <Button
+    <ImageButton
         style="@style/button"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take photo"
-        android:drawableLeft="@drawable/ic_camera"
+        android:src="@drawable/ic_camera"
         android:id="@+id/btnCamera"
         android:onClick="onLaunchCamera"
-        android:layout_alignTop="@+id/btnUpload"
-        android:layout_alignLeft="@+id/txtName"
-        android:layout_alignStart="@+id/txtName" />
+        android:background="@color/blackish"
+        android:layout_below="@+id/ivphoto"
+        android:layout_alignRight="@+id/tvNetwrks"
+        android:layout_alignEnd="@+id/tvNetwrks" />
 
-    <Button
+    <ImageButton
         style="@style/button"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Photo"
-        android:drawableLeft="@drawable/ic_fileimage"
+        android:src="@drawable/ic_fileimage"
+        android:background="@color/blackish"
         android:id="@+id/btnUpload"
         android:onClick="onSelectImage"
-        android:layout_below="@+id/ivphoto"
-        android:layout_alignRight="@+id/txtName"
-        android:layout_alignEnd="@+id/txtName" />
+        android:layout_alignTop="@+id/btnCamera"
+        android:layout_alignRight="@+id/btnFinalize"
+        android:layout_alignEnd="@+id/btnFinalize" />
+<TextView
+    style="@style/TextViewLabels"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tvName"
+    android:text="@string/tvName"
+    android:layout_below="@id/btnUpload"
 
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="30dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Full Name"
         android:id="@+id/txtName"
-        android:layout_below="@+id/btnUpload"
+        android:layout_below="@+id/tvName"
         android:layout_alignParentLeft="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
+        android:layout_centerHorizontal="true" />
+    <TextView
+        style="@style/TextViewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEmail"
+        android:text="@string/tvEmail"
+        android:layout_below="@id/txtName"
+        android:layout_marginLeft="30dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="email address"
         android:id="@+id/txtEmail"
-        android:layout_below="@+id/txtName"
+        android:layout_below="@+id/tvEmail"
         android:layout_alignParentLeft="false"
-        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="false" />
-
+    <TextView
+        style="@style/TextViewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvJob"
+        android:text="@string/tvJob"
+        android:layout_below="@+id/txtEmail"
+        android:layout_marginLeft="30dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Job title"
         android:id="@+id/etJob"
-        android:layout_below="@+id/txtEmail"
+        android:layout_below="@+id/tvJob"
         android:layout_alignParentLeft="false"
-        android:layout_margin="10dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+       />
 
+    <TextView
+        style="@style/TextViewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNetwrks"
+        android:text="@string/tvNetwrks"
+        android:layout_below="@+id/etJob"
+        android:layout_marginLeft="30dp" />
     <Spinner
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spnNetwork"
-        android:layout_below="@+id/etJob"
+        android:layout_below="@+id/tvNetwrks"
         android:layout_alignParentLeft="false"
         android:prompt="@string/spinnerPrompt"
         android:minHeight="20dp"
@@ -101,6 +127,10 @@ style="@style/page_background_bl"
         android:textAlignment="center"
         android:layout_margin="10dp"
        />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText" />
 
     <Button
         style="@style/button"
@@ -109,13 +139,12 @@ style="@style/page_background_bl"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnCamera"
-        android:layout_toEndOf="@+id/btnCamera" />
+        android:layout_below="@+id/spnNetwork"
+        android:layout_centerHorizontal="true" />
+
     <ImageView
         android:id="@+id/ivGif"
         android:contentDescription="Gif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 </RelativeLayout>
