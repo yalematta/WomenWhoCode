@@ -7,10 +7,13 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +22,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,7 @@ import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
 import com.google.android.gms.maps.model.LatLng;
@@ -41,6 +47,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -57,8 +64,13 @@ public class TimelineActivity extends AppCompatActivity implements
     private final static int TOPICS_TAB = 1;
     private final static int EVENTS_TAB = 2;
     private LocationProvider mLocationProvider;
+    private ParseUser currentUser;
+    public Profile profile;
     private ViewPager vpPager;
     private View parentLayout;
+
+    private DrawerLayout mDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +78,53 @@ public class TimelineActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_timeline);
         parentLayout = findViewById(R.id.timeline_activity_view);
 
+        mDrawer=(DrawerLayout)findViewById(R.id.drawer_layout);
         // set tool bar to replace actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
+
+        //for drawer view
+        currentUser = ParseUser.getCurrentUser();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_list_icon);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        // Find our drawer view
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
+// Inflate the header view at runtime
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
+// We can now look up items within the header if needed
+        ImageView ivHeaderPhoto = (ImageView) headerLayout.findViewById(R.id.ivphoto);
+        TextView txtFullName=(TextView)headerLayout.findViewById(R.id.tvFullName);
+        TextView txtUserName=(TextView)headerLayout.findViewById(R.id.tvUserName);
+
+        ParseQuery<Profile> parseQuery = ParseQuery.getQuery(Profile.class);
+        parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
+        parseQuery.getFirstInBackground(new GetCallback<Profile>() {
+            @Override
+            public void done(Profile p, ParseException e) {
+                if (e == null) {
+
+                    profile = p;
+
+                }
+            }
+        });
+
+        if (profile != null) {
+            if (profile.getPhotoFile() != null) {
+                Picasso.with(getApplicationContext())
+                        .load(profile.getPhotoFile().getUrl())
+                        .transform(new CircleTransform())
+                        .resize(50, 50)
+                        .centerCrop()
+                        .into(ivHeaderPhoto);
+            }
+            txtFullName.setText(profile.getFullName().toString());
+        }
+
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText(R.string.app_name);
@@ -123,12 +177,12 @@ public class TimelineActivity extends AppCompatActivity implements
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            this.finish();
+        } else if (id == R.id.home) {
+            mDrawer.openDrawer(GravityCompat.START);
+            return true;
         }
+
+
 
 
         return super.onOptionsItemSelected(item);
@@ -269,5 +323,8 @@ public class TimelineActivity extends AppCompatActivity implements
         public int getCount() {
             return tabTitles.length;
         }
+
+
+
     }
 }

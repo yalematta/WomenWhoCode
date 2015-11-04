@@ -8,7 +8,6 @@ style="@style/page_background_bl"
 
 
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reviewProfile"
@@ -21,12 +20,13 @@ style="@style/page_background_bl"
         android:layout_centerHorizontal="true" />
 
     <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:id="@+id/ivphoto"
         android:src="@drawable/ic_placeholder"
         android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
     <ImageButton
         style="@style/button"
@@ -37,8 +37,8 @@ style="@style/page_background_bl"
         android:onClick="onLaunchCamera"
         android:background="@color/blackish"
         android:layout_below="@+id/ivphoto"
-        android:layout_alignRight="@+id/tvNetwrks"
-        android:layout_alignEnd="@+id/tvNetwrks" />
+        android:layout_toRightOf="@+id/tvEmail"
+        android:layout_toEndOf="@+id/tvEmail" />
 
     <ImageButton
         style="@style/button"
@@ -48,9 +48,9 @@ style="@style/page_background_bl"
         android:background="@color/blackish"
         android:id="@+id/btnUpload"
         android:onClick="onSelectImage"
-        android:layout_alignTop="@+id/btnCamera"
-        android:layout_alignRight="@+id/btnFinalize"
-        android:layout_alignEnd="@+id/btnFinalize" />
+        android:layout_below="@+id/ivphoto"
+        android:layout_toRightOf="@+id/tvNetwrks"
+        android:layout_toEndOf="@+id/tvNetwrks" />
 <TextView
     style="@style/TextViewLabels"
     android:layout_width="wrap_content"
@@ -60,7 +60,7 @@ style="@style/page_background_bl"
     android:layout_below="@id/btnUpload"
 
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="30dp" />
+    android:layout_marginLeft="20dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
@@ -76,7 +76,8 @@ style="@style/page_background_bl"
         android:id="@+id/tvEmail"
         android:text="@string/tvEmail"
         android:layout_below="@id/txtName"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
@@ -94,7 +95,8 @@ style="@style/page_background_bl"
         android:id="@+id/tvJob"
         android:text="@string/tvJob"
         android:layout_below="@+id/txtEmail"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp" />
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
@@ -112,7 +114,8 @@ style="@style/page_background_bl"
         android:id="@+id/tvNetwrks"
         android:text="@string/tvNetwrks"
         android:layout_below="@+id/etJob"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp" />
     <Spinner
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -126,7 +129,7 @@ style="@style/page_background_bl"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:layout_margin="10dp"
-       />
+        android:layout_marginBottom="40dp" />
     <EditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -140,11 +143,8 @@ style="@style/page_background_bl"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
         android:layout_below="@+id/spnNetwork"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false" />
 
-    <ImageView
-        android:id="@+id/ivGif"
-        android:contentDescription="Gif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 </RelativeLayout>

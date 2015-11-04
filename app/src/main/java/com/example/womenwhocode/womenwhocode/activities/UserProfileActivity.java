@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,7 +73,7 @@ public class UserProfileActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         final ArrayList<String> networks = new ArrayList<>();
         // TODO: needs a take photo intent for when where is no camera
-        ivGif = (ImageView) findViewById(R.id.ivGif);
+
         if (extras != null) {
 
             email = extras.getString("Email");
@@ -131,14 +132,17 @@ public class UserProfileActivity extends AppCompatActivity {
             final ParseUser currentUser;
 
             // Save user with the updated input in Profile model
-            userProfile.setFullName(txtName.getText().toString());
+            if(!TextUtils.isEmpty(txtName.getText().toString())) {
+                userProfile.setFullName(txtName.getText().toString());
+            }
             if (spnNetwork.getSelectedItem().toString().equals("select")) {
                 userProfile.setNetwork("");
             } else {
                 userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
             }
-
-            userProfile.setJobTitle(txtjobTitle.getText().toString());
+            if(!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
+                userProfile.setJobTitle(txtjobTitle.getText().toString());
+            }
             currentUser = ParseUser.getCurrentUser();
             userProfile.setUser(currentUser);
             userProfile.save();
@@ -176,6 +180,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
                         Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
                         startActivity(i);
+                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
                     } else {
                         Log.d("AutoSubscribeError", "Error: " + e.getMessage());
                     }

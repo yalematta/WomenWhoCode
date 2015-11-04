@@ -64,7 +64,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         ParseUser.logInInBackground(username, pwd, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
-                    Toast.makeText(getBaseContext(), "User Login successful", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "User Login successful", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginEmailActivity.this, TimelineActivity.class);
                     startActivity(i);
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
