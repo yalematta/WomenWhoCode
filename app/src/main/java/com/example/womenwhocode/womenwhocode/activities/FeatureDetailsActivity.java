@@ -317,7 +317,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         tabStrip.setViewPager(vpPager);
 
         // Hides header card when the chat view is selected
-        vpPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        tabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
