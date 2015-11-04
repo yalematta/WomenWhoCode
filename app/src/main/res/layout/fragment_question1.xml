@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     style="@style/page_background_bl"
-    android:padding="15dp">
+    android:padding="@dimen/activity_horizontal_padding">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,32 +11,34 @@
         android:layout_alignParentTop="true"
         android:id="@+id/tvQuestion"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:textSize="@dimen/text_large_text_size"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:paddingTop="@dimen/detail_padding_top"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingBottom="@dimen/activity_horizontal_padding"
+        style="@style/TextView.TitleText.Pf"/>
 
     <LinearLayout android:id="@+id/chkLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@id/tvQuestion"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentLeft="true"></LinearLayout>
+        android:padding="@dimen/activity_horizontal_padding"></LinearLayout>
     <EditText
         style="@style/EditBoxStyle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/etOther"
         android:hint="Other"
+        android:paddingTop="@dimen/activity_horizontal_padding"
+        android:paddingBottom="@dimen/activity_horizontal_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
         android:layout_centerInParent="true"
         android:layout_below="@+id/chkLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
         android:longClickable="false" />
     <Button
         style="@style/button"
@@ -44,11 +46,10 @@
         android:layout_height="wrap_content"
         android:onClick="goToNextPage"
         android:text="Next"
+        android:layout_margin="@dimen/activity_horizontal_padding"
         android:id="@+id/btnNext"
         android:layout_gravity="right"
         android:layout_weight="0.17"
-android:layout_below="@+id/etOther"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
     </RelativeLayout>

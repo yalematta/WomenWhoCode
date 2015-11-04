@@ -39,6 +39,12 @@
         <item name="android:textColor">@color/whitish</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
+    <style name="TextView.TitleText.Pf" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_large_pf_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
 
     <style name="TextView.TitleText.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>

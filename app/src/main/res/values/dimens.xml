@@ -4,6 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_padding">16dp</dimen>
     <dimen name="content_left_margin_wh">8sp</dimen>
+    <dimen name="text_large_pf_text_size">18dp</dimen>
+    <dimen name="text_large_pf_padding_top">32dp</dimen>
     <dimen name="text_large_margin_top">40dp</dimen>
     <dimen name="text_large_text_size">18sp</dimen>
     <dimen name="text_medium_text_size">16sp</dimen>
