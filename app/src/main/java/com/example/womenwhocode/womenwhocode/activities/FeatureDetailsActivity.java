@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -258,7 +259,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = { "posts", "chat" };
+        private final String[] tabTitles = {"posts", "chat"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -314,6 +315,27 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         // Attach the tabstrip to the viewpager
         tabStrip.setViewPager(vpPager);
+
+        // Hides header card when the chat view is selected
+        vpPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    rlFeatures.setVisibility(View.GONE);
+                } else {
+                    rlFeatures.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+        });
     }
 
     private void setTab() {
