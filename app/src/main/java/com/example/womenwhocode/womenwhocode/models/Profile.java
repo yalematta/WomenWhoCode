@@ -14,15 +14,15 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Profile")
 public class Profile extends ParseObject {
-    public static String FULL_NAME_KEY = "full_name";
-    public static String JOB_TITLE_KEY = "job_title";
+    private static final String FULL_NAME_KEY = "full_name";
+    private static final String JOB_TITLE_KEY = "job_title";
     public static String IMAGE_URL_KEY = "image_url";
-    public static String NETWORK_KEY = "network";
-    public static String LOCATION_KEY = "location";
-    public static String USER_KEY = "user";
-    public static String ABOUT_YEARS_EXPERIENCE_KEY = "about_years_experience";
-    public static String GITHUB_ACCESS_TOKEN = "github_access_token";
-    public static String GITHUB_ID = "github_id";
+    private static final String NETWORK_KEY = "network";
+    private static final String LOCATION_KEY = "location";
+    public static final String USER_KEY = "user";
+    private static final String ABOUT_YEARS_EXPERIENCE_KEY = "about_years_experience";
+    private static final String GITHUB_ACCESS_TOKEN = "github_access_token";
+    private static final String GITHUB_ID = "github_id";
 
     public void setFullName(String fullName) {
         put(FULL_NAME_KEY, fullName);
@@ -43,7 +43,13 @@ public class Profile extends ParseObject {
     }
 
     public String getJobTitle() {
-        return this.get(JOB_TITLE_KEY).toString();
+        String fn = "";
+        try {
+            fn = this.get(JOB_TITLE_KEY).toString();
+        } catch (NullPointerException n) {
+            n.printStackTrace();
+        }
+        return fn;
     }
 
     public ParseFile getPhotoFile() {

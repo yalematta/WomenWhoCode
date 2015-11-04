@@ -1,50 +1,49 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/timeline_activity_view">
 
-    <!-- action bar -->
-    <include
-        layout="@layout/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
-
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/tabs"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/timeline_activity_view"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        app:pstsShouldExpand="true"
-        app:pstsTabTextAllCaps="true"
-        android:textSize="14sp"
-        android:background="@color/blackish"
-        app:pstsTabTextColor="@color/tab_text"
-        app:pstsDividerColor="@color/blackish"
-        app:pstsIndicatorColor="@color/teal"
-        app:pstsIndicatorHeight="4dp"
-        app:pstsTabPaddingLeftRight="14dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        <!-- action bar -->
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/blackish"
+            android:textSize="14sp"
+            app:pstsDividerColor="@color/blackish"
+            app:pstsIndicatorColor="@color/teal"
+            app:pstsIndicatorHeight="4dp"
+            app:pstsShouldExpand="true"
+            app:pstsTabPaddingLeftRight="14dp"
+            app:pstsTabTextAllCaps="true"
+            app:pstsTabTextColor="@color/tab_text" />
 
-</LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white" />
+    </LinearLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nvView"
-    android:layout_width="wrap_content"
-        app:itemIconTint="@color/teal"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@android:color/white"
+        app:itemIconTint="@color/teal"
         app:menu="@menu/drawer_menu" />
 </android.support.v4.widget.DrawerLayout>

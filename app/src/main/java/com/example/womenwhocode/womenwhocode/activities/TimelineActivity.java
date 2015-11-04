@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +30,6 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
-import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog;
 import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
@@ -63,9 +61,8 @@ public class TimelineActivity extends AppCompatActivity implements
     public final static int TIMELINE_TAB = 0;
     private final static int TOPICS_TAB = 1;
     private final static int EVENTS_TAB = 2;
-    private LocationProvider mLocationProvider;
-    private ParseUser currentUser;
     public Profile profile;
+    private LocationProvider mLocationProvider;
     private ViewPager vpPager;
     private View parentLayout;
 
@@ -78,7 +75,8 @@ public class TimelineActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_timeline);
         parentLayout = findViewById(R.id.timeline_activity_view);
 
-        mDrawer=(DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         // set tool bar to replace actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,45 +84,42 @@ public class TimelineActivity extends AppCompatActivity implements
         actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
 
         //for drawer view
-        currentUser = ParseUser.getCurrentUser();
+        ParseUser currentUser = ParseUser.getCurrentUser();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_list_icon);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         // Find our drawer view
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
-// Inflate the header view at runtime
+
+        // Inflate the header view at runtime
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
-// We can now look up items within the header if needed
-        ImageView ivHeaderPhoto = (ImageView) headerLayout.findViewById(R.id.ivphoto);
-        TextView txtFullName=(TextView)headerLayout.findViewById(R.id.tvFullName);
-        TextView txtUserName=(TextView)headerLayout.findViewById(R.id.tvUserName);
+
+        // We can now look up items within the header if needed
+        final ImageView ivHeaderPhoto = (ImageView) headerLayout.findViewById(R.id.ivPhoto);
+        final TextView tvFullName = (TextView) headerLayout.findViewById(R.id.tvFullName);
+        final TextView tvJobTitle = (TextView) headerLayout.findViewById(R.id.tvJobTitle);
 
         ParseQuery<Profile> parseQuery = ParseQuery.getQuery(Profile.class);
         parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
         parseQuery.getFirstInBackground(new GetCallback<Profile>() {
             @Override
-            public void done(Profile p, ParseException e) {
+            public void done(Profile profile, ParseException e) {
                 if (e == null) {
-
-                    profile = p;
-
+                    if (profile != null) {
+                        if (profile.getPhotoFile() != null) {
+                            Picasso.with(getApplicationContext())
+                                    .load(profile.getPhotoFile().getUrl())
+                                    .transform(new CircleTransform())
+                                    .resize(50, 50)
+                                    .centerCrop()
+                                    .into(ivHeaderPhoto);
+                        }
+                        tvFullName.setText(profile.getFullName());
+                        tvJobTitle.setText(profile.getJobTitle());
+                    }
                 }
             }
         });
-
-        if (profile != null) {
-            if (profile.getPhotoFile() != null) {
-                Picasso.with(getApplicationContext())
-                        .load(profile.getPhotoFile().getUrl())
-                        .transform(new CircleTransform())
-                        .resize(50, 50)
-                        .centerCrop()
-                        .into(ivHeaderPhoto);
-            }
-            txtFullName.setText(profile.getFullName().toString());
-        }
-
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText(R.string.app_name);
@@ -163,7 +158,6 @@ public class TimelineActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -175,16 +169,10 @@ public class TimelineActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.home) {
+        if (id == R.id.home) {
             mDrawer.openDrawer(GravityCompat.START);
             return true;
         }
-
-
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -323,7 +311,6 @@ public class TimelineActivity extends AppCompatActivity implements
         public int getCount() {
             return tabTitles.length;
         }
-
 
 
     }

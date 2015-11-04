@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-
 
 import com.example.womenwhocode.womenwhocode.R;
 
@@ -17,13 +15,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LoginActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
-
     }
 
     @Override
@@ -34,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
@@ -46,27 +40,20 @@ public class LoginActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void JoinApp(View view) {
         // Puja, you can use this to get the questionnaire data.
-
-
         Intent i = new Intent(this, PersonalizationActivity.class);
-        i.putExtra("type","Join");
+        i.putExtra("type", "Join");
         startActivity(i);
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     public void LogInToApp(View view) {
-
         Intent i = new Intent(this, PersonalizationActivity.class);
-        i.putExtra("type","Login");
+        i.putExtra("type", "Login");
         startActivity(i);
 
     }
