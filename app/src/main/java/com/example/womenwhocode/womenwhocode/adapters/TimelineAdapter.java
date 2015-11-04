@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -55,7 +57,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             viewHolder.ivFeaturePhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
-            viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
+            viewHolder.tvAwesomeIcon = (ImageButton) convertView.findViewById(R.id.btnAwesomeIcon);
             viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
             viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
             viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
@@ -148,7 +150,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View parent = (View)v.getParent();
+                View parent = (View) v.getParent();
                 // grab the tagged objects
                 Post post = (Post) parent.findViewById(R.id.tvPostDescription).getTag();
                 Awesome awesome = (Awesome) v.getTag();
@@ -159,9 +161,6 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                 // do animation on the icon
                 // switch them with a nice scale in out
                 // update count value based on awesome count (+||-)
-                // ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
-                // anim.setDuration(1000);
-                // anim.start();
 
                 // could the value of a be null?
                 onAwesome(tvAwesomeCount, awesome, post, v);
@@ -187,19 +186,30 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View tvAwesomeIcon) {
+    private void animate(ImageButton btn) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(btn, "alpha", 1, 0, 1, 0, 1); // Flash
+        anim.setDuration(1000);
+        anim.start();
+    }
+
+    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View v) {
         int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+        ImageButton awesomeIcon = (ImageButton) v.findViewById(R.id.btnAwesomeIcon);
 
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
                 awesomeCount--;
+                awesomeIcon.setImageResource(R.drawable.awesome);
+                animate(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
                 awesomeCount++;
+                awesomeIcon.setImageResource(R.drawable.awesomeddd);
+                animate(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(true);
@@ -207,6 +217,8 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         } else {
             // Update UI thread
             awesomeCount++;
+            awesomeIcon.setImageResource(R.drawable.awesomeddd);
+            animate(awesomeIcon);
 
             // Build parse request
             awesome = new Awesome();
@@ -219,7 +231,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         // TODO: it's probably safe to do this before the onAwesome
         tvAwesomeCount.setText(String.valueOf(awesomeCount));
         // reset the awesome account in case it was null before!
-        tvAwesomeIcon.setTag(awesome);
+        v.setTag(awesome);
 
         // Send data to parse
         awesome.saveInBackground();
@@ -231,7 +243,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         ImageView ivFeaturePhoto;
         TextView tvPostDescription;
         TextView tvAwesomeCount;
-        TextView tvAwesomeIcon;
+        ImageButton tvAwesomeIcon;
         CardView cvPostFeature;
         TextView tvRelativeDate;
         TextView tvFeatureTitle;

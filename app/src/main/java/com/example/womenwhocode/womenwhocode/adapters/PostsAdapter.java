@@ -1,10 +1,12 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +47,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
             viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
             viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
-            viewHolder.tvAwesomeIcon = (TextView) convertView.findViewById(R.id.tvAwesomeIcon);
+            viewHolder.tvAwesomeIcon = (ImageButton) convertView.findViewById(R.id.btnAwesomeIcon);
             viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
             viewHolder.post = post;
 
@@ -98,7 +100,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View parent = (View)v.getParent();
+                View parent = (View) v.getParent();
                 // grab the tagged objects
                 Post post = (Post) parent.findViewById(R.id.tvPostDescription).getTag();
                 Awesome awesome = (Awesome) v.getTag();
@@ -120,19 +122,30 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View tvAwesomeIcon) {
+    private void animate(ImageButton btn) {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(btn, "alpha", 1, 0, 1, 0, 1); // Flash
+        anim.setDuration(1000);
+        anim.start();
+    }
+
+    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View v) {
         int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
+        ImageButton awesomeIcon = (ImageButton) v.findViewById(R.id.btnAwesomeIcon);
 
         if (awesome != null) {
             if (awesome.getAwesomed()) {
                 // Update UI thread
                 awesomeCount--;
+                awesomeIcon.setImageResource(R.drawable.awesome);
+                animate(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
                 awesomeCount++;
+                awesomeIcon.setImageResource(R.drawable.awesomeddd);
+                animate(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(true);
@@ -140,6 +153,8 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         } else {
             // Update UI thread
             awesomeCount++;
+            awesomeIcon.setImageResource(R.drawable.awesomeddd);
+            animate(awesomeIcon);
 
             // Build parse request
             awesome = new Awesome();
@@ -152,7 +167,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         // TODO: it's probably safe to do this before the onAwesome
         tvAwesomeCount.setText(String.valueOf(awesomeCount));
         // reset the awesome account in case it was null before!
-        tvAwesomeIcon.setTag(awesome);
+        v.setTag(awesome);
 
 //        ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
 //        anim.setDuration(1000);
@@ -169,7 +184,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         TextView tvPostNameBy;
         TextView tvPostDescription;
         TextView tvAwesomeCount;
-        TextView tvAwesomeIcon;
+        ImageButton tvAwesomeIcon;
         TextView tvRelativeTime;
         Post post;
     }
