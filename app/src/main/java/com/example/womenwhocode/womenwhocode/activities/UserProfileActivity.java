@@ -245,7 +245,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     ImageView ivPreview = (ImageView) findViewById(R.id.ivphoto);
                     ivPreview.setImageBitmap(finalImg);
                 } else { // Result was a failure
-                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -259,8 +259,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 userProfile.setPhotoFile(imgFile);
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+//                    .show();
         }
     }
 

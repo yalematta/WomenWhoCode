@@ -97,7 +97,7 @@ public class TimelineFragment extends Fragment {
 
                     LocalDataStore.unpinAndRepin(listPosts, LocalDataStore.POSTS_PIN);
                 } else {
-                    Toast.makeText(getContext(), "who knows timeline", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(), "who knows timeline", Toast.LENGTH_LONG).show();
                 }
             }
         });

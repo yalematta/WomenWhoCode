@@ -58,7 +58,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
         public void done(ParseException e) {
             if (e == null) {
                 try {
-                    Toast.makeText(getBaseContext(), "User created", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getBaseContext(), "User created", Toast.LENGTH_SHORT).show();
                     // [ ] TODO: auto subscribe user to features with auto subscribe true
 
                     Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
@@ -72,7 +72,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
 
                 }
             } else {
-                Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("User Creation failed", e.toString());
             }
         }

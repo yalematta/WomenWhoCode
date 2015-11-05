@@ -128,9 +128,9 @@ public class LocationProvider implements
     @Override
     public void onConnectionSuspended(int i) {
         if (i == CAUSE_SERVICE_DISCONNECTED) {
-            Toast.makeText(mContext, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
         } else if (i == CAUSE_NETWORK_LOST) {
-            Toast.makeText(mContext, "Network lost. Please re-connect.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext, "Network lost. Please re-connect.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -140,7 +140,7 @@ public class LocationProvider implements
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
         // update profile location data!
         // mLocationCallback.handleNewLocation(mCurrentLocation);
     }
@@ -167,8 +167,8 @@ public class LocationProvider implements
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(mContext,
-                    "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
+//            Toast.makeText(mContext,
+//                    "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
         }
     }
 }

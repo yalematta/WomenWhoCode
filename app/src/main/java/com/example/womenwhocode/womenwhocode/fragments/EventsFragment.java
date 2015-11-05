@@ -137,7 +137,7 @@ public class EventsFragment extends Fragment {
                             } else if (e != null) {
                                 Log.d("PARSE_EVENTS_FAIL", "Error: " + e.getMessage());
                             } else {
-                                Toast.makeText(getContext(), "who knows events", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getContext(), "who knows events", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
