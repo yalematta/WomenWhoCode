@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -14,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.utils.OnSwipeTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,10 @@ public class PostsListFragment extends Fragment {
     ArrayList<Post> posts;
     PostsAdapter aPosts;
     ProgressBar pb;
+
+    public interface OnFeatureScroll {
+        void onFeatureScrollListner(int itemPosition); // call in EventDetailActivity and FeatureDetailActivity
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,5 +93,30 @@ public class PostsListFragment extends Fragment {
 
         // populate data
         populatePosts();
+
+//        lvPosts.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
+//            @Override
+//            public void onSwipeUp() {
+//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
+//                listener.onFeatureScrollListner(0);
+//            }
+//        });
+
+        lvPosts.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // this happens when you go from up to down or from down to up
+//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
+//                listener.onFeatureScrollListner(0);
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
+                listener.onFeatureScrollListner(firstVisibleItem);
+            }
+        });
+
     }
 }

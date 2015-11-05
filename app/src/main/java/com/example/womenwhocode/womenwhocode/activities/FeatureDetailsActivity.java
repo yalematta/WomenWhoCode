@@ -1,9 +1,13 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,8 +19,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,8 +34,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
+import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
@@ -47,7 +58,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by shehba.shahab on 10/18/15.
  */
-public class FeatureDetailsActivity extends AppCompatActivity {
+public class FeatureDetailsActivity extends AppCompatActivity implements PostsListFragment.OnFeatureScroll {
 
     private String feature_id;
     private ProgressBar pb;
@@ -114,8 +125,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         pb.setVisibility(ProgressBar.VISIBLE);
 
         // hide scroll view so the progress bar is the center of attention
-        rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures);
-        rlFeatures.setVisibility(ScrollView.INVISIBLE);
+        rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures); // TODO: animate!
+//        rlFeatures.setVisibility(ScrollView.INVISIBLE);
 
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
@@ -163,7 +174,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
                                 // hide the progress bar, show the main view
                                 pb.setVisibility(ProgressBar.GONE);
-                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
+//                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -256,6 +267,12 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onFeatureScrollListner(int itemPosition) {
+        // listener place holder
+//            rlFeatures.setVisibility(RelativeLayout.GONE);
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
