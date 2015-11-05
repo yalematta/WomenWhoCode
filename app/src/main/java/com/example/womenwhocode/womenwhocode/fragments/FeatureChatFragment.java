@@ -60,7 +60,7 @@ public class FeatureChatFragment extends ChatFragment {
     @Override
     protected void receiveMessages() {
         if (isFirstLoad()) {
-            setSpinners();
+//            setSpinners();
         }
 
         featureId = getArguments().getString(FEATURE_ID, "");
@@ -100,7 +100,7 @@ public class FeatureChatFragment extends ChatFragment {
                         // other things
                         scrollToBottom();
                         setFirstLoad(false);
-                        clearSpinners();
+//                        clearSpinners();
                     } else {
                         add(list);
                         scrollToBottom();
@@ -109,7 +109,7 @@ public class FeatureChatFragment extends ChatFragment {
                 } else if (e != null) {
                     Log.d("PARSE_FEATURE_POST_FAIL", "Error: " + e.getMessage());
                 } else {
-                    clearSpinners();
+//                    clearSpinners();
                 }
             }
         });

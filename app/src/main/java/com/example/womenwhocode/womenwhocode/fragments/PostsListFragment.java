@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Post;
-import com.example.womenwhocode.womenwhocode.utils.OnSwipeTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;

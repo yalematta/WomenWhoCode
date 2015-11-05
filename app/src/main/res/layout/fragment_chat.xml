@@ -27,12 +27,14 @@
         android:id="@+id/rlSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:paddingTop="@dimen/icon_padding">
 
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/icon_padding"
             android:layout_alignBottom="@+id/btnSend"
             android:layout_toLeftOf="@+id/btnSend"
             android:gravity="top"

@@ -61,7 +61,7 @@ public class EventChatFragment extends ChatFragment {
     @Override
     protected void receiveMessages() {
         if (isFirstLoad()) {
-            setSpinners();
+//            setSpinners();
         }
 
         eventId = getArguments().getString(EVENT_ID, "");
@@ -102,7 +102,7 @@ public class EventChatFragment extends ChatFragment {
                         // other things
                         scrollToBottom();
                         setFirstLoad(false);
-                        clearSpinners();
+//                        clearSpinners();
                     } else {
                         add(list);
                         scrollToBottom();
@@ -111,7 +111,7 @@ public class EventChatFragment extends ChatFragment {
                 } else if (e != null) {
                     Log.d("PARSE_EVENTS_POST_FAIL", "Error: " + e.getMessage());
                 } else {
-                    clearSpinners();
+//                    clearSpinners();
                 }
             }
         });
