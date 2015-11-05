@@ -171,12 +171,10 @@ public class EventDetailsActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("EVENT_PS_NO_DATA", e.toString());
                     }
                 } else {
                     Log.d("EVENT_PS_ERROR", e.toString());
-                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });

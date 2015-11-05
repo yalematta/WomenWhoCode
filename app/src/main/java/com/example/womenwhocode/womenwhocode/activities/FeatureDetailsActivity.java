@@ -178,12 +178,10 @@ public class FeatureDetailsActivity extends AppCompatActivity implements PostsLi
                             }
                         });
                     } else {
-                        Toast.makeText(getBaseContext(), "nothing is stored locally", Toast.LENGTH_LONG).show();
                         Log.d("FEATURE_PS_NO_DATA", e.toString());
                     }
                 } else {
                     Log.d("FEATURE_PS_ERROR", e.toString());
-                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -54,7 +54,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                         // Toast.makeText(getBaseContext(), objects.get(0).getString("username"), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getBaseContext(), "Query unsuccessful", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getBaseContext(), "Query unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -69,7 +69,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                     startActivity(i);
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 } else {
-                    Toast.makeText(getBaseContext(), "User Login failed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getBaseContext(), "User Login failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
