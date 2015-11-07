@@ -274,6 +274,13 @@ public class TimelineActivity extends AppCompatActivity implements
         }
     }
 
+    public void logout(MenuItem item) {
+        ParseUser.logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     // Return the order of the fragments in the view pager
     public class PagerAdapter extends FragmentPagerAdapter {
         private final String[] tabTitles = {(String) getResources().getText(R.string.title_fragment_timeline), (String) getResources().getText(R.string.title_fragment_topics), (String) getResources().getText(R.string.title_fragment_events)};
