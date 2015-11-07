@@ -112,8 +112,8 @@ public class PostsListFragment extends Fragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
-                listener.onFeatureScrollListner(firstVisibleItem);
+//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
+//                listener.onFeatureScrollListner(firstVisibleItem);
             }
         });
 
