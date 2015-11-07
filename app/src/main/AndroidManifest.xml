@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.womenwhocode.womenwhocode">
+    package="com.example.womenwhocode.womenwhocode" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,10 +14,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/app_name">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".activities.LaunchActivity"
+            android:label="@string/app_name"> // some devices use this as app name
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,26 +24,31 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.LoginActivity"
+            android:label="" >
+        </activity>
+        <activity
             android:name=".activities.TimelineActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.FeatureDetailsActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.EventDetailsActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.PersonalizationActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.LoginEmailActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.UserProfileActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".activities.SignUpEmailActivity"
-            android:label=""></activity>
+            android:label="" />
+
     </application>
 
 </manifest>
