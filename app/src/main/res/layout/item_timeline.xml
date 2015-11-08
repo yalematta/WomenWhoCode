@@ -3,7 +3,8 @@
     android:id="@+id/llTimelineItems"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground">
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -48,6 +49,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/ivPostPhoto"
+                    android:layout_toLeftOf="@+id/tvRelativeDate"
+                    android:gravity="left"
                     android:text="Title"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"

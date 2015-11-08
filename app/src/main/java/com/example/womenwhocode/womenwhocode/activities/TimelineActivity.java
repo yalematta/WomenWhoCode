@@ -54,7 +54,8 @@ public class TimelineActivity extends AppCompatActivity implements
         EventsFragment.OnEventItemClickListener,
         FeaturesFragment.OnFeatureItemClickListener,
         LocationProvider.LocationCallback,
-        RecommendFeatureDialogListener {
+        RecommendFeatureDialogListener,
+        TimelineFragment.OnItemClickListener {
 
     public final static String SELECTED_TAB_EXTRA_KEY = "selectedTabIndex";
     public final static int TIMELINE_TAB = 0;
@@ -279,6 +280,22 @@ public class TimelineActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         this.finish();
+    }
+
+    @Override
+    public void onFeatureTimelineClickListener(Feature feature) {
+        Intent i = new Intent(this, FeatureDetailsActivity.class);
+        i.putExtra("feature_id", feature.getObjectId());
+        i.putExtra(SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
+        startActivity(i);
+    }
+
+    @Override
+    public void onEventTimelineClickListener(Event event) {
+        Intent i = new Intent(this, EventDetailsActivity.class);
+        i.putExtra("event_id", event.getObjectId());
+        i.putExtra(SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
+        startActivity(i);
     }
 
     // Return the order of the fragments in the view pager

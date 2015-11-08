@@ -64,7 +64,7 @@ public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHo
         tvFeatureTitle.setText(title);
 
         // set image
-        Context context = holder.ivFeatureImage.getContext();
+        Context context = ivFeatureImage.getContext();
         ivFeatureImage.setImageResource(0); // clear image, to avoid memory leak
         if (title.contains("Recommend")) { // this may not be accurate - only for the recommended piece
             ivFeatureImage.setImageResource(R.drawable.ic_plus);
