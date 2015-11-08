@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -21,24 +20,24 @@ import butterknife.ButterKnife;
  * Created by zassmin on 10/18/15.
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
-    Event event;
-    ParseUser currentUser;
-    ViewHolder holder;
 
     public EventsAdapter(Context context, ArrayList<Event> events) {
         super(context, android.R.layout.simple_list_item_1, events);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // set up objects
-        event = getItem(position);
-        currentUser = ParseUser.getCurrentUser();
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        Event event = getItem(position);
+        // ParseUser currentUser = ParseUser.getCurrentUser();
 
+        final ViewHolder holder;
         if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_event, parent,
+                    false);
+
             holder = new ViewHolder(convertView);
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.item_event, parent, false);
+            holder.event = event;
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -71,6 +70,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         TextView tvEventDate;
         @Bind(R.id.tvEventNetwork)
         TextView tvEventNetwork;
+        Event event;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
