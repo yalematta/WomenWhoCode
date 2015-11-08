@@ -20,19 +20,24 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.android.support:cardview-v7:23.0.+'
-    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
-    compile 'com.google.android.gms:play-services:7.8.0'
+
+    // Google Play Services
+    compile 'com.google.android.gms:play-services-base:7.8.0'
+    compile 'com.google.android.gms:play-services-location:7.8.0'
+
+    // Support Libraries
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.android.support:design:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+
+    // other libs
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.flaviofaria:kenburnsview:1.0.6'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
-
-
 }
