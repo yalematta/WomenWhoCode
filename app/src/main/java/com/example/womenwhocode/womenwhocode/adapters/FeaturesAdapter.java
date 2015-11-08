@@ -88,12 +88,9 @@ public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvFeatureTitle)
-        public TextView tvFeatureTitle;
-        @Bind(R.id.ivFeatureImage)
-        public ImageView ivFeatureImage;
-        @Bind(R.id.cvFeature)
-        public CardView cvFeature;
+        @Bind(R.id.tvFeatureTitle) public TextView tvFeatureTitle;
+        @Bind(R.id.ivFeatureImage) public ImageView ivFeatureImage;
+        @Bind(R.id.cvFeature) public CardView cvFeature;
 
         public ViewHolder(final View itemView) {
             super(itemView);

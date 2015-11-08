@@ -256,26 +256,16 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     }
 
     static class ViewHolder {
-        @Bind(R.id.ivPostPhoto)
-        ImageView ivPostPhoto;
-        @Bind(R.id.tvPostDescription)
-        TextView tvPostDescription;
-        @Bind(R.id.tvAwesomeCount)
-        TextView tvAwesomeCount;
-        @Bind(R.id.btnAwesomeIcon)
-        ImageButton tvAwesomeIcon;
-        @Bind(R.id.cvPostFeature)
-        CardView cvPostFeature;
-        @Bind(R.id.tvRelativeDate)
-        TextView tvRelativeDate;
-        @Bind(R.id.tvPostTitle)
-        TextView tvFeatureTitle;
-        @Bind(R.id.pbLoading)
-        ProgressBar pb;
-        @Bind(R.id.rlPostFeature)
-        RelativeLayout rlPostFeature;
-        @Bind(R.id.tvPostNameBy)
-        TextView tvPostNameBy;
+        @Bind(R.id.ivPostPhoto) ImageView ivPostPhoto;
+        @Bind(R.id.tvPostDescription) TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount) TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon) ImageButton tvAwesomeIcon;
+        @Bind(R.id.cvPostFeature) CardView cvPostFeature;
+        @Bind(R.id.tvRelativeDate) TextView tvRelativeDate;
+        @Bind(R.id.tvPostTitle) TextView tvFeatureTitle;
+        @Bind(R.id.pbLoading) ProgressBar pb;
+        @Bind(R.id.rlPostFeature) RelativeLayout rlPostFeature;
+        @Bind(R.id.tvPostNameBy) TextView tvPostNameBy;
         Post post;
 
         ViewHolder(View view) {

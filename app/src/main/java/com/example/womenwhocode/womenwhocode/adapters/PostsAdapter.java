@@ -198,18 +198,12 @@ public class PostsAdapter extends ArrayAdapter<Post> {
     }
 
     static class ViewHolder {
-        @Bind(R.id.ivUserPhoto)
-        ImageView ivUserPhoto;
-        @Bind(R.id.tvPostNameBy)
-        TextView tvPostNameBy;
-        @Bind(R.id.tvPostDescription)
-        TextView tvPostDescription;
-        @Bind(R.id.tvAwesomeCount)
-        TextView tvAwesomeCount;
-        @Bind(R.id.btnAwesomeIcon)
-        ImageButton tvAwesomeIcon;
-        @Bind(R.id.tvRelativeTime)
-        TextView tvRelativeTime;
+        @Bind(R.id.ivUserPhoto) ImageView ivUserPhoto;
+        @Bind(R.id.tvPostNameBy) TextView tvPostNameBy;
+        @Bind(R.id.tvPostDescription) TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount) TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon) ImageButton tvAwesomeIcon;
+        @Bind(R.id.tvRelativeTime) TextView tvRelativeTime;
         Post post;
 
         ViewHolder(View view) {

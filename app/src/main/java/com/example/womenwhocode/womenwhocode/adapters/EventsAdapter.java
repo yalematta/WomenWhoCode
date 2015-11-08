@@ -60,16 +60,11 @@ public class EventsAdapter extends ArrayAdapter<Event> {
     }
 
     static class ViewHolder {
-        @Bind(R.id.tvEventTitle)
-        TextView tvEventTitle;
-        @Bind(R.id.tvEventLocation)
-        TextView tvEventLocation;
-        @Bind(R.id.tvEventTime)
-        TextView tvEventTime;
-        @Bind(R.id.tvEventDate)
-        TextView tvEventDate;
-        @Bind(R.id.tvEventNetwork)
-        TextView tvEventNetwork;
+        @Bind(R.id.tvEventTitle) TextView tvEventTitle;
+        @Bind(R.id.tvEventLocation) TextView tvEventLocation;
+        @Bind(R.id.tvEventTime) TextView tvEventTime;
+        @Bind(R.id.tvEventDate) TextView tvEventDate;
+        @Bind(R.id.tvEventNetwork) TextView tvEventNetwork;
         Event event;
 
         ViewHolder(View view) {
