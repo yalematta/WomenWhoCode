@@ -14,21 +14,16 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by zassmin on 10/18/15.
  */
 public class EventsAdapter extends ArrayAdapter<Event> {
-    private static class ViewHolder {
-        TextView tvEventTitle;
-        TextView tvEventLocation;
-        TextView tvEventTime;
-        TextView tvEventDate;
-        TextView tvEventNetwork;
-    }
-
     Event event;
     ParseUser currentUser;
-    ViewHolder viewHolder;
+    ViewHolder holder;
 
     public EventsAdapter(Context context, ArrayList<Event> events) {
         super(context, android.R.layout.simple_list_item_1, events);
@@ -41,32 +36,44 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         currentUser = ParseUser.getCurrentUser();
 
         if (convertView == null) {
-            viewHolder = new ViewHolder();
+            holder = new ViewHolder(convertView);
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.item_event, parent, false);
-            viewHolder.tvEventTitle = (TextView) convertView.findViewById(R.id.tvEventTitle);
-            viewHolder.tvEventLocation = (TextView) convertView.findViewById(R.id.tvEventLocation);
-            viewHolder.tvEventTime = (TextView) convertView.findViewById(R.id.tvEventTime);
-            viewHolder.tvEventNetwork = (TextView) convertView.findViewById(R.id.tvEventNetwork);
-            viewHolder.tvEventDate = (TextView) convertView.findViewById(R.id.tvEventDate);
-            convertView.setTag(viewHolder);
+            convertView.setTag(holder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
         if (event.getNetwork() != null) {
-            viewHolder.tvEventNetwork.setText(event.getNetwork().getTitle() + " network");
+            holder.tvEventNetwork.setText(event.getNetwork().getTitle() + " network");
         }
 
         long time = Utilities.setLocalDateTime(event.getEventDateTime());
         String date = Utilities.dateTimeParser(time, Utilities.DATE_FORMAT);
         String prettyTime = Utilities.dateTimeParser(time, Utilities.TIME_FORMAT);
 
-        viewHolder.tvEventTitle.setText(event.getTitle());
-        viewHolder.tvEventLocation.setText("at " + event.getLocation());
-        viewHolder.tvEventTime.setText(prettyTime);
-        viewHolder.tvEventDate.setText(date);
+        holder.tvEventTitle.setText(event.getTitle());
+        holder.tvEventLocation.setText("at " + event.getLocation());
+        holder.tvEventTime.setText(prettyTime);
+        holder.tvEventDate.setText(date);
 
         return convertView;
+    }
+
+    static class ViewHolder {
+        @Bind(R.id.tvEventTitle)
+        TextView tvEventTitle;
+        @Bind(R.id.tvEventLocation)
+        TextView tvEventLocation;
+        @Bind(R.id.tvEventTime)
+        TextView tvEventTime;
+        @Bind(R.id.tvEventDate)
+        TextView tvEventDate;
+        @Bind(R.id.tvEventNetwork)
+        TextView tvEventNetwork;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

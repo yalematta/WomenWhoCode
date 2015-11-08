@@ -22,6 +22,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by zassmin on 10/26/15.
  */
@@ -42,13 +45,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.item_post, parent, false);
 
-            viewHolder = new ViewHolder();
-            viewHolder.ivUserPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
-            viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
-            viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
-            viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
-            viewHolder.tvAwesomeIcon = (ImageButton) convertView.findViewById(R.id.btnAwesomeIcon);
-            viewHolder.tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
+            viewHolder = new ViewHolder(convertView);
             viewHolder.post = post;
 
             convertView.setTag(viewHolder);
@@ -123,7 +120,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
     }
 
     private void animate(ImageButton target) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25,15, -15, 6, -6, 0);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
         anim.setDuration(1000);
         anim.start();
     }
@@ -179,13 +176,23 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         savedPost.saveInBackground();
     }
 
-    private static class ViewHolder {
+    static class ViewHolder {
+        @Bind(R.id.ivUserPhoto)
         ImageView ivUserPhoto;
+        @Bind(R.id.tvPostNameBy)
         TextView tvPostNameBy;
+        @Bind(R.id.tvPostDescription)
         TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount)
         TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon)
         ImageButton tvAwesomeIcon;
+        @Bind(R.id.tvRelativeTime)
         TextView tvRelativeTime;
         Post post;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

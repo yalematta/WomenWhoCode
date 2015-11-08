@@ -1,13 +1,9 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -19,23 +15,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
-import com.example.womenwhocode.womenwhocode.fragments.ChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
@@ -268,7 +256,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements PostsLi
     }
 
     @Override
-    public void onFeatureScrollListner(int itemPosition) {
+    public void onFeatureScrollListener(int itemPosition) {
         // listener place holder
 //            rlFeatures.setVisibility(RelativeLayout.GONE);
     }
