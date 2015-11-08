@@ -4,12 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,47 +17,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class FeaturesAdapter extends  RecyclerView.Adapter<FeaturesAdapter.ViewHolder> {
-    private List<Feature> mFeatures;
-
+public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHolder> {
     private static OnItemClickListener listener;
-
-    public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
-    }
+    private final List<Feature> mFeatures;
 
     public FeaturesAdapter(List<Feature> features) {
         mFeatures = features;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvFeatureTitle;
-        public ImageView ivFeatureImage;
-        public CardView cvFeature;
-
-        public ViewHolder(final View itemView) {
-            super(itemView);
-
-            tvFeatureTitle = (TextView) itemView.findViewById(R.id.tvFeatureTitle);
-            ivFeatureImage = (ImageView) itemView.findViewById(R.id.ivFeatureImage);
-            cvFeature = (CardView) itemView.findViewById(R.id.cvFeature);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onItemClick(itemView, getLayoutPosition());
-                    }
-                }
-            });
-        }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        FeaturesAdapter.listener = listener;
     }
 
     public FeaturesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -69,8 +41,7 @@ public class FeaturesAdapter extends  RecyclerView.Adapter<FeaturesAdapter.ViewH
 
         View featureView = inflater.inflate(R.layout.item_feature, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(featureView);
-        return viewHolder;
+        return new ViewHolder(featureView);
     }
 
     @Override
@@ -111,4 +82,34 @@ public class FeaturesAdapter extends  RecyclerView.Adapter<FeaturesAdapter.ViewH
     public int getItemCount() {
         return mFeatures.size();
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tvFeatureTitle)
+        public TextView tvFeatureTitle;
+        @Bind(R.id.ivFeatureImage)
+        public ImageView ivFeatureImage;
+        @Bind(R.id.cvFeature)
+        public CardView cvFeature;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
+        }
+    }
 }
+
+
+

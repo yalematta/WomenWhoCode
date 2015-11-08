@@ -32,6 +32,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by shehba.shahab on 10/17/15.
  */
@@ -47,26 +50,16 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         Post post = getItem(position);
         currentUser = ParseUser.getCurrentUser();
 
-        final ViewHolder viewHolder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_timeline, parent, false);
 
-            viewHolder = new ViewHolder();
-            viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
-            viewHolder.cvPostFeature = (CardView) convertView.findViewById(R.id.cvPostFeature);
-            viewHolder.ivPostPhoto = (ImageView) convertView.findViewById(R.id.ivPostPhoto);
-            viewHolder.tvPostDescription = (TextView) convertView.findViewById(R.id.tvPostDescription);
-            viewHolder.tvAwesomeCount = (TextView) convertView.findViewById(R.id.tvAwesomeCount);
-            viewHolder.tvAwesomeIcon = (ImageButton) convertView.findViewById(R.id.btnAwesomeIcon);
-            viewHolder.tvRelativeDate = (TextView) convertView.findViewById(R.id.tvRelativeDate);
-            viewHolder.tvFeatureTitle = (TextView) convertView.findViewById(R.id.tvPostTitle);
-            viewHolder.tvPostNameBy = (TextView) convertView.findViewById(R.id.tvPostNameBy);
-            viewHolder.rlPostFeature = (RelativeLayout) convertView.findViewById(R.id.rlPostFeature);
-            viewHolder.post = post;
+            holder = new ViewHolder(convertView);
+            holder.post = post;
 
-            convertView.setTag(viewHolder);
+            convertView.setTag(holder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
         // TODO: set awesome icon here - default - not awesome yet
@@ -78,22 +71,22 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             @Override
             public void done(Awesome a, ParseException e) {
                 if (e == null) {
-                    viewHolder.tvAwesomeIcon.setTag(a);
+                    holder.tvAwesomeIcon.setTag(a);
                     // TODO if awesome.getAwesome == true change the icon to the awesomedd icon
                 } else {
-                    viewHolder.tvAwesomeIcon.setTag(null);
+                    holder.tvAwesomeIcon.setTag(null);
                 }
             }
         });
 
         // Set the progress bar
-        viewHolder.pb.setVisibility(ProgressBar.VISIBLE);
+        holder.pb.setVisibility(ProgressBar.VISIBLE);
 
         // Hide relative layout so the progress bar is the center of attention
-        viewHolder.cvPostFeature.setVisibility(CardView.INVISIBLE);
+        holder.cvPostFeature.setVisibility(CardView.INVISIBLE);
 
         // Clear out the image views
-        viewHolder.ivPostPhoto.setImageResource(0);
+        holder.ivPostPhoto.setImageResource(0);
 
         String title = "WWCode";
         // final so on click of feature has access to it, these values don't change anyway
@@ -107,7 +100,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             // set feature background color
             // set color!
             int color = Color.parseColor(String.valueOf(hexColor));
-            viewHolder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
+            holder.rlPostFeature.setBackgroundColor(color); // default color is set in xml
 
             // Insert the image using picasso
             Picasso.with(getContext())
@@ -115,19 +108,19 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
                     .transform(new CircleTransform())
                     .resize(75, 75)
                     .centerCrop()
-                    .into(viewHolder.ivPostPhoto);
+                    .into(holder.ivPostPhoto);
 
         } else if (event != null) {
             title = event.getTitle();
 
             // insert icon
-            viewHolder.ivPostPhoto.setImageResource(R.drawable.ic_calendar_check);
+            holder.ivPostPhoto.setImageResource(R.drawable.ic_calendar_check);
         }
 
         // in case a post has a user
         ParseUser postUser = post.getUser();
         if (postUser != null) {
-            viewHolder.tvPostNameBy.setText(postUser.getUsername());
+            holder.tvPostNameBy.setText(postUser.getUsername());
         }
 
         // Insert the model data into each of the view items
@@ -135,19 +128,19 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         String relativeDate = post.getPostDateTime();
         int awesomeCount = post.getAwesomeCount();
 
-        viewHolder.tvPostDescription.setText(description);
-        viewHolder.tvRelativeDate.setText(relativeDate);
-        viewHolder.tvFeatureTitle.setText(title);
-        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        holder.tvPostDescription.setText(description);
+        holder.tvRelativeDate.setText(relativeDate);
+        holder.tvFeatureTitle.setText(title);
+        holder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
 
         // Store all necessary data for click
-        viewHolder.tvPostDescription.setTag(post);
+        holder.tvPostDescription.setTag(post);
 
         // Hide the progress bar, show the main view
-        viewHolder.pb.setVisibility(ProgressBar.GONE);
-        viewHolder.cvPostFeature.setVisibility(CardView.VISIBLE);
+        holder.pb.setVisibility(ProgressBar.GONE);
+        holder.cvPostFeature.setVisibility(CardView.VISIBLE);
 
-        viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
+        holder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View parent = (View) v.getParent();
@@ -167,7 +160,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
             }
         });
 
-        viewHolder.rlPostFeature.setOnClickListener(new View.OnClickListener() {
+        holder.rlPostFeature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (feature != null) {
@@ -187,7 +180,7 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
     }
 
     private void animate(ImageButton target) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25,15, -15, 6, -6, 0);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
         anim.setDuration(1000);
         anim.start();
     }
@@ -239,17 +232,32 @@ public class TimelineAdapter extends ArrayAdapter<Post> {
         savedPost.saveInBackground();
     }
 
-    private static class ViewHolder {
+    static class ViewHolder {
+        @Bind(R.id.ivPostPhoto)
         ImageView ivPostPhoto;
+        @Bind(R.id.tvPostDescription)
         TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount)
         TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon)
         ImageButton tvAwesomeIcon;
+        @Bind(R.id.cvPostFeature)
         CardView cvPostFeature;
+        @Bind(R.id.tvRelativeDate)
         TextView tvRelativeDate;
+        @Bind(R.id.tvPostTitle)
         TextView tvFeatureTitle;
+        @Bind(R.id.pbLoading)
         ProgressBar pb;
+        @Bind(R.id.rlPostFeature)
         RelativeLayout rlPostFeature;
+        @Bind(R.id.tvPostNameBy)
         TextView tvPostNameBy;
         Post post;
+
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

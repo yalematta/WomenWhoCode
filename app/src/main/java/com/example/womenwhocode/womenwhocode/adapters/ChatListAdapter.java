@@ -21,11 +21,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by zassmin on 11/1/15.
  */
 public class ChatListAdapter extends ArrayAdapter<Message> {
-    private String mUserId;
+    private final String mUserId;
 
     public ChatListAdapter(Context context, String userId, ArrayList<Message> messages) {
         super(context, 0, messages);
@@ -38,21 +41,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             convertView = LayoutInflater.from(getContext()).
                     inflate(R.layout.item_chat, parent, false);
 
-            final ViewHolder holder = new ViewHolder();
-            // current user message stuff
-            holder.rlCurrentUser = (RelativeLayout) convertView.findViewById(R.id.rlCurrentUser);
-            holder.tvBody = (TextView)convertView.findViewById(R.id.tvBody);
-            holder.ivCurrentUserProfile = (ImageView)convertView.findViewById(R.id.ivCurrentUserProfile);
-            holder.tvCreatedAt = (TextView) convertView.findViewById(R.id.tvCreatedAt);
-            holder.tvFullName = (TextView) convertView.findViewById(R.id.tvFullName);
-
-            // other users message stuff
-            holder.rlOtherUser = (RelativeLayout) convertView.findViewById(R.id.rlOtherUser);
-            holder.ivOtherProfileLeft = (ImageView)convertView.findViewById(R.id.ivOtherProfileLeft);
-            holder.tvOtherBody = (TextView) convertView.findViewById(R.id.tvOtherBody);
-            holder.tvOtherCreatedAt = (TextView) convertView.findViewById(R.id.tvOtherCreatedAt);
-            holder.tvOtherFullName = (TextView) convertView.findViewById(R.id.tvOtherFullName);
-
+            final ViewHolder holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
         final Message message = getItem(position);
@@ -66,7 +55,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
         }
 
         Profile profile = message.getProfile();
-        final ViewHolder holder = (ViewHolder)convertView.getTag();
+        final ViewHolder holder = (ViewHolder) convertView.getTag();
         final boolean isMe = message.getUserId().equals(mUserId);
         String date = Utilities.dateTimeParser(message.getCreatedAt().getTime(), Utilities.TIME_FORMAT);
         // decide which rl to render
@@ -127,20 +116,33 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
         return convertView;
     }
 
-    final class ViewHolder {
+    static class ViewHolder {
         // current user message view
+        @Bind(R.id.rlCurrentUser)
         public RelativeLayout rlCurrentUser;
+        @Bind(R.id.ivCurrentUserProfile)
         public ImageView ivCurrentUserProfile;
+        @Bind(R.id.tvFullName)
         public TextView tvFullName;
+        @Bind(R.id.tvCreatedAt)
         public TextView tvCreatedAt;
+        @Bind(R.id.tvBody)
         public TextView tvBody;
 
         // other users message view
+        @Bind(R.id.rlOtherUser)
         public RelativeLayout rlOtherUser;
+        @Bind(R.id.ivOtherProfileLeft)
         public ImageView ivOtherProfileLeft;
+        @Bind(R.id.tvOtherFullName)
         public TextView tvOtherFullName;
+        @Bind(R.id.tvOtherCreatedAt)
         public TextView tvOtherCreatedAt;
+        @Bind(R.id.tvOtherBody)
         public TextView tvOtherBody;
 
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
