@@ -1,10 +1,11 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -119,10 +120,33 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         return convertView;
     }
 
-    private void animate(ImageButton target) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(target, "translationX", 0, 25, -25, 25, -25, 15, -15, 6, -6, 0);
-        anim.setDuration(1000);
-        anim.start();
+    private void animateOnAwesome(final ImageButton awesomeIcon) {
+        Animation animateOnAwesome;
+        animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
+                R.anim.scale_up);
+        awesomeIcon.startAnimation(animateOnAwesome);
+        animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                awesomeIcon.setImageResource(R.drawable.awesomeddd);
+            }
+
+            public void onAnimationEnd(Animation anim) {
+                awesomeIcon.setImageResource(R.drawable.awesome);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
+
+    private void animateOnUnawesome(ImageButton awesomeIcon) {
+        Animation animation;
+        animation = AnimationUtils.loadAnimation(getContext(),
+                R.anim.scale_down);
+        awesomeIcon.startAnimation(animation);
     }
 
     private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View v) {
@@ -133,16 +157,14 @@ public class PostsAdapter extends ArrayAdapter<Post> {
             if (awesome.getAwesomed()) {
                 // Update UI thread
                 awesomeCount--;
-                awesomeIcon.setImageResource(R.drawable.awesome);
-                animate(awesomeIcon);
+                animateOnUnawesome(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(false);
             } else {
                 // Update UI thread
                 awesomeCount++;
-                awesomeIcon.setImageResource(R.drawable.awesomeddd);
-                animate(awesomeIcon);
+                animateOnAwesome(awesomeIcon);
 
                 // Build parse request
                 awesome.setAwesomed(true);
@@ -150,8 +172,7 @@ public class PostsAdapter extends ArrayAdapter<Post> {
         } else {
             // Update UI thread
             awesomeCount++;
-            awesomeIcon.setImageResource(R.drawable.awesomeddd);
-            animate(awesomeIcon);
+            animateOnAwesome(awesomeIcon);
 
             // Build parse request
             awesome = new Awesome();
