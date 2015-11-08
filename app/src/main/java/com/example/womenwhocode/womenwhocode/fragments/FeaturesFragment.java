@@ -26,6 +26,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
 /**
  * Created by shehba.shahab on 10/16/15.
  */
@@ -60,6 +62,7 @@ public class FeaturesFragment extends Fragment {
 
         rvFeatures.setAdapter(aFeatures);
         rvFeatures.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFeatures.setItemAnimator(new SlideInUpAnimator()); // FIXME: can't tell if it's working!
 
         populateFeaturesList();
 
