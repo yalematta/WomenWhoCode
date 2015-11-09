@@ -32,10 +32,6 @@ public class PostsListFragment extends Fragment {
     PostsAdapter aPosts;
     ProgressBar pb;
 
-    public interface OnFeatureScroll {
-        void onFeatureScrollListener(int itemPosition); // call in EventDetailActivity and FeatureDetailActivity
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,30 +88,5 @@ public class PostsListFragment extends Fragment {
 
         // populate data
         populatePosts();
-
-//        lvPosts.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
-//            @Override
-//            public void onSwipeUp() {
-//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
-//                listener.onFeatureScrollListener(0);
-//            }
-//        });
-
-        lvPosts.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                // this happens when you go from up to down or from down to up
-//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
-//                listener.onFeatureScrollListener(0);
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                OnFeatureScroll listener = (OnFeatureScroll) getActivity();
-//                listener.onFeatureScrollListener(firstVisibleItem);
-            }
-        });
-
     }
 }
