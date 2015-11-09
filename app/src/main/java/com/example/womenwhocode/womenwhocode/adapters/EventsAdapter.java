@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by zassmin on 10/18/15.
  */
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
-    private List<Event> mEvents;
+    private final List<Event> mEvents;
     private static OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -30,7 +30,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        EventsAdapter.listener = listener;
     }
 
     public EventsAdapter(List<Event> events) {
@@ -42,8 +42,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View eventView = inflater.inflate(R.layout.item_event, parent, false);
-        ViewHolder viewHolder = new ViewHolder(eventView);
-        return viewHolder;
+        return new ViewHolder(eventView);
     }
 
     @Override

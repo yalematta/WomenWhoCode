@@ -19,10 +19,10 @@ import java.util.List;
  * Created by zassmin on 10/26/15.
  */
 public class EventPostsFragment extends PostsListFragment {
-    public static String EVENT_ID = "event_id";
-    public static String eventId;
-    protected ParseQuery<Event> eventParseQuery;
-    protected ParseQuery<Post> postParseQuery;
+    private static final String EVENT_ID = "event_id";
+    private static String eventId;
+    private ParseQuery<Event> eventParseQuery;
+    private ParseQuery<Post> postParseQuery;
 
     public static EventPostsFragment newInstance(String eventObjectId) {
         EventPostsFragment eventPostsFragment = new EventPostsFragment();

@@ -19,7 +19,6 @@ import com.example.womenwhocode.womenwhocode.R;
  * Created by zassmin on 11/4/15.
  */
 public class RecommendFeatureDialog extends DialogFragment implements EditText.OnEditorActionListener {
-    private EditText mEditText;
 
     public interface RecommendFeatureDialogListener {
         void onFinishEditDialog(String inputText);
@@ -32,8 +31,7 @@ public class RecommendFeatureDialog extends DialogFragment implements EditText.O
     }
 
     public static RecommendFeatureDialog newInstance() {
-        RecommendFeatureDialog frag = new RecommendFeatureDialog();
-        return frag;
+        return new RecommendFeatureDialog();
     }
 
     @Nullable
@@ -47,7 +45,7 @@ public class RecommendFeatureDialog extends DialogFragment implements EditText.O
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-        mEditText = (EditText) view.findViewById(R.id.etRecommendation);
+        EditText mEditText = (EditText) view.findViewById(R.id.etRecommendation);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         // Show soft keyboard automatically and request focus to field
         mEditText.requestFocus();

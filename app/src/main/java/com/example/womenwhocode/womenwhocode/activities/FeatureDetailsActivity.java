@@ -77,6 +77,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
 
@@ -147,7 +148,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                             public void done(Subscribe sub, ParseException e) {
                                 if (sub != null) {
                                     subscribe = sub;
-                                    if (sub.getSubscribed() == true) {
+                                    if (sub.getSubscribed()) {
                                         displayChat();
                                         btnSubscribe.setText(SUBSCRIBED_TEXT);
                                     } else {
@@ -165,7 +166,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Log.d("FEATURE_PS_NO_DATA", e.toString());
+                        Log.d("FEATURE_PS_NO_DATA", e != null ? e.toString() : null);
                     }
                 } else {
                     Log.d("FEATURE_PS_ERROR", e.toString());
@@ -198,7 +199,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
 
         if (subscribe != null) {
-            if (subscribe.getSubscribed() == true) { // maybe just check against icon value
+            if (subscribe.getSubscribed()) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
                 hideChat();
 

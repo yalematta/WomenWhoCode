@@ -10,11 +10,11 @@ import com.parse.ParseQuery;
  */
 @ParseClassName("Network")
 public class Network extends ParseObject {
-    public static String TITLE_KEY = "title";
-    public static String MEETUP_GROUP_ID_KEY = "meetup_group_id";
-    public static String MEETUP_URL_KEY = "meetup_url";
-    public static String IMAGE_URL_KEY = "image_url";
-    public static String LOCATION_KEY = "location";
+    private static final String TITLE_KEY = "title";
+    private static final String MEETUP_GROUP_ID_KEY = "meetup_group_id";
+    private static final String MEETUP_URL_KEY = "meetup_url";
+    private static final String IMAGE_URL_KEY = "image_url";
+    public static final String LOCATION_KEY = "location";
 
     public void setTitle(String title) {
         put(TITLE_KEY, title);
@@ -60,8 +60,7 @@ public class Network extends ParseObject {
         ParseQuery<Network> networkParseQuery = ParseQuery.getQuery(Network.class);
         // networkParseQuery.fromLocalDatastore();
         // FIXME: get from local data store!
-        Network network = networkParseQuery.whereEqualTo(
+        return networkParseQuery.whereEqualTo(
                 Network.MEETUP_GROUP_ID_KEY, meetupId).getFirstInBackground().getResult();
-        return network;
     }
 }

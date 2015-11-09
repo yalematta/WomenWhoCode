@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class ChatFragment extends Fragment {
 
-    public static int MAX_CHAT_MESSAGES_TO_SHOW = 50;
+    static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
     private final int RUN_FREQUENCY = 1000; // ms
     private View view;
     private ListView lvChat;
@@ -129,11 +129,11 @@ public class ChatFragment extends Fragment {
         pb.setVisibility(ProgressBar.GONE);
     }
 
-    protected void addAll(List<Message> messageList) {
+    void addAll(List<Message> messageList) {
         aChatList.addAll(messageList);
     }
 
-    protected void add(List<Message> messageList) {
+    void add(List<Message> messageList) {
         for (Message message : messageList) {
             if (message != aChatList.getItem(aChatList.getCount() - 1)) { // double post bug
                 aChatList.add(message);
@@ -141,41 +141,41 @@ public class ChatFragment extends Fragment {
         }
     }
 
-    protected void clear() {
+    void clear() {
         aChatList.clear();
     }
 
-    protected void scrollToBottom() {
+    void scrollToBottom() {
         lvChat.setSelection(aChatList.getCount() - 1);
     }
 
-    protected void setupMessagePosting(String body, String userId) { // maybe change to interface
+    void setupMessagePosting(String body, String userId) { // maybe change to interface
         // override this in the other fragments
     }
 
     // will be called in the handler that listens for new messages
-    protected void receiveMessages() { // maybe change to interface
+    void receiveMessages() { // maybe change to interface
         // override this in the other fragments
     }
 
-    protected boolean isFirstLoad() {
+    boolean isFirstLoad() {
         return mFirstLoad;
     }
 
-    protected void setFirstLoad(boolean load) {
+    void setFirstLoad(boolean load) {
         // Keep track of initial load to scroll to the bottom of the ListView
         this.mFirstLoad = load;
     }
 
-    protected Date getMostRecentcreatedAt() {
+    Date getMostRecentcreatedAt() {
         return this.recentCreatedAt;
     }
 
-    protected void setMostRecentcreatedAt(Date createAt) {
+    void setMostRecentcreatedAt(Date createAt) {
         this.recentCreatedAt = createAt;
     }
 
-    protected Profile getUserProfile() {
+    Profile getUserProfile() {
         return this.profile;
     }
 

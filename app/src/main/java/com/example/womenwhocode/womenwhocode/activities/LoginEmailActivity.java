@@ -60,7 +60,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         });
     }
 
-    public void ValidateUser(String username,String pwd) {
+    private void ValidateUser(String username, String pwd) {
         ParseUser.logInInBackground(username, pwd, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {

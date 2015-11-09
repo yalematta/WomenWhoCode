@@ -20,10 +20,10 @@ import java.util.List;
  * Created by zassmin on 11/1/15.
  */
 public class EventChatFragment extends ChatFragment {
-    public static String EVENT_ID = "event_id";
-    public static String eventId;
-    protected ParseQuery<Event> eventParseQuery;
-    protected ParseQuery<Message> messageParseQuery;
+    private static final String EVENT_ID = "event_id";
+    private static String eventId;
+    private ParseQuery<Event> eventParseQuery;
+    private ParseQuery<Message> messageParseQuery;
 
     public static EventChatFragment newInstance(String eventObjectId) {
         EventChatFragment eventChatFragment = new EventChatFragment();

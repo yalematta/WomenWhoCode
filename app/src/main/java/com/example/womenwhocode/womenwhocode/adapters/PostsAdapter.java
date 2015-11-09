@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  * Created by zassmin on 10/26/15.
  */
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
-    private List<Post> mPosts;
+    private final List<Post> mPosts;
     private static OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -40,7 +40,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        PostsAdapter.listener = listener;
     }
 
 
@@ -53,8 +53,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View postView = inflater.inflate(R.layout.item_post, parent, false);
-        ViewHolder viewHolder = new ViewHolder(postView);
-        return viewHolder;
+        return new ViewHolder(postView);
     }
 
     @Override

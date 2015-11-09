@@ -13,7 +13,7 @@ import com.parse.ParseUser;
 public class Awesome extends ParseObject {
     public static final String USER_KEY = "user";
     public static final String POST_KEY = "post";
-    public static final String AWESOMED_KEY = "awesomed";
+    private static final String AWESOMED_KEY = "awesomed";
 
     private static ParseQuery<Awesome> query;
 

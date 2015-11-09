@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by shehba.shahab on 10/17/15.
  */
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
-    private List<Post> mPosts;
+    private final List<Post> mPosts;
     private static OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -39,7 +39,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        TimelineAdapter.listener = listener;
     }
 
     public TimelineAdapter(List<Post> posts) {
@@ -51,8 +51,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View timelineView = inflater.inflate(R.layout.item_timeline, parent, false);
-        ViewHolder viewHolder = new ViewHolder(timelineView);
-        return viewHolder;
+        return new ViewHolder(timelineView);
     }
 
     @Override

@@ -19,10 +19,10 @@ import java.util.List;
  * Created by zassmin on 11/2/15.
  */
 public class FeatureChatFragment extends ChatFragment {
-    public static String FEATURE_ID = "feature_id";
-    public static String featureId;
-    protected ParseQuery<Feature> featureParseQuery;
-    protected ParseQuery<Message> messageParseQuery;
+    private static final String FEATURE_ID = "feature_id";
+    private static String featureId;
+    private ParseQuery<Feature> featureParseQuery;
+    private ParseQuery<Message> messageParseQuery;
 
     public static FeatureChatFragment newInstance(String featureObjectId) {
         FeatureChatFragment featureChatFragment = new FeatureChatFragment();

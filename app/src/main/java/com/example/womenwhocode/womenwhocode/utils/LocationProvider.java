@@ -26,11 +26,11 @@ public class LocationProvider implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    public abstract interface LocationCallback {
-        public void handleNewLocation(Location location);
+    public interface LocationCallback {
+        void handleNewLocation(Location location);
     }
 
-    public static final String TAG = LocationProvider.class.getSimpleName();
+    private static final String TAG = LocationProvider.class.getSimpleName();
 
     /*
      * Define a request code to send to Google Play services
@@ -38,14 +38,10 @@ public class LocationProvider implements
      */
     public final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
-    private long UPDATE_INTERVAL = 60000;  /* 60 secs - 60000, change to 10800000 - 3hrs */
-    private long FASTEST_INTERVAL = 5000; /* 5 secs - 5000, change to 3600000 - 60 min */
-
-    private LocationCallback mLocationCallback;
-    private Context mContext;
+    private final LocationCallback mLocationCallback;
+    private final Context mContext;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-    private Location mCurrentLocation;
 
     public LocationProvider(Context context, LocationCallback callback) {
         mLocationCallback = callback;
@@ -62,6 +58,8 @@ public class LocationProvider implements
                 .build();
 
         // Create the LocationRequest object
+        long FASTEST_INTERVAL = 5000;
+        long UPDATE_INTERVAL = 60000;
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) // FIXME: change accuracy depending on the flow in the experience the user is in
                 .setInterval(UPDATE_INTERVAL)
@@ -116,7 +114,7 @@ public class LocationProvider implements
     public void onConnected(Bundle bundle) {
         Log.i(TAG, "Location services connected.");
 
-        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mCurrentLocation == null) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }

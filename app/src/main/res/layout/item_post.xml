@@ -97,7 +97,7 @@
                     android:paddingRight="@dimen/icon_padding"
                     android:paddingTop="@dimen/icon_paddingTop"
                     android:scaleType="fitXY"
-                    android:src="@drawable/awesome" />>
+                    android:src="@drawable/awesome" />
 
                 <TextView
                     android:id="@+id/tvAwesomeCount"

@@ -20,7 +20,6 @@ import java.util.List;
 public class FeaturePostsFragment extends PostsListFragment {
     private static final String FEATURE_ID = "feature_id";
     private static String featureId;
-    private ParseQuery<Feature> featureParseQuery;
     private ParseQuery<Post> postParseQuery;
     private Feature feature;
 
@@ -36,7 +35,7 @@ public class FeaturePostsFragment extends PostsListFragment {
     protected void populatePosts() {
         featureId = getArguments().getString(FEATURE_ID, "");
 
-        featureParseQuery = ParseQuery.getQuery(Feature.class);
+        ParseQuery<Feature> featureParseQuery = ParseQuery.getQuery(Feature.class);
         postParseQuery = ParseQuery.getQuery(Post.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             postParseQuery.fromPin(featureId);
