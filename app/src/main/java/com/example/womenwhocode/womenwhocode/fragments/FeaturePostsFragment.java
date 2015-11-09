@@ -53,6 +53,7 @@ public class FeaturePostsFragment extends PostsListFragment {
                         if (e == null && list.size() > 0) {
                             clear();
                             add(list);
+                            notifiedDataChanged();
                             clearSpinners();
                             LocalDataStore.unpinAndRepin(list, featureId);
                         } else if (e != null) {
