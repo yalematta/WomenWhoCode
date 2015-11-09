@@ -51,17 +51,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class UserProfileActivity extends AppCompatActivity {
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     private static final int SELECTED_PICTURE = 1;
-    private final String APP_TAG = "MyCustomApp";
     private final String photoFileName = "photo.jpg";
     private final Profile userProfile = new Profile();
     private final PersonalizationDetails pd = new PersonalizationDetails();
     private EditText txtName;
-    private EditText txtEmail;
     private EditText txtjobTitle;
     private Spinner spnNetwork;
     private String userAns;
     private String email = "";
-    private String filepath;
     private ImageView ivGif;
 
     @Override
@@ -81,7 +78,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         }
         txtName = (EditText) findViewById(R.id.txtName);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtjobTitle = (EditText) findViewById(R.id.etJob);
         spnNetwork = (Spinner) findViewById(R.id.spnNetwork);
 
@@ -117,7 +114,6 @@ public class UserProfileActivity extends AppCompatActivity {
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
             }
         });
     }
@@ -218,7 +214,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 cursor.moveToFirst();
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                filepath = cursor.getString(columnIndex);
+                String filepath = cursor.getString(columnIndex);
                 cursor.close();
 
                 //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.pic1);
@@ -278,6 +274,7 @@ public class UserProfileActivity extends AppCompatActivity {
         // Only continue if the SD Card is mounted
         if (isExternalStorageAvailable()) {
             // Get safe storage directory for photos
+            String APP_TAG = "MyCustomApp";
             File mediaStorageDir = new File(
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), APP_TAG);
 
@@ -294,10 +291,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private boolean isExternalStorageAvailable() {
         String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            return true;
-        }
-        return false;
+        return state.equals(Environment.MEDIA_MOUNTED);
     }
 
     private Bitmap rotateBitmapOrientation(String photoFilePath) {
@@ -323,9 +317,8 @@ public class UserProfileActivity extends AppCompatActivity {
         // Rotate Bitmap
         Matrix matrix = new Matrix();
         matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
         // Return result
-        return rotatedBitmap;
+        return Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
     }
 
 

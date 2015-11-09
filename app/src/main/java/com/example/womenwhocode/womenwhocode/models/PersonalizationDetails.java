@@ -11,8 +11,8 @@ import org.json.JSONArray;
  */
 @ParseClassName("PersonalizationDetails")
 public class PersonalizationDetails extends ParseObject {
-    public static String USER_KEY = "user";
-    public static String ANSWERS_KEY = "answers";
+    private static final String USER_KEY = "user";
+    private static final String ANSWERS_KEY = "answers";
 
     public void setAnswers(String answers) {
         put(ANSWERS_KEY, answers);

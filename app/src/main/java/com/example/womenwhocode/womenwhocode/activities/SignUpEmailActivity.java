@@ -20,7 +20,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by pnroy on 10/22/15.
  */
 public class SignUpEmailActivity extends AppCompatActivity {
-    String userAns = "";
+    private String userAns = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -58,7 +58,7 @@ public class TimelineActivity extends AppCompatActivity implements
         TimelineFragment.OnItemClickListener {
 
     public final static String SELECTED_TAB_EXTRA_KEY = "selectedTabIndex";
-    public final static int TIMELINE_TAB = 0;
+    private final static int TIMELINE_TAB = 0;
     private final static int TOPICS_TAB = 1;
     private final static int EVENTS_TAB = 2;
     public Profile profile;

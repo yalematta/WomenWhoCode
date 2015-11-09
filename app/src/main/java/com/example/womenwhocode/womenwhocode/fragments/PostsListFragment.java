@@ -92,36 +92,36 @@ public class PostsListFragment extends Fragment {
         return v;
     }
 
-    protected void setSpinners() {
+    private void setSpinners() {
         rvPosts.setVisibility(ListView.INVISIBLE);
         pb = (ProgressBar) v.findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
     }
 
-    protected void clearSpinners() {
+    void clearSpinners() {
         rvPosts.setVisibility(ListView.VISIBLE);
         pb.setVisibility(ProgressBar.GONE);
     }
 
-    protected void add(List<Post> postList) {
+    void add(List<Post> postList) {
         posts.addAll(postList);
     }
 
-    protected void clear() {
+    void clear() {
         posts.clear();
     }
 
-    protected void notifiedDataChanged() {
+    void notifiedDataChanged() {
         aPosts.notifyDataSetChanged();
     }
 
-    protected void noPostsView(String color) {
+    void noPostsView(String color) {
         RelativeLayout rlPostLists = (RelativeLayout) v.findViewById(R.id.rlPostLists);
         int intColor = Color.parseColor(String.valueOf(color));
         rlPostLists.setBackgroundColor(intColor);
     }
 
-    protected void populatePosts() {
+    void populatePosts() {
         // override this in the other fragments
     }
 

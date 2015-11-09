@@ -33,18 +33,18 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by pnroy on 10/19/15.
  */
 public class PersonalizationActivity extends AppCompatActivity {
-    public Question1Fragment question1Fragment = new Question1Fragment();
+    private final Question1Fragment question1Fragment = new Question1Fragment();
 
-    public LogInFragment logInFragment = new LogInFragment();
-    public SignUpFragment signUpFragment = new SignUpFragment();
-    PersonalizationQuestionnaire pq;
-    PersonalizationDetails pd;
+    private final LogInFragment logInFragment = new LogInFragment();
+    private final SignUpFragment signUpFragment = new SignUpFragment();
+    private PersonalizationQuestionnaire pq;
+    private PersonalizationDetails pd;
     int pageCnt = 0;
-    JSONArray arr1=null;
-    JSONArray arr2=null;
-    JSONArray arr3=null;
-    ArrayList<String> Question = new ArrayList<String>();
-    ArrayList<String[]> Ans = new ArrayList<String[]>();
+    private JSONArray arr1=null;
+    private JSONArray arr2=null;
+    private JSONArray arr3=null;
+    private final ArrayList<String> Question = new ArrayList<>();
+    private final ArrayList<String[]> Ans = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class PersonalizationActivity extends AppCompatActivity {
 
         //for join us
         setFragmentData();
-        if (type.equals("Join")) {
+        if (type != null && type.equals("Join")) {
             //replace contents of fragment with first fragment
             ft.replace(R.id.flPersonalization, question1Fragment);
             Bundle bundle = new Bundle();
@@ -93,7 +93,7 @@ public class PersonalizationActivity extends AppCompatActivity {
     }
 
 
-    public void setFragmentData() {
+    private void setFragmentData() {
         pd = new PersonalizationDetails();
         pq.build();
         HashMap<String, String[]> ques = pq.getQuestionnaire();
@@ -160,7 +160,7 @@ public class PersonalizationActivity extends AppCompatActivity {
         }
     }
 
-    public JSONArray getAnswersArray(View view) {
+    private JSONArray getAnswersArray(View view) {
         final JSONArray ja = new JSONArray();
         RelativeLayout formLayout = (RelativeLayout) view.getParent();
         EditText etOther=(EditText)formLayout.findViewById(R.id.etOther);

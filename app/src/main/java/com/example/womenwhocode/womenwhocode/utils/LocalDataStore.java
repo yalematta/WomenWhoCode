@@ -12,16 +12,16 @@ import java.util.List;
  * Created by zassmin on 10/23/15.
  */
 public class LocalDataStore {
-    public static String EVENT_PIN = "events";
-    public static String FEATURES_PIN = "features";
-    public static String POSTS_PIN = "posts";
-    public static String PROFILE_PIN = "user_profile";
+    public static final String EVENT_PIN = "events";
+    public static final String FEATURES_PIN = "features";
+    public static final String POSTS_PIN = "posts";
+    public static final String PROFILE_PIN = "user_profile";
     public static String NETWORK_PIN = "networks";
-    public static String LOCAL_NETWORK_PIN = "local_networks";
+    public static final String LOCAL_NETWORK_PIN = "local_networks";
     public static String EVENT_POSTS_PIN = "event_posts";
     public static String FEATURE_POSTS_PIN = "feature_posts";
     public static String PERSONALIZATION_DETAIL_PIN="personalization_detail";
-    public static String MESSAGE_PIN = "messages";
+    public static final String MESSAGE_PIN = "messages";
 
     public static void unpinAndRepin(final List data, final String pinName) {
        // Unpin old data and pin new data to local datastore

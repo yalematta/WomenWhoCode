@@ -12,12 +12,12 @@ import java.util.Date;
  */
 @ParseClassName("Message")
 public class Message extends ParseObject {
-    public static final String USER_ID_KEY = "user_id";
-    public static final String BODY_KEY = "body";
+    private static final String USER_ID_KEY = "user_id";
+    private static final String BODY_KEY = "body";
     public static final String EVENT_ID_KEY = "event_id";
     public static final String FEATURE_ID_KEY = "event_id";
     public static final String CREATED_AT_KEY = "createdAt";
-    public static final String PROFILE_KEY = "profile";
+    private static final String PROFILE_KEY = "profile";
     public static final String USER_KEY = "user";
 
     public void setUser(ParseUser user) {

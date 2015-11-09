@@ -19,17 +19,17 @@ import java.util.Calendar;
  */
 @ParseClassName("Event")
 public class Event extends ParseObject {
-    public static String NETWORK_KEY = "network";
-    public static String DATETIME_KEY = "event_date"; // UTC start time of the event, in milliseconds since the epoch
-    public static String LOCATION_KEY = "location"; // venue should be attribute name here
-    public static String URL_KEY = "url"; // could be an event url from meetup, facebook, eventbrite, etc
-    public static String TITLE_KEY = "title";
-    public static String FEATURED_KEY = "featured";
-    public static String MEETUP_EVENT_ID_KEY = "meetup_event_id";
-    public static String DESCRIPTION_KEY = "description";
-    public static String TIMEZONE_KEY = "timezone";
-    public static String SUBSCRIBE_COUNT = "subscribe_count";
-    public static String HEX_COLOR = "hex_color";
+    public static final String NETWORK_KEY = "network";
+    private static final String DATETIME_KEY = "event_date"; // UTC start time of the event, in milliseconds since the epoch
+    private static final String LOCATION_KEY = "location"; // venue should be attribute name here
+    private static final String URL_KEY = "url"; // could be an event url from meetup, facebook, eventbrite, etc
+    private static final String TITLE_KEY = "title";
+    private static final String FEATURED_KEY = "featured";
+    private static final String MEETUP_EVENT_ID_KEY = "meetup_event_id";
+    private static final String DESCRIPTION_KEY = "description";
+    private static final String TIMEZONE_KEY = "timezone";
+    private static final String SUBSCRIBE_COUNT = "subscribe_count";
+    private static final String HEX_COLOR = "hex_color";
 
     public void setHexColor(String hexColor) {
         put(HEX_COLOR, hexColor);
@@ -54,7 +54,7 @@ public class Event extends ParseObject {
         return count;
     }
 
-    public void setNetwork(Network network) {
+    private void setNetwork(Network network) {
         put(NETWORK_KEY, network);
     }
 
@@ -68,7 +68,7 @@ public class Event extends ParseObject {
         return network;
     }
 
-    public void setEventDateTime(String datetime) {
+    private void setEventDateTime(String datetime) {
         put(DATETIME_KEY, datetime);
     }
 
@@ -76,7 +76,7 @@ public class Event extends ParseObject {
         return this.get(DATETIME_KEY).toString();
     }
 
-    public void setLocation(String location) {
+    private void setLocation(String location) {
         put(LOCATION_KEY, location);
     }
 
@@ -84,7 +84,7 @@ public class Event extends ParseObject {
         return this.get(LOCATION_KEY).toString();
     }
 
-    public void setUrl(String url) {
+    private void setUrl(String url) {
         put(URL_KEY, url);
     }
 
@@ -92,7 +92,7 @@ public class Event extends ParseObject {
         return this.get(URL_KEY).toString();
     }
 
-    public void setTitle(String title) {
+    private void setTitle(String title) {
         put(TITLE_KEY, title);
     }
 
@@ -100,7 +100,7 @@ public class Event extends ParseObject {
         return this.get(TITLE_KEY).toString();
     }
 
-    public void setFeatured(boolean featured) {
+    private void setFeatured(boolean featured) {
         put(FEATURED_KEY, featured);
     }
 
@@ -108,7 +108,7 @@ public class Event extends ParseObject {
         return this.getBoolean(FEATURED_KEY);
     }
 
-    public void setMeetupEventId(String id) {
+    private void setMeetupEventId(String id) {
         put(MEETUP_EVENT_ID_KEY, id);
     }
 
@@ -116,7 +116,7 @@ public class Event extends ParseObject {
         return this.get(MEETUP_EVENT_ID_KEY).toString();
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         put(DESCRIPTION_KEY, description);
     }
 
@@ -124,7 +124,7 @@ public class Event extends ParseObject {
         return this.get(DESCRIPTION_KEY).toString();
     }
 
-    public void setTimeZone(String timeZone) {
+    private void setTimeZone(String timeZone) {
         put(TIMEZONE_KEY, timeZone);
     }
 
@@ -132,7 +132,7 @@ public class Event extends ParseObject {
         return this.getString(TIMEZONE_KEY);
     }
 
-    public static Event fromJSON(ModelJSONObject jsonObject) {
+    private static Event fromJSON(ModelJSONObject jsonObject) {
         String eventId = "";
         try {
             eventId = jsonObject.getString("id"); // this should never be null!

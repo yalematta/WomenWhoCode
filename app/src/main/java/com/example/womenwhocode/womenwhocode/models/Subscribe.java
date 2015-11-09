@@ -20,11 +20,11 @@ import java.util.List;
  */
 @ParseClassName("Subscribe")
 public class Subscribe extends ParseObject {
-    public static String NETWORK_KEY = "network";
-    public static String EVENT_KEY = "event";
-    public static String FEATURE_KEY = "feature";
-    public static String SUBSCRIBED_KEY = "subscribed";
-    public static String USER_KEY = "user";
+    private static final String NETWORK_KEY = "network";
+    public static final String EVENT_KEY = "event";
+    public static final String FEATURE_KEY = "feature";
+    public static final String SUBSCRIBED_KEY = "subscribed";
+    public static final String USER_KEY = "user";
 
     public static ParseQuery<Subscribe> subscribeParseQuery;
     // FIXME: temp pointer, should remove when currentUser is in!

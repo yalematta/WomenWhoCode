@@ -25,7 +25,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
@@ -46,26 +45,26 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EventDetailsActivity extends AppCompatActivity {
-    TextView tvEventTitle;
-    TextView tvSubscribeCount;
-    Button btnSubscribeIcon;
-    Event event;
-    ProgressBar pb;
-    RelativeLayout rlEvents;
-    String event_id;
-    ParseUser currentUser;
-    Subscribe subscribe;
-    int subscribeCount;
-    Toolbar toolbar;
-    TextView tvToolbarTitle;
-    ImageView ivEventImage;
+    private TextView tvEventTitle;
+    private TextView tvSubscribeCount;
+    private Button btnSubscribeIcon;
+    private Event event;
+    private ProgressBar pb;
+    private RelativeLayout rlEvents;
+    private String event_id;
+    private ParseUser currentUser;
+    private Subscribe subscribe;
+    private int subscribeCount;
+    private Toolbar toolbar;
+    private TextView tvToolbarTitle;
+    private ImageView ivEventImage;
 
     private CustomViewPager vpPager;
     private CustomTabStrip tabStrip;
 
-    private static String SUBSCRIBED_TEXT = "unfollow";
-    private static String SUBSCRIBE_TEXT = "follow";
-    private static String SUBSCRIBERS_TEXT = " followers";
+    private static final String SUBSCRIBED_TEXT = "unfollow";
+    private static final String SUBSCRIBE_TEXT = "follow";
+    private static final String SUBSCRIBERS_TEXT = " followers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +150,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                             public void done(Subscribe sub, ParseException e) {
                                 if (sub != null) {
                                     subscribe = sub;
-                                    if (sub.getSubscribed() == true) {
+                                    if (sub.getSubscribed()) {
                                         displayChat();
                                         btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
                                         ivEventImage.setImageResource(R.drawable.ic_calendar_check);
@@ -206,7 +205,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     public void onSubscribe(View view) {
         if (subscribe != null) {
-            if (subscribe.getSubscribed() == true) { // maybe just check against icon value
+            if (subscribe.getSubscribed()) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
                 hideChat(); //
 
@@ -283,12 +282,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                EventPostsFragment eventPostsFragment = EventPostsFragment.newInstance(event_id);
-                return eventPostsFragment;
+                return EventPostsFragment.newInstance(event_id);
             } else if (position == 1) {
                 // TODO: figure out subscription value
-                EventChatFragment eventChatFragment = EventChatFragment.newInstance(event_id);
-                return eventChatFragment;
+                return EventChatFragment.newInstance(event_id);
             } else return null;
         }
 

@@ -18,8 +18,8 @@ import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
  * Created by pnroy on 10/19/15.
  */
 public class Question1Fragment extends Fragment {
-Button btnNext;
-PersonalizationDetails pd;
+private Button btnNext;
+private PersonalizationDetails pd;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -44,10 +44,9 @@ PersonalizationDetails pd;
 
             tvQuestion.setText(Question);
             tvQuestion.setTextColor(getResources().getColor(R.color.whitish));
-            String[] ansArray = (String[]) Ans;
-            for (int i = 0; i < ansArray.length; i++) {
+            for (int i = 0; i < Ans.length; i++) {
                 CheckBox cb = new CheckBox(getContext());
-                cb.setText(ansArray[i]);
+                cb.setText(Ans[i]);
 
                 cb.setTextColor(getResources().getColor(R.color.whitish));
                 l.addView(cb);

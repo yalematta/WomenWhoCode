@@ -36,10 +36,9 @@ public class EventsFragment extends Fragment {
     private RecyclerView rvEvents;
     private OnEventItemClickListener listener;
     private ProgressBar pb;
-    private ParseQuery<Profile> profileParseQuery;
     private ParseQuery<Event> query;
     private ParseQuery<Network> networkParseQuery;
-    private static int MILE_RANGE = 25;
+    private static final int MILE_RANGE = 25;
 
     public interface OnEventItemClickListener {
         void onEventClickListener(Event event);
@@ -93,7 +92,7 @@ public class EventsFragment extends Fragment {
 
     private void populateEvents() {
         // load queries
-        profileParseQuery = ParseQuery.getQuery(Profile.class); // maybe put this in shared prefs!
+        ParseQuery<Profile> profileParseQuery = ParseQuery.getQuery(Profile.class);
         query = ParseQuery.getQuery(Event.class);
         networkParseQuery = ParseQuery.getQuery(Network.class);
 
