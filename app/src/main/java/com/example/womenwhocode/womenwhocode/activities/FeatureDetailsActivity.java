@@ -26,7 +26,6 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
@@ -46,7 +45,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by shehba.shahab on 10/18/15.
  */
-public class FeatureDetailsActivity extends AppCompatActivity implements PostsListFragment.OnFeatureScroll {
+public class FeatureDetailsActivity extends AppCompatActivity {
 
     private String feature_id;
     private ProgressBar pb;
@@ -114,7 +113,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements PostsLi
 
         // hide scroll view so the progress bar is the center of attention
         rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures); // TODO: animate!
-//        rlFeatures.setVisibility(ScrollView.INVISIBLE);
+        rlFeatures.setVisibility(RelativeLayout.INVISIBLE);
 
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
@@ -162,7 +161,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements PostsLi
 
                                 // hide the progress bar, show the main view
                                 pb.setVisibility(ProgressBar.GONE);
-//                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
+                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -253,12 +252,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements PostsLi
                 }
             });
         }
-    }
-
-    @Override
-    public void onFeatureScrollListener(int itemPosition) {
-        // listener place holder
-//            rlFeatures.setVisibility(RelativeLayout.GONE);
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {

@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,185 +31,98 @@ import butterknife.ButterKnife;
 /**
  * Created by zassmin on 10/26/15.
  */
-public class PostsAdapter extends ArrayAdapter<Post> {
-    private ParseUser currentUser;
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+    private List<Post> mPosts;
+    private static OnItemClickListener listener;
 
-    public PostsAdapter(Context context, ArrayList<Post> posts) {
-        super(context, android.R.layout.simple_list_item_1, posts);
+    public interface OnItemClickListener {
+        void onAwesomeClick(View itemView, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
+    public PostsAdapter(List<Post> posts) {
+        this.mPosts = posts;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Post post = getItem(position);
-        currentUser = ParseUser.getCurrentUser();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View postView = inflater.inflate(R.layout.item_post, parent, false);
+        ViewHolder viewHolder = new ViewHolder(postView);
+        return viewHolder;
+    }
 
-        final ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.item_post, parent, false);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Post post = mPosts.get(position);
 
-            viewHolder = new ViewHolder(convertView);
-            viewHolder.post = post;
+        // set up vars
+        TextView tvPostNameBy = holder.tvPostNameBy;
+        ImageView ivUserPhoto = holder.ivUserPhoto;
+        TextView tvPostDescription = holder.tvPostDescription;
+        TextView tvRelativeTime = holder.tvRelativeTime;
+        TextView tvAwesomeCount = holder.tvAwesomeCount;
+        ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+        // to resolve bug where icon changes on many items
+        btnAwesomeIcon.setImageResource(0);
+        btnAwesomeIcon.setImageResource(R.drawable.awesome);
 
-        // TODO: set awesome icon here - default - not awesome yet
-        // get the awesome object
-        ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
-        awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
-        awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
-        awesomeParseQuery.getFirstInBackground(new GetCallback<Awesome>() {
-            @Override
-            public void done(Awesome a, ParseException e) {
-                if (e == null) {
-                    viewHolder.tvAwesomeIcon.setTag(a);
-                    // TODO if awesome.getAwesome == true change the icon to the awesomedd icon
-                } else {
-                    viewHolder.tvAwesomeIcon.setTag(null);
-                }
-            }
-        });
-
+        // user details
+        ivUserPhoto.setImageResource(0);
+        Context context = tvPostNameBy.getContext();
         ParseUser postUser = post.getUser();
         if (postUser != null) {
-            viewHolder.tvPostNameBy.setText(postUser.getUsername());
+            tvPostNameBy.setText(postUser.getUsername());
             // TODO: find the profile for user to get their image :(
-            // TODO: maybe add image icon instead
-            Picasso.with(getContext())
+            Picasso.with(context)
                     .load(post.getFeatureImageUrl())
                     .transform(new CircleTransform())
                     .resize(75, 75)
                     .centerCrop()
-                    .into(viewHolder.ivUserPhoto);
+                    .into(ivUserPhoto);
         } else {
-            viewHolder.ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
+            ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
 
-        viewHolder.tvPostDescription.setText(post.getDescription());
-        viewHolder.tvRelativeTime.setText(post.getPostDateTime());
+        tvPostDescription.setText(post.getDescription());
+        tvRelativeTime.setText(post.getPostDateTime());
 
         int awesomeCount = post.getAwesomeCount();
-        viewHolder.tvAwesomeCount.setText(String.valueOf(awesomeCount));
-
-        // Store all necessary data for click
-        viewHolder.tvPostDescription.setTag(post);
-
-        viewHolder.tvAwesomeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View parent = (View) v.getParent();
-                // grab the tagged objects
-                Post post = (Post) parent.findViewById(R.id.tvPostDescription).getTag();
-                Awesome awesome = (Awesome) v.getTag();
-                TextView tvAwesomeCount = (TextView) parent.findViewById(R.id.tvAwesomeCount);
-
-                // TODO: start icon and counter animation here!
-                // check which icon is it - awesome or unawesome
-                // do animation on the icon
-                // switch them with a nice scale in out
-                // update count value based on awesome count (+||-)
-                // ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
-                // anim.setDuration(1000);
-                // anim.start();
-
-                onAwesome(tvAwesomeCount, awesome, post, v);
-            }
-        });
-
-        return convertView;
-    }
-
-    private void animateOnAwesome(final ImageButton awesomeIcon) {
-        Animation animateOnAwesome;
-        animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_up);
-        awesomeIcon.startAnimation(animateOnAwesome);
-        animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                awesomeIcon.setImageResource(R.drawable.awesomeddd);
-            }
-
-            public void onAnimationEnd(Animation anim) {
-                awesomeIcon.setImageResource(R.drawable.awesome);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-    }
-
-    private void animateOnUnawesome(ImageButton awesomeIcon) {
-        Animation animation;
-        animation = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_down);
-        awesomeIcon.startAnimation(animation);
-    }
-
-    private void onAwesome(TextView tvAwesomeCount, Awesome awesome, Post savedPost, View v) {
-        int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
-        ImageButton awesomeIcon = (ImageButton) v.findViewById(R.id.btnAwesomeIcon);
-
-        if (awesome != null) {
-            if (awesome.getAwesomed()) {
-                // Update UI thread
-                awesomeCount--;
-                animateOnUnawesome(awesomeIcon);
-
-                // Build parse request
-                awesome.setAwesomed(false);
-            } else {
-                // Update UI thread
-                awesomeCount++;
-                animateOnAwesome(awesomeIcon);
-
-                // Build parse request
-                awesome.setAwesomed(true);
-            }
-        } else {
-            // Update UI thread
-            awesomeCount++;
-            animateOnAwesome(awesomeIcon);
-
-            // Build parse request
-            awesome = new Awesome();
-            awesome.setAwesomed(true);
-            awesome.setUser(currentUser);
-            awesome.setPost(savedPost);
-        }
-
-        // Update the UI thread
-        // TODO: it's probably safe to do this before the onAwesome
         tvAwesomeCount.setText(String.valueOf(awesomeCount));
-        // reset the awesome account in case it was null before!
-        v.setTag(awesome);
-
-//        ObjectAnimator anim = ObjectAnimator.ofFloat(savedAwesomeCount, "alpha", 1, 0, 1, 0, 1); // Flash
-//        anim.setDuration(1000);
-//        anim.start();
-
-        // Send data to parse
-        awesome.saveInBackground();
-        savedPost.setAwesomeCount(awesomeCount);
-        savedPost.saveInBackground();
     }
 
-    static class ViewHolder {
-        @Bind(R.id.ivUserPhoto) ImageView ivUserPhoto;
-        @Bind(R.id.tvPostNameBy) TextView tvPostNameBy;
-        @Bind(R.id.tvPostDescription) TextView tvPostDescription;
-        @Bind(R.id.tvAwesomeCount) TextView tvAwesomeCount;
-        @Bind(R.id.btnAwesomeIcon) ImageButton tvAwesomeIcon;
-        @Bind(R.id.tvRelativeTime) TextView tvRelativeTime;
-        Post post;
+    @Override
+    public int getItemCount() {
+        return mPosts.size();
+    }
 
-        ViewHolder(View view) {
-            ButterKnife.bind(this, view);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.ivUserPhoto) public ImageView ivUserPhoto;
+        @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
+        @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon) public ImageButton btnAwesomeIcon;
+        @Bind(R.id.tvRelativeTime) public TextView tvRelativeTime;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+
+            ButterKnife.bind(this, itemView);
+
+            btnAwesomeIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onAwesomeClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 }

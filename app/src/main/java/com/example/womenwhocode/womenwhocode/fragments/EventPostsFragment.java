@@ -55,7 +55,7 @@ public class EventPostsFragment extends PostsListFragment {
                             clear();
                             // add to adapter
                             add(list);
-
+                            notifiedDataChanged();
                             clearSpinners();
                             // pin locally
                             LocalDataStore.unpinAndRepin(list, eventId);
