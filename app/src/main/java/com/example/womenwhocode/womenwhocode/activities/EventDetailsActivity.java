@@ -158,6 +158,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                                     } else {
                                         hideChat();
                                         btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
+                                        ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                     }
                                 } else {
                                     hideChat();
@@ -214,6 +215,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
                 tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
 
                 // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
