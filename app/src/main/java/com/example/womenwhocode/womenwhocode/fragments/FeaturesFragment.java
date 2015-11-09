@@ -54,7 +54,7 @@ public class FeaturesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_features, container, false);
 
         rvFeatures = (RecyclerView) view.findViewById(R.id.lvFeatures);
-        rvFeatures.setVisibility(ListView.INVISIBLE);
+        rvFeatures.setVisibility(RecyclerView.INVISIBLE);
 
         // show progress bar in the meantime
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
@@ -104,7 +104,7 @@ public class FeaturesFragment extends Fragment {
                     aFeatures.notifyDataSetChanged(); // FIXME: last resort, do something else
                     // hide progress bar, make list view appear
                     pb.setVisibility(ProgressBar.GONE);
-                    rvFeatures.setVisibility(ListView.VISIBLE);
+                    rvFeatures.setVisibility(RecyclerView.VISIBLE);
                     LocalDataStore.unpinAndRepin(lFeatures, LocalDataStore.FEATURES_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());

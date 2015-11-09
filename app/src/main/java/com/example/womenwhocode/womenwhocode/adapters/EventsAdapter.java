@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,56 +21,81 @@ import butterknife.ButterKnife;
 /**
  * Created by zassmin on 10/18/15.
  */
-public class EventsAdapter extends ArrayAdapter<Event> {
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
+    private List<Event> mEvents;
+    private static OnItemClickListener listener;
 
-    public EventsAdapter(Context context, ArrayList<Event> events) {
-        super(context, android.R.layout.simple_list_item_1, events);
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public EventsAdapter(List<Event> events) {
+        this.mEvents = events;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        Event event = getItem(position);
-        // ParseUser currentUser = ParseUser.getCurrentUser();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View eventView = inflater.inflate(R.layout.item_event, parent, false);
+        ViewHolder viewHolder = new ViewHolder(eventView);
+        return viewHolder;
+    }
 
-        final ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_event, parent,
-                    false);
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Event event = mEvents.get(position);
 
-            holder = new ViewHolder(convertView);
-            holder.event = event;
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        TextView tvEventNetwork = holder.tvEventNetwork;
+        TextView tvEventTitle = holder.tvEventTitle;
+        TextView tvEventLocation = holder.tvEventLocation;
+        TextView tvEventTime = holder.tvEventTime;
+        TextView tvEventDate = holder.tvEventDate;
 
         if (event.getNetwork() != null) {
-            holder.tvEventNetwork.setText(event.getNetwork().getTitle() + " network");
+            tvEventNetwork.setText(event.getNetwork().getTitle() + " network");
         }
 
         long time = Utilities.setLocalDateTime(event.getEventDateTime());
         String date = Utilities.dateTimeParser(time, Utilities.DATE_FORMAT);
         String prettyTime = Utilities.dateTimeParser(time, Utilities.TIME_FORMAT);
 
-        holder.tvEventTitle.setText(event.getTitle());
-        holder.tvEventLocation.setText("at " + event.getLocation());
-        holder.tvEventTime.setText(prettyTime);
-        holder.tvEventDate.setText(date);
-
-        return convertView;
+        tvEventTitle.setText(event.getTitle());
+        tvEventLocation.setText("at " + event.getLocation());
+        tvEventTime.setText(prettyTime);
+        tvEventDate.setText(date);
     }
 
-    static class ViewHolder {
-        @Bind(R.id.tvEventTitle) TextView tvEventTitle;
-        @Bind(R.id.tvEventLocation) TextView tvEventLocation;
-        @Bind(R.id.tvEventTime) TextView tvEventTime;
-        @Bind(R.id.tvEventDate) TextView tvEventDate;
-        @Bind(R.id.tvEventNetwork) TextView tvEventNetwork;
-        Event event;
+    @Override
+    public int getItemCount() {
+        return mEvents.size();
+    }
 
-        ViewHolder(View view) {
-            ButterKnife.bind(this, view);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tvEventTitle) public TextView tvEventTitle;
+        @Bind(R.id.tvEventLocation) public TextView tvEventLocation;
+        @Bind(R.id.tvEventTime) public TextView tvEventTime;
+        @Bind(R.id.tvEventDate) public TextView tvEventDate;
+        @Bind(R.id.tvEventNetwork) public TextView tvEventNetwork;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+
+            ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
         }
+
     }
 }

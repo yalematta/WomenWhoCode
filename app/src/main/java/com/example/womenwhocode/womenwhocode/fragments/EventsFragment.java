@@ -1,20 +1,15 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
@@ -25,23 +20,20 @@ import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by shehba.shahab on 10/16/15.
  */
 public class EventsFragment extends Fragment {
-    ArrayList<Event> events;
-    EventsAdapter aEvents;
-    ListView lvEvents;
+    private ArrayList<Event> events;
+    private EventsAdapter aEvents;
+    private RecyclerView rvEvents;
     private OnEventItemClickListener listener;
     private ProgressBar pb;
     private ParseQuery<Profile> profileParseQuery;
@@ -50,39 +42,41 @@ public class EventsFragment extends Fragment {
     private static int MILE_RANGE = 25;
 
     public interface OnEventItemClickListener {
-        public void onEventClickListener(Event event);
+        void onEventClickListener(Event event);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         events = new ArrayList<>();
-        aEvents = new EventsAdapter(getActivity(), events);
+        aEvents = new EventsAdapter(events);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
-        lvEvents = (ListView) view.findViewById(R.id.lvEvents);
-        // hide the listview until data is loaded
-        lvEvents.setVisibility(ListView.INVISIBLE);
+        rvEvents = (RecyclerView) view.findViewById(R.id.lvEvents);
+        // hide the recycler view until data is loaded
+        rvEvents.setVisibility(RecyclerView.INVISIBLE);
 
         // load progress bar
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
 
-        lvEvents.setAdapter(aEvents);
+        rvEvents.setAdapter(aEvents);
+        rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
 
         populateEvents(); // FIXME: look into making this call happen on a daily basis and/or when there is a change in the user's location
 
-        lvEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        aEvents.setOnItemClickListener(new EventsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Event event = aEvents.getItem(position);
+            public void onItemClick(View itemView, int position) {
+                Event event = events.get(position);
                 listener.onEventClickListener(event);
             }
         });
+
         return view;
     }
 
@@ -128,11 +122,12 @@ public class EventsFragment extends Fragment {
                     query.findInBackground(new FindCallback<Event>() {
                         public void done(List<Event> eventList, ParseException e) {
                             if (eventList != null && e == null) {
-                                aEvents.clear();
-                                aEvents.addAll(eventList);
+                                events.clear();
+                                events.addAll(eventList);
+                                aEvents.notifyDataSetChanged();
                                 // hide progress bar, make list view appear
                                 pb.setVisibility(ProgressBar.GONE);
-                                lvEvents.setVisibility(ListView.VISIBLE);
+                                rvEvents.setVisibility(RecyclerView.VISIBLE);
                                 LocalDataStore.unpinAndRepin(eventList, LocalDataStore.EVENT_PIN);
                             } else if (e != null) {
                                 Log.d("PARSE_EVENTS_FAIL", "Error: " + e.getMessage());
