@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,13 +18,17 @@ import android.widget.ProgressBar;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Recommendation;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
@@ -37,6 +42,15 @@ public class FeaturesFragment extends Fragment {
     private ProgressBar pb;
     private ArrayList<Feature> features;
     private OnFeatureItemClickListener listener;
+    private ParseUser currentUser;
+    private ArrayList<Feature> recommendedFeatures;
+    private ArrayList<Feature> subscribedFeatures;
+    private int listCounter;
+    private ArrayList<Object> items;
+    private Runnable runnable;
+    private final int RUN_FREQUENCY = 1000; // ms
+    private Handler handler;
+    private HashSet<Feature> featuresSet;
 
     public interface OnFeatureItemClickListener {
         void onFeatureClickListener(Feature feature);
@@ -45,8 +59,29 @@ public class FeaturesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        items = new ArrayList<>();
         features = new ArrayList<>();
-        aFeatures = new FeaturesAdapter(features);
+        aFeatures = new FeaturesAdapter(items);
+        currentUser = ParseUser.getCurrentUser();
+        recommendedFeatures = new ArrayList<>();
+        subscribedFeatures = new ArrayList<>();
+        listCounter = 0;
+        handler = new Handler();
+        featuresSet = new HashSet<>();
+
+        // Defines a runnable which is run every 100ms
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                // FIXME: only do this when there are new messages - handler.postDelayed(this, RUN_FREQUENCY);
+                if (listCounter == 3) {
+                    loadItems();
+                } else if (listCounter < 3) {
+                    handler.postDelayed(this, RUN_FREQUENCY);
+                }
+            }
+        };
     }
 
     @Override
@@ -65,15 +100,18 @@ public class FeaturesFragment extends Fragment {
         rvFeatures.setItemAnimator(new SlideInUpAnimator()); // FIXME: can't tell if it's working!
 
         populateFeaturesList();
+        handler.postDelayed(runnable, RUN_FREQUENCY);
 
-        aFeatures.setOnItemClickListener(new FeaturesAdapter.OnItemClickListener() {
+        aFeatures.setOnItemClickListener(new FeaturesAdapter.OnItemClickListener() { // get on click listener working for this
             @Override
             public void onItemClick(View itemView, int position) {
-                Feature feature = features.get(position);
-                if (feature.getTitle().contains("Recommend")) {
-                    showEditDialog();
-                } else {
-                    listener.onFeatureClickListener(feature);
+                if (items.get(position) instanceof Feature) {
+                    Feature feature = (Feature) items.get(position);
+                    if (feature.getTitle().contains("Recommend")) {
+                        showEditDialog();
+                    } else {
+                        listener.onFeatureClickListener(feature);
+                    }
                 }
             }
         });
@@ -95,22 +133,92 @@ public class FeaturesFragment extends Fragment {
             query.fromPin(LocalDataStore.FEATURES_PIN);
         }
 
-        query.orderByAscending(Feature.TITLE_KEY);
+        ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
+        subscribeParseQuery.whereEqualTo(Subscribe.USER_KEY, currentUser);
+        subscribeParseQuery.whereExists(Subscribe.FEATURE_KEY);
+        subscribeParseQuery.whereEqualTo(Subscribe.SUBSCRIBED_KEY, true);
+        subscribeParseQuery.include("feature");
+        subscribeParseQuery.findInBackground(new FindCallback<Subscribe>() {
+            @Override
+            public void done(List<Subscribe> list, ParseException e) {
+                if (e == null && list.size() > 0) {
+                    subscribedFeatures.clear();
+                    for (Subscribe subscribe : list) {
+                        subscribedFeatures.add(subscribe.getFeature());
+                    }
+                    listCounter++;
+                }
+            }
+        });
+
+        ParseQuery<Recommendation> recommendationParseQuery = ParseQuery.getQuery(Recommendation.class);
+        recommendationParseQuery.whereEqualTo(Recommendation.USER_ID_KEY, currentUser.getObjectId());
+        recommendationParseQuery.whereEqualTo(Recommendation.VALID_KEY, true);
+        recommendationParseQuery.include("feature");
+        recommendationParseQuery.findInBackground(new FindCallback<Recommendation>() {
+            @Override
+            public void done(List<Recommendation> list, ParseException e) {
+                if (e == null && list.size() > 0) { // has dups
+                    recommendedFeatures.clear();
+                    for (Recommendation recommendation : list) {
+                        recommendedFeatures.add(recommendation.getFeature());
+                    }
+                    listCounter ++;
+                }
+            }
+        });
+
+        // FIXME: remove dups
         query.findInBackground(new FindCallback<Feature>() {
             public void done(List<Feature> lFeatures, ParseException e) {
                 if (e == null && lFeatures.size() > 0) {
-                    features.clear();
+                    features.clear(); // this won't work
+                    // only add after feature item
                     features.addAll(lFeatures);
-                    aFeatures.notifyDataSetChanged(); // FIXME: last resort, do something else
-                    // hide progress bar, make list view appear
-                    pb.setVisibility(ProgressBar.GONE);
-                    rvFeatures.setVisibility(RecyclerView.VISIBLE);
+                    listCounter ++;
                     LocalDataStore.unpinAndRepin(lFeatures, LocalDataStore.FEATURES_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
             }
         });
+    }
+
+    private void loadItems() {
+        handler.removeCallbacks(runnable);
+        // stop handler
+        items.clear();
+        featuresSet.clear();
+        if (subscribedFeatures.size() > 0) { // would it be safe to check for null?
+            items.add("Following:");
+            for (Feature f : subscribedFeatures) {
+                if (featuresSet.add(f)) {
+                    items.add(f);
+                }
+            }
+        }
+
+        if (recommendedFeatures.size() > 0) {
+            items.add("Recommended for you:");
+            for (Feature f : recommendedFeatures) {
+                if (featuresSet.add(f)) {
+                    items.add(f);
+                }
+            }
+        }
+
+        items.add("All topics:");
+        for (Feature f : features) {
+            if (featuresSet.add(f)) {
+                items.add(f);
+            }
+        }
+
+        aFeatures.notifyDataSetChanged(); // FIXME: last resort, do something else
+        // hide progress bar, make list view appear
+        pb.setVisibility(ProgressBar.GONE);
+        rvFeatures.setVisibility(RecyclerView.VISIBLE);
+        listCounter = 0;
     }
 
     @Override

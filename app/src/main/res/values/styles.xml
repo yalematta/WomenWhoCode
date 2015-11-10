@@ -53,6 +53,14 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <style name="TextView.TitleText.FeatureHeader" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
     <style name="TextView.Subtitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_subheader_text_size</item>
         <item name="android:textStyle">normal</item>

@@ -23,34 +23,64 @@ import butterknife.ButterKnife;
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHolder> {
+public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
-    private final List<Feature> mFeatures;
+    private List<Object> items;
+    private final int TOPIC = 0, TOPIC_HEADER = 1;
 
-    public FeaturesAdapter(List<Feature> features) {
-        mFeatures = features;
+    public FeaturesAdapter(List<Object> items) {
+        this.items = items;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         FeaturesAdapter.listener = listener;
     }
 
-    public FeaturesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder viewHolder = null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        View featureView = inflater.inflate(R.layout.item_feature, parent, false);
+        switch (viewType) {
+            case TOPIC:
+                View viewTopic = inflater.inflate(R.layout.item_feature, parent, false);
+                viewHolder = new ViewHolderTopic(viewTopic);
+                break;
+            case TOPIC_HEADER:
+                View viewTopicHeader = inflater.inflate(R.layout.item_topic_header, parent, false);
+                viewHolder = new ViewHolderTopicHeader(viewTopicHeader);
+                break;
+        }
 
-        return new ViewHolder(featureView);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(FeaturesAdapter.ViewHolder holder, int position) {
-        Feature feature = mFeatures.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case TOPIC:
+                ViewHolderTopic viewHolderTopic = (ViewHolderTopic) holder;
+                configureViewHolderTopic(viewHolderTopic, position);
+                break;
+            case TOPIC_HEADER:
+                ViewHolderTopicHeader viewHolderTopicHeader = (ViewHolderTopicHeader) holder;
+                configureViewHolderTopicHeader(viewHolderTopicHeader, position);
+                break;
+        }
 
-        TextView tvFeatureTitle = holder.tvFeatureTitle;
-        ImageView ivFeatureImage = holder.ivFeatureImage;
-        CardView cvFeature = holder.cvFeature;
+    }
+
+    private void configureViewHolderTopicHeader(ViewHolderTopicHeader viewHolderTopicHeader, int position) {
+        TextView tvTopicHeader = viewHolderTopicHeader.tvTopicHeader;
+        String header = (String) items.get(position);
+        tvTopicHeader.setText(header);
+    }
+
+    private void configureViewHolderTopic(ViewHolderTopic viewHolderTopic, int position) {
+        Feature feature = (Feature) items.get(position);
+
+        TextView tvFeatureTitle = viewHolderTopic.tvFeatureTitle;
+        ImageView ivFeatureImage = viewHolderTopic.ivFeatureImage;
+        CardView cvFeature = viewHolderTopic.cvFeature;
 
         // Insert the model data into each of the view items
         String title = feature.getTitle();
@@ -80,19 +110,29 @@ public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mFeatures.size();
+        return items.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (items.get(position) instanceof Feature) {
+            return TOPIC;
+        } else if (items.get(position) instanceof String) {
+            return TOPIC_HEADER;
+        }
+        return -1;
     }
 
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolderTopic extends RecyclerView.ViewHolder {
         @Bind(R.id.tvFeatureTitle) public TextView tvFeatureTitle;
         @Bind(R.id.ivFeatureImage) public ImageView ivFeatureImage;
         @Bind(R.id.cvFeature) public CardView cvFeature;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolderTopic(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -104,6 +144,15 @@ public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHo
                     }
                 }
             });
+        }
+    }
+
+    public static class ViewHolderTopicHeader extends RecyclerView.ViewHolder {
+        @Bind(R.id.tvTopicHeader) public TextView tvTopicHeader;
+
+        public ViewHolderTopicHeader(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
