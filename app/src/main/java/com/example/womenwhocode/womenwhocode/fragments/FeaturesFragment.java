@@ -28,6 +28,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
@@ -49,6 +50,7 @@ public class FeaturesFragment extends Fragment {
     private Runnable runnable;
     private final int RUN_FREQUENCY = 1000; // ms
     private Handler handler;
+    private HashSet<Feature> featuresSet;
 
     public interface OnFeatureItemClickListener {
         void onFeatureClickListener(Feature feature);
@@ -65,6 +67,7 @@ public class FeaturesFragment extends Fragment {
         subscribedFeatures = new ArrayList<>();
         listCounter = 0;
         handler = new Handler();
+        featuresSet = new HashSet<>();
 
         // Defines a runnable which is run every 100ms
         runnable = new Runnable() {
@@ -185,18 +188,31 @@ public class FeaturesFragment extends Fragment {
         handler.removeCallbacks(runnable);
         // stop handler
         items.clear();
+        featuresSet.clear();
         if (subscribedFeatures.size() > 0) { // would it be safe to check for null?
             items.add("Following:");
-            items.addAll(subscribedFeatures);
+            for (Feature f : subscribedFeatures) {
+                if (featuresSet.add(f)) {
+                    items.add(f);
+                }
+            }
         }
 
         if (recommendedFeatures.size() > 0) {
             items.add("Recommended for you:");
-            items.addAll(recommendedFeatures);
+            for (Feature f : recommendedFeatures) {
+                if (featuresSet.add(f)) {
+                    items.add(f);
+                }
+            }
         }
 
         items.add("All topics:");
-        items.addAll(features);
+        for (Feature f : features) {
+            if (featuresSet.add(f)) {
+                items.add(f);
+            }
+        }
 
         aFeatures.notifyDataSetChanged(); // FIXME: last resort, do something else
         // hide progress bar, make list view appear
