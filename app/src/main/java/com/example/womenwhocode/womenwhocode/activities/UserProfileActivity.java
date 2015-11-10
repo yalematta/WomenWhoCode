@@ -48,6 +48,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -213,20 +214,22 @@ public class UserProfileActivity extends AppCompatActivity {
                     // get features with those tags
                     ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
                     featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
+                    featureTagParseQuery.include("feature");
                     featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
                         @Override
                         public void done(List<FeatureTag> list, ParseException e) {
                             if (e == null) {
+                                HashSet<Feature> featureSet = new HashSet<>(); // to catch dups!
                                 for (FeatureTag featureTag : list) {
-                                    // create recommendations
-                                    // this isn't considering dups...
-                                    // might be find since topics query might consider dups
-                                    Recommendation r = new Recommendation();
-                                    r.setFeature(featureTag.getFeature());
-                                    r.setFeatureId(featureTag.getFeature().getObjectId());
-                                    r.setUserId(currentUser.getObjectId());
-                                    r.setValid(true);
-                                    r.saveInBackground();
+                                    if (featureSet.add(featureTag.getFeature())) { // 0 and 3
+                                        // create recommendations
+                                        Recommendation r = new Recommendation();
+                                        r.setFeature(featureTag.getFeature());
+                                        r.setFeatureId(featureTag.getFeature().getObjectId());
+                                        r.setUserId(currentUser.getObjectId());
+                                        r.setValid(true);
+                                        r.saveInBackground();
+                                    }
                                 }
                             }
                         }
