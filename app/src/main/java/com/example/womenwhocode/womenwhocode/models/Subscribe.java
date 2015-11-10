@@ -20,7 +20,7 @@ import java.util.List;
  */
 @ParseClassName("Subscribe")
 public class Subscribe extends ParseObject {
-    private static final String NETWORK_KEY = "network";
+    public static final String NETWORK_KEY = "network";
     public static final String EVENT_KEY = "event";
     public static final String FEATURE_KEY = "feature";
     public static final String SUBSCRIBED_KEY = "subscribed";
