@@ -26,12 +26,18 @@ import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.FeatureTag;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.models.Recommendation;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.models.Tag;
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -40,6 +46,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,6 +67,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private String userAns;
     private String email = "";
     private ImageView ivGif;
+    private ParseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +133,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public void OnFinalize(View view) {
         try {
-            final ParseUser currentUser;
-
             // Save user with the updated input in Profile model
             if(!TextUtils.isEmpty(txtName.getText().toString())) {
                 userProfile.setFullName(txtName.getText().toString());
@@ -147,45 +153,93 @@ public class UserProfileActivity extends AppCompatActivity {
             pd.setUser(currentUser);
             pd.save();
 
-            // Auto subscribe user to features
-            final ArrayList<Feature> features = new ArrayList<>();
-            ParseQuery<Feature> featureQuery = ParseQuery.getQuery(Feature.class);
-            featureQuery.whereEqualTo(Feature.AUTO_SUBSCRIBE_KEY, true);
-            featureQuery.findInBackground(new FindCallback<Feature>() {
-                public void done(List<Feature> featureList, ParseException e) {
-                    if (e == null) {
-
-                        for (int i = 0; i < featureList.size(); i++) {
-                            features.add(featureList.get(i));
-                        }
-
-                        for (int j = 0; j < features.size(); j++) {
-
-                            Feature feature = features.get(j);
-
-                            final Subscribe subscribe = new Subscribe();
-                            subscribe.setSubscribed(true);
-                            subscribe.setUser(currentUser);
-                            subscribe.setFeature(feature);
-                            subscribe.saveInBackground();
-
-                            int subscribeCount = feature.getSubscribeCount() + 1;
-                            feature.setSubscribeCount(subscribeCount);
-                            feature.saveInBackground();
-                        }
-
-                        Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
-                        startActivity(i);
-                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-
-                    } else {
-                        Log.d("AutoSubscribeError", "Error: " + e.getMessage());
-                    }
-                }
-            });
+            recommendUserToTopic(); // FIXME: will this be done by the time a user go to topics?
+            autoSubscribeUserToTopics();
         } catch (ParseException p) {
             Log.d("FinalizationError", "Error: " + p.getMessage());
         }
+    }
+
+    private void autoSubscribeUserToTopics() {
+        // Auto subscribe user to features
+        final ArrayList<Feature> features = new ArrayList<>();
+        ParseQuery<Feature> featureQuery = ParseQuery.getQuery(Feature.class);
+        featureQuery.whereEqualTo(Feature.AUTO_SUBSCRIBE_KEY, true);
+        featureQuery.findInBackground(new FindCallback<Feature>() {
+            public void done(List<Feature> featureList, ParseException e) {
+                if (e == null) {
+
+                    for (int i = 0; i < featureList.size(); i++) {
+                        features.add(featureList.get(i));
+                    }
+
+                    for (int j = 0; j < features.size(); j++) {
+
+                        Feature feature = features.get(j);
+
+                        final Subscribe subscribe = new Subscribe();
+                        subscribe.setSubscribed(true);
+                        subscribe.setUser(currentUser);
+                        subscribe.setFeature(feature);
+                        subscribe.saveInBackground();
+
+                        int subscribeCount = feature.getSubscribeCount() + 1;
+                        feature.setSubscribeCount(subscribeCount);
+                        feature.saveInBackground();
+                    }
+
+                    startTimelineActivityIntent();
+                } else {
+                    Log.d("AutoSubscribeError", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void recommendUserToTopic() {
+        // get personalization details
+        ParseQuery<PersonalizationDetails> personalizationDetailsParseQuery = ParseQuery.getQuery(PersonalizationDetails.class);
+        personalizationDetailsParseQuery.whereEqualTo(PersonalizationDetails.USER_KEY, currentUser);
+        personalizationDetailsParseQuery.getFirstInBackground(new GetCallback<PersonalizationDetails>() {
+            @Override
+            public void done(PersonalizationDetails personalizationDetails, ParseException e) {
+                if (e == null) {
+                    // parse answers
+                    String[] parsed = personalizationDetails.getAnswers().split("\"");
+
+                    // query tags for answers
+                    ParseQuery<Tag> tagParseQuery = ParseQuery.getQuery(Tag.class);
+                    tagParseQuery.whereContainedIn(Tag.NAME_KEY, Arrays.asList(parsed));
+                    // get features with those tags
+                    ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
+                    featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
+                    featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
+                        @Override
+                        public void done(List<FeatureTag> list, ParseException e) {
+                            if (e == null) {
+                                for (FeatureTag featureTag : list) {
+                                    // create recommendations
+                                    // this isn't considering dups...
+                                    // might be find since topics query might consider dups
+                                    Recommendation r = new Recommendation();
+                                    r.setFeature(featureTag.getFeature());
+                                    r.setFeatureId(featureTag.getFeature().getObjectId());
+                                    r.setUserId(currentUser.getObjectId());
+                                    r.setValid(true);
+                                    r.saveInBackground();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void startTimelineActivityIntent() {
+        Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
+        startActivity(i);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
     public void onSelectImage(View view) {
