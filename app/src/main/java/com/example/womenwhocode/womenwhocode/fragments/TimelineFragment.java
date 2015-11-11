@@ -50,8 +50,8 @@ public class TimelineFragment extends Fragment {
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onFeatureTimelineClickListener(Feature feature);
-        void onEventTimelineClickListener(Event event);
+        void onFeatureTimelineClickListener(Feature feature, View itemView);
+        void onEventTimelineClickListener(Event event, View itemView);
     }
 
     @Override
@@ -88,9 +88,9 @@ public class TimelineFragment extends Fragment {
                 Event event = post.getEvent();
 
                 if (feature != null) {
-                    listener.onFeatureTimelineClickListener(feature);
+                    listener.onFeatureTimelineClickListener(feature, itemView);
                 } else if (event != null) {
-                    listener.onEventTimelineClickListener(event);
+                    listener.onEventTimelineClickListener(event, itemView);
                 }
             }
 
@@ -154,6 +154,7 @@ public class TimelineFragment extends Fragment {
         // Return all posts for features or events to which the user is subscribed
         postQuery = ParseQuery.or(subscribedFeaturesAndEvents);
         postQuery.include(Post.FEATURE_KEY);
+        postQuery.include(Post.USER_KEY);
         postQuery.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> listPosts, ParseException e) {
                 if (e != null) {

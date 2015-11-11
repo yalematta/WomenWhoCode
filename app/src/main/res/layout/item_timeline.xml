@@ -35,8 +35,9 @@
                 android:background="@color/teal"
                 android:padding="@dimen/activity_horizontal_padding">
 
-                <ImageView
-                    android:id="@+id/ivPostPhoto"
+                <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+                    android:id="@+id/ivEventTopicPhoto"
+                    android:transitionName="eventTopicPhoto"
                     android:layout_width="@dimen/image_view_height_width"
                     android:layout_height="@dimen/image_view_height_width"
                     android:layout_alignParentLeft="true"
@@ -44,11 +45,12 @@
                     android:layout_alignParentTop="true"/>
 
                 <TextView
-                    android:id="@+id/tvPostTitle"
+                    android:id="@+id/tvEventTopicTitle"
+                    android:transitionName="eventTopicTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/ivPostPhoto"
+                    android:layout_toRightOf="@+id/ivEventTopicPhoto"
                     android:layout_toLeftOf="@+id/tvRelativeDate"
                     android:gravity="left"
                     android:text="Title"
@@ -60,8 +62,8 @@
                     android:id="@+id/tvPostNameBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/ivPostPhoto"
-                    android:layout_below="@+id/tvPostTitle"
+                    android:layout_toRightOf="@+id/ivEventTopicPhoto"
+                    android:layout_below="@+id/tvEventTopicTitle"
                     android:padding="@dimen/icon_padding"
                     android:text="WWCode"
                     style="@style/TextView.Subtitle"/>
@@ -72,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignBottom="@+id/tvPostTitle"
+                    android:layout_alignBottom="@+id/tvEventTopicTitle"
                     android:padding="@dimen/icon_padding"
                     android:singleLine="true"
                     android:text="2s"

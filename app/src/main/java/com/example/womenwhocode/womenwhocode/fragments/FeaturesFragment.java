@@ -53,7 +53,7 @@ public class FeaturesFragment extends Fragment {
     private HashSet<Feature> featuresSet;
 
     public interface OnFeatureItemClickListener {
-        void onFeatureClickListener(Feature feature);
+        void onFeatureClickListener(Feature feature, View itemView);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class FeaturesFragment extends Fragment {
                     if (feature.getTitle().contains("Recommend")) {
                         showEditDialog();
                     } else {
-                        listener.onFeatureClickListener(feature);
+                        listener.onFeatureClickListener(feature, itemView);
                     }
                 }
             }

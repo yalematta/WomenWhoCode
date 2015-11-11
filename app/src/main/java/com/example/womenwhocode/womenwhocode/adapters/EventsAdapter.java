@@ -5,14 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -50,7 +48,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         Event event = mEvents.get(position);
 
         TextView tvEventNetwork = holder.tvEventNetwork;
-        TextView tvEventTitle = holder.tvEventTitle;
+        TextView tvEventTitle = holder.tvEventTopicTitle;
         TextView tvEventLocation = holder.tvEventLocation;
         TextView tvEventTime = holder.tvEventTime;
         TextView tvEventDate = holder.tvEventDate;
@@ -75,7 +73,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvEventTitle) public TextView tvEventTitle;
+        @Bind(R.id.tvEventTopicTitle) public TextView tvEventTopicTitle;
         @Bind(R.id.tvEventLocation) public TextView tvEventLocation;
         @Bind(R.id.tvEventTime) public TextView tvEventTime;
         @Bind(R.id.tvEventDate) public TextView tvEventDate;

@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.util.Pair;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
@@ -205,22 +209,42 @@ public class TimelineActivity extends AppCompatActivity implements
         }
     }
 
+    // TODO: add shared transitions from timeline event list to event detail
+    // TODO: add shared transitions from timeline feature list to event detail
     @Override
-    public void onEventClickListener(Event event) {
+    public void onEventClickListener(Event event, View itemView) {
         Intent i = new Intent(this, EventDetailsActivity.class);
         i.putExtra("event_id", event.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, EVENTS_TAB);
-        startActivity(i);
-        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            TextView tvEventTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, tvEventTitle, "eventTopicTitle");
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
     }
 
     @Override
-    public void onFeatureClickListener(Feature feature) {
+    public void onFeatureClickListener(Feature feature, View itemView) {
         Intent i = new Intent(TimelineActivity.this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TOPICS_TAB);
-        startActivity(i);
-        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            ImageView ivFeatureImage = (ImageView) itemView.findViewById(R.id.ivEventTopicPhoto);
+            TextView tvFeatureTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
+            Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "eventTopicPhoto");
+            Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "eventTopicTitle");
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: transition with background color
+        }
+
     }
 
     @Override
@@ -283,19 +307,42 @@ public class TimelineActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFeatureTimelineClickListener(Feature feature) {
+    public void onFeatureTimelineClickListener(Feature feature, View itemView) {
         Intent i = new Intent(this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
-        startActivity(i);
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            ImageView ivFeatureImage = (ImageView) itemView.findViewById(R.id.ivEventTopicPhoto);
+            TextView tvFeatureTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
+            Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "eventTopicPhoto");
+            Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "eventTopicTitle");
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: transition with background color
+        }
+
     }
 
     @Override
-    public void onEventTimelineClickListener(Event event) {
+    public void onEventTimelineClickListener(Event event, View itemView) {
         Intent i = new Intent(this, EventDetailsActivity.class);
         i.putExtra("event_id", event.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TimelineActivity.TIMELINE_TAB);
-        startActivity(i);
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            ImageView ivEventPhoto = (ImageView) itemView.findViewById(R.id.ivEventTopicPhoto);
+            TextView tvEventTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
+            Pair<View, String> p1 = Pair.create((View)ivEventPhoto, "eventTopicPhoto");
+            Pair<View, String> p2 = Pair.create((View)tvEventTitle, "eventTopicTitle");
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
     }
 
     // Return the order of the fragments in the view pager

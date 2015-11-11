@@ -42,6 +42,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
+import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -66,7 +67,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private ParseUser currentUser;
     private Subscribe subscribe;
     private int subscribeCount;
-    private ImageView ivFeatureImage;
+    private RoundedImageView ivFeatureImage;
     private CustomViewPager vpPager;
     private CustomTabStrip tabStrip;
 
@@ -98,6 +99,9 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_view_participants:
                 // Display participants
+                return true;
+            case android.R.id.home:
+                supportFinishAfterTransition();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -146,19 +150,19 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
     private void setUpView() {
         // set the progress bar
-        pb = (ProgressBar) findViewById(R.id.pbLoading);
-        pb.setVisibility(ProgressBar.VISIBLE);
+//        pb = (ProgressBar) findViewById(R.id.pbLoading);
+//        pb.setVisibility(ProgressBar.VISIBLE);
 
         // hide scroll view so the progress bar is the center of attention
         rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures); // TODO: animate!
-        rlFeatures.setVisibility(RelativeLayout.INVISIBLE);
+//        rlFeatures.setVisibility(RelativeLayout.INVISIBLE);
 
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
+        tvFeatureTitle = (TextView) findViewById(R.id.tvEventTopicTitle);
         tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
         tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
         btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
-        ivFeatureImage = (ImageView) findViewById(R.id.ivFeatureImage);
+        ivFeatureImage = (RoundedImageView) findViewById(R.id.ivEventTopicPhoto);
 
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
@@ -198,8 +202,8 @@ public class FeatureDetailsActivity extends AppCompatActivity {
                                 }
 
                                 // hide the progress bar, show the main view
-                                pb.setVisibility(ProgressBar.GONE);
-                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
+//                                pb.setVisibility(ProgressBar.GONE);
+//                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -222,7 +226,6 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
         Picasso.with(this)
                 .load(feature.getImageUrl())
-                .transform(new CircleTransform())
                 .resize(50, 50)
                 .centerCrop()
                 .into(ivFeatureImage);

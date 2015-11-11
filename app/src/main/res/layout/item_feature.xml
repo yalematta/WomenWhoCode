@@ -28,18 +28,21 @@
             android:paddingRight="16dp"
             android:paddingTop="16dp">
 
-            <ImageView
-                android:id="@+id/ivFeatureImage"
+            <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+                android:id="@+id/ivEventTopicPhoto"
+                android:transitionName="eventTopicPhoto"
+                android:scaleType="centerCrop"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true" />
 
             <TextView
-                android:id="@+id/tvFeatureTitle"
+                android:id="@+id/tvEventTopicTitle"
+                android:transitionName="eventTopicTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ivFeatureImage"
+                android:layout_toRightOf="@+id/ivEventTopicPhoto"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:paddingLeft="@dimen/activity_horizontal_margin"

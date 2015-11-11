@@ -43,18 +43,21 @@
         android:paddingBottom="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding">
 
-        <ImageView
-            android:id="@+id/ivFeatureImage"
+        <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+            android:id="@+id/ivEventTopicPhoto"
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
             android:padding="@dimen/icon_padding"
+            android:transitionName="eventTopicPhoto"
+            android:scaleType="centerCrop"
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/tvFeatureTitle"
+            android:id="@+id/tvEventTopicTitle"
+            android:transitionName="eventTopicTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivFeatureImage"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             android:padding="@dimen/icon_padding"
             style="@style/TextView.TitleText"/>
 
@@ -65,8 +68,8 @@
             android:paddingLeft="@dimen/icon_padding"
             android:paddingRight="@dimen/icon_padding"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFeatureTitle"
-            android:layout_toRightOf="@+id/ivFeatureImage"
+            android:layout_below="@+id/tvEventTopicTitle"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             style="@style/TextView.Subtitle"/>
 
         <TextView
@@ -78,7 +81,7 @@
             android:paddingLeft="@dimen/icon_padding"
             android:paddingRight="@dimen/icon_padding"
             android:layout_below="@+id/tvSubscriberCount"
-            android:layout_toRightOf="@+id/ivFeatureImage"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             style="@style/TextView.DetailDescription"/>
 
         <Button
@@ -86,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFeatureDescription"
-            android:layout_toRightOf="@+id/ivFeatureImage"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             android:layout_margin="@dimen/icon_padding"
             android:onClick="onSubscribe"
             style="@style/FollowButton"
