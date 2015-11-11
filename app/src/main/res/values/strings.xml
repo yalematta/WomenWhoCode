@@ -37,5 +37,11 @@
     <string name="send">Send</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="label_add_participants">Add Participants</string>
+    <string name="label_mark_unread">Mark unread</string>
+    <string name="label_participants">Participants</string>
+    <string name="label_leave">Leave</string>
+    <string name="label_disable_notifications">Disable Notifications</string>
+    <string name="label_ringtone_options">Ringtone options</string>
 
 </resources>

@@ -15,6 +15,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +50,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class FeatureDetailsActivity extends AppCompatActivity {
 
+    private static final String SUBSCRIBED_TEXT = "unfollow";
+    private static final String SUBSCRIBE_TEXT = "follow";
+    private static final String SUBSCRIBERS_TEXT = " followers";
     private String feature_id;
     private ProgressBar pb;
     private RelativeLayout rlFeatures;
@@ -63,9 +69,40 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private ImageView ivFeatureImage;
     private CustomViewPager vpPager;
     private CustomTabStrip tabStrip;
-    private static final String SUBSCRIBED_TEXT = "unfollow";
-    private static final String SUBSCRIBE_TEXT = "follow";
-    private static final String SUBSCRIBERS_TEXT = " followers";
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_feature_details, menu);
+        return true;
+    }
+
+    // Hides chat related options from menu
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem viewParticipantsMenuItem = menu.findItem(R.id.action_view_participants);
+        MenuItem markUnreadMenuItem = menu.findItem(R.id.action_mark_unread);
+        MenuItem addParticipantsMenuItem = menu.findItem(R.id.action_add_particpants);
+        if (vpPager.getCurrentItem() == 0) {
+            viewParticipantsMenuItem.setVisible(false);
+            markUnreadMenuItem.setVisible(false);
+            addParticipantsMenuItem.setVisible(false);
+        } else {
+            viewParticipantsMenuItem.setVisible(true);
+            markUnreadMenuItem.setVisible(true);
+            addParticipantsMenuItem.setVisible(true);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_participants:
+                // Display participants
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -255,36 +292,6 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         }
     }
 
-    public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = {"posts", "chat"};
-
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        // The order and creation fo fragments within the pager
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return FeaturePostsFragment.newInstance(feature_id);
-            } else if (position == 1) {
-                return FeatureChatFragment.newInstance(feature_id);
-            } else return null;
-        }
-
-        // Return the tab title
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
-        }
-
-        // How many fragments there are to swipe between
-        @Override
-        public int getCount() {
-            return tabTitles.length;
-        }
-    }
-
     private void hideChat() {
         vpPager.setPagingEnabled(false);
         tabStrip.setDisabled(true);
@@ -338,6 +345,36 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private void setTab() {
         // Switch to page based on index
         vpPager.setCurrentItem(0);
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+        private final String[] tabTitles = {"posts", "chat"};
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // The order and creation fo fragments within the pager
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return FeaturePostsFragment.newInstance(feature_id);
+            } else if (position == 1) {
+                return FeatureChatFragment.newInstance(feature_id);
+            } else return null;
+        }
+
+        // Return the tab title
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        // How many fragments there are to swipe between
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
     }
 }
 

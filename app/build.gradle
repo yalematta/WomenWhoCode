@@ -46,4 +46,5 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
+    compile 'com.lguipeng.bubbleview:library:1.0.0'
 }
