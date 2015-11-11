@@ -219,7 +219,7 @@ public class TimelineActivity extends AppCompatActivity implements
         if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
             TextView tvEventTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
             ActivityOptionsCompat options = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(TimelineActivity.this, tvEventTitle, "eventTitle");
+                    .makeSceneTransitionAnimation(TimelineActivity.this, tvEventTitle, "eventTopicTitle");
             startActivity(i, options.toBundle());
         } else {
             startActivity(i);
@@ -235,8 +235,8 @@ public class TimelineActivity extends AppCompatActivity implements
         if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
             ImageView ivFeatureImage = (ImageView) itemView.findViewById(R.id.ivEventTopicPhoto);
             TextView tvFeatureTitle = (TextView) itemView.findViewById(R.id.tvEventTopicTitle);
-            Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "topicImage");
-            Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "topicTitle");
+            Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "eventTopicPhoto");
+            Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "eventTopicTitle");
             ActivityOptionsCompat options = ActivityOptionsCompat
                     .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
             startActivity(i, options.toBundle());

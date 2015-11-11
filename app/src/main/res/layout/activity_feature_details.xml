@@ -48,13 +48,13 @@
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
             android:padding="@dimen/icon_padding"
-            android:transitionName="topicImage"
+            android:transitionName="eventTopicPhoto"
             android:scaleType="centerCrop"
             android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/tvEventTopicTitle"
-            android:transitionName="topicTitle"
+            android:transitionName="eventTopicTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
