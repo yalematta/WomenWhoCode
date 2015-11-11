@@ -100,6 +100,9 @@ public class FeatureDetailsActivity extends AppCompatActivity {
             case R.id.action_view_participants:
                 // Display participants
                 return true;
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -143,17 +146,6 @@ public class FeatureDetailsActivity extends AppCompatActivity {
         // Return the created intent as the "up" activity
         return newIntent;
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                supportFinishAfterTransition();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setUpView() {
