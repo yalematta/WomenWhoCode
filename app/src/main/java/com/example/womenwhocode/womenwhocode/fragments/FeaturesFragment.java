@@ -146,8 +146,8 @@ public class FeaturesFragment extends Fragment {
                     for (Subscribe subscribe : list) {
                         subscribedFeatures.add(subscribe.getFeature());
                     }
-                    listCounter++;
                 }
+                listCounter++;
             }
         });
 
@@ -163,8 +163,8 @@ public class FeaturesFragment extends Fragment {
                     for (Recommendation recommendation : list) {
                         recommendedFeatures.add(recommendation.getFeature());
                     }
-                    listCounter ++;
                 }
+                listCounter ++;
             }
         });
 
@@ -175,11 +175,11 @@ public class FeaturesFragment extends Fragment {
                     features.clear(); // this won't work
                     // only add after feature item
                     features.addAll(lFeatures);
-                    listCounter ++;
                     LocalDataStore.unpinAndRepin(lFeatures, LocalDataStore.FEATURES_PIN);
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
+                listCounter ++;
             }
         });
     }
