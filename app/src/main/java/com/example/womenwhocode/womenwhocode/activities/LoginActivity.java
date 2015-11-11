@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, PersonalizationActivity.class);
         i.putExtra("type", "Join");
         startActivity(i);
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
     public void LogInToApp(View view) {

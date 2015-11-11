@@ -33,6 +33,9 @@ public class SignUpEmailActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+    }
+    @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
@@ -67,7 +70,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
                     i.putExtra("Password", password);
                     i.putExtra("userAns",userAns);
                     startActivity(i);
-                    overridePendingTransition(R.anim.activity_left_in,R.anim.activity_right_out);
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 }catch(Exception ex){
 
                 }
