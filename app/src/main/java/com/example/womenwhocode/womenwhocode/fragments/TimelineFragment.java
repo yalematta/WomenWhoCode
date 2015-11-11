@@ -50,8 +50,8 @@ public class TimelineFragment extends Fragment {
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onFeatureTimelineClickListener(Feature feature);
-        void onEventTimelineClickListener(Event event);
+        void onFeatureTimelineClickListener(Feature feature, View itemView);
+        void onEventTimelineClickListener(Event event, View itemView);
     }
 
     @Override
@@ -88,9 +88,9 @@ public class TimelineFragment extends Fragment {
                 Event event = post.getEvent();
 
                 if (feature != null) {
-                    listener.onFeatureTimelineClickListener(feature);
+                    listener.onFeatureTimelineClickListener(feature, itemView);
                 } else if (event != null) {
-                    listener.onEventTimelineClickListener(event);
+                    listener.onEventTimelineClickListener(event, itemView);
                 }
             }
 
