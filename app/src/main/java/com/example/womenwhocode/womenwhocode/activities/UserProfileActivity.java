@@ -131,6 +131,9 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+    @Override
+    public void onBackPressed() {
+    }
 
     public void OnFinalize(View view) {
         try {
