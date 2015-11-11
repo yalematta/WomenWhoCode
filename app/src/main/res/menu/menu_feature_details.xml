@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_particpants"
+        android:title="@string/label_add_participants"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_mark_unread"
+        android:title="@string/label_mark_unread"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_view_participants"
+        android:title="@string/label_participants"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_leave_chat"
+        android:title="@string/label_leave"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_disable_notifications"
+        android:title="@string/label_disable_notifications"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_ringtone_options"
+        android:title="@string/label_ringtone_options"
+        app:showAsAction="never"/>
+
+
+</menu>

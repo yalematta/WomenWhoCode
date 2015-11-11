@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -167,11 +168,11 @@ public class ChatFragment extends Fragment {
         this.mFirstLoad = load;
     }
 
-    Date getMostRecentcreatedAt() {
+    Date getMostRecentCreatedAt() {
         return this.recentCreatedAt;
     }
 
-    void setMostRecentcreatedAt(Date createAt) {
+    void setMostRecentCreatedAt(Date createAt) {
         this.recentCreatedAt = createAt;
     }
 
@@ -181,8 +182,7 @@ public class ChatFragment extends Fragment {
 
     private void setColorFilter() {
         if (etMessage.getText().length() > 0) {
-            btnSend.setColorFilter(R.color.teal);
-
+            btnSend.setColorFilter(R.color.teal, PorterDuff.Mode.MULTIPLY);
         } else btnSend.clearColorFilter();
     }
 

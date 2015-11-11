@@ -15,6 +15,7 @@ import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
+import com.github.library.bubbleview.BubbleTextVew;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -122,14 +123,14 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
         @Bind(R.id.ivCurrentUserProfile) public ImageView ivCurrentUserProfile;
         @Bind(R.id.tvFullName) public TextView tvFullName;
         @Bind(R.id.tvCreatedAt) public TextView tvCreatedAt;
-        @Bind(R.id.tvBody) public TextView tvBody;
+        @Bind(R.id.tvBody) public BubbleTextVew tvBody;
 
         // other users message view
         @Bind(R.id.rlOtherUser) public RelativeLayout rlOtherUser;
         @Bind(R.id.ivOtherProfileLeft) public ImageView ivOtherProfileLeft;
         @Bind(R.id.tvOtherFullName) public TextView tvOtherFullName;
         @Bind(R.id.tvOtherCreatedAt) public TextView tvOtherCreatedAt;
-        @Bind(R.id.tvOtherBody) public TextView tvOtherBody;
+        @Bind(R.id.tvOtherBody) public BubbleTextVew tvOtherBody;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

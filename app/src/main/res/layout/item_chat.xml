@@ -1,93 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <!-- make one or the other gone depending whether message matches current user -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:id="@+id/rlCurrentUser">
+    <RelativeLayout
+        android:id="@+id/rlCurrentUser"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
-            android:padding="@dimen/icon_padding"
             android:id="@+id/ivCurrentUserProfile"
-            android:contentDescription="@string/profile_me"
-            android:layout_alignParentRight="true"
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
-            android:src="@mipmap/ic_wwc" />
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/profile_me"
+            android:padding="@dimen/icon_padding"
+            android:src="@mipmap/ic_wwc"/>
 
         <TextView
-            android:padding="@dimen/icon_padding"
             android:id="@+id/tvFullName"
+            style="@style/TextView.Subtitle.Dark.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
-            android:text="Venus"
-            style="@style/TextView.Subtitle.Dark.Small">
+            android:padding="@dimen/icon_padding"
+            android:text="Venus">
         </TextView>
 
         <TextView
-            android:padding="@dimen/icon_padding"
             android:id="@+id/tvCreatedAt"
+            style="@style/TextView.RelativeDate.SmallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tvFullName"
-            android:text="3 pm"
-            style="@style/TextView.RelativeDate.SmallText">
+            android:padding="@dimen/icon_padding"
+            android:text="3 pm">
         </TextView>
 
-        <TextView
-            android:paddingRight="@dimen/icon_padding"
+        <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/ivCurrentUserProfile"
             android:layout_below="@+id/tvFullName"
-            android:text="message body">
-        </TextView>
+            android:layout_toLeftOf="@id/ivCurrentUserProfile"
+            android:paddingRight="@dimen/icon_padding"
+            android:text="message body"
+            android:textColor="@color/lightestGray"
+            app:angle="8dp"
+            app:arrowHeight="6dp"
+            app:arrowLocation="right"
+            app:arrowPosition="2dp"
+            app:arrowWidth="6dp"
+            app:bubbleColor="@color/teal"/>
 
     </RelativeLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:id="@+id/rlOtherUser">
+    <RelativeLayout
+        android:id="@+id/rlOtherUser"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivOtherProfileLeft"
-            android:contentDescription="@string/profile_other"
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
             android:layout_alignParentLeft="true"
+            android:contentDescription="@string/profile_other"
             android:padding="@dimen/icon_padding"
-            android:src="@mipmap/ic_wwc" />
+            android:src="@mipmap/ic_wwc"/>
 
         <TextView
-            android:padding="@dimen/icon_padding"
             android:id="@+id/tvOtherFullName"
+            style="@style/TextView.Subtitle.Dark.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
-            android:text="Sailor Moon"
-            style="@style/TextView.Subtitle.Dark.Small">
-        </TextView>
-        <TextView
             android:padding="@dimen/icon_padding"
+            android:text="Sailor Moon">
+        </TextView>
+
+        <TextView
             android:id="@+id/tvOtherCreatedAt"
+            style="@style/TextView.RelativeDate.SmallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvOtherFullName"
-            android:text="3 pm"
-            style="@style/TextView.RelativeDate.SmallText">
+            android:padding="@dimen/icon_padding"
+            android:text="3 pm">
         </TextView>
-        <TextView
-            android:paddingLeft="@dimen/icon_padding"
+
+        <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvOtherBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivOtherProfileLeft"
             android:layout_below="@id/tvOtherFullName"
-            android:text="message body">
-        </TextView>
+            android:layout_toRightOf="@+id/ivOtherProfileLeft"
+            android:paddingLeft="@dimen/icon_padding"
+            android:text="message body"
+            android:textColor="@android:color/background_dark"
+            app:angle="8dp"
+            app:arrowHeight="6dp"
+            app:arrowLocation="left"
+            app:arrowPosition="2dp"
+            app:arrowWidth="6dp"
+            app:bubbleColor="@color/lightestGray"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

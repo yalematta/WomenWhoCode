@@ -76,7 +76,7 @@ public class EventChatFragment extends ChatFragment {
 
         messageParseQuery.whereEqualTo(Message.EVENT_ID_KEY, eventId);
         if (!isFirstLoad()) {
-            messageParseQuery.whereGreaterThan(Message.CREATED_AT_KEY, getMostRecentcreatedAt());
+            messageParseQuery.whereGreaterThan(Message.CREATED_AT_KEY, getMostRecentCreatedAt());
         }
 
         messageParseQuery.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
@@ -88,7 +88,7 @@ public class EventChatFragment extends ChatFragment {
             public void done(List<Message> list, ParseException e) {
                 if (e == null && list.size() > 0) {
                     // assuming 0 position is most recent
-                    setMostRecentcreatedAt(list.get(list.size()-1).getCreatedAt());
+                    setMostRecentCreatedAt(list.get(list.size() - 1).getCreatedAt());
 
                     // pin locally
                     LocalDataStore.unpinAndRepin(list, eventId + LocalDataStore.MESSAGE_PIN);
