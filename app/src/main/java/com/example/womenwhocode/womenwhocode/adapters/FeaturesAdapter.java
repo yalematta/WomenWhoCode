@@ -79,8 +79,8 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void configureViewHolderTopic(ViewHolderTopic viewHolderTopic, int position) {
         Feature feature = (Feature) items.get(position);
 
-        TextView tvFeatureTitle = viewHolderTopic.tvFeatureTitle;
-        RoundedImageView ivFeatureImage = viewHolderTopic.ivFeatureImage;
+        TextView tvFeatureTitle = viewHolderTopic.tvEventTopicTitle;
+        RoundedImageView ivFeatureImage = viewHolderTopic.ivEventTopicPhoto;
         CardView cvFeature = viewHolderTopic.cvFeature;
 
         // Insert the model data into each of the view items
@@ -128,8 +128,8 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class ViewHolderTopic extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvFeatureTitle) public TextView tvFeatureTitle;
-        @Bind(R.id.ivFeatureImage) public RoundedImageView ivFeatureImage;
+        @Bind(R.id.tvEventTopicTitle) public TextView tvEventTopicTitle;
+        @Bind(R.id.ivEventTopicPhoto) public RoundedImageView ivEventTopicPhoto;
         @Bind(R.id.cvFeature) public CardView cvFeature;
 
         public ViewHolderTopic(final View itemView) {

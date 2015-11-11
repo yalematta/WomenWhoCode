@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvEventTitle"
+            android:id="@+id/tvEventTopicTitle"
             android:transitionName="eventTitle"
             android:layout_toRightOf="@+id/ivEventImage"
             android:padding="@dimen/icon_padding"
@@ -68,7 +68,7 @@
             android:paddingBottom="@dimen/icon_padding"
             android:paddingLeft="@dimen/icon_padding"
             android:paddingRight="@dimen/icon_padding"
-            android:layout_below="@+id/tvEventTitle"
+            android:layout_below="@+id/tvEventTopicTitle"
             android:layout_toRightOf="@+id/ivEventImage"
             style="@style/TextView.Subtitle"
             android:text="260 Subscribed" />

@@ -118,7 +118,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 
         // look up views
-        tvEventTitle = (TextView) findViewById(R.id.tvEventTitle);
+        tvEventTitle = (TextView) findViewById(R.id.tvEventTopicTitle);
         tvSubscribeCount = (TextView) findViewById(R.id.tvSubscribeCount);
         btnSubscribeIcon = (Button) findViewById(R.id.btnSubscribeIcon);
         ivEventImage = (ImageView) findViewById(R.id.ivEventImage);

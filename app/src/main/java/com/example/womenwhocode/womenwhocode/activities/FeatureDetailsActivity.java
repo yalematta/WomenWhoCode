@@ -166,11 +166,11 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 //        rlFeatures.setVisibility(RelativeLayout.INVISIBLE);
 
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
+        tvFeatureTitle = (TextView) findViewById(R.id.tvEventTopicTitle);
         tvFeatureDescription = (TextView) findViewById(R.id.tvFeatureDescription);
         tvSubscriberCount = (TextView) findViewById(R.id.tvSubscriberCount);
         btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
-        ivFeatureImage = (RoundedImageView) findViewById(R.id.ivFeatureImage);
+        ivFeatureImage = (RoundedImageView) findViewById(R.id.ivEventTopicPhoto);
 
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 

@@ -60,12 +60,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         ProgressBar pb = holder.pb;
         CardView cvPostFeature = holder.cvPostFeature;
-        ImageView ivPostPhoto = holder.ivPostPhoto;
+        ImageView ivPostPhoto = holder.ivEventTopicPhoto;
         RelativeLayout rlPostFeature = holder.rlPostFeature;
         TextView tvPostNameBy = holder.tvPostNameBy;
         TextView tvPostDescription = holder.tvPostDescription;
         TextView tvRelativeDate = holder.tvRelativeDate;
-        TextView tvFeatureTitle = holder.tvFeatureTitle;
+        TextView tvFeatureTitle = holder.tvEventTopicTitle;
         TextView tvAwesomeCount = holder.tvAwesomeCount;
         ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
@@ -98,7 +98,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             Picasso.with(context)
                     .load(imageUrl)
                     .transform(new CircleTransform())
-                    .resize(75, 75)
+                    .resize(75, 75) // FIXME: this might break!
                     .centerCrop()
                     .into(ivPostPhoto);
 
@@ -136,13 +136,13 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.ivPostPhoto) public ImageView ivPostPhoto;
+        @Bind(R.id.ivEventTopicPhoto) public ImageView ivEventTopicPhoto;
         @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
         @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
         @Bind(R.id.btnAwesomeIcon) public ImageButton btnAwesomeIcon;
         @Bind(R.id.cvPostFeature) public CardView cvPostFeature;
         @Bind(R.id.tvRelativeDate) public TextView tvRelativeDate;
-        @Bind(R.id.tvPostTitle) public TextView tvFeatureTitle;
+        @Bind(R.id.tvEventTopicTitle) public TextView tvEventTopicTitle;
         @Bind(R.id.pbLoading) public ProgressBar pb;
         @Bind(R.id.rlPostFeature) public RelativeLayout rlPostFeature;
         @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
