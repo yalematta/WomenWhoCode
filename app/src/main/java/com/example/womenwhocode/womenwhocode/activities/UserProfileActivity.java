@@ -276,11 +276,14 @@ public class UserProfileActivity extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 String filepath = cursor.getString(columnIndex);
                 cursor.close();
-
+                final BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 8;
+                options.inJustDecodeBounds = true;
                 //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.pic1);
                 Bitmap bmap = BitmapFactory
                         .decodeFile(filepath);
-                finalImg = Bitmap.createScaledBitmap(bmap, 200, 200, true);
+
+                finalImg = Bitmap.createScaledBitmap(bmap, 150, 150, true);
                 ImageView imgView = (ImageView) findViewById(R.id.ivphoto);
 
                 // Set the Image in ImageView after decoding the String
@@ -357,6 +360,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private Bitmap rotateBitmapOrientation(String photoFilePath) {
         // Create and configure BitmapFactory
         BitmapFactory.Options bounds = new BitmapFactory.Options();
+        bounds.inSampleSize = 8;
         bounds.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(photoFilePath, bounds);
         BitmapFactory.Options opts = new BitmapFactory.Options();
