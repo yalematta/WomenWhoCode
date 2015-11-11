@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.util.Pair;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
@@ -219,8 +223,20 @@ public class TimelineActivity extends AppCompatActivity implements
         Intent i = new Intent(TimelineActivity.this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TOPICS_TAB);
-        startActivity(i);
-        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            ImageView ivFeatureImage = (ImageView) findViewById(R.id.ivFeatureImage);
+            TextView tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
+            Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "topicImage");
+            Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "topicTitle");
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
+
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: transition with background color
+        }
+
     }
 
     @Override

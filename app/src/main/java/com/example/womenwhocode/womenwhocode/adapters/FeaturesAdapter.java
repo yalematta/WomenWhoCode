@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -79,7 +80,7 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Feature feature = (Feature) items.get(position);
 
         TextView tvFeatureTitle = viewHolderTopic.tvFeatureTitle;
-        ImageView ivFeatureImage = viewHolderTopic.ivFeatureImage;
+        RoundedImageView ivFeatureImage = viewHolderTopic.ivFeatureImage;
         CardView cvFeature = viewHolderTopic.cvFeature;
 
         // Insert the model data into each of the view items
@@ -101,7 +102,6 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else {
             Picasso.with(context)
                     .load(imageUrl)
-                    .transform(new CircleTransform())
                     .resize(75, 75)
                     .centerCrop()
                     .into(ivFeatureImage);
@@ -129,7 +129,7 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class ViewHolderTopic extends RecyclerView.ViewHolder {
         @Bind(R.id.tvFeatureTitle) public TextView tvFeatureTitle;
-        @Bind(R.id.ivFeatureImage) public ImageView ivFeatureImage;
+        @Bind(R.id.ivFeatureImage) public RoundedImageView ivFeatureImage;
         @Bind(R.id.cvFeature) public CardView cvFeature;
 
         public ViewHolderTopic(final View itemView) {

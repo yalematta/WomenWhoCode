@@ -43,15 +43,18 @@
         android:paddingBottom="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding">
 
-        <ImageView
+        <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
             android:id="@+id/ivFeatureImage"
             android:layout_width="@dimen/image_view_height_width"
             android:layout_height="@dimen/image_view_height_width"
             android:padding="@dimen/icon_padding"
+            android:transitionName="topicImage"
+            android:scaleType="centerCrop"
             android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/tvFeatureTitle"
+            android:transitionName="topicTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivFeatureImage"
