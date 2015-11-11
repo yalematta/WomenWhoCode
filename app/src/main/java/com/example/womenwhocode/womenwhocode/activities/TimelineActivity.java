@@ -209,28 +209,36 @@ public class TimelineActivity extends AppCompatActivity implements
         }
     }
 
+    // TODO: add shared transitions from timeline event list to event detail
+    // TODO: add shared transitions from timeline feature list to event detail
     @Override
-    public void onEventClickListener(Event event) {
+    public void onEventClickListener(Event event, View itemView) {
         Intent i = new Intent(this, EventDetailsActivity.class);
         i.putExtra("event_id", event.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, EVENTS_TAB);
-        startActivity(i);
-        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out); // TODO: Replace with Shared Element Activity Transition
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+            TextView tvEventTitle = (TextView) itemView.findViewById(R.id.tvEventTitle);
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(TimelineActivity.this, tvEventTitle, "eventTitle");
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
     }
 
     @Override
-    public void onFeatureClickListener(Feature feature) {
+    public void onFeatureClickListener(Feature feature, View itemView) {
         Intent i = new Intent(TimelineActivity.this, FeatureDetailsActivity.class);
         i.putExtra("feature_id", feature.getObjectId());
         i.putExtra(SELECTED_TAB_EXTRA_KEY, TOPICS_TAB);
         if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
-            ImageView ivFeatureImage = (ImageView) findViewById(R.id.ivFeatureImage);
-            TextView tvFeatureTitle = (TextView) findViewById(R.id.tvFeatureTitle);
+            ImageView ivFeatureImage = (ImageView) itemView.findViewById(R.id.ivFeatureImage);
+            TextView tvFeatureTitle = (TextView) itemView.findViewById(R.id.tvFeatureTitle);
             Pair<View, String> p1 = Pair.create((View)ivFeatureImage, "topicImage");
             Pair<View, String> p2 = Pair.create((View)tvFeatureTitle, "topicTitle");
             ActivityOptionsCompat options = ActivityOptionsCompat
                     .makeSceneTransitionAnimation(TimelineActivity.this, p1, p2);
-
             startActivity(i, options.toBundle());
         } else {
             startActivity(i);

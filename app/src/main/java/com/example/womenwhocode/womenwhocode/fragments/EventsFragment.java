@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
@@ -41,7 +42,7 @@ public class EventsFragment extends Fragment {
     private static final int MILE_RANGE = 25;
 
     public interface OnEventItemClickListener {
-        void onEventClickListener(Event event);
+        void onEventClickListener(Event event, View itemView);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onItemClick(View itemView, int position) {
                 Event event = events.get(position);
-                listener.onEventClickListener(event);
+                listener.onEventClickListener(event, itemView);
             }
         });
 

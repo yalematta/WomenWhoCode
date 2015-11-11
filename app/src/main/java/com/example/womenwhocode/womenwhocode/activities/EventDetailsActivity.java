@@ -108,11 +108,11 @@ public class EventDetailsActivity extends AppCompatActivity {
     private void setUpView() {
         // set the progress bar
         pb = (ProgressBar) findViewById(R.id.pbLoading);
-        pb.setVisibility(ProgressBar.VISIBLE);
+//        pb.setVisibility(ProgressBar.VISIBLE);
 
         // hide scroll view so the progress bar is the center of attention
         rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
-        rlEvents.setVisibility(ScrollView.INVISIBLE);
+//        rlEvents.setVisibility(ScrollView.INVISIBLE);
 
         // get title on tool bar
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
@@ -166,8 +166,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                                 }
 
                                 // hide the progress bar, show the main view
-                                pb.setVisibility(ProgressBar.GONE);
-                                rlEvents.setVisibility(RelativeLayout.VISIBLE);
+//                                pb.setVisibility(ProgressBar.GONE);
+//                                rlEvents.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {
@@ -195,11 +195,12 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
