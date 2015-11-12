@@ -39,6 +39,7 @@
         <item name="android:textColor">@color/whitish</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
+
     <style name="TextView.TitleText.Pf" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_pf_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -90,7 +91,21 @@
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
-        <item name="android:textColor">@color/whitish</item></style>
+        <item name="android:textColor">@color/whitish</item>
+    </style>
+
+    <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="BubbleTextView.ChatBody.CurrentUser" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/whitish</item>
+    </style>
 
     <style name="page_background_bl">
         <item name="android:background">@color/blackish</item>
@@ -189,7 +204,7 @@
     <style name="Multicolor_1">
         <item name="android:background">@drawable/layers_multicolor_border</item>
         <item name="android:textSize">16sp</item>
-        <item name ="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/black</item>
 
     </style>
 

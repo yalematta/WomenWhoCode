@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="@dimen/view_margin">
 
     <!-- make one or the other gone depending whether message matches current user -->
     <RelativeLayout
@@ -42,13 +43,13 @@
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvBody"
-            android:layout_width="wrap_content"
+            style="@style/BubbleTextView.ChatBody.CurrentUser"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFullName"
             android:layout_toLeftOf="@id/ivCurrentUserProfile"
             android:padding="@dimen/icon_padding"
             android:text="message body"
-            android:textColor="@color/whitish"
             app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="right"
             app:arrowWidth="@dimen/arrow_width"
@@ -93,13 +94,13 @@
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvOtherBody"
-            android:layout_width="wrap_content"
+            style="@style/BubbleTextView.ChatBody.OtherUser"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvOtherFullName"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
             android:padding="@dimen/icon_padding"
             android:text="message body"
-            android:textColor="@android:color/background_dark"
             app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="left"
             app:arrowWidth="@dimen/arrow_width"
