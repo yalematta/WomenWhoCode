@@ -50,6 +50,7 @@
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
@@ -66,21 +67,22 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/whitish</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:alpha">0.8</item>
+        <item name="android:alpha">0.7</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
     <style name="TextView.Subtitle.Dark" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/blackish</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.54</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
     <style name="TextView.Subtitle.Dark.Small" parent="TextAppearance.AppCompat">
         <item name="android:textAllCaps">true</item>
-        <item name="android:alpha">0.8</item>
+        <item name="android:alpha">0.54</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_small_text_size</item>
-        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
@@ -96,18 +98,18 @@
     </style>
 
     <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:alpha">0.8</item>
+        <item name="android:alpha">0.38</item>
     </style>
 
 
     <style name="TextView.RelativeDate.SmallText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_small_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:alpha">0.8</item>
+        <item name="android:alpha">0.38</item>
     </style>
 
     <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
@@ -139,7 +141,7 @@
     </style>
 
     <style name="EditBoxStyle">
-        <item name="android:textColorHint">@color/lightGray</item> // FIXME: font color should be black and needs 0.38 alpha
+        <item name="android:textColorHint">@color/lightGray</item>
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textColor">@color/whitish</item>
     </style>
@@ -178,7 +180,8 @@
     </style>
 
     <style name="TextViewLabels">
-        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.38</item>
         <item name="android:textSize">@dimen/text_normal_text_size</item>
     </style>
 
