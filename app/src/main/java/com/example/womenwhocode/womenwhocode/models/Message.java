@@ -26,10 +26,8 @@ public class Message extends ParseObject {
         Profile profile = null;
         try {
             profile = this.getParseObject(PROFILE_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return profile;
     }
