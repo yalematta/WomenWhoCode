@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
@@ -33,6 +35,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
@@ -48,6 +51,12 @@ public class TimelineFragment extends Fragment {
     private ParseUser currentUser;
     private ParseQuery<Awesome> awesomeParseQuery;
     private OnItemClickListener listener;
+    private ArrayList<UserNotification> userNotifs;
+    private ArrayList<Object> items;
+    private Runnable runnable;
+    private final int RUN_FREQUENCY = 1000; // ms
+    private Handler handler;
+    private int listCounter;
 
     public interface OnItemClickListener {
         void onFeatureTimelineClickListener(Feature feature, View itemView);
@@ -58,9 +67,30 @@ public class TimelineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         posts = new ArrayList<>();
-        aPosts = new TimelineAdapter(posts);
+        items = new ArrayList<>();
+        aPosts = new TimelineAdapter(items);
         currentUser = ParseUser.getCurrentUser();
         awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
+        userNotifs = new ArrayList<>();
+        listCounter = 0;
+        handler = new Handler();
+
+        // Defines a runnable which is run every 100ms
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                // FIXME: only do this when there are new messages - handler.postDelayed(this, RUN_FREQUENCY);
+                if (listCounter == 2) {
+                    loadItems();
+                } else if (listCounter < 2) {
+                    handler.postDelayed(this, RUN_FREQUENCY);
+                } else {
+                    listCounter = 0;
+                    handler.removeCallbacks(this);
+                }
+            }
+        };
     }
 
     @Override
@@ -78,12 +108,15 @@ public class TimelineFragment extends Fragment {
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
 
+        // runnable
+        handler.postDelayed(runnable, RUN_FREQUENCY);
+
         // listeners
         aPosts.setOnItemClickListener(new TimelineAdapter.OnItemClickListener() {
 
             @Override
             public void onPostFeatureClick(View itemView, int position) {
-                Post post = posts.get(position);
+                Post post = (Post) items.get(position);
                 Feature feature = post.getFeature();
                 Event event = post.getEvent();
 
@@ -96,7 +129,7 @@ public class TimelineFragment extends Fragment {
 
             @Override
             public void onAwesomeClick(final View itemView, final int position) {
-                final Post post = posts.get(position);
+                final Post post = (Post) items.get(position);
 
                 // find awesome object
                 awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
@@ -111,6 +144,20 @@ public class TimelineFragment extends Fragment {
                         }
                     }
                 });
+            }
+
+            @Override
+            public void onClose(View itemView, int position) {
+                UserNotification un = (UserNotification) items.get(position);
+
+                // update UI
+                items.remove(position);
+                userNotifs.clear(); // temp hack! - doesn't work if we have more than one notif
+                aPosts.notifyItemRemoved(position);
+
+                // save to parse
+                un.setEnabled(false);
+                un.saveInBackground();
             }
         });
 
@@ -132,6 +179,24 @@ public class TimelineFragment extends Fragment {
 
     private void populatePostsList() {
         ParseUser currentUser = ParseUser.getCurrentUser();
+
+        // get notifications
+        ParseQuery<UserNotification> userNotificationParseQuery = ParseQuery.getQuery(UserNotification.class);
+        userNotificationParseQuery.whereEqualTo(UserNotification.USER_ID_KEY, currentUser.getObjectId());
+        userNotificationParseQuery.whereEqualTo(UserNotification.ENABLED_KEY, true);
+        userNotificationParseQuery.include(UserNotification.NOTIFICATION_KEY);
+        userNotificationParseQuery.findInBackground(new FindCallback<UserNotification>() {
+            @Override
+            public void done(List<UserNotification> list, ParseException e) {
+                if (e == null && list.size() > 0) {
+                    userNotifs.clear();
+                    userNotifs.addAll(list); // might just be able to directly append to 0...
+                }
+                listCounter++;
+            }
+        });
+
+        // get posts
         ParseQuery<Post> postQuery = ParseQuery.getQuery(Post.class);
         ParseQuery<Subscribe> subscribeQuery = ParseQuery.getQuery(Subscribe.class);
         subscribeQuery.whereEqualTo(Subscribe.USER_KEY, currentUser);
@@ -153,6 +218,7 @@ public class TimelineFragment extends Fragment {
 
         // Return all posts for features or events to which the user is subscribed
         postQuery = ParseQuery.or(subscribedFeaturesAndEvents);
+        postQuery.orderByDescending(Post.AWESOME_COUNT_KEY);
         postQuery.include(Post.FEATURE_KEY);
         postQuery.include(Post.USER_KEY);
         postQuery.findInBackground(new FindCallback<Post>() {
@@ -162,18 +228,33 @@ public class TimelineFragment extends Fragment {
                 } else if (listPosts != null) {
                     posts.clear();
                     posts.addAll(listPosts);
-                    aPosts.notifyDataSetChanged();
-
-                    // hide progress bar, make list view appear
-                    pb.setVisibility(ProgressBar.GONE);
-                    rvPosts.setVisibility(ListView.VISIBLE);
 
                     LocalDataStore.unpinAndRepin(listPosts, LocalDataStore.POSTS_PIN);
-                } else {
-//                    Toast.makeText(getContext(), "who knows timeline", Toast.LENGTH_LONG).show();
                 }
+
+                listCounter++;
             }
         });
+    }
+
+    private void loadItems() {
+        handler.removeCallbacks(runnable);
+        // stop handler
+        items.clear();
+
+        if (userNotifs.size() > 0) {
+            items.addAll(userNotifs);
+        }
+
+        if (posts.size() > 0) {
+            items.addAll(posts);
+        }
+
+        listCounter = 0;
+        aPosts.notifyDataSetChanged();
+        // hide progress bar, make list view appear
+        pb.setVisibility(ProgressBar.GONE);
+        rvPosts.setVisibility(ListView.VISIBLE);
     }
 
     private void animateOnUnawesome(ImageButton awesomeIcon) {

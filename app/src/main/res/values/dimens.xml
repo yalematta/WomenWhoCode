@@ -37,4 +37,8 @@
     <dimen name="topic_header_horizontal_padding">24dp</dimen>
     <dimen name="arrow_height">4dp</dimen>
     <dimen name="arrow_width">4dp</dimen>
+    <dimen name="arrow_height">6dp</dimen>
+    <dimen name="arrow_width">6dp</dimen>
+    <dimen name="notification_padding_horizontal">56dp</dimen>
+    <dimen name="notification_padding_vertical">56dp</dimen>
 </resources>
