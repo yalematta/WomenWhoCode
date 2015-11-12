@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
+import com.example.womenwhocode.womenwhocode.viewholders.ViewHolderTopicHeader;
 
 import java.util.List;
 
@@ -19,9 +20,10 @@ import butterknife.ButterKnife;
 /**
  * Created by zassmin on 10/18/15.
  */
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
-    private final List<Event> mEvents;
+public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
+    private List<Object> items;
+    private final int EVENT = 0, EVENT_HEADER = 1;
 
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);
@@ -31,21 +33,51 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         EventsAdapter.listener = listener;
     }
 
-    public EventsAdapter(List<Event> events) {
-        this.mEvents = events;
+    public EventsAdapter(List<Object> items) {
+        this.items = items;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View eventView = inflater.inflate(R.layout.item_event, parent, false);
-        return new ViewHolder(eventView);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder viewHolder = null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+        switch (viewType) {
+            case EVENT:
+                View v1 = inflater.inflate(R.layout.item_event, parent, false);
+                viewHolder = new ViewHolder(v1);
+                break;
+            case EVENT_HEADER:
+                View v2 = inflater.inflate(R.layout.item_topic_header, parent, false);
+                viewHolder = new ViewHolderTopicHeader(v2);
+                break;
+        }
+
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Event event = mEvents.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case EVENT:
+                ViewHolder vh1 = (ViewHolder) holder;
+                configureViewHolder(vh1, position);
+                break;
+            case EVENT_HEADER:
+                ViewHolderTopicHeader vh2 = (ViewHolderTopicHeader) holder;
+                configureViewHolderTopicHeader(vh2, position);
+                break;
+        }
+    }
+
+    private void configureViewHolderTopicHeader(ViewHolderTopicHeader holder, int position) {
+        TextView tvTopicHeader = holder.tvTopicHeader;
+        String header = (String) items.get(position);
+        tvTopicHeader.setText(header);
+    }
+
+    private void configureViewHolder(ViewHolder holder, int position) {
+        Event event = (Event) items.get(position);
 
         TextView tvEventNetwork = holder.tvEventNetwork;
         TextView tvEventTitle = holder.tvEventTopicTitle;
@@ -69,7 +101,17 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mEvents.size();
+        return this.items.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (items.get(position) instanceof Event) {
+            return EVENT;
+        } else if (items.get(position) instanceof String) {
+            return EVENT_HEADER;
+        }
+        return -1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -93,6 +135,5 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 }
             });
         }
-
     }
 }

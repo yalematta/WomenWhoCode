@@ -220,6 +220,7 @@ public class TimelineFragment extends Fragment {
         postQuery.orderByDescending(Post.AWESOME_COUNT_KEY);
         postQuery.include(Post.FEATURE_KEY);
         postQuery.include(Post.USER_KEY);
+        postQuery.include(Post.EVENT_KEY);
         postQuery.findInBackground(new FindCallback<Post>() {
             public void done(List<Post> listPosts, ParseException e) {
                 if (e != null) {
