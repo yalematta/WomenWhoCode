@@ -46,6 +46,7 @@ public class FeaturePostsFragment extends PostsListFragment {
             public void done(Feature f, ParseException e) {
                 feature = f;
                 postParseQuery.whereEqualTo(Post.FEATURE_KEY, feature);
+                postParseQuery.orderByDescending(Post.AWESOME_COUNT_KEY);
                 postParseQuery.findInBackground(new FindCallback<Post>() {
                     @Override
                     public void done(List<Post> list, ParseException e) {
