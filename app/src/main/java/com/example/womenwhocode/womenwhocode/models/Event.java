@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @ParseClassName("Event")
 public class Event extends ParseObject {
     public static final String NETWORK_KEY = "network";
-    private static final String DATETIME_KEY = "event_date"; // UTC start time of the event, in milliseconds since the epoch
+    public static final String DATETIME_KEY = "event_date"; // UTC start time of the event, in milliseconds since the epoch
     private static final String LOCATION_KEY = "location"; // venue should be attribute name here
     private static final String URL_KEY = "url"; // could be an event url from meetup, facebook, eventbrite, etc
     private static final String TITLE_KEY = "title";
