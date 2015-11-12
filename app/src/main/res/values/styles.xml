@@ -139,7 +139,7 @@
     </style>
 
     <style name="EditBoxStyle">
-        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textColorHint">@color/lightGray</item> // FIXME: font color should be black and needs 0.38 alpha
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textColor">@color/whitish</item>
     </style>

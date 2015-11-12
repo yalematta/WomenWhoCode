@@ -1,5 +1,9 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.annotation.TargetApi;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -44,7 +48,18 @@ public class Question1Fragment extends Fragment {
             tvQuestion.setTextColor(getResources().getColor(R.color.whitish));
             for (String An : Ans) {
                 CheckBox cb = new CheckBox(getContext());
+<<<<<<< HEAD
                 cb.setText(An);
+=======
+
+                if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.LOLLIPOP)  {
+                    // known android bug, when you uncheck it goes doesn't convert properly
+                    // http://stackoverflow.com/questions/28047291/api21-setbuttontintlist-on-checkbox
+                    cb.setButtonTintList(getContext().getResources().getColorStateList(R.color.checkbox));
+                }
+
+                cb.setText(Ans[i]);
+>>>>>>> master
 
                 cb.setTextColor(getResources().getColor(R.color.whitish));
                 l.addView(cb);
