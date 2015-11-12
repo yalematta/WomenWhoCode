@@ -20,10 +20,8 @@ public class FeatureTag extends ParseObject {
         Feature feature = null;
         try {
             feature = getParseObject(FEATURE_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return feature;
     }
@@ -36,10 +34,8 @@ public class FeatureTag extends ParseObject {
         Tag tag = null;
         try {
             tag = getParseObject(TAG_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return tag;
     }

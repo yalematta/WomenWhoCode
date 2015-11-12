@@ -9,9 +9,9 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Notification")
 public class Notification extends ParseObject {
-    public static final String TYPE_KEY = "type";
-    public static final String MESSAGE_KEY = "message";
-    public static final String PHOTO_KEY = "photo_file";
+    private static final String TYPE_KEY = "type";
+    private static final String MESSAGE_KEY = "message";
+    private static final String PHOTO_KEY = "photo_file";
 
     public ParseFile getPhotoFile() {
         return getParseFile(PHOTO_KEY);

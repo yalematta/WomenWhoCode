@@ -165,9 +165,7 @@ public class Event extends ParseObject {
             }
             event.save();
             // save in background and the callback!
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
         return event;

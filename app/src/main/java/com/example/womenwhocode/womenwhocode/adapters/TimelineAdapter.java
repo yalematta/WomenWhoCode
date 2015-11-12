@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
  */
 public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
-    private List<Object> items;
+    private final List<Object> items;
     private final int POST = 0, NOTIFICATION = 1;
     // close listener - set enabled to false and save in background!
     // add additional new holder

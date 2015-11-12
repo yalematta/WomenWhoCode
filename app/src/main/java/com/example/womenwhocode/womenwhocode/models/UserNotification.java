@@ -34,10 +34,8 @@ public class UserNotification extends ParseObject {
         Notification notification = null;
         try {
             notification = this.getParseObject(NOTIFICATION_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return notification;
     }

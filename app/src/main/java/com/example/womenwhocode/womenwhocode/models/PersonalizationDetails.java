@@ -9,7 +9,7 @@ import com.parse.ParseUser;
  */
 @ParseClassName("PersonalizationDetails")
 public class PersonalizationDetails extends ParseObject {
-    public static final String USER_KEY = "user";
+    private static final String USER_KEY = "user";
     private static final String ANSWERS_KEY = "answers";
 
     public void setAnswers(String answers) {

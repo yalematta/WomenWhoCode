@@ -24,10 +24,8 @@ public class Recommendation extends ParseObject {
         Feature feature = null;
         try {
             feature = getParseObject(FEATURE_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return feature;
     }
@@ -36,10 +34,8 @@ public class Recommendation extends ParseObject {
         Event event = null;
         try {
             event = getParseObject(EVENT_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             e.printStackTrace();
-        } catch (NullPointerException nullError) {
-            nullError.printStackTrace();
         }
         return event;
     }

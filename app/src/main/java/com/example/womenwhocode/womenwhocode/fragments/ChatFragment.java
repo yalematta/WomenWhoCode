@@ -1,7 +1,7 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -99,7 +98,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chat, container, false);
         lvChat = (ListView) view.findViewById(R.id.lvChat);
-        RelativeLayout rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
+        //RelativeLayout rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
         return view;
     }
 
@@ -182,7 +181,7 @@ public class ChatFragment extends Fragment {
 
     private void setColorFilter() {
         if (etMessage.getText().length() > 0) {
-            btnSend.setColorFilter(R.color.teal, PorterDuff.Mode.MULTIPLY);
+            btnSend.setColorFilter(Color.parseColor("#00b5a9")); // TODO: Use color resource
         } else btnSend.clearColorFilter();
     }
 
