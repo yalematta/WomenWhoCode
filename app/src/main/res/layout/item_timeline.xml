@@ -41,21 +41,18 @@
                     android:layout_width="@dimen/image_view_height_width"
                     android:layout_height="@dimen/image_view_height_width"
                     android:layout_alignParentLeft="true"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_alignParentTop="true"/>
+                    android:padding="@dimen/icon_padding" />
 
                 <TextView
                     android:id="@+id/tvEventTopicTitle"
                     android:transitionName="eventTopicTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/ivEventTopicPhoto"
                     android:layout_toLeftOf="@+id/tvRelativeDate"
                     android:gravity="left"
                     android:text="Title"
-                    android:paddingLeft="@dimen/icon_padding"
-                    android:paddingRight="@dimen/icon_padding"
+                    android:padding="@dimen/icon_padding"
                     style="@style/TextView.TitleText" />
 
                 <TextView
@@ -64,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/ivEventTopicPhoto"
                     android:layout_below="@+id/tvEventTopicTitle"
-                    android:padding="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
                     android:text="WWCode"
                     style="@style/TextView.Subtitle"/>
 
