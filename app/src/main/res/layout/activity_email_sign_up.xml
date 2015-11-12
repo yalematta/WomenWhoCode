@@ -19,7 +19,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/txtEmail"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:hint="email address"
         android:layout_below="@+id/txtName"
         android:layout_centerHorizontal="true"

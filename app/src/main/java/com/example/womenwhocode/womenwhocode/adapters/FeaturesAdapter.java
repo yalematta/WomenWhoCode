@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +24,7 @@ import butterknife.ButterKnife;
  */
 public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
-    private List<Object> items;
+    private final List<Object> items;
     private final int TOPIC = 0, TOPIC_HEADER = 1;
 
     public FeaturesAdapter(List<Object> items) {

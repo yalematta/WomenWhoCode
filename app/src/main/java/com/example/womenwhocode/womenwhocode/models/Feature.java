@@ -10,7 +10,7 @@ import com.parse.ParseObject;
 public class Feature extends ParseObject {
     public static final String AUTO_SUBSCRIBE_KEY = "auto_subscribe";
     private static final String IMAGE_URL_KEY = "image_url";
-    public static final String TITLE_KEY = "title";
+    private static final String TITLE_KEY = "title";
     private static final String NETWORK_KEY = "network";
     private static final String DESCRIPTION_KEY = "description";
     private static final String HEX_COLOR_KEY = "hex_color";

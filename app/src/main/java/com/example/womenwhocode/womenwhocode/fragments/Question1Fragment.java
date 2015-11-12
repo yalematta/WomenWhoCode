@@ -18,8 +18,6 @@ import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
  * Created by pnroy on 10/19/15.
  */
 public class Question1Fragment extends Fragment {
-private Button btnNext;
-private PersonalizationDetails pd;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -29,8 +27,8 @@ private PersonalizationDetails pd;
         try {
 
             LinearLayout l = (LinearLayout) view.findViewById(R.id.chkLayout);
-            btnNext = (Button)view.findViewById(R.id.btnNext);
-            pd=new PersonalizationDetails();
+            Button btnNext = (Button) view.findViewById(R.id.btnNext);
+            PersonalizationDetails pd = new PersonalizationDetails();
             //Toast.makeText(getContext(),String.valueOf(cnt),Toast.LENGTH_LONG);
             TextView tvQuestion = (TextView) view.findViewById(R.id.tvQuestion);
 
@@ -40,13 +38,13 @@ private PersonalizationDetails pd;
                 String[] Ans=bundle.getStringArray("Answers");
 
 
-            btnNext.setId(clickcnt+1);
+            btnNext.setId(clickcnt + 1);
 
             tvQuestion.setText(Question);
             tvQuestion.setTextColor(getResources().getColor(R.color.whitish));
-            for (int i = 0; i < Ans.length; i++) {
+            for (String An : Ans) {
                 CheckBox cb = new CheckBox(getContext());
-                cb.setText(Ans[i]);
+                cb.setText(An);
 
                 cb.setTextColor(getResources().getColor(R.color.whitish));
                 l.addView(cb);

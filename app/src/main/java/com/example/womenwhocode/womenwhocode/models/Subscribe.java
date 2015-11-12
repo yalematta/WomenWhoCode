@@ -1,26 +1,16 @@
 package com.example.womenwhocode.womenwhocode.models;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.parse.CountCallback;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
-import java.util.List;
 
 /**
  * Created by zassmin on 10/16/15.
  */
 @ParseClassName("Subscribe")
 public class Subscribe extends ParseObject {
-    public static final String NETWORK_KEY = "network";
+    private static final String NETWORK_KEY = "network";
     public static final String EVENT_KEY = "event";
     public static final String FEATURE_KEY = "feature";
     public static final String SUBSCRIBED_KEY = "subscribed";

@@ -10,10 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.activities.LoginEmailActivity;
 import com.example.womenwhocode.womenwhocode.activities.SignUpEmailActivity;
-
-import org.json.JSONArray;
 
 /**
  * Created by pnroy on 10/23/15.

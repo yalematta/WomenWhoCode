@@ -46,14 +46,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFullName"
             android:layout_toLeftOf="@id/ivCurrentUserProfile"
-            android:paddingRight="@dimen/icon_padding"
+            android:padding="@dimen/icon_padding"
             android:text="message body"
-            android:textColor="@color/lightestGray"
-            app:angle="8dp"
-            app:arrowHeight="6dp"
+            android:textColor="@color/whitish"
+            app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="right"
-            app:arrowPosition="2dp"
-            app:arrowWidth="6dp"
+            app:arrowWidth="@dimen/arrow_width"
             app:bubbleColor="@color/teal"/>
 
     </RelativeLayout>
@@ -99,14 +97,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvOtherFullName"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
-            android:paddingLeft="@dimen/icon_padding"
+            android:padding="@dimen/icon_padding"
             android:text="message body"
             android:textColor="@android:color/background_dark"
-            app:angle="8dp"
-            app:arrowHeight="6dp"
+            app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="left"
-            app:arrowPosition="2dp"
-            app:arrowWidth="6dp"
+            app:arrowWidth="@dimen/arrow_width"
             app:bubbleColor="@color/lightestGray"/>
 
     </RelativeLayout>

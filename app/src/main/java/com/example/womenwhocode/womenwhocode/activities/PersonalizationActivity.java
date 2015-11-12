@@ -38,11 +38,9 @@ public class PersonalizationActivity extends AppCompatActivity {
     private final LogInFragment logInFragment = new LogInFragment();
     private final SignUpFragment signUpFragment = new SignUpFragment();
     private PersonalizationQuestionnaire pq;
-    private PersonalizationDetails pd;
     int pageCnt = 0;
     private JSONArray arr1=null;
     private JSONArray arr2=null;
-    private JSONArray arr3=null;
     private final ArrayList<String> Question = new ArrayList<>();
     private final ArrayList<String[]> Ans = new ArrayList<>();
 
@@ -94,7 +92,7 @@ public class PersonalizationActivity extends AppCompatActivity {
 
 
     private void setFragmentData() {
-        pd = new PersonalizationDetails();
+        PersonalizationDetails pd = new PersonalizationDetails();
         pq.build();
         HashMap<String, String[]> ques = pq.getQuestionnaire();
 
@@ -144,8 +142,8 @@ public class PersonalizationActivity extends AppCompatActivity {
                     ft.addToBackStack(null);
                     break;
                 case 3:
-                     arr3 = getAnswersArray(view);
-                    JSONArray finalArray=concatArray(arr1,arr2,arr3);
+                    JSONArray arr3 = getAnswersArray(view);
+                    JSONArray finalArray=concatArray(arr1,arr2, arr3);
                     ft.replace(R.id.flPersonalization, signUpFragment);
                     bundle.putString("userAns", finalArray.toString());
                     signUpFragment.setArguments(bundle);

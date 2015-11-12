@@ -112,7 +112,7 @@ style="@style/page_background_bl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvNetwrks"
-        android:text="@string/tvNetwrks"
+        android:text="@string/tvNetworks"
         android:layout_below="@+id/etJob"
         />
     <Spinner

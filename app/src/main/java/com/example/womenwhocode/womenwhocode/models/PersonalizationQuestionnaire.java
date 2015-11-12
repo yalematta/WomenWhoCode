@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Created by zassmin on 10/22/15.
  */
 public class PersonalizationQuestionnaire {
-    public HashMap<String, String[]> questionnaire;
+    private final HashMap<String, String[]> questionnaire;
 
     public PersonalizationQuestionnaire() {
         this.questionnaire = new HashMap<>();
