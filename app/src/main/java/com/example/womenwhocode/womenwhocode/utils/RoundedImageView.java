@@ -1,6 +1,5 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
-import android.widget.ImageView;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

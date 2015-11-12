@@ -5,8 +5,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import java.util.Date;
-
 /**
  * Created by zassmin on 11/1/15.
  */

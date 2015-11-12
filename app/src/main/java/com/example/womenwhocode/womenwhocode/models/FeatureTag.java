@@ -9,8 +9,8 @@ import com.parse.ParseObject;
  */
 @ParseClassName("FeatureTag")
 public class FeatureTag extends ParseObject {
-    public static String FEATURE_KEY = "feature";
-    public static String TAG_KEY = "tag";
+    private static final String FEATURE_KEY = "feature";
+    public static final String TAG_KEY = "tag";
 
     public void setFeature(Feature feature) {
         put(FEATURE_KEY, feature);

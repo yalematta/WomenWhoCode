@@ -21,8 +21,6 @@ import java.util.List;
 public class FeatureChatFragment extends ChatFragment {
     private static final String FEATURE_ID = "feature_id";
     private static String featureId;
-    private ParseQuery<Feature> featureParseQuery;
-    private ParseQuery<Message> messageParseQuery;
 
     public static FeatureChatFragment newInstance(String featureObjectId) {
         FeatureChatFragment featureChatFragment = new FeatureChatFragment();
@@ -58,15 +56,15 @@ public class FeatureChatFragment extends ChatFragment {
     }
 
     @Override
-    protected void receiveMessages() {
+    void receiveMessages() {
         if (isFirstLoad()) {
 //            setSpinners();
         }
 
         featureId = getArguments().getString(FEATURE_ID, "");
 
-        featureParseQuery = ParseQuery.getQuery(Feature.class);
-        messageParseQuery = ParseQuery.getQuery(Message.class);
+        ParseQuery<Feature> featureParseQuery = ParseQuery.getQuery(Feature.class);
+        ParseQuery<Message> messageParseQuery = ParseQuery.getQuery(Message.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             messageParseQuery.fromPin(featureId + LocalDataStore.MESSAGE_PIN);
         }

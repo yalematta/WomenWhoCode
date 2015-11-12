@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
@@ -79,16 +77,13 @@ public class FeatureDetailsActivity extends AppCompatActivity {
 
     // Hides chat related options from menu
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem viewParticipantsMenuItem = menu.findItem(R.id.action_view_participants);
-        MenuItem markUnreadMenuItem = menu.findItem(R.id.action_mark_unread);
-        MenuItem addParticipantsMenuItem = menu.findItem(R.id.action_add_particpants);
+        MenuItem viewParticipantsMenuItem = menu.findItem(R.id.action_view_members);
+        MenuItem addParticipantsMenuItem = menu.findItem(R.id.action_add_members);
         if (vpPager.getCurrentItem() == 0) {
             viewParticipantsMenuItem.setVisible(false);
-            markUnreadMenuItem.setVisible(false);
             addParticipantsMenuItem.setVisible(false);
         } else {
             viewParticipantsMenuItem.setVisible(true);
-            markUnreadMenuItem.setVisible(true);
             addParticipantsMenuItem.setVisible(true);
         }
         return true;
@@ -97,7 +92,7 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_view_participants:
+            case R.id.action_view_members:
                 // Display participants
                 return true;
             case android.R.id.home:

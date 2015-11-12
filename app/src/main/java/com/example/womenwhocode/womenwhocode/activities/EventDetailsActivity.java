@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -49,7 +48,6 @@ public class EventDetailsActivity extends AppCompatActivity {
     private TextView tvSubscribeCount;
     private Button btnSubscribeIcon;
     private Event event;
-    private ProgressBar pb;
     private RelativeLayout rlEvents;
     private String event_id;
     private ParseUser currentUser;
@@ -107,7 +105,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private void setUpView() {
         // set the progress bar
-        pb = (ProgressBar) findViewById(R.id.pbLoading);
+        ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
 //        pb.setVisibility(ProgressBar.VISIBLE);
 
         // hide scroll view so the progress bar is the center of attention

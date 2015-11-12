@@ -22,8 +22,6 @@ import java.util.List;
 public class EventChatFragment extends ChatFragment {
     private static final String EVENT_ID = "event_id";
     private static String eventId;
-    private ParseQuery<Event> eventParseQuery;
-    private ParseQuery<Message> messageParseQuery;
 
     public static EventChatFragment newInstance(String eventObjectId) {
         EventChatFragment eventChatFragment = new EventChatFragment();
@@ -59,15 +57,15 @@ public class EventChatFragment extends ChatFragment {
     }
 
     @Override
-    protected void receiveMessages() {
+    void receiveMessages() {
         if (isFirstLoad()) {
 //            setSpinners();
         }
 
         eventId = getArguments().getString(EVENT_ID, "");
 
-        eventParseQuery = ParseQuery.getQuery(Event.class);
-        messageParseQuery = ParseQuery.getQuery(Message.class);
+        ParseQuery<Event> eventParseQuery = ParseQuery.getQuery(Event.class);
+        ParseQuery<Message> messageParseQuery = ParseQuery.getQuery(Message.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             messageParseQuery.fromPin(eventId + LocalDataStore.MESSAGE_PIN);
         }

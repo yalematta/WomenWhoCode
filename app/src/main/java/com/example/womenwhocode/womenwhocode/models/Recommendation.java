@@ -9,10 +9,10 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Recommendation")
 public class Recommendation extends ParseObject {
-    public static final String EVENT_KEY = "event";
-    public static final String EVENT_ID_KEY = "event_id";
-    public static final String FEATURE_KEY = "feature";
-    public static final String FEATURE_ID_KEY = "feature_id";
+    private static final String EVENT_KEY = "event";
+    private static final String EVENT_ID_KEY = "event_id";
+    private static final String FEATURE_KEY = "feature";
+    private static final String FEATURE_ID_KEY = "feature_id";
     public static final String VALID_KEY = "valid";
     public static final String USER_ID_KEY = "user_id";
 

@@ -3,34 +3,18 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_add_particpants"
-        android:title="@string/label_add_participants"
+        android:id="@+id/action_add_members"
+        android:title="@string/label_add_members"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_mark_unread"
-        android:title="@string/label_mark_unread"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_view_participants"
-        android:title="@string/label_participants"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_leave_chat"
-        android:title="@string/label_leave"
+        android:id="@+id/action_view_members"
+        android:title="@string/label_members"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_disable_notifications"
         android:title="@string/label_disable_notifications"
         app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/action_ringtone_options"
-        android:title="@string/label_ringtone_options"
-        app:showAsAction="never"/>
-
 
 </menu>

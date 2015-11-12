@@ -2,7 +2,6 @@ package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Post;
@@ -21,7 +20,6 @@ import java.util.List;
 public class EventPostsFragment extends PostsListFragment {
     private static final String EVENT_ID = "event_id";
     private static String eventId;
-    private ParseQuery<Event> eventParseQuery;
     private ParseQuery<Post> postParseQuery;
 
     public static EventPostsFragment newInstance(String eventObjectId) {
@@ -37,7 +35,7 @@ public class EventPostsFragment extends PostsListFragment {
         // we need to get the Event object
         eventId = getArguments().getString(EVENT_ID, "");
 
-        eventParseQuery = ParseQuery.getQuery(Event.class);
+        ParseQuery<Event> eventParseQuery = ParseQuery.getQuery(Event.class);
         postParseQuery = ParseQuery.getQuery(Post.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             postParseQuery.fromPin(eventId);

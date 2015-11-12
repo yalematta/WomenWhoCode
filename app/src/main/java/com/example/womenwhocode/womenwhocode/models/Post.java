@@ -11,11 +11,11 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Post")
 public class Post extends ParseObject {
-    public static final String DESCRIPTION_KEY = "description";
-    public static final String NETWORK_KEY = "network";
+    private static final String DESCRIPTION_KEY = "description";
+    private static final String NETWORK_KEY = "network";
     public static final String EVENT_KEY = "event";
     public static final String FEATURE_KEY = "feature";
-    public static final String AWESOME_COUNT_KEY = "awesome_count";
+    private static final String AWESOME_COUNT_KEY = "awesome_count";
     public static final String USER_KEY = "user";
 
     public String getDescription() {

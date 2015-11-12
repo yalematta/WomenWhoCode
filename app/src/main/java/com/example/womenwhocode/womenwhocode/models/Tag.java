@@ -8,7 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Tag")
 public class Tag extends ParseObject {
-    public static String NAME_KEY = "name";
+    public static final String NAME_KEY = "name";
 
     public void setName(String name) {
         put(NAME_KEY, name);
