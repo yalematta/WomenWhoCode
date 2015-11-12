@@ -35,6 +35,6 @@
     <dimen name="card_bottom_padding">8dp</dimen>
     <dimen name="button_margin_top">8dp</dimen>
     <dimen name="topic_header_horizontal_padding">24dp</dimen>
-    <dimen name="arrow_height">6dp</dimen>
-    <dimen name="arrow_width">6dp</dimen>
+    <dimen name="arrow_height">4dp</dimen>
+    <dimen name="arrow_width">4dp</dimen>
 </resources>
