@@ -39,6 +39,7 @@ public class EventsFragment extends Fragment {
     private ParseQuery<Event> query;
     private ParseQuery<Network> networkParseQuery;
     private static final int MILE_RANGE = 25;
+    private ArrayList<Object> items;
 
     public interface OnEventItemClickListener {
         void onEventClickListener(Event event, View itemView);
@@ -48,7 +49,8 @@ public class EventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         events = new ArrayList<>();
-        aEvents = new EventsAdapter(events);
+        items = new ArrayList<>();
+        aEvents = new EventsAdapter(items);
     }
 
     @Override
@@ -102,10 +104,9 @@ public class EventsFragment extends Fragment {
             profileParseQuery.fromPin(LocalDataStore.PROFILE_PIN);
         }
 
-        // TODO: sort events by most recent
-        // TODO: reduce # of network calls for profile
-        // TODO: check for location updates
+        // TODO: reduce # of network calls for profile - maybe store the location somewhere
         // TODO: add a no events view when there are no events to show
+        // TODO: seed at least 2 global events
 
         profileParseQuery.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
         profileParseQuery.getFirstInBackground(new GetCallback<Profile>() {
@@ -122,8 +123,9 @@ public class EventsFragment extends Fragment {
                     query.findInBackground(new FindCallback<Event>() {
                         public void done(List<Event> eventList, ParseException e) {
                             if (eventList != null && e == null) {
-                                events.clear();
-                                events.addAll(eventList);
+                                items.clear();
+                                items.add(0, "Upcoming events near you:");
+                                items.addAll(eventList);
                                 aEvents.notifyDataSetChanged();
                                 // hide progress bar, make list view appear
                                 pb.setVisibility(ProgressBar.GONE);
@@ -139,5 +141,7 @@ public class EventsFragment extends Fragment {
                 }
             }
         });
+
+        // TODO: Upcoming global events
     }
 }

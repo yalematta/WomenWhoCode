@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
+import com.example.womenwhocode.womenwhocode.viewholders.ViewHolderTopicHeader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -142,15 +143,6 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 }
             });
-        }
-    }
-
-    public static class ViewHolderTopicHeader extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvTopicHeader) public TextView tvTopicHeader;
-
-        public ViewHolderTopicHeader(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
         }
     }
 }
