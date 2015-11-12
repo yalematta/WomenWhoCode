@@ -8,12 +8,14 @@ import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.FeatureTag;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Network;
+import com.example.womenwhocode.womenwhocode.models.Notification;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.Recommendation;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.models.Tag;
+import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -45,6 +47,8 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Tag.class);
         ParseObject.registerSubclass(FeatureTag.class);
         ParseObject.registerSubclass(Recommendation.class);
+        ParseObject.registerSubclass(UserNotification.class);
+        ParseObject.registerSubclass(Notification.class);
 
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
