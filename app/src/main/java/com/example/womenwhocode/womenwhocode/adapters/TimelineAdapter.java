@@ -13,10 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -29,34 +31,79 @@ import butterknife.ButterKnife;
 /**
  * Created by shehba.shahab on 10/17/15.
  */
-public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
-    private final List<Post> mPosts;
+public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
+    private List<Object> items;
+    private final int POST = 0, NOTIFICATION = 1;
+    // close listener - set enabled to false and save in background!
+    // add additional new holder
+    // try to get image working with glide since it handles gifs!
 
     public interface OnItemClickListener {
         void onPostFeatureClick(View itemView, int position);
         void onAwesomeClick(View itemView, int position);
+        void onClose(View itemView, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         TimelineAdapter.listener = listener;
     }
 
-    public TimelineAdapter(List<Post> posts) {
-        mPosts = posts;
+    public TimelineAdapter(List<Object> items) {
+        this.items = items;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View timelineView = inflater.inflate(R.layout.item_timeline, parent, false);
-        return new ViewHolder(timelineView);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        RecyclerView.ViewHolder viewHolder = null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+        switch (viewType) {
+            case POST:
+                View viewHolderPost = inflater.inflate(R.layout.item_timeline, parent, false);
+                viewHolder = new ViewHolderPost(viewHolderPost);
+                break;
+            case NOTIFICATION:
+                View viewHolderNotification = inflater.inflate(R.layout.item_notification, parent, false);
+                viewHolder = new ViewHolderNotification(viewHolderNotification);
+                break;
+        }
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Post post = mPosts.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case POST:
+                ViewHolderPost vh1 = (ViewHolderPost) holder;
+                configureViewHolderPost(vh1, position);
+                break;
+            case NOTIFICATION:
+                ViewHolderNotification vh2 = (ViewHolderNotification) holder;
+                configureViewHolderNotification(vh2, position);
+                break;
+        }
+
+    }
+
+    private void configureViewHolderNotification(ViewHolderNotification holder, int position) {
+        UserNotification un = (UserNotification) items.get(position);
+
+        ImageView ivNotificationImage = holder.ivNotificationImage;
+        TextView tvNotificationMessage = holder.tvNotificationMessage;
+
+        Context context = ivNotificationImage.getContext();
+        Glide.with(context)
+                .load(un.getNotification().getPhotoFile().getUrl())
+                .asGif()
+                .into(ivNotificationImage);
+
+        tvNotificationMessage.setText(un.getNotification().getMessage());
+    }
+
+    private void configureViewHolderPost(ViewHolderPost holder, int position) {
+        Post post = (Post) items.get(position);
 
         ProgressBar pb = holder.pb;
         CardView cvPostFeature = holder.cvPostFeature;
@@ -132,10 +179,20 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mPosts.size();
+        return items.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        if (items.get(position) instanceof Post) {
+            return POST;
+        } else if (items.get(position) instanceof UserNotification) {
+            return NOTIFICATION;
+        }
+        return -1;
+    }
+
+    public static class ViewHolderPost extends RecyclerView.ViewHolder {
         @Bind(R.id.ivEventTopicPhoto) public ImageView ivEventTopicPhoto;
         @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
         @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
@@ -147,7 +204,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         @Bind(R.id.rlPostFeature) public RelativeLayout rlPostFeature;
         @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolderPost(final View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
@@ -167,6 +224,27 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 public void onClick(View v) {
                     if (listener != null) {
                         listener.onAwesomeClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
+        }
+    }
+
+    public static class ViewHolderNotification extends RecyclerView.ViewHolder {
+        @Bind(R.id.ivNotificationImage) public ImageView ivNotificationImage;
+        @Bind(R.id.ibNotificationClose) public ImageButton ibNotificationClose;
+        @Bind(R.id.tvNotificationMessage) public TextView tvNotificationMessage;
+
+        public ViewHolderNotification(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+
+            // set close listener here
+            ibNotificationClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onClose(itemView, getLayoutPosition());
                     }
                 }
             });

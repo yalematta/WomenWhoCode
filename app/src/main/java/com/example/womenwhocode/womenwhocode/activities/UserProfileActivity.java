@@ -26,15 +26,19 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.FeatureTag;
+import com.example.womenwhocode.womenwhocode.models.Notification;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.Recommendation;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.models.Tag;
+import com.example.womenwhocode.womenwhocode.models.UserNotification;
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -77,12 +81,15 @@ public class UserProfileActivity extends AppCompatActivity {
         final ArrayList<String> networks = new ArrayList<>();
         // TODO: needs a take photo intent for when where is no camera
 
+        currentUser = ParseUser.getCurrentUser();
         if (extras != null) {
-
             email = extras.getString("Email");
             userAns = extras.getString("userAns");
 
+            savePersonalizationDetails();
+            recommendUserToTopic();
         }
+
         txtName = (EditText) findViewById(R.id.txtName);
         EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtjobTitle = (EditText) findViewById(R.id.etJob);
@@ -122,6 +129,9 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        autoSubscribeUserToTopics();
+        registerUserNotifications();
     }
 
     @Override
@@ -146,16 +156,10 @@ public class UserProfileActivity extends AppCompatActivity {
             if(!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
                 userProfile.setJobTitle(txtjobTitle.getText().toString());
             }
-            currentUser = ParseUser.getCurrentUser();
             userProfile.setUser(currentUser);
             userProfile.save();
 
-            pd.setAnswers(userAns);
-            pd.setUser(currentUser);
-            pd.save();
-
-            recommendUserToTopic(); // FIXME: will this be done by the time a user go to topics?
-            autoSubscribeUserToTopics();
+            startTimelineActivityIntent();
         } catch (ParseException p) {
             Log.d("FinalizationError", "Error: " + p.getMessage());
         }
@@ -188,8 +192,6 @@ public class UserProfileActivity extends AppCompatActivity {
                         feature.setSubscribeCount(subscribeCount);
                         feature.saveInBackground();
                     }
-
-                    startTimelineActivityIntent();
                 } else {
                     Log.d("AutoSubscribeError", "Error: " + e.getMessage());
                 }
@@ -198,42 +200,56 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void recommendUserToTopic() {
-        // get personalization details
-        ParseQuery<PersonalizationDetails> personalizationDetailsParseQuery = ParseQuery.getQuery(PersonalizationDetails.class);
-        personalizationDetailsParseQuery.whereEqualTo(PersonalizationDetails.USER_KEY, currentUser);
-        personalizationDetailsParseQuery.getFirstInBackground(new GetCallback<PersonalizationDetails>() {
-            @Override
-            public void done(PersonalizationDetails personalizationDetails, ParseException e) {
-                if (e == null) {
-                    // parse answers
-                    String[] parsed = personalizationDetails.getAnswers().split("\"");
+          // parse answers
+          String[] parsed = userAns.split("\"");
 
-                    // query tags for answers
-                    ParseQuery<Tag> tagParseQuery = ParseQuery.getQuery(Tag.class);
-                    tagParseQuery.whereContainedIn(Tag.NAME_KEY, Arrays.asList(parsed));
-                    // get features with those tags
-                    ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
-                    featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
-                    featureTagParseQuery.include("feature");
-                    featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
-                        @Override
-                        public void done(List<FeatureTag> list, ParseException e) {
-                            if (e == null) {
-                                HashSet<Feature> featureSet = new HashSet<>(); // to catch dups!
-                                for (FeatureTag featureTag : list) {
-                                    if (featureSet.add(featureTag.getFeature())) { // 0 and 3
-                                        // create recommendations
-                                        Recommendation r = new Recommendation();
-                                        r.setFeature(featureTag.getFeature());
-                                        r.setFeatureId(featureTag.getFeature().getObjectId());
-                                        r.setUserId(currentUser.getObjectId());
-                                        r.setValid(true);
-                                        r.saveInBackground();
-                                    }
-                                }
-                            }
-                        }
-                    });
+          // query tags for answers
+          ParseQuery<Tag> tagParseQuery = ParseQuery.getQuery(Tag.class);
+          tagParseQuery.whereContainedIn(Tag.NAME_KEY, Arrays.asList(parsed));
+          // get features with those tags
+          ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
+          featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
+          featureTagParseQuery.include("feature");
+          featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
+              @Override
+              public void done(List<FeatureTag> list, ParseException e) {
+                  if (e == null) {
+                      HashSet<Feature> featureSet = new HashSet<>(); // to catch dups!
+                      for (FeatureTag featureTag : list) {
+                          if (featureSet.add(featureTag.getFeature())) { // 0 and 3
+                              // create recommendations
+                              Recommendation r = new Recommendation();
+                              r.setFeature(featureTag.getFeature());
+                              r.setFeatureId(featureTag.getFeature().getObjectId());
+                              r.setUserId(currentUser.getObjectId());
+                              r.setValid(true);
+                              r.saveInBackground();
+                          }
+                      }
+                  }
+              }
+          });
+    }
+
+    private void savePersonalizationDetails() {
+        pd.setAnswers(userAns);
+        pd.setUser(currentUser);
+        pd.saveInBackground();
+    }
+
+    private void registerUserNotifications() {
+        ParseQuery<Notification> notificationParseQuery = ParseQuery.getQuery(Notification.class);
+        notificationParseQuery.findInBackground(new FindCallback<Notification>() {
+            @Override
+            public void done(List<Notification> list, ParseException e) {
+                if (e == null && list.size() > 0) {
+                    for (Notification n : list) {
+                        UserNotification un = new UserNotification();
+                        un.setUserId(currentUser.getObjectId());
+                        un.setEnabled(true);
+                        un.setNotification(n);
+                        un.saveInBackground();
+                    }
                 }
             }
         });

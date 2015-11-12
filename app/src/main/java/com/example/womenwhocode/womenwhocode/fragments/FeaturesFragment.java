@@ -77,6 +77,9 @@ public class FeaturesFragment extends Fragment {
                     loadItems();
                 } else if (listCounter < 3) {
                     handler.postDelayed(this, RUN_FREQUENCY);
+                } else {
+                    handler.removeCallbacks(this);
+                    listCounter = 0;
                 }
             }
         };

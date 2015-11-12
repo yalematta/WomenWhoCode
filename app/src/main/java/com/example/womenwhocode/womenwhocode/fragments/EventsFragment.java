@@ -118,6 +118,7 @@ public class EventsFragment extends Fragment {
                     }
                     networkParseQuery.whereWithinMiles(Network.LOCATION_KEY, profile.getLocation(), MILE_RANGE);
                     query.whereMatchesQuery(Event.NETWORK_KEY, networkParseQuery);
+                    query.orderByAscending(Event.DATETIME_KEY);
                     query.findInBackground(new FindCallback<Event>() {
                         public void done(List<Event> eventList, ParseException e) {
                             if (eventList != null && e == null) {
