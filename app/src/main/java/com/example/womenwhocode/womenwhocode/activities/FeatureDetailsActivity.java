@@ -355,7 +355,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     @Override
     public void onLaunchAddPostDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance("Add Post");
+        AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance();
         addPostDialogFragment.show(fm, "fragment_add_post");
     }
 
