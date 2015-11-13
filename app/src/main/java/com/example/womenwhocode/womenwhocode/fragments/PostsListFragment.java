@@ -1,14 +1,13 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,14 +18,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
-import com.example.womenwhocode.womenwhocode.widgets.RecommendFeatureDialog;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -49,6 +46,11 @@ public class PostsListFragment extends Fragment {
     private ProgressBar pb;
     private ParseQuery<Awesome> awesomeParseQuery;
     private ParseUser currentUser;
+    private OnAddPostListener listener;
+
+    public interface OnAddPostListener {
+        void onLaunchAddPostDialog();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,28 +109,14 @@ public class PostsListFragment extends Fragment {
 
         // floating action button on click!
         FloatingActionButton fabAddPost = (FloatingActionButton) v.findViewById(R.id.fabAddPost);
-//        fabAddPost.setRippleColor(Color.GRAY);
         fabAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPostFragment();
-                Snackbar.make(v, "Thanks for adding a post!", Snackbar.LENGTH_SHORT).show();
-                // create a listener for the feature detail activity and the event detail activity
-                // that listener will call the other fragment, give it the event or feature ids
-                // the other fragment will have it's own listener
-                // on submit
-                // the listener will
-                // - create a post in the feature detail activity and event detail activity
-                // - close the existing fragment
-                // - something else
+                listener.onLaunchAddPostDialog();
             }
         });
 
         return v;
-    }
-
-    private void showPostFragment() {
-        // set up a fragment here!
     }
 
     private void setSpinners() {
@@ -249,5 +237,16 @@ public class PostsListFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnAddPostListener) {
+            listener = (OnAddPostListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implement PostListFragment.OnAddPostListener");
+        }
     }
 }
