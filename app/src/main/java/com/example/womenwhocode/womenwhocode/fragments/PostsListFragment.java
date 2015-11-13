@@ -1,9 +1,12 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -44,11 +46,15 @@ public class PostsListFragment extends Fragment {
     private ProgressBar pb;
     private ParseQuery<Awesome> awesomeParseQuery;
     private ParseUser currentUser;
+    private OnAddPostListener listener;
+
+    public interface OnAddPostListener {
+        void onLaunchAddPostDialog();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         posts = new ArrayList<>();
         aPosts = new PostsAdapter(posts);
         awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
@@ -101,6 +107,15 @@ public class PostsListFragment extends Fragment {
             }
         });
 
+        // floating action button on click!
+        FloatingActionButton fabAddPost = (FloatingActionButton) v.findViewById(R.id.fabAddPost);
+        fabAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onLaunchAddPostDialog();
+            }
+        });
+
         return v;
     }
 
@@ -128,7 +143,7 @@ public class PostsListFragment extends Fragment {
     }
 
     void noPostsView(String color) {
-        RelativeLayout rlPostLists = (RelativeLayout) v.findViewById(R.id.rlPostLists);
+        CoordinatorLayout rlPostLists = (CoordinatorLayout) v.findViewById(R.id.rlPostLists);
         int intColor = Color.parseColor(String.valueOf(color));
         rlPostLists.setBackgroundColor(intColor);
     }
@@ -222,5 +237,16 @@ public class PostsListFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnAddPostListener) {
+            listener = (OnAddPostListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implement PostListFragment.OnAddPostListener");
+        }
     }
 }

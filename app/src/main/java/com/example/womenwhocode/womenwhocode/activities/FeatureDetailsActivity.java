@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,9 +28,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
@@ -47,7 +52,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by shehba.shahab on 10/18/15.
  */
-public class FeatureDetailsActivity extends AppCompatActivity {
+public class FeatureDetailsActivity extends AppCompatActivity implements
+        PostsListFragment.OnAddPostListener,
+        AddPostDialogFragment.OnSubmitPostListener{
 
     private static final String SUBSCRIBED_TEXT = "unfollow";
     private static final String SUBSCRIBE_TEXT = "follow";
@@ -343,6 +350,30 @@ public class FeatureDetailsActivity extends AppCompatActivity {
     private void setTab() {
         // Switch to page based on index
         vpPager.setCurrentItem(0);
+    }
+
+    @Override
+    public void onLaunchAddPostDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance();
+        addPostDialogFragment.show(fm, "fragment_add_post");
+    }
+
+    private void addPost(String postBody) {
+        Post post = new Post();
+        post.setDescription(postBody);
+        post.setUser(currentUser);
+        post.setFeature(feature);
+        post.saveInBackground();
+    }
+
+    @Override
+    public void onSubmitPostListener(String inputText) {
+        addPost(inputText);
+        CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
+        Snackbar.make(v, "Thanks for adding a post!", Snackbar.LENGTH_SHORT).show();
+        // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
+        // FIXME: add post to bottom of the list!
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {

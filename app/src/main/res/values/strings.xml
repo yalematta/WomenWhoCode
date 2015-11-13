@@ -42,4 +42,5 @@
     <string name="label_disable_notifications">Disable Notifications</string>
     <string name="subject_share_post">Hey, I saw this on WomenWhoCode and thought of you.</string>
     <string name="label_awesome_x">"AWESOME x "</string>
+    <string name="add_post">New post</string>
 </resources>

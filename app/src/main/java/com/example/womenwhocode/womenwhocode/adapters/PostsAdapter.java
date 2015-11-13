@@ -73,6 +73,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     .centerCrop()
                     .into(ivUserPhoto);
         } else {
+            tvPostNameBy.setText("WWCode");
             ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
 

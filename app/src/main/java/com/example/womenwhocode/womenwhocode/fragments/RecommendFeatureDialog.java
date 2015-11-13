@@ -1,4 +1,4 @@
-package com.example.womenwhocode.womenwhocode.widgets;
+package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

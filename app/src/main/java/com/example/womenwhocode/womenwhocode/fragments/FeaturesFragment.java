@@ -20,7 +20,6 @@ import com.example.womenwhocode.womenwhocode.models.Recommendation;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.example.womenwhocode.womenwhocode.widgets.RecommendFeatureDialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
