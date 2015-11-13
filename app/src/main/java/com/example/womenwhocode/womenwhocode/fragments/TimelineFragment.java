@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  * Created by shehba.shahab on 10/16/15.
  */
 public class TimelineFragment extends Fragment {
+    private final int RUN_FREQUENCY = 1000; // ms
     private TimelineAdapter aPosts;
     private ArrayList<Post> posts;
     private RecyclerView rvPosts;
@@ -53,14 +55,8 @@ public class TimelineFragment extends Fragment {
     private ArrayList<UserNotification> userNotifs;
     private ArrayList<Object> items;
     private Runnable runnable;
-    private final int RUN_FREQUENCY = 1000; // ms
     private Handler handler;
     private int listCounter;
-
-    public interface OnItemClickListener {
-        void onFeatureTimelineClickListener(Feature feature, View itemView);
-        void onEventTimelineClickListener(Event event, View itemView);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -143,6 +139,17 @@ public class TimelineFragment extends Fragment {
                         }
                     }
                 });
+            }
+
+            @Override
+            public void onShareButtonClick(final View itemView, final int position) {
+                final Post post = (Post) items.get(position);
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = post.getDescription();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.subject_share_post);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
             }
 
             @Override
@@ -320,7 +327,7 @@ public class TimelineFragment extends Fragment {
         }
 
         // Update the UI thread
-        tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        tvAwesomeCount.setText(getString(R.string.label_awesome_x) + String.valueOf(awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();
@@ -334,5 +341,11 @@ public class TimelineFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public interface OnItemClickListener {
+        void onFeatureTimelineClickListener(Feature feature, View itemView);
+
+        void onEventTimelineClickListener(Event event, View itemView);
     }
 }

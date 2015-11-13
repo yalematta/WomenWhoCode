@@ -133,6 +133,14 @@
         <item name="android:alpha">0.38</item>
     </style>
 
+    <style name="TextView.AwesomeCount.SmallText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/mediumGray</item>
+        <item name="android:textSize">@dimen/text_subheader_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
     <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/whitish</item>
         <item name="android:lineSpacingExtra">@dimen/line_spacing_details</item>
@@ -212,6 +220,12 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/black</item>
 
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
 </resources>

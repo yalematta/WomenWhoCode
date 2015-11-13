@@ -1,5 +1,6 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -86,6 +87,17 @@ public class PostsListFragment extends Fragment {
                         }
                     }
                 });
+            }
+
+            @Override
+            public void onShareButtonClick(final View itemView, final int position) {
+                final Post post = (Post) posts.get(position);
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = post.getDescription();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.subject_share_post);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
             }
         });
 
@@ -196,7 +208,7 @@ public class PostsListFragment extends Fragment {
 
         // Update the UI thread
         // TODO: it's probably safe to do this before the onAwesome
-        tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        tvAwesomeCount.setText(getString(R.string.label_awesome_x) + String.valueOf(awesomeCount));
 
         // Send data to parse
         awesome.saveInBackground();
