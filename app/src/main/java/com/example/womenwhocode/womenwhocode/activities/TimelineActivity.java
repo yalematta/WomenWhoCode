@@ -32,7 +32,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
-import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
+import com.example.womenwhocode.womenwhocode.widgets.RecommendFeatureDialog.RecommendFeatureDialogListener;
 import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
@@ -88,7 +88,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
         //for drawer view
         ParseUser currentUser = ParseUser.getCurrentUser();
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_list_icon);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Find our drawer view
