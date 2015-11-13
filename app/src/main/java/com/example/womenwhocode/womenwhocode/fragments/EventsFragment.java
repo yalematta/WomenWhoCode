@@ -31,7 +31,6 @@ import java.util.List;
  * Created by shehba.shahab on 10/16/15.
  */
 public class EventsFragment extends Fragment {
-    private ArrayList<Event> events;
     private EventsAdapter aEvents;
     private RecyclerView rvEvents;
     private OnEventItemClickListener listener;
@@ -48,7 +47,6 @@ public class EventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        events = new ArrayList<>();
         items = new ArrayList<>();
         aEvents = new EventsAdapter(items);
     }
@@ -73,7 +71,7 @@ public class EventsFragment extends Fragment {
         aEvents.setOnItemClickListener(new EventsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Event event = events.get(position);
+                Event event = (Event) items.get(position);
                 listener.onEventClickListener(event, itemView);
             }
         });
