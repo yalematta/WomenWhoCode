@@ -41,8 +41,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface OnItemClickListener {
         void onPostFeatureClick(View itemView, int position);
+
         void onAwesomeClick(View itemView, int position);
+
         void onClose(View itemView, int position);
+
+        void onShareButtonClick(View itemView, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -170,7 +174,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         tvPostDescription.setText(description);
         tvRelativeDate.setText(relativeDate);
         tvFeatureTitle.setText(title);
-        tvAwesomeCount.setText(String.valueOf(awesomeCount));
+
+        tvAwesomeCount.setText(context.getResources().getString(R.string.label_awesome_x) + String
+                .valueOf
+                        (awesomeCount));
 
         // Hide the progress bar, show the main view
         pb.setVisibility(ProgressBar.GONE);
@@ -203,6 +210,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @Bind(R.id.pbLoading) public ProgressBar pb;
         @Bind(R.id.rlPostFeature) public RelativeLayout rlPostFeature;
         @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
+        @Bind(R.id.btnShare) public ImageButton btnShare;
 
         public ViewHolderPost(final View itemView) {
             super(itemView);
@@ -224,6 +232,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 public void onClick(View v) {
                     if (listener != null) {
                         listener.onAwesomeClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
+
+            btnShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onShareButtonClick(itemView, getLayoutPosition());
                     }
                 }
             });

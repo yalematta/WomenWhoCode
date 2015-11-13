@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/llTimelineItems"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="?android:attr/selectableItemBackground"
-              android:orientation="vertical">
+<LinearLayout
+    android:id="@+id/llTimelineItems"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -13,27 +14,30 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone"/>
 
-    <android.support.v7.widget.CardView android:id="@+id/cvPostFeature"
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        card_view:cardCornerRadius="1.5dp"
-                                        card_view:cardElevation="@dimen/card_elevation">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvPostFeature"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="1.5dp"
+        card_view:cardElevation="@dimen/card_elevation">
 
-        <RelativeLayout android:id="@+id/rlFeaturePosts"
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/rlFeaturePosts"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <RelativeLayout android:id="@+id/rlPostFeature"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/teal"
-                            android:padding="@dimen/activity_horizontal_padding">
+            <RelativeLayout
+                android:id="@+id/rlPostFeature"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/teal"
+                android:padding="@dimen/activity_horizontal_padding">
 
                 <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
                     android:id="@+id/ivEventTopicPhoto"
@@ -80,14 +84,15 @@
 
             </RelativeLayout>
 
-            <RelativeLayout android:id="@+id/rlPost"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_below="@+id/rlPostFeature"
-                            android:padding="@dimen/activity_horizontal_padding">
+            <RelativeLayout
+                android:id="@+id/rlPost"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rlPostFeature"
+                android:padding="@dimen/activity_horizontal_padding">
 
                 <TextView
                     android:id="@+id/tvEmpty"
@@ -106,14 +111,37 @@
                     android:linksClickable="true"
                     android:text="Description"/>
 
+                <View
+                    android:id="@+id/view"
+                    style="@style/Divider"
+                    android:layout_below="@+id/tvPostDescription"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_toRightOf="@+id/tvEmpty"/>
+
+                <ImageButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/view"
+                    android:background="@null"
+                    android:contentDescription="Share button"
+                    android:paddingBottom="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_share_button"/>
+
                 <ImageButton
                     android:id="@+id/btnAwesomeIcon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_alignBottom="@+id/tvAwesomeCount"
-                    android:layout_below="@+id/tvPostDescription"
-                    android:layout_toLeftOf="@+id/tvAwesomeCount"
+                    android:layout_alignLeft="@+id/tvPostDescription"
+                    android:layout_alignStart="@+id/tvPostDescription"
+                    android:layout_below="@+id/view"
                     android:background="@null"
+                    android:contentDescription="Awesome Icon"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
@@ -123,15 +151,18 @@
 
                 <TextView
                     android:id="@+id/tvAwesomeCount"
+                    style="@style/TextView.AwesomeCount.SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/tvPostDescription"
+                    android:layout_alignBottom="@+id/btnAwesomeIcon"
+                    android:layout_toEndOf="@+id/btnAwesomeIcon"
+                    android:layout_toRightOf="@+id/btnAwesomeIcon"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
                     android:paddingTop="@dimen/icon_paddingTop"
                     android:text="50"/>
+
             </RelativeLayout>
         </RelativeLayout>
 

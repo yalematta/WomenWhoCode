@@ -24,20 +24,15 @@ import butterknife.ButterKnife;
  * Created by zassmin on 10/26/15.
  */
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
-    private final List<Post> mPosts;
     private static OnItemClickListener listener;
+    private final List<Post> mPosts;
 
-    public interface OnItemClickListener {
-        void onAwesomeClick(View itemView, int position);
+    public PostsAdapter(List<Post> posts) {
+        this.mPosts = posts;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         PostsAdapter.listener = listener;
-    }
-
-
-    public PostsAdapter(List<Post> posts) {
-        this.mPosts = posts;
     }
 
     @Override
@@ -85,12 +80,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         tvRelativeTime.setText(post.getPostDateTime());
 
         int awesomeCount = post.getAwesomeCount();
-        tvAwesomeCount.setText(String.valueOf(awesomeCount));
+        tvAwesomeCount.setText(context.getResources().getString(R.string.label_awesome_x) + String
+                .valueOf
+                        (awesomeCount));
     }
 
     @Override
     public int getItemCount() {
         return mPosts.size();
+    }
+
+    public interface OnItemClickListener {
+        void onAwesomeClick(View itemView, int position);
+
+        void onShareButtonClick(View itemView, int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -100,6 +103,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
         @Bind(R.id.btnAwesomeIcon) public ImageButton btnAwesomeIcon;
         @Bind(R.id.tvRelativeTime) public TextView tvRelativeTime;
+        @Bind(R.id.btnShare) public ImageButton btnShare;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -111,6 +115,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 public void onClick(View v) {
                     if (listener != null) {
                         listener.onAwesomeClick(itemView, getLayoutPosition());
+                    }
+                }
+            });
+
+            btnShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onShareButtonClick(itemView, getLayoutPosition());
                     }
                 }
             });

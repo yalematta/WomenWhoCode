@@ -84,32 +84,57 @@
                     android:padding="5dp"
                     android:text="Description" />
 
-                <ImageButton
-                    android:id="@+id/btnAwesomeIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignBottom="@+id/tvAwesomeCount"
+                <View
+                    android:id="@+id/view"
+                    style="@style/Divider"
                     android:layout_below="@+id/tvPostDescription"
-                    android:layout_toLeftOf="@+id/tvAwesomeCount"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_toRightOf="@+id/tvEmpty"/>
+
+                <ImageButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/view"
                     android:background="@null"
+                    android:contentDescription="Share button"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
                     android:paddingTop="@dimen/icon_paddingTop"
                     android:scaleType="fitXY"
-                    android:src="@drawable/awesome" />
+                    android:src="@drawable/ic_share_button"/>
+
+                <ImageButton
+                    android:id="@+id/btnAwesomeIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignLeft="@+id/tvPostDescription"
+                    android:layout_alignStart="@+id/tvPostDescription"
+                    android:layout_below="@+id/view"
+                    android:background="@null"
+                    android:contentDescription="Awesome Icon"
+                    android:paddingBottom="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/awesome"/>
 
                 <TextView
                     android:id="@+id/tvAwesomeCount"
+                    style="@style/TextView.AwesomeCount.SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvPostDescription"
-                    android:layout_alignParentRight="true"
-                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:layout_alignBottom="@+id/btnAwesomeIcon"
+                    android:layout_toEndOf="@+id/btnAwesomeIcon"
+                    android:layout_toRightOf="@+id/btnAwesomeIcon"
                     android:paddingBottom="@dimen/icon_padding"
-                    android:paddingRight="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
-                    android:text="50" />
+                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:text="50"/>
             </RelativeLayout>
         </RelativeLayout>
 
