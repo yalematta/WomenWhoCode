@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,9 +28,12 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
@@ -45,7 +49,10 @@ import com.parse.SaveCallback;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class EventDetailsActivity extends AppCompatActivity {
+public class EventDetailsActivity extends AppCompatActivity implements
+        PostsListFragment.OnAddPostListener,
+        AddPostDialogFragment.OnSubmitPostListener {
+
     private TextView tvEventTitle;
     private TextView tvSubscribeCount;
     private Button btnSubscribeIcon;
@@ -272,6 +279,30 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void onEventInfo(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getUrl()));
         startActivity(browserIntent);
+    }
+
+    @Override
+    public void onLaunchAddPostDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance();
+        addPostDialogFragment.show(fm, "fragment_add_post");
+    }
+
+    @Override
+    public void onSubmitPostListener(String inputText) {
+        addPost(inputText);
+        CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
+        Snackbar.make(v, "Thanks for adding a post!", Snackbar.LENGTH_SHORT).show();
+        // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
+        // FIXME: add post to bottom of the list!
+    }
+
+    private void addPost(String postBody) {
+        Post post = new Post();
+        post.setDescription(postBody);
+        post.setUser(currentUser);
+        post.setEvent(event);
+        post.saveInBackground();
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
