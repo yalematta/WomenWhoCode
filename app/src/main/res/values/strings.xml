@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="login">LogIn</string>
     <string name="loginWithGitHub">LogIn With GitHub</string>
-    <string name="reviewProfile">Review Profile</string>
+    <string name="reviewProfile">Review Your Profile</string>
     <string name="loginWithEmail">LogIn With Email</string>
     <string name="other">"Other"</string>
     <string name="question1">"Engineering area of interest"</string>
