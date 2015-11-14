@@ -126,11 +126,11 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         cvPostFeature.setVisibility(CardView.INVISIBLE);
 
         // to resolve bug where icon changes on many items
-        btnAwesomeIcon.setImageResource(0);
+        btnAwesomeIcon.setImageDrawable(null) ;
         btnAwesomeIcon.setImageResource(R.drawable.awesome);
 
         // Set up feature/event specific attrs
-        ivPostPhoto.setImageResource(0);
+        ivPostPhoto.setImageDrawable(null);
         Context context = ivPostPhoto.getContext();
         String title = "WWCode";
         Feature feature = post.getFeature();

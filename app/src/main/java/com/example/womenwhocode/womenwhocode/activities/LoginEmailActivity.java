@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -59,8 +63,42 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     private void ValidateUser(String username, String pwd) {
         ParseUser.logInInBackground(username, pwd, new LogInCallback() {
-            public void done(ParseUser user, ParseException e) {
+            public void done(final ParseUser user, ParseException e) {
                 if (user != null) {
+
+                    Profile profile = null;
+                    try {
+                        profile = user.getParseObject(Message.PROFILE_KEY).fetchIfNeeded();
+                    } catch (ParseException | NullPointerException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    // temporary backwards migration for users without profiles
+                    if (profile == null) {
+                        ParseApplication.currentPosition = 0; // default theme
+                        ParseQuery<Profile> profileParseQuery = ParseQuery.getQuery(Profile.class);
+                        profileParseQuery.whereEqualTo(Profile.USER_KEY, user);
+                        profileParseQuery.getFirstInBackground(new GetCallback<Profile>() {
+                            @Override
+                            public void done(Profile p, ParseException e) {
+                                if (e == null) {
+                                    // set profile on current user
+                                    user.put(Message.PROFILE_KEY, p);
+                                    user.saveInBackground();
+                                    // set default theme on user's profile
+                                    p.setTheme(0);
+                                    p.saveInBackground();
+                                }
+                            }
+                        });
+                    } else {
+                        if (profile.getTheme() >= 0) {
+                            ParseApplication.currentPosition = profile.getTheme();
+                        } else {
+                            ParseApplication.currentPosition = 0;
+                        }
+                    }
+
                     //Toast.makeText(getBaseContext(), "User Login successful", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginEmailActivity.this, TimelineActivity.class);
                     startActivity(i);

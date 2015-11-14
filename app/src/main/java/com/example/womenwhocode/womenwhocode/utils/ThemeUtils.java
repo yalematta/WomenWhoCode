@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.utils;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 
 /**
@@ -23,6 +24,10 @@ public class ThemeUtils {
     }
 
     public static void onActivityCreateSetTheme(Activity activity) {
+        if (ParseApplication.currentPosition != sTheme) {
+            sTheme = ParseApplication.currentPosition;
+        }
+
         switch (sTheme) {
             default:
             case THEME_WWCODE_LIGHT:

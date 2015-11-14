@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -97,9 +98,14 @@ public class TimelineActivity extends AppCompatActivity implements
 
         // Find our drawer view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
-
         // Inflate the header view at runtime
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
+
+        // Inflate the theme switch menu
+        Menu menu = navigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.theme_switch);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        onThemeSwitch(actionView); // listener
 
         // We can now look up items within the header if needed
         final ImageView ivHeaderPhoto = (ImageView) headerLayout.findViewById(R.id.ivPhoto);
@@ -110,19 +116,20 @@ public class TimelineActivity extends AppCompatActivity implements
         parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
         parseQuery.getFirstInBackground(new GetCallback<Profile>() {
             @Override
-            public void done(Profile profile, ParseException e) {
+            public void done(Profile p, ParseException e) {
                 if (e == null) {
-                    if (profile != null) {
-                        if (profile.getPhotoFile() != null) {
+                    if (p != null) {
+                        profile = p;
+                        if (p.getPhotoFile() != null) {
                             Picasso.with(getApplicationContext())
-                                    .load(profile.getPhotoFile().getUrl())
+                                    .load(p.getPhotoFile().getUrl())
                                     .transform(new CircleTransform())
                                     .resize(50, 50)
                                     .centerCrop()
                                     .into(ivHeaderPhoto);
                         }
-                        tvFullName.setText(profile.getFullName());
-                        tvJobTitle.setText(profile.getJobTitle());
+                        tvFullName.setText(p.getFullName());
+                        tvJobTitle.setText(p.getJobTitle());
                     }
                 }
             }
@@ -258,6 +265,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
     private void updateUserProfile(final LatLng latLng) {
         // FIXME: only update if the location has changed.
+        // FIXME: clean up dup profile request!
         ParseQuery<Profile> query = ParseQuery.getQuery(Profile.class);
         query.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
         query.getFirstInBackground(new GetCallback<Profile>() {
@@ -346,6 +354,33 @@ public class TimelineActivity extends AppCompatActivity implements
             startActivity(i);
             overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
         }
+    }
+
+    private void onThemeSwitch(View actionView) {
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (profile == null) {
+                    return;
+                }
+
+                switch (profile.getTheme()) {
+                    case ThemeUtils.THEME_WWCODE_LIGHT:
+                        switchThemeForUser(ThemeUtils.THEME_WWCODE_DARK);
+                        break;
+                    case ThemeUtils.THEME_WWCODE_DARK:
+                        switchThemeForUser(ThemeUtils.THEME_WWCODE_LIGHT);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void switchThemeForUser(int theme) {
+        ThemeUtils.changeToTheme(this, theme);
+        ParseApplication.currentPosition = theme;
+        profile.setTheme(theme);
+        profile.saveInBackground();
     }
 
     // Return the order of the fragments in the view pager

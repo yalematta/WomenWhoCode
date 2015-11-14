@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile_fragment"
             android:icon="@drawable/ic_email"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_recent_activity_fragment"
-            android:icon="@drawable/ic_email"
-            android:title="Your Recent Activity" />
+            android:id="@+id/nav_settings_activity_fragment"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
         <item
             android:id="@+id/nav_contact_us_fragment"
             android:icon="@drawable/ic_email"
@@ -18,6 +19,12 @@
             android:icon="@drawable/ic_email"
             android:onClick="logout"
             android:title="Logout" />
+
+        <item android:id="@+id/theme_switch"
+            android:icon="@drawable/ic_invert_colors"
+            app:actionLayout="@layout/action_switch_theme"
+            android:title="Switch your theme!"
+            app:actionViewClass="android.support.v7.widget.SwitchCompat"/>
     </group>
 
 </menu>

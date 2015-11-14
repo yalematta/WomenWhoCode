@@ -40,4 +40,5 @@
     <dimen name="notification_padding_horizontal">56dp</dimen>
     <dimen name="notification_padding_vertical">56dp</dimen>
     <dimen name="bubble_padding">8dp</dimen>
+    <dimen name="switch_theme_margin">12dp</dimen>
 </resources>

@@ -95,7 +95,7 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         // set image
         Context context = ivFeatureImage.getContext();
-        ivFeatureImage.setImageResource(0); // clear image, to avoid memory leak
+        ivFeatureImage.setImageDrawable(null); // clear image, to avoid memory leak
         if (title.contains("Recommend")) { // this may not be accurate - only for the recommended piece
             ivFeatureImage.setImageResource(R.drawable.ic_plus);
         } else {

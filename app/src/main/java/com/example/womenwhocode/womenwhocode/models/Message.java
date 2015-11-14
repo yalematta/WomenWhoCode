@@ -15,7 +15,7 @@ public class Message extends ParseObject {
     public static final String EVENT_ID_KEY = "event_id";
     public static final String FEATURE_ID_KEY = "event_id";
     public static final String CREATED_AT_KEY = "createdAt";
-    private static final String PROFILE_KEY = "profile";
+    public static final String PROFILE_KEY = "profile";
     public static final String USER_KEY = "user";
 
     public void setUser(ParseUser user) {

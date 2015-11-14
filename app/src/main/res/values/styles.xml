@@ -153,7 +153,7 @@
     </style>
 
     <!-- =============================================================== -->
-    <!-- Needs to Switch Based on Theme Selected -->
+    <!-- For Theme.WWCodeLight -->
     <!-- =============================================================== -->
 
     <style name="TextView.TitleText.Dark" parent="TextAppearance.AppCompat">
@@ -195,9 +195,6 @@
         <item name="android:background">@color/lightestGray</item>
     </style>
 
-    <!-- TODO: style for regular text -->
-    <!-- TODO: what are we changing at runtime that we should change here? -->
-
     <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -206,6 +203,56 @@
         <item name="bubbleColor">@color/lightestGray</item>
     </style>
 
+    <!-- =============================================================== -->
+    <!-- For Theme.WWCodeDark -->
+    <!-- =============================================================== -->
+
+    <style name="BackgroundDark">
+        <item name="android:background">@color/darkBlack</item>
+    </style>
+
+    <style name="SubBackgroundDark">
+        <item name="android:background">@color/darkGray</item>
+    </style>
+
+    <style name="TextView.TitleText.Light" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="TextView.TitleText.FeatureHeader.Light" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="TextView.Subtitle.Light.Small" parent="TextAppearance.AppCompat">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:alpha">0.7</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_small_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="TextView.Regular.Light" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="BubbleTextView.ChatBody.OtherUser.Light" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="bubbleColor">@color/darkGray</item>
+    </style>
+
+
+    <!-- TODO: does event background color on card change? -->
+    <!-- FIXME: get designer feedback -->
     <!-- I think this actually stays the same! -->
     <style name="BubbleTextView.ChatBody.CurrentUser" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
@@ -219,8 +266,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
-
-    <!-- TODO: These may not change - needs verification -->
 
     <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/black</item>
