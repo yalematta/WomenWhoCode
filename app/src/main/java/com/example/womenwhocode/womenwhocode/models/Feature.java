@@ -1,6 +1,7 @@
 package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 /**
@@ -15,6 +16,7 @@ public class Feature extends ParseObject {
     private static final String DESCRIPTION_KEY = "description";
     private static final String HEX_COLOR_KEY = "hex_color";
     private static final String SUBSCRIBE_COUNT = "subscribe_count";
+    private static final String PHOTO_KEY = "photo_file";
 
     public void setSubscribeCount(int count) {
         put(SUBSCRIBE_COUNT, count);
@@ -77,5 +79,13 @@ public class Feature extends ParseObject {
 
     public void setHexColor(String hexColor) {
         put(HEX_COLOR_KEY, hexColor);
+    }
+
+    public ParseFile getPhotoFile() {
+        return getParseFile(PHOTO_KEY);
+    }
+
+    public void setPhotoFile(ParseFile file) {
+        put(PHOTO_KEY, file);
     }
 }

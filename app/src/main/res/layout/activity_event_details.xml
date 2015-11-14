@@ -47,8 +47,8 @@
         <ImageView
             android:id="@+id/ivEventImage"
             android:transitionName="eventTopicPhoto"
-            android:layout_width="@dimen/image_view_height_width"
-            android:layout_height="@dimen/image_view_height_width"
+            android:layout_width="@dimen/regular_image_view_height_width"
+            android:layout_height="@dimen/regular_image_view_height_width"
             android:padding="@dimen/icon_padding"
             android:layout_alignParentLeft="true" />
 

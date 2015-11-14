@@ -123,9 +123,9 @@ public class TimelineActivity extends AppCompatActivity implements
                         if (p.getPhotoFile() != null) {
                             Picasso.with(getApplicationContext())
                                     .load(p.getPhotoFile().getUrl())
-                                    .transform(new CircleTransform())
-                                    .resize(50, 50)
+                                    .resize(48, 48)
                                     .centerCrop()
+                                    .transform(new CircleTransform())
                                     .into(ivHeaderPhoto);
                         }
                         tvFullName.setText(p.getFullName());

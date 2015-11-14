@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,13 @@ import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -137,6 +142,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Event event = post.getEvent();
         if (feature != null) {
             String imageUrl = feature.getImageUrl();
+            if (feature.getPhotoFile() != null) {
+                imageUrl = feature.getPhotoFile().getUrl();
+            }
             title = feature.getTitle();
             String hexColor = feature.getHexColor();
 
@@ -148,9 +156,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             // Insert the image using picasso
             Picasso.with(context)
                     .load(imageUrl)
-                    .transform(new CircleTransform())
-                    .resize(75, 75) // FIXME: this might break!
+                    .resize(40, 40)
                     .centerCrop()
+                    .transform(new CircleTransform())
                     .into(ivPostPhoto);
 
         } else if (event != null) {
@@ -162,8 +170,13 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         // in case a post has a user
         ParseUser postUser = post.getUser();
-        if (postUser != null) { // FIXME: should be full name from profile
-            tvPostNameBy.setText(postUser.getUsername());
+        Profile profile = getUserProfile(postUser);
+        if (postUser != null) {
+            String username = postUser.getUsername();
+            if (profile != null && !TextUtils.isEmpty(profile.getFullName())) {
+                username = profile.getFullName();
+            }
+            tvPostNameBy.setText(username);
         }
 
         // Insert the model data into each of the view items
@@ -175,13 +188,21 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         tvRelativeDate.setText(relativeDate);
         tvFeatureTitle.setText(title);
 
-        tvAwesomeCount.setText(context.getResources().getString(R.string.label_awesome_x) + String
-                .valueOf
-                        (awesomeCount));
+        tvAwesomeCount.setText(context.getResources().getString(R.string.label_awesome_x) + String.valueOf(awesomeCount));
 
         // Hide the progress bar, show the main view
         pb.setVisibility(ProgressBar.GONE);
         cvPostFeature.setVisibility(CardView.VISIBLE);
+    }
+
+    private Profile getUserProfile(ParseUser user) {
+        Profile profile = null;
+        try {
+            profile = user.getParseObject(Message.PROFILE_KEY).fetchIfNeeded();
+        } catch (ParseException | NullPointerException e1) {
+            e1.printStackTrace();
+        }
+        return profile;
     }
 
     @Override

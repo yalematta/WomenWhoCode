@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -63,13 +67,24 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         ivUserPhoto.setImageDrawable(null);
         Context context = tvPostNameBy.getContext();
         ParseUser postUser = post.getUser();
+        Profile profile = getUserProfile(postUser);
         if (postUser != null) {
-            tvPostNameBy.setText(postUser.getUsername());
-            // TODO: find the profile for user to get their image :(
+            String username = postUser.getUsername();
+            String imageUrl = post.getFeatureImageUrl();
+            if (profile != null) {
+                if (!TextUtils.isEmpty(profile.getFullName())) {
+                    username = profile.getFullName();
+                }
+                if (profile.getPhotoFile() != null) {
+                    imageUrl = profile.getPhotoFile().getUrl();
+                }
+            }
+
+            tvPostNameBy.setText(username);
             Picasso.with(context)
-                    .load(post.getFeatureImageUrl())
+                    .load(imageUrl)
                     .transform(new CircleTransform())
-                    .resize(75, 75)
+                    .resize(40, 40)
                     .centerCrop()
                     .into(ivUserPhoto);
         } else {
@@ -82,8 +97,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         int awesomeCount = post.getAwesomeCount();
         tvAwesomeCount.setText(context.getResources().getString(R.string.label_awesome_x) + String
-                .valueOf
-                        (awesomeCount));
+                .valueOf(awesomeCount));
+    }
+
+    private Profile getUserProfile(ParseUser user) {
+        Profile profile = null;
+        try {
+            profile = user.getParseObject(Message.PROFILE_KEY).fetchIfNeeded();
+        } catch (ParseException | NullPointerException e1) {
+            e1.printStackTrace();
+        }
+        return profile;
     }
 
     @Override

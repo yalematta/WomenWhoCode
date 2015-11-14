@@ -228,9 +228,13 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         int color = Color.parseColor(String.valueOf(feature.getHexColor()));
         rlFeatures.setBackgroundColor(color);
 
+        String imageUrl = feature.getImageUrl();
+        if (feature.getPhotoFile() != null) {
+            imageUrl = feature.getPhotoFile().getUrl();
+        }
         Picasso.with(this)
-                .load(feature.getImageUrl())
-                .resize(50, 50)
+                .load(imageUrl)
+                .resize(40, 40)
                 .centerCrop()
                 .into(ivFeatureImage);
 

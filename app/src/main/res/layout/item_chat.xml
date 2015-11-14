@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/ivCurrentUserProfile"
-            android:layout_width="@dimen/image_view_height_width"
-            android:layout_height="@dimen/image_view_height_width"
+            android:layout_width="@dimen/regular_image_view_height_width"
+            android:layout_height="@dimen/regular_image_view_height_width"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/profile_me"
             android:padding="@dimen/icon_padding"
@@ -66,8 +66,8 @@
 
         <ImageView
             android:id="@+id/ivOtherProfileLeft"
-            android:layout_width="@dimen/image_view_height_width"
-            android:layout_height="@dimen/image_view_height_width"
+            android:layout_width="@dimen/regular_image_view_height_width"
+            android:layout_height="@dimen/regular_image_view_height_width"
             android:layout_alignParentLeft="true"
             android:contentDescription="@string/profile_other"
             android:padding="@dimen/icon_padding"
