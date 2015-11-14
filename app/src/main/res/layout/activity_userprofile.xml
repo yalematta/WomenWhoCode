@@ -141,9 +141,8 @@ style="@style/page_background_bl"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
-        android:layout_below="@+id/spnNetwork"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="false"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp" />
 
 
