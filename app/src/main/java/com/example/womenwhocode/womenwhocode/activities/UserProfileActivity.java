@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.FeatureTag;
+import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Notification;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.Profile;
@@ -33,12 +34,15 @@ import com.example.womenwhocode.womenwhocode.models.Recommendation;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.models.Tag;
 import com.example.womenwhocode.womenwhocode.models.UserNotification;
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -140,26 +144,29 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void OnFinalize(View view) {
-        try {
-            // Save user with the updated input in Profile model
-            if(!TextUtils.isEmpty(txtName.getText().toString())) {
-                userProfile.setFullName(txtName.getText().toString());
-            }
-            if (spnNetwork.getSelectedItem().toString().equals("select")) {
-                userProfile.setNetwork("");
-            } else {
-                userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
-            }
-            if(!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
-                userProfile.setJobTitle(txtjobTitle.getText().toString());
-            }
-            userProfile.setUser(currentUser);
-            userProfile.save();
-
-            startTimelineActivityIntent();
-        } catch (ParseException p) {
-            Log.d("FinalizationError", "Error: " + p.getMessage());
+        // Save user with the updated input in Profile model
+        if(!TextUtils.isEmpty(txtName.getText().toString())) {
+            userProfile.setFullName(txtName.getText().toString());
         }
+        if (spnNetwork.getSelectedItem().toString().equals("select")) {
+            userProfile.setNetwork("");
+        } else {
+            userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
+        }
+        if(!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
+            userProfile.setJobTitle(txtjobTitle.getText().toString());
+        }
+        userProfile.setUser(currentUser);
+        userProfile.setTheme(0);
+        userProfile.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                currentUser.put(Message.PROFILE_KEY, userProfile);
+                currentUser.saveInBackground();
+            }
+        });
+
+        startTimelineActivityIntent();
     }
 
     private void autoSubscribeUserToTopics() {

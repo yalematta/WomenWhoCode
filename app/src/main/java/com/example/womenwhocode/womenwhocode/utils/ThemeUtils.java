@@ -9,7 +9,7 @@ import com.example.womenwhocode.womenwhocode.R;
  * Created by zassmin on 11/13/15.
  */
 public class ThemeUtils {
-    private static int sTheme;
+    private static int sTheme = 0;
 
     public final static int THEME_WWCODE_LIGHT = 0;
     public final static int THEME_WWCODE_DARK = 1;

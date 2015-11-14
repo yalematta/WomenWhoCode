@@ -23,6 +23,7 @@ public class Profile extends ParseObject {
     private static final String ABOUT_YEARS_EXPERIENCE_KEY = "about_years_experience";
     private static final String GITHUB_ACCESS_TOKEN = "github_access_token";
     private static final String GITHUB_ID = "github_id";
+    private static final String THEME_KEY = "theme_type";
 
     public void setFullName(String fullName) {
         put(FULL_NAME_KEY, fullName);
@@ -108,5 +109,13 @@ public class Profile extends ParseObject {
 
     public long getGithubId() {
         return (long) this.get(GITHUB_ID);
+    }
+
+    public void setTheme(int type) {
+        this.put(THEME_KEY, type);
+    }
+
+    public int getTheme() {
+        return (int) this.getNumber(THEME_KEY);
     }
 }
