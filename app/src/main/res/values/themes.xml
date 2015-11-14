@@ -13,6 +13,13 @@
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Define styles for YOUR_CUSTOM_THEME here. -->
+        <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader.Light</item>
+        <item name="textSecondaryHeaders">@style/TextView.TitleText.Light</item>
+        <item name="chatSubheaders">@style/TextView.Subtitle.Light.Small</item>
+        <item name="chatBubbleOtherUser">@style/BubbleTextView.ChatBody.OtherUser.Light</item>
+        <item name="awesomeCount">@style/TextView.AwesomeCount.SmallText</item>
+        <item name="mainBackground">@style/BackgroundDark</item>
+        <item name="subBackground">@style/SubBackgroundDark</item>
+        <item name="textRegular">@style/TextView.Regular.Light</item>
     </style>
 </resources>
