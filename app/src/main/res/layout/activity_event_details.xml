@@ -49,7 +49,7 @@
             android:transitionName="eventTopicPhoto"
             android:layout_width="@dimen/regular_image_view_height_width"
             android:layout_height="@dimen/regular_image_view_height_width"
-            android:padding="@dimen/icon_padding"
+            android:layout_marginRight="@dimen/icon_main_padding_right"
             android:layout_alignParentLeft="true" />
 
         <TextView
@@ -58,7 +58,9 @@
             android:id="@+id/tvEventTopicTitle"
             android:transitionName="eventTopicTitle"
             android:layout_toRightOf="@+id/ivEventImage"
-            android:padding="@dimen/icon_padding"
+            android:paddingTop="@dimen/icon_padding"
+            android:paddingRight="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
             style="@style/TextView.DetailTitle"
             android:text="Security with Expert" />
 
@@ -67,7 +69,7 @@
             android:id="@+id/tvSubscribeCount"
             android:layout_width="match_parent"
             android:paddingBottom="@dimen/icon_padding"
-            android:paddingLeft="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
             android:layout_below="@+id/tvEventTopicTitle"
             android:layout_toRightOf="@+id/ivEventImage"
@@ -83,8 +85,8 @@
             android:text="event info"
             android:layout_marginTop="@dimen/button_margin_top"
             android:layout_marginBottom="@dimen/icon_padding"
-            android:layout_marginLeft="@dimen/icon_padding"
             android:layout_marginRight="@dimen/icon_padding"
+            android:layout_marginLeft="@dimen/icon_padding_right"
             android:onClick="onEventInfo"
             style="@style/FollowButton"/>
 
@@ -107,7 +109,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white" />
+        android:background="@color/white" />
 
     <FrameLayout
         android:layout_width="match_parent"
