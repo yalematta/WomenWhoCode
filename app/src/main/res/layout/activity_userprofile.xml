@@ -26,6 +26,7 @@ style="@style/page_background_bl"
         android:background="@drawable/ic_placeholder"
         android:layout_below="@+id/txtReview"
         android:layout_centerHorizontal="true"
+        android:onClick="showCameraIcons"
         />
     
     <LinearLayout
@@ -44,6 +45,7 @@ style="@style/page_background_bl"
             android:src="@drawable/ic_camera"
             android:id="@+id/btnCamera"
             android:onClick="onLaunchCamera"
+            android:visibility="invisible"
             android:background="@color/blackish" />
 
         <ImageButton
@@ -53,6 +55,7 @@ style="@style/page_background_bl"
             android:src="@drawable/ic_fileimage"
             android:background="@color/blackish"
             android:id="@+id/btnUpload"
+            android:visibility="invisible"
             android:onClick="onSelectImage" />
     </LinearLayout>
 
@@ -116,6 +119,7 @@ style="@style/page_background_bl"
         android:layout_below="@+id/etJob"
         />
     <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spnNetwork"
@@ -134,13 +138,13 @@ style="@style/page_background_bl"
         style="@style/finalizeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_padding"
         android:text="Finalize Profile"
         android:id="@+id/btnFinalize"
         android:onClick="OnFinalize"
         android:layout_below="@+id/spnNetwork"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="false" />
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="50dp" />
 
 
 </RelativeLayout>

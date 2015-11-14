@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:hint="username" />
+        android:hint="Username" />
 
     <EditText
         style="@style/EditBoxStyle"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtEmail"
         android:inputType="textEmailAddress"
-        android:hint="email address"
+        android:hint="Email Address"
         android:layout_below="@+id/txtName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp" />
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtPwd"
         android:layout_below="@+id/txtEmail"
-        android:hint="password"
+        android:hint="Password"
         android:inputType="textPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp" />

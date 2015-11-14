@@ -16,10 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -69,8 +78,9 @@ public class UserProfileActivity extends AppCompatActivity {
     private Spinner spnNetwork;
     private String userAns;
     private String email = "";
-    private ImageView ivGif;
+    private ImageView ivPic;
     private ParseUser currentUser;
+    private boolean animate_flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +105,8 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtjobTitle = (EditText) findViewById(R.id.etJob);
         spnNetwork = (Spinner) findViewById(R.id.spnNetwork);
+        ivPic=(ImageView)findViewById(R.id.ivphoto);
+        ivPic.clearAnimation();
 
         //get the Network data
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Network");
@@ -143,6 +155,17 @@ public class UserProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(!animate_flag) {
+            doAlpha();
+        }
+    }
+    private void doAlpha(){
+        Animation alphaAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha_animation);
+        ivPic.startAnimation(alphaAnimation); //image is my ImageView
+    }
     public void OnFinalize(View view) {
         // Save user with the updated input in Profile model
         if(!TextUtils.isEmpty(txtName.getText().toString())) {
@@ -262,10 +285,11 @@ public class UserProfileActivity extends AppCompatActivity {
     private void startTimelineActivityIntent() {
         Intent i = new Intent(UserProfileActivity.this, TimelineActivity.class);
         startActivity(i);
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     public void onSelectImage(View view) {
+        animate_flag=true;
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
@@ -273,6 +297,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         Bitmap finalImg = null;
         try {
             // When an Image is picked
@@ -341,6 +366,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onLaunchCamera(View view) {
+        animate_flag=true;
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
@@ -377,8 +403,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private Bitmap rotateBitmapOrientation(String photoFilePath) {
         // Create and configure BitmapFactory
         BitmapFactory.Options bounds = new BitmapFactory.Options();
-        bounds.inSampleSize = 8;
-        bounds.inJustDecodeBounds = true;
+        //bounds.inSampleSize = 4;
+        //bounds.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(photoFilePath, bounds);
         BitmapFactory.Options opts = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(photoFilePath, opts);
@@ -403,4 +429,13 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
 
+    public void showCameraIcons(View view) {
+        view.clearAnimation();
+        RelativeLayout rl=(RelativeLayout)view.getParent();
+
+        LinearLayout child=(LinearLayout)rl.getChildAt(2);
+
+        child.findViewById(R.id.btnUpload).setVisibility(View.VISIBLE);
+        child.findViewById(R.id.btnCamera).setVisibility(View.VISIBLE);
+    }
 }

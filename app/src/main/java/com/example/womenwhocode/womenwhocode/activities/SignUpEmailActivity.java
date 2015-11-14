@@ -49,7 +49,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
     final String email = tvEmail.getText().toString();
     final String password = tvPassword.getText().toString();
 //create the parse user and save it
-    ParseUser user = new ParseUser();
+   ParseUser user = new ParseUser();
     user.setUsername(tvName.getText().toString());
     user.setPassword(tvPassword.getText().toString());
     user.setEmail(tvEmail.getText().toString());
