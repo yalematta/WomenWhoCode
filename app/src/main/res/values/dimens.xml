@@ -15,7 +15,8 @@
     <dimen name="icon_paddingTop">8dp</dimen>
     <dimen name="detail_padding_top">28dp</dimen>
     <dimen name="text_subheader_padTop">4dp</dimen>
-    <dimen name="image_view_height_width">50dp</dimen>
+    <dimen name="large_image_view_height_width">48dp</dimen>
+    <dimen name="regular_image_view_height_width">40dp</dimen>
     <dimen name="text_regular_text_size">12sp</dimen>
     <dimen name="text_small_text_size">8sp</dimen>
     <dimen name="view_margin">20dp</dimen>

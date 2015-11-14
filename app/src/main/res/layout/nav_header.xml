@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivPhoto"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="@dimen/large_image_view_height_width"
+        android:layout_height="@dimen/large_image_view_height_width"
         android:layout_marginRight="64dp"
         android:src="@drawable/ic_placeholder" />
 

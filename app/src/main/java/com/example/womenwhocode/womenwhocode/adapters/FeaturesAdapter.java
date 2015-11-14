@@ -99,9 +99,12 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (title.contains("Recommend")) { // this may not be accurate - only for the recommended piece
             ivFeatureImage.setImageResource(R.drawable.ic_plus);
         } else {
+            if (feature.getPhotoFile() != null) {
+                imageUrl = feature.getPhotoFile().getUrl();
+            }
             Picasso.with(context)
                     .load(imageUrl)
-                    .resize(75, 75)
+                    .resize(48, 48)
                     .centerCrop()
                     .into(ivFeatureImage);
         }

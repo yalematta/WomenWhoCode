@@ -74,7 +74,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
                     Picasso.with(getContext())
                             .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
-                            .resize(50, 50)
+                            .resize(40, 40)
                             .centerCrop()
                             .into(holder.ivCurrentUserProfile);
                 }
@@ -100,7 +100,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
                     Picasso.with(getContext())
                             .load(profile.getPhotoFile().getUrl())
                             .transform(new CircleTransform())
-                            .resize(50, 50)
+                            .resize(40, 40)
                             .centerCrop()
                             .into(holder.ivOtherProfileLeft);
                 }
