@@ -10,6 +10,10 @@
         <item name="colorAccent">@color/teal</item>
     </style>
 
+    <!-- =============================================================== -->
+    <!-- Toolbar Styles - Stays Consistent -->
+    <!-- =============================================================== -->
+
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- This would set the toolbar's background color -->
         <item name="android:background">@color/blackish</item>
@@ -32,41 +36,15 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <!-- =============================================================== -->
+    <!-- Item, Dialog, Activity Styles - Stays Consistent -->
+    <!-- =============================================================== -->
 
     <style name="TextView.TitleText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/whitish</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
-    <style name="TextView.TitleText.Pf" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_large_pf_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
-        <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
-    <style name="TextView.TitleText.Dark" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_large_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:alpha">0.87</item>
-        <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
-    <style name="TextView.TitleText.FeatureHeader" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:alpha">0.87</item>
-        <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
-    <style name="TextView.TitleText.Notification" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
     </style>
 
     <style name="TextView.Subtitle" parent="TextAppearance.AppCompat">
@@ -78,21 +56,6 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
-    <style name="TextView.Subtitle.Dark" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:alpha">0.54</item>
-        <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
-    <style name="TextView.Subtitle.Dark.Small" parent="TextAppearance.AppCompat">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:alpha">0.54</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/text_small_text_size</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textAppearance">@style/HeaderTextDefault</item>
-    </style>
-
     <style name="TextView.RelativeDate" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -100,60 +63,11 @@
         <item name="android:textColor">@color/whitish</item>
     </style>
 
-    <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:alpha">0.87</item>
-    </style>
-
-    <style name="BubbleTextView.ChatBody.CurrentUser" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
-    </style>
-
-    <style name="page_background_bl">
-        <item name="android:background">@color/blackish</item>
-
-    </style>
-
-    <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:alpha">0.38</item>
-    </style>
-
-
-    <style name="TextView.RelativeDate.SmallText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_small_text_size</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:alpha">0.38</item>
-    </style>
-
-    <style name="TextView.AwesomeCount.SmallText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/mediumGray</item>
-        <item name="android:textSize">@dimen/text_subheader_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-
     <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/whitish</item>
         <item name="android:lineSpacingExtra">@dimen/line_spacing_details</item>
     </style>
 
-    <!-- general fonts are changed, can't seem to get the header working -->
-    <!-- will update the some of the text views in the mean time -->
-    <style name="HeaderTextDefault" parent="android:TextAppearance">
-        <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
-    </style>
-
-    <!-- light background color: #fafafa -->
-    <!-- dark background color: #212121 -->
     <style name="FollowButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">@dimen/text_subheader_text_size</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
@@ -167,6 +81,28 @@
         <item name="android:paddingRight">@dimen/activity_horizontal_padding</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_padding</item>
         <item name="android:background">@drawable/follow_button</item>
+    </style>
+
+    <!-- TODO: this "could" switch based on theme -->
+    <style name="TextView.TitleText.Notification" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/whitish</item>
+    </style>
+
+    <!-- =============================================================== -->
+    <!-- Personalization, SignUp, LogIn Styles - Stays Consistent -->
+    <!-- =============================================================== -->
+
+    <style name="TextView.TitleText.Pf" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_large_pf_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="page_background_bl">
+        <item name="android:background">@color/blackish</item>
     </style>
 
     <style name="EditBoxStyle">
@@ -214,12 +150,80 @@
         <item name="android:textSize">@dimen/text_normal_text_size</item>
     </style>
 
+    <!-- =============================================================== -->
+    <!-- Font References - Stays Consistent -->
+    <!-- =============================================================== -->
 
-    <style name="Multicolor_1">
-        <item name="android:background">@drawable/layers_multicolor_border</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@android:color/black</item>
+    <style name="HeaderTextDefault" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+    </style>
 
+    <!-- =============================================================== -->
+    <!-- Needs to Switch Based on Theme Selected -->
+    <!-- =============================================================== -->
+
+    <style name="TextView.TitleText.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="TextView.TitleText.FeatureHeader" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <style name="TextView.Subtitle.Dark.Small" parent="TextAppearance.AppCompat">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:alpha">0.54</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_small_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/HeaderTextDefault</item>
+    </style>
+
+    <!-- background for posts and chat needs to be here! -->
+    <!-- what are we changing at runtime that we should change here? -->
+
+    <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="BubbleTextView.ChatBody.CurrentUser" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/whitish</item>
+    </style>
+
+    <style name="TextView.AwesomeCount.SmallText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/mediumGray</item>
+        <item name="android:textSize">@dimen/text_subheader_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- TODO: These may not change - needs verification -->
+
+    <style name="TextView.RelativeDate.Dark" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:alpha">0.38</item>
+    </style>
+
+    <style name="TextView.RelativeDate.SmallText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_small_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:alpha">0.38</item>
     </style>
 
     <style name="Divider">

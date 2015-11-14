@@ -5,7 +5,7 @@
     <item name="black" type="color">#000000</item>
     <item name="darkGray" type="color">#454545</item>
     <item name="whitish" type="color">#ffffff</item>
-    <item name="lightestGray" type="color">#d4d4d4</item>
+    <item name="lightestGray" type="color">#eeeeee</item>
     <item name="mediumGray" type="color">#6d6d6d</item>
     <item name="lightGray" type="color">#A7A9AB</item>
 </resources>
