@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tvFullName"
-            style="@style/TextView.Subtitle.Dark.Small"
+            style="?chatSubheaders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
@@ -74,7 +74,7 @@
 
         <TextView
             android:id="@+id/tvOtherFullName"
-            style="@style/TextView.Subtitle.Dark.Small"
+            style="?chatSubheaders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
@@ -94,7 +94,7 @@
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvOtherBody"
-            style="@style/BubbleTextView.ChatBody.OtherUser"
+            style="?chatBubbleOtherUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvOtherFullName"

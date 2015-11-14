@@ -181,8 +181,16 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
-    <!-- background for posts and chat needs to be here! -->
-    <!-- what are we changing at runtime that we should change here? -->
+    <style name="BackgroundLight">
+        <item name="android:background">@color/whitish</item>
+    </style>
+
+    <style name="SubBackgroundLight">
+        <item name="android:background">@color/lightestGray</item>
+    </style>
+
+    <!-- TODO: style for regular text -->
+    <!-- TODO: what are we changing at runtime that we should change here? -->
 
     <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>

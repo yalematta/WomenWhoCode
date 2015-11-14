@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.support.v4.util.Pair;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
@@ -40,6 +41,7 @@ import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -75,6 +77,8 @@ public class TimelineActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // MUST BE SET BEFORE setContentView
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_timeline);
         parentLayout = findViewById(R.id.timeline_activity_view);
 

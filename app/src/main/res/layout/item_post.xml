@@ -41,7 +41,7 @@
                     android:layout_toRightOf="@+id/ivUserPhoto"
                     android:padding="@dimen/icon_padding"
                     android:text="WWCode"
-                    style="@style/TextView.TitleText.Dark"
+                    style="?textSecondaryHeaders"
                     android:layout_centerVertical="true" />
 
                 <TextView
@@ -124,7 +124,7 @@
 
                 <TextView
                     android:id="@+id/tvAwesomeCount"
-                    style="@style/TextView.AwesomeCount.SmallText"
+                    style="?awesomeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/btnAwesomeIcon"
