@@ -44,7 +44,7 @@
                     android:layout_width="@dimen/regular_image_view_height_width"
                     android:layout_height="@dimen/regular_image_view_height_width"
                     android:layout_alignParentLeft="true"
-                    android:padding="@dimen/icon_padding"
+                    android:layout_marginRight="@dimen/icon_main_padding_right"
                     android:transitionName="eventTopicPhoto"/>
 
                 <TextView
@@ -75,10 +75,10 @@
                     style="@style/TextView.RelativeDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tvEventTopicTitle"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:padding="@dimen/icon_padding"
+                    android:layout_alignBottom="@+id/tvEventTopicTitle"
+                    android:paddingLeft="@dimen/icon_padding"
+                    android:paddingBottom="@dimen/icon_padding"
                     android:singleLine="true"
                     android:text="2s"/>
 
@@ -97,6 +97,7 @@
 
                 <TextView
                     android:id="@+id/tvEmpty"
+                    android:layout_marginRight="@dimen/icon_padding_right"
                     android:layout_width="@dimen/regular_image_view_height_width"
                     android:layout_height="@dimen/regular_image_view_height_width"
                     android:layout_alignParentLeft="true"

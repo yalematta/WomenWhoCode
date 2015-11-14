@@ -35,7 +35,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:text="Title"
-                    style="@style/TextView.TitleText"/>
+                    style="@style/TextView.DetailTitle"/>
 
                 <TextView
                     android:id="@+id/tvEventNetwork"

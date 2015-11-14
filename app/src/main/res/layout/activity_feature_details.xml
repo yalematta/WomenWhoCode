@@ -25,7 +25,7 @@
         android:layout_height="48dp"
         app:pstsShouldExpand="true"
         app:pstsTabTextAllCaps="true"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:background="@color/blackish"
         app:pstsTabTextColor="@color/tab_text"
         app:pstsDividerColor="@color/blackish"
@@ -47,7 +47,7 @@
             android:id="@+id/ivEventTopicPhoto"
             android:layout_width="@dimen/regular_image_view_height_width"
             android:layout_height="@dimen/regular_image_view_height_width"
-            android:padding="@dimen/icon_padding"
+            android:layout_marginRight="@dimen/icon_main_padding_right"
             android:transitionName="eventTopicPhoto"
             android:scaleType="centerCrop"
             android:layout_alignParentLeft="true" />
@@ -58,14 +58,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            android:padding="@dimen/icon_padding"
-            style="@style/TextView.TitleText"/>
+            android:paddingTop="@dimen/icon_padding"
+            android:paddingRight="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
+            style="@style/TextView.DetailTitle"/>
 
         <TextView
             android:id="@+id/tvSubscriberCount"
             android:layout_width="match_parent"
             android:paddingBottom="@dimen/icon_padding"
-            android:paddingLeft="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvEventTopicTitle"
@@ -78,7 +80,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/description_padding_top"
             android:paddingBottom="@dimen/description_padding_bottom"
-            android:paddingLeft="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
             android:layout_below="@+id/tvSubscriberCount"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
@@ -90,7 +92,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFeatureDescription"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            android:layout_margin="@dimen/icon_padding"
+            android:layout_marginTop="@dimen/icon_padding"
+            android:layout_marginBottom="@dimen/icon_padding"
+            android:layout_marginRight="@dimen/icon_padding"
+            android:layout_marginLeft="@dimen/icon_padding_right"
             android:onClick="onSubscribe"
             style="@style/FollowButton"
             android:text="Follow" />

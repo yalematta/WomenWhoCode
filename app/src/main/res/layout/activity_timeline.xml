@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@color/blackish"
-            android:textSize="14sp"
+            android:textSize="13sp"
             app:pstsDividerColor="@color/blackish"
             app:pstsIndicatorColor="@color/teal"
             app:pstsIndicatorHeight="4dp"
