@@ -360,6 +360,10 @@ public class TimelineActivity extends AppCompatActivity implements
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (profile == null) {
+                    return;
+                }
+
                 switch (profile.getTheme()) {
                     case ThemeUtils.THEME_WWCODE_LIGHT:
                         switchThemeForUser(ThemeUtils.THEME_WWCODE_DARK);
