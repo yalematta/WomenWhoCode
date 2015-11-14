@@ -42,7 +42,7 @@ public class Question1Fragment extends Fragment {
             btnNext.setId(clickcnt + 1);
 
             tvQuestion.setText(Question);
-            tvQuestion.setTextColor(getResources().getColor(R.color.whitish));
+            tvQuestion.setTextColor(getResources().getColor(R.color.white));
             for (String An : Ans) {
                 CheckBox cb = new CheckBox(getContext());
 
@@ -54,7 +54,7 @@ public class Question1Fragment extends Fragment {
 
                 cb.setText(An);
 
-                cb.setTextColor(getResources().getColor(R.color.whitish));
+                cb.setTextColor(getResources().getColor(R.color.white));
                 l.addView(cb);
             }
 

@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
@@ -37,6 +38,7 @@ import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
 import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
@@ -113,6 +115,8 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // MUST BE SET BEFORE setContentView
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_feature_details);
 
         // set tool bar to replace actionbar

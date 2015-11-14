@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Material_Light" parent="Theme.AppCompat.Light">
-        <item name="pageBackground">@style/page_background_bl</item>
-        <item name="button">@style/button</item>
-        <item name="editBox">@style/EditBoxStyle</item>
-        <item name="textView">@style/TextViewLabels</item>
+    <!-- FIXME: determine if the NoActionBar thing is not helpful -->
+    <style name="Theme.WWCodeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader</item>
+        <item name="textSecondaryHeaders">@style/TextView.TitleText.Dark</item>
+        <item name="chatSubheaders">@style/TextView.Subtitle.Dark.Small</item>
+        <item name="chatBubbleOtherUser">@style/BubbleTextView.ChatBody.OtherUser</item>
+        <item name="awesomeCount">@style/TextView.AwesomeCount.SmallText</item>
+        <!-- FIXME: I might need to replace these with actual colors -->
+        <item name="mainBackground">@style/BackgroundLight</item>
+        <item name="subBackground">@style/SubBackgroundLight</item>
+        <!-- TODO: add something for regular text, can't change themes without it -->
     </style>
 
-    <style name="Theme.YOUR_CUSTOM_THEME" parent="Theme.AppCompat.Light">
+    <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Define styles for YOUR_CUSTOM_THEME here. -->
     </style>
 </resources>

@@ -2,12 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--   darker variant for the status bar and contextual app bars -->
-        <item name="colorPrimaryDark">@color/black</item>
-        <!--   app branding color for the app bar -->
-        <item name="colorPrimary">@color/blackish</item>
-        <!--   theme UI controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/teal</item>
     </style>
 
     <!-- =============================================================== -->
@@ -18,9 +12,9 @@
         <!-- This would set the toolbar's background color -->
         <item name="android:background">@color/blackish</item>
         <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
-        <item name="android:textColorPrimary">@color/whitish</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <!-- android:actionMenuTextColor is the color of the text of action (menu) items  -->
-        <item name="actionMenuTextColor">@color/whitish</item>
+        <item name="actionMenuTextColor">@color/white</item>
         <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
@@ -32,7 +26,7 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
@@ -43,14 +37,14 @@
     <style name="TextView.TitleText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
     <style name="TextView.Subtitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_subheader_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:alpha">0.7</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
@@ -60,18 +54,18 @@
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:alpha">0.8</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextView.DetailDescription" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:lineSpacingExtra">@dimen/line_spacing_details</item>
     </style>
 
     <style name="FollowButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">@dimen/text_subheader_text_size</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">normal</item>
         <item name="android:minHeight">0dp</item>
@@ -87,7 +81,7 @@
     <style name="TextView.TitleText.Notification" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <!-- =============================================================== -->
@@ -97,7 +91,7 @@
     <style name="TextView.TitleText.Pf" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_large_pf_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
@@ -108,20 +102,20 @@
     <style name="EditBoxStyle">
         <item name="android:textColorHint">@color/lightGray</item>
         <item name="android:textSize">@dimen/text_large_text_size</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="button">
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
         <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/shape_button</item>
     </style>
 
     <style name="landingPage" parent="Widget.AppCompat.Button">
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
         <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/shape_button</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">200dp</item>
@@ -134,7 +128,7 @@
     <style name="finalizeProfile" parent="Widget.AppCompat.Button">
         <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
         <item name="android:textSize">@dimen/text_regular_text_size</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/shape_button</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">200dp</item>
@@ -187,8 +181,16 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
-    <!-- background for posts and chat needs to be here! -->
-    <!-- what are we changing at runtime that we should change here? -->
+    <style name="BackgroundLight">
+        <item name="android:background">@color/whitish</item>
+    </style>
+
+    <style name="SubBackgroundLight">
+        <item name="android:background">@color/lightestGray</item>
+    </style>
+
+    <!-- TODO: style for regular text -->
+    <!-- TODO: what are we changing at runtime that we should change here? -->
 
     <style name="BubbleTextView.ChatBody.OtherUser" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
@@ -197,10 +199,11 @@
         <item name="android:alpha">0.87</item>
     </style>
 
+    <!-- I think this actually stays the same! -->
     <style name="BubbleTextView.ChatBody.CurrentUser" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/whitish</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextView.AwesomeCount.SmallText" parent="TextAppearance.AppCompat">

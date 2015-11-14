@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
@@ -32,6 +33,7 @@ import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
 import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
@@ -67,6 +69,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // MUST BE SET BEFORE setContentView
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_event_details);
 
         // for up button
