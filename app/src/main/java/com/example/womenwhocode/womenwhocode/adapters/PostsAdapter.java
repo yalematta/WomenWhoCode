@@ -56,11 +56,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
         // to resolve bug where icon changes on many items
-        btnAwesomeIcon.setImageResource(0);
+        btnAwesomeIcon.setImageDrawable(null);
         btnAwesomeIcon.setImageResource(R.drawable.awesome);
 
         // user details
-        ivUserPhoto.setImageResource(0);
+        ivUserPhoto.setImageDrawable(null);
         Context context = tvPostNameBy.getContext();
         ParseUser postUser = post.getUser();
         if (postUser != null) {
