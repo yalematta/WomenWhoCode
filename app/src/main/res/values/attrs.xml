@@ -6,10 +6,10 @@
     <attr name="button" format="reference" />
     <attr name="editBox" format="reference"/>
     <attr name="textView" format="reference"/>
-   <!-- <attr name="textSubheader" format="reference" />
-    <attr name="textLarge" format="reference" />
+    <attr name="subBackground" format="reference"/>
+    <attr name="mainBackground" format="reference"/>
+    <attr name="textSecondaryHeaders" format="reference" />
+    <attr name="textPersonalizedListHeaders" format="reference" />
     <attr name="textRegular" format="reference" />
-    <attr name="whiteBackground" format="reference" />
-    <attr name="button" format="reference" />
-    <attr name="spinner" format="reference" />-->
+    <!-- dialogs? -->
 </resources>
