@@ -154,6 +154,7 @@ public class TimelineFragment extends Fragment {
 
             @Override
             public void onClose(View itemView, int position) {
+                // FIXME: there is a potential bug!
                 UserNotification un = (UserNotification) items.get(position);
 
                 // update UI

@@ -115,7 +115,7 @@
 
                 <View
                     android:id="@+id/view"
-                    style="@style/Divider"
+                    style="?prettyDivider"
                     android:layout_below="@+id/tvPostDescription"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@+id/tvEmpty"/>

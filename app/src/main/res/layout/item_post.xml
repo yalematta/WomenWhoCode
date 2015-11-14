@@ -52,7 +52,7 @@
                     android:singleLine="true"
                     android:padding="@dimen/icon_padding"
                     android:text="1s"
-                    style="@style/TextView.RelativeDate.Dark"
+                    style="?postDate"
                     android:layout_centerVertical="true" />
 
             </RelativeLayout>
@@ -88,7 +88,7 @@
 
                 <View
                     android:id="@+id/view"
-                    style="@style/Divider"
+                    style="?prettyDivider"
                     android:layout_below="@+id/tvPostDescription"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@+id/tvEmpty"/>

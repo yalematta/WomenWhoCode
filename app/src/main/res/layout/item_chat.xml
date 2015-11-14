@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/tvCreatedAt"
-            style="@style/TextView.RelativeDate.SmallText"
+            style="?smallTextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tvFullName"
@@ -85,7 +85,7 @@
 
         <TextView
             android:id="@+id/tvOtherCreatedAt"
-            style="@style/TextView.RelativeDate.SmallText"
+            style="?smallTextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvOtherFullName"
