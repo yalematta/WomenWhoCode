@@ -92,6 +92,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rlPostFeature"
+                style="?mainBackground"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <TextView

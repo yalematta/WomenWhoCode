@@ -23,7 +23,7 @@
                 android:id="@+id/rlPostHeader"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:background="@color/lightestGray"
+                style="?subBackground"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <ImageView
@@ -64,6 +64,7 @@
                 android:layout_below="@+id/rlPostHeader"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
+                style="?mainBackground"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <TextView
