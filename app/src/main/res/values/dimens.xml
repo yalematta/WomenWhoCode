@@ -4,13 +4,15 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_padding">16dp</dimen>
     <dimen name="content_left_margin_wh">8sp</dimen>
-    <dimen name="text_large_pf_text_size">18dp</dimen>
+    <dimen name="text_large_pf_text_size">16dp</dimen>
     <dimen name="text_large_pf_padding_top">32dp</dimen>
     <dimen name="text_large_margin_top">40dp</dimen>
-    <dimen name="text_large_text_size">18sp</dimen>
+    <dimen name="text_large_text_size">16sp</dimen>
     <dimen name="text_medium_text_size">16sp</dimen>
+    <dimen name="text_detail_title_text_size">20sp</dimen>
     <dimen name="text_normal_text_size">12sp</dimen>
-    <dimen name="text_subheader_text_size">12sp</dimen>
+    <dimen name="text_subheader_text_size">10sp</dimen>
+    <dimen name="follow_button">13sp</dimen>
     <dimen name="icon_padding">4dp</dimen>
     <dimen name="icon_paddingTop">8dp</dimen>
     <dimen name="detail_padding_top">28dp</dimen>
@@ -42,4 +44,6 @@
     <dimen name="notification_padding_vertical">56dp</dimen>
     <dimen name="bubble_padding">8dp</dimen>
     <dimen name="switch_theme_margin">12dp</dimen>
+    <dimen name="icon_main_padding_right">8dp</dimen>
+    <dimen name="icon_padding_right">12dp</dimen>
 </resources>

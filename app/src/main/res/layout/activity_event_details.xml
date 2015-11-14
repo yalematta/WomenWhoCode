@@ -24,7 +24,7 @@
             android:layout_height="48dp"
             app:pstsShouldExpand="true"
             app:pstsTabTextAllCaps="true"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:background="@color/blackish"
             app:pstsTabTextColor="@color/tab_text"
             app:pstsDividerColor="@color/blackish"
@@ -59,7 +59,7 @@
             android:transitionName="eventTopicTitle"
             android:layout_toRightOf="@+id/ivEventImage"
             android:padding="@dimen/icon_padding"
-            style="@style/TextView.TitleText"
+            style="@style/TextView.DetailTitle"
             android:text="Security with Expert" />
 
         <TextView
