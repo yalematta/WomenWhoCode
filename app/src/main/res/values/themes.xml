@@ -7,10 +7,9 @@
         <item name="chatSubheaders">@style/TextView.Subtitle.Dark.Small</item>
         <item name="chatBubbleOtherUser">@style/BubbleTextView.ChatBody.OtherUser</item>
         <item name="awesomeCount">@style/TextView.AwesomeCount.SmallText</item>
-        <!-- FIXME: I might need to replace these with actual colors -->
         <item name="mainBackground">@style/BackgroundLight</item>
         <item name="subBackground">@style/SubBackgroundLight</item>
-        <!-- TODO: add something for regular text, can't change themes without it -->
+        <item name="textRegular">@style/TextView.Regular</item>
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">

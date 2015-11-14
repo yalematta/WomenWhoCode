@@ -92,6 +92,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rlPostFeature"
+                style="?mainBackground"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <TextView
@@ -104,6 +105,7 @@
 
                 <TextView
                     android:id="@+id/tvPostDescription"
+                    style="?textRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tvEmpty"

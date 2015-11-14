@@ -65,7 +65,8 @@
                     android:layout_alignParentRight="true"
                     android:autoLink="all"
                     android:linksClickable="true"
-                    android:text="29 October" />
+                    android:text="29 October"
+                    style="@style/TextView.Regular"/>
 
                 <TextView
                     android:id="@+id/tvEventTime"
@@ -76,7 +77,8 @@
                     android:layout_alignParentRight="true"
                     android:autoLink="all"
                     android:linksClickable="true"
-                    android:text="3pm" />
+                    android:text="3pm"
+                    style="@style/TextView.Regular"/>
 
                 <TextView
                     android:id="@+id/tvEventLocation"
@@ -85,7 +87,8 @@
                     android:layout_below="@id/tvEventTime"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
-                    android:text="at Slack" />
+                    android:text="at Slack"
+                    style="@style/TextView.Regular"/>
 
             </RelativeLayout>
         </RelativeLayout>

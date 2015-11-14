@@ -181,6 +181,12 @@
         <item name="android:textAppearance">@style/HeaderTextDefault</item>
     </style>
 
+    <style name="TextView.Regular" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
     <style name="BackgroundLight">
         <item name="android:background">@color/whitish</item>
     </style>
@@ -197,6 +203,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:alpha">0.87</item>
+        <item name="bubbleColor">@color/lightestGray</item>
     </style>
 
     <!-- I think this actually stays the same! -->

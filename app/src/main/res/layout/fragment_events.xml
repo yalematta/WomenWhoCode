@@ -19,6 +19,7 @@
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="0dp"
-        android:paddingTop="16dp" />
+        android:paddingTop="16dp"
+        style="?mainBackground"/>
 
 </LinearLayout>
