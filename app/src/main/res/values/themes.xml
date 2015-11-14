@@ -10,6 +10,9 @@
         <item name="mainBackground">@style/BackgroundLight</item>
         <item name="subBackground">@style/SubBackgroundLight</item>
         <item name="textRegular">@style/TextView.Regular</item>
+        <item name="postDate">@style/TextView.RelativeDate.Dark</item>
+        <item name="smallTextDate">@style/TextView.RelativeDate.SmallText</item>
+        <item name="prettyDivider">@style/DividerDark</item>
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
@@ -17,9 +20,12 @@
         <item name="textSecondaryHeaders">@style/TextView.TitleText.Light</item>
         <item name="chatSubheaders">@style/TextView.Subtitle.Light.Small</item>
         <item name="chatBubbleOtherUser">@style/BubbleTextView.ChatBody.OtherUser.Light</item>
-        <item name="awesomeCount">@style/TextView.AwesomeCount.SmallText</item>
+        <item name="awesomeCount">@style/TextView.AwesomeCount.SmallText.Light</item>
         <item name="mainBackground">@style/BackgroundDark</item>
         <item name="subBackground">@style/SubBackgroundDark</item>
         <item name="textRegular">@style/TextView.Regular.Light</item>
+        <item name="postDate">@style/TextView.RelativeDate.Light</item>
+        <item name="smallTextDate">@style/TextView.RelativeDate.SmallText.Light</item>
+        <item name="prettyDivider">@style/DividerLight</item>
     </style>
 </resources>
