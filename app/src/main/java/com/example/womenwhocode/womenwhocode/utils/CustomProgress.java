@@ -1,6 +1,5 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
-import android.widget.TextView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -165,7 +164,7 @@ public class CustomProgress extends TextView {
      * Get current percentage based on current width
      * @return
      */
-    public int getCurrentPercentage() {
+    private int getCurrentPercentage() {
         return (int) Math.ceil((width/(maxWidth*1.0f))*100);
     }
 
@@ -190,7 +189,7 @@ public class CustomProgress extends TextView {
      * will show progress based on getCurrentPercentage()
      * @return true for showing percentage false for not showing anything
      */
-    public boolean isShowingPercentage() {
+    private boolean isShowingPercentage() {
         return showingPercentage;
     }
 

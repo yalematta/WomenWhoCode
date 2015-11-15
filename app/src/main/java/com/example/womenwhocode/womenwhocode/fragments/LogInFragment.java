@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.activities.LoginEmailActivity;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by pnroy on 10/19/15.

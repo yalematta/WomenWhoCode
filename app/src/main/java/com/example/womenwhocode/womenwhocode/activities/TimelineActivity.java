@@ -67,7 +67,7 @@ public class TimelineActivity extends AppCompatActivity implements
     private final static int TIMELINE_TAB = 0;
     private final static int TOPICS_TAB = 1;
     private final static int EVENTS_TAB = 2;
-    public Profile profile;
+    private Profile profile;
     private LocationProvider mLocationProvider;
     private ViewPager vpPager;
     private View parentLayout;
