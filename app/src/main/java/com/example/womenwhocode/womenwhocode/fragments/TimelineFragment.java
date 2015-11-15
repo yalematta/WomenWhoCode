@@ -160,7 +160,7 @@ public class TimelineFragment extends Fragment {
                 // update UI
                 items.remove(position);
                 userNotifs.clear(); // temp hack! - doesn't work if we have more than one notif
-                aPosts.notifyItemRemoved(position);
+                aPosts.notifyDataSetChanged();
 
                 // save to parse
                 un.setEnabled(false);
