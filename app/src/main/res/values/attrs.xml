@@ -28,7 +28,6 @@
     <attr name="smallTextDate" format="reference" />
     <attr name="prettyDivider" format="reference" />
     <attr name="navDrawer" format="reference" />
-    <attr name="navDrawerText" format="reference" />
     <!-- dialogs? -->
 
 </resources>

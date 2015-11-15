@@ -10,4 +10,5 @@
     <item name="lightestGray" type="color">#eeeeee</item>
     <item name="mediumGray" type="color">#6d6d6d</item>
     <item name="lightGray" type="color">#A7A9AB</item>
+    <item name="tabOpacity" type="color">#bebebe</item>
 </resources>
