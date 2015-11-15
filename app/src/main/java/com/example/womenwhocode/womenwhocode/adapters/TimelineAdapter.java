@@ -173,7 +173,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvPostNameBy.setText(username);
         }
 
-        // Changes color of 'awesomeddd' posts
+        // Changes color of 'awesomeddd_light' posts
         ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
         awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
         awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
