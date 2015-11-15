@@ -26,7 +26,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;

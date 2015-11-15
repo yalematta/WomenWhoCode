@@ -1,6 +1,5 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,7 @@ import butterknife.ButterKnife;
  */
 public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static OnItemClickListener listener;
-    private List<Object> items;
+    private final List<Object> items;
     private final int EVENT = 0, EVENT_HEADER = 1;
 
     public interface OnItemClickListener {

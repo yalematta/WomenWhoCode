@@ -23,7 +23,6 @@ import com.example.womenwhocode.womenwhocode.R;
  */
 public class AddPostDialogFragment extends DialogFragment {
     private EditText mEditText;
-    private OnSubmitPostListener listener;
     private Toolbar toolbar;
 
     public interface OnSubmitPostListener {
@@ -38,9 +37,7 @@ public class AddPostDialogFragment extends DialogFragment {
     }
 
     public static AddPostDialogFragment newInstance() {
-        AddPostDialogFragment frag = new AddPostDialogFragment();
-        return frag;
-
+        return new AddPostDialogFragment();
     }
 
     @NonNull
@@ -113,7 +110,7 @@ public class AddPostDialogFragment extends DialogFragment {
             return;
         }
 
-        listener = (OnSubmitPostListener) getActivity();
+        OnSubmitPostListener listener = (OnSubmitPostListener) getActivity();
         listener.onSubmitPostListener(postBody);
 
         dismiss();

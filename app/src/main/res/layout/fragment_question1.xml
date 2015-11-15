@@ -9,21 +9,21 @@
     android:id="@+id/img_1"
 
         android:paddingTop="@dimen/detail_padding_top"
-        android:paddingLeft="112dp"></ImageView>
+        android:paddingLeft="112dp"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/img_2"
         android:layout_toRightOf="@+id/img_1"
 
-        android:paddingTop="@dimen/detail_padding_top"></ImageView>
+        android:paddingTop="@dimen/detail_padding_top"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/img_3"
         android:layout_toRightOf="@+id/img_2"
 
-        android:paddingTop="@dimen/detail_padding_top"></ImageView>
+        android:paddingTop="@dimen/detail_padding_top"/>
 
 
     <TextView
