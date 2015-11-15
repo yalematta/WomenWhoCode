@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- FIXME: determine if the NoActionBar thing is not helpful -->
     <style name="Theme.WWCodeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader</item>
         <item name="textSecondaryHeaders">@style/TextView.TitleText.Dark</item>
@@ -13,6 +12,7 @@
         <item name="postDate">@style/TextView.RelativeDate.Dark</item>
         <item name="smallTextDate">@style/TextView.RelativeDate.SmallText</item>
         <item name="prettyDivider">@style/DividerDark</item>
+        <item name="navDrawer">@style/NavigationDrawerLight</item>
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,5 +27,6 @@
         <item name="postDate">@style/TextView.RelativeDate.Light</item>
         <item name="smallTextDate">@style/TextView.RelativeDate.SmallText.Light</item>
         <item name="prettyDivider">@style/DividerLight</item>
+        <item name="navDrawer">@style/NavigationDrawerDark</item>
     </style>
 </resources>

@@ -239,6 +239,11 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="NavigationDrawerLight">
+        <item name="android:background">@color/white</item>
+        <item name="itemTextColor">@color/darkGray</item>
+    </style>
+
     <!-- =============================================================== -->
     <!-- For Theme.WWCodeDark -->
     <!-- =============================================================== -->
@@ -314,6 +319,11 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="NavigationDrawerDark">
+        <item name="android:background">@color/darkBlack</item>
+        <item name="itemTextColor">@color/lightGray</item>
     </style>
 
     <!-- TODO: does event background color on card change? -->

@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rlEventBody"
                 android:padding="@dimen/activity_horizontal_padding"
+                style="?subBackground"
                 android:layout_below="@+id/rlEventHeader">
 
                 <TextView
@@ -66,7 +67,7 @@
                     android:autoLink="all"
                     android:linksClickable="true"
                     android:text="29 October"
-                    style="@style/TextView.Regular"/>
+                    style="?textRegular"/>
 
                 <TextView
                     android:id="@+id/tvEventTime"
@@ -78,7 +79,7 @@
                     android:autoLink="all"
                     android:linksClickable="true"
                     android:text="3pm"
-                    style="@style/TextView.Regular"/>
+                    style="?textRegular"/>
 
                 <TextView
                     android:id="@+id/tvEventLocation"
@@ -88,7 +89,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:text="at Slack"
-                    style="@style/TextView.Regular"/>
+                    style="?textRegular"/>
 
             </RelativeLayout>
         </RelativeLayout>
