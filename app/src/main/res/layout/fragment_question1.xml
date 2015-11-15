@@ -3,6 +3,27 @@
                 android:layout_height="match_parent"
                 style="@style/page_background_bl"
                 android:padding="@dimen/activity_horizontal_padding">
+    <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/img_1"
+
+        android:paddingTop="@dimen/detail_padding_top"
+        android:paddingLeft="112dp"></ImageView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_2"
+        android:layout_toRightOf="@+id/img_1"
+
+        android:paddingTop="@dimen/detail_padding_top"></ImageView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_3"
+        android:layout_toRightOf="@+id/img_2"
+
+        android:paddingTop="@dimen/detail_padding_top"></ImageView>
 
 
     <TextView
@@ -10,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
+        android:layout_below="@+id/img_1"
         android:id="@+id/tvQuestion"
         android:layout_centerHorizontal="true"
         android:paddingTop="@dimen/detail_padding_top"
@@ -17,7 +39,7 @@
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingBottom="@dimen/activity_horizontal_padding"
         style="@style/TextView.TitleText.Pf"
-        android:layout_marginTop="28dp" />
+        android:layout_marginTop="64dp" />
 
     <LinearLayout android:id="@+id/chkLayout"
         android:layout_width="wrap_content"
