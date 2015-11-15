@@ -13,6 +13,8 @@
         <item name="postDate">@style/TextView.RelativeDate.Dark</item>
         <item name="smallTextDate">@style/TextView.RelativeDate.SmallText</item>
         <item name="prettyDivider">@style/DividerDark</item>
+        <item name="navDrawer">@style/NavigationDrawerLight</item>
+        <item name="navDrawerText">@style/NavigationDrawerTextDark</item>
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,5 +29,7 @@
         <item name="postDate">@style/TextView.RelativeDate.Light</item>
         <item name="smallTextDate">@style/TextView.RelativeDate.SmallText.Light</item>
         <item name="prettyDivider">@style/DividerLight</item>
+        <item name="navDrawer">@style/NavigationDrawerDark</item>
+        <item name="navDrawerText">@style/NavigationDrawerTextLight</item>
     </style>
 </resources>

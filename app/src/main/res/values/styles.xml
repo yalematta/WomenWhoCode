@@ -239,6 +239,16 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="NavigationDrawerLight">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="NavigationDrawerTextDark">
+        <item name="android:alpha">0.87</item>
+        <item name="android:actionMenuTextColor">@color/black</item>
+        <item name="actionMenuTextColor">@color/black</item>
+    </style>
+
     <!-- =============================================================== -->
     <!-- For Theme.WWCodeDark -->
     <!-- =============================================================== -->
@@ -315,6 +325,17 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
+
+    <style name="NavigationDrawerDark">
+        <item name="android:background">@color/darkBlack</item>
+    </style>
+
+    <style name="NavigationDrawerTextLight">
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+
 
     <!-- TODO: does event background color on card change? -->
     <!-- FIXME: get designer feedback -->
