@@ -75,10 +75,10 @@
                     style="@style/TextView.RelativeDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignBottom="@+id/tvEventTopicTitle"
-                    android:paddingLeft="@dimen/icon_padding"
+                    android:layout_alignParentRight="true"
                     android:paddingBottom="@dimen/icon_padding"
+                    android:paddingLeft="@dimen/icon_padding"
                     android:singleLine="true"
                     android:text="2s"/>
 
@@ -86,22 +86,22 @@
 
             <RelativeLayout
                 android:id="@+id/rlPost"
+                style="?mainBackground"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rlPostFeature"
-                style="?mainBackground"
                 android:padding="@dimen/activity_horizontal_padding">
 
                 <TextView
                     android:id="@+id/tvEmpty"
-                    android:layout_marginRight="@dimen/icon_padding_right"
                     android:layout_width="@dimen/regular_image_view_height_width"
                     android:layout_height="@dimen/regular_image_view_height_width"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/icon_padding_right"
                     android:visibility="invisible"/>
 
                 <TextView
@@ -134,21 +134,17 @@
                     android:paddingRight="@dimen/icon_padding"
                     android:paddingTop="@dimen/icon_paddingTop"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_share_button"/>
+                    android:src="@drawable/share"/>
 
                 <ImageButton
                     android:id="@+id/btnAwesomeIcon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_alignLeft="@+id/tvPostDescription"
                     android:layout_alignStart="@+id/tvPostDescription"
                     android:layout_below="@+id/view"
                     android:background="@null"
                     android:contentDescription="Awesome Icon"
-                    android:paddingBottom="@dimen/icon_padding"
-                    android:paddingLeft="@dimen/icon_padding"
-                    android:paddingRight="@dimen/icon_padding"
-                    android:paddingTop="@dimen/icon_paddingTop"
                     android:scaleType="fitXY"
                     android:src="@drawable/awesome"/>
 
@@ -157,13 +153,13 @@
                     style="?awesomeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/btnAwesomeIcon"
+                    android:layout_alignTop="@+id/btnAwesomeIcon"
                     android:layout_toEndOf="@+id/btnAwesomeIcon"
                     android:layout_toRightOf="@+id/btnAwesomeIcon"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
-                    android:paddingTop="@dimen/icon_paddingTop"
+                    android:paddingTop="20dp"
                     android:text="50"/>
 
             </RelativeLayout>

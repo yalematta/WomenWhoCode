@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.TimelineAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
@@ -33,7 +34,6 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,9 +133,9 @@ public class TimelineFragment extends Fragment {
                     @Override
                     public void done(Awesome awesome, ParseException e) {
                         if (e == null) {
-                            onAwesome(awesome, post, itemView, position);
+                            onAwesome(awesome, post, itemView);
                         } else {
-                            onAwesome(null, post, itemView, position);
+                            onAwesome(null, post, itemView);
                         }
                     }
                 });
@@ -265,26 +265,19 @@ public class TimelineFragment extends Fragment {
         rvPosts.setVisibility(ListView.VISIBLE);
     }
 
-    private void animateOnUnawesome(ImageButton awesomeIcon) {
-        Animation animation;
-        animation = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_down);
-        awesomeIcon.startAnimation(animation);
-    }
-
     private void animateOnAwesome(final ImageButton awesomeIcon) {
         Animation animateOnAwesome;
         animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_up);
+                R.anim.hold);
         awesomeIcon.startAnimation(animateOnAwesome);
         animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                awesomeIcon.setImageResource(R.drawable.awesomeddd);
+                Glide.with(getContext()).load(R.raw.awesomeddd).asGif().into(awesomeIcon);
             }
 
             public void onAnimationEnd(Animation anim) {
-                awesomeIcon.setImageResource(R.drawable.awesome);
+                awesomeIcon.setImageResource(R.drawable.awesomeddd);
             }
 
             @Override
@@ -294,7 +287,7 @@ public class TimelineFragment extends Fragment {
         });
     }
 
-    private void onAwesome(Awesome awesome, Post savedPost, View v, final int position) {
+    private void onAwesome(Awesome awesome, Post savedPost, View v) {
         int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
         ImageButton awesomeIcon = (ImageButton) v.findViewById(R.id.btnAwesomeIcon);
         TextView tvAwesomeCount = (TextView) v.findViewById(R.id.tvAwesomeCount);
@@ -303,7 +296,7 @@ public class TimelineFragment extends Fragment {
             if (awesome.getAwesomed()) {
                 // Update UI thread
                 awesomeCount--;
-                animateOnUnawesome(awesomeIcon);
+                awesomeIcon.setImageResource(R.drawable.awesome);
 
                 // Build parse request
                 awesome.setAwesomed(false);
