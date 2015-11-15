@@ -276,6 +276,7 @@
 
     <style name="TextView.Regular.Light" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_regular_text_size</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
