@@ -180,14 +180,20 @@ public class ChatFragment extends Fragment {
     }
 
     private void setColorFilter() {
-        if (etMessage.getText().length() > 0) {
-            btnSend.setColorFilter(Color.parseColor("#00b5a9")); // TODO: Use color resource
-        } else btnSend.clearColorFilter();
+        if (!TextUtils.isEmpty(etMessage.getText())) {
+            btnSend.setBackgroundColor(getResources().getColor(R.color.teal));
+            btnSend.setPadding(10, 4, 10, 4);
+        } else {
+            btnSend.setBackgroundColor(getResources().getColor(R.color.lightestGray));
+            btnSend.setPadding(10, 4, 10, 4);
+        }
     }
 
     private void setUpView() {
         // grab message posting views
         btnSend = (ImageButton) view.findViewById(R.id.btnSend);
+        btnSend.setBackgroundColor(getResources().getColor(R.color.lightestGray));
+        btnSend.setPadding(10, 4, 10, 4);
         etMessage = (EditText) view.findViewById(R.id.etMessage);
 
         // Automatically scroll to the bottom when a data set change notification is received

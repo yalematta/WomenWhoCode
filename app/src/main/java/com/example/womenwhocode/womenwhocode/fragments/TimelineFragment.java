@@ -333,15 +333,7 @@ public class TimelineFragment extends Fragment {
         // Send data to parse
         awesome.saveInBackground();
         savedPost.setAwesomeCount(awesomeCount);
-        savedPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    // notify adapter on successful save
-                    aPosts.notifyItemChanged(position);
-                }
-            }
-        });
+        savedPost.saveInBackground();
     }
 
     public interface OnItemClickListener {

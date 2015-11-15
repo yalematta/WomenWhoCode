@@ -26,19 +26,24 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rlSend"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:minHeight="50dp"
         android:paddingTop="@dimen/icon_padding">
 
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/icon_padding"
-            android:layout_alignBottom="@+id/btnSend"
+            android:paddingTop="8dp"
+            android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/btnSend"
+            android:inputType="textMultiLine|textFilter|textVisiblePassword|textNoSuggestions"
             android:gravity="top"
+            android:ems="10"
+            android:minLines="1"
+            android:maxLines="5"
             android:hint="@string/message_hint"
             android:imeOptions="actionSend" />
 
@@ -46,13 +51,18 @@
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="bottom|right"
             android:layout_alignParentRight="true"
-            android:gravity="center_vertical|right"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
+            android:paddingTop="@dimen/icon_padding"
+            android:paddingBottom="@dimen/icon_padding"
+            android:layout_marginBottom="@dimen/icon_padding"
+            android:layout_alignBottom="@+id/etMessage"
+            android:background="@color/lightestGray"
             android:src="@drawable/ic_send"
             android:text="@string/send"
-            android:textSize="18sp"/>
+            android:textSize="13sp"/>
 
     </RelativeLayout>
 </RelativeLayout>
