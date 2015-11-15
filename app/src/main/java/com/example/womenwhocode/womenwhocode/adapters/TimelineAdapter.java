@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Message;
@@ -23,8 +25,9 @@ import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
-import com.parse.Parse;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -44,22 +47,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     // add additional new holder
     // try to get image working with glide since it handles gifs!
 
-    public interface OnItemClickListener {
-        void onPostFeatureClick(View itemView, int position);
-
-        void onAwesomeClick(View itemView, int position);
-
-        void onClose(View itemView, int position);
-
-        void onShareButtonClick(View itemView, int position);
+    public TimelineAdapter(List<Object> items) {
+        this.items = items;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         TimelineAdapter.listener = listener;
-    }
-
-    public TimelineAdapter(List<Object> items) {
-        this.items = items;
     }
 
     @Override
@@ -113,6 +106,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void configureViewHolderPost(ViewHolderPost holder, int position) {
         Post post = (Post) items.get(position);
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
         ProgressBar pb = holder.pb;
         CardView cvPostFeature = holder.cvPostFeature;
@@ -123,7 +117,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tvRelativeDate = holder.tvRelativeDate;
         TextView tvFeatureTitle = holder.tvEventTopicTitle;
         TextView tvAwesomeCount = holder.tvAwesomeCount;
-        ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
+        final ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
         // Set the progress bar
         pb.setVisibility(ProgressBar.VISIBLE);
@@ -131,7 +125,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         cvPostFeature.setVisibility(CardView.INVISIBLE);
 
         // to resolve bug where icon changes on many items
-        btnAwesomeIcon.setImageDrawable(null) ;
+        btnAwesomeIcon.setImageDrawable(null);
         btnAwesomeIcon.setImageResource(R.drawable.awesome);
 
         // Set up feature/event specific attrs
@@ -179,6 +173,23 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvPostNameBy.setText(username);
         }
 
+        // Changes color of 'awesomeddd' posts
+        ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
+        awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
+        awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
+        awesomeParseQuery.getFirstInBackground(new GetCallback<Awesome>() {
+            @Override
+            public void done(Awesome a, ParseException e) {
+                if (e == null) {
+                    if (a.getAwesomed()) {
+                        btnAwesomeIcon.setImageResource(R.drawable.awesomeddd);
+                    }
+                } else {
+                    Log.d("POST AWESOME ERROR", "Error getting post awesome status.");
+                }
+            }
+        });
+
         // Insert the model data into each of the view items
         String description = post.getDescription();
         String relativeDate = post.getPostDateTime();
@@ -218,6 +229,16 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return NOTIFICATION;
         }
         return -1;
+    }
+
+    public interface OnItemClickListener {
+        void onPostFeatureClick(View itemView, int position);
+
+        void onAwesomeClick(View itemView, int position);
+
+        void onClose(View itemView, int position);
+
+        void onShareButtonClick(View itemView, int position);
     }
 
     public static class ViewHolderPost extends RecyclerView.ViewHolder {

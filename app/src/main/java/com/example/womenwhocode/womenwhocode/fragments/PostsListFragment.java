@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
@@ -28,7 +29,6 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,9 +87,9 @@ public class PostsListFragment extends Fragment {
                     @Override
                     public void done(Awesome awesome, ParseException e) {
                         if (e == null) {
-                            onAwesome(awesome, post, itemView, position);
+                            onAwesome(awesome, post, itemView);
                         } else {
-                            onAwesome(null, post, itemView, position);
+                            onAwesome(null, post, itemView);
                         }
                     }
                 });
@@ -97,7 +97,7 @@ public class PostsListFragment extends Fragment {
 
             @Override
             public void onShareButtonClick(final View itemView, final int position) {
-                final Post post = (Post) posts.get(position);
+                final Post post = posts.get(position);
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 String shareBody = post.getDescription();
@@ -162,16 +162,16 @@ public class PostsListFragment extends Fragment {
     private void animateOnAwesome(final ImageButton awesomeIcon) {
         Animation animateOnAwesome;
         animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_up);
+                R.anim.hold);
         awesomeIcon.startAnimation(animateOnAwesome);
         animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                awesomeIcon.setImageResource(R.drawable.awesomeddd);
+                Glide.with(getContext()).load(R.raw.awesomeddd).asGif().into(awesomeIcon);
             }
 
             public void onAnimationEnd(Animation anim) {
-                awesomeIcon.setImageResource(R.drawable.awesome);
+                awesomeIcon.setImageResource(R.drawable.awesomeddd);
             }
 
             @Override
@@ -181,14 +181,7 @@ public class PostsListFragment extends Fragment {
         });
     }
 
-    private void animateOnUnawesome(ImageButton awesomeIcon) {
-        Animation animation;
-        animation = AnimationUtils.loadAnimation(getContext(),
-                R.anim.scale_down);
-        awesomeIcon.startAnimation(animation);
-    }
-
-    private void onAwesome(Awesome awesome, Post savedPost, View v, final int position) {
+    private void onAwesome(Awesome awesome, Post savedPost, View v) {
         int awesomeCount = savedPost.getAwesomeCount(); // Get latest value
         ImageButton awesomeIcon = (ImageButton) v.findViewById(R.id.btnAwesomeIcon);
         TextView tvAwesomeCount = (TextView) v.findViewById(R.id.tvAwesomeCount);
@@ -197,7 +190,7 @@ public class PostsListFragment extends Fragment {
             if (awesome.getAwesomed()) {
                 // Update UI thread
                 awesomeCount--;
-                animateOnUnawesome(awesomeIcon);
+                awesomeIcon.setImageResource(R.drawable.awesome);
 
                 // Build parse request
                 awesome.setAwesomed(false);

@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.adapters;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -48,8 +52,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Post post = mPosts.get(position);
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
         // set up vars
         TextView tvPostNameBy = holder.tvPostNameBy;
@@ -57,7 +62,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView tvPostDescription = holder.tvPostDescription;
         TextView tvRelativeTime = holder.tvRelativeTime;
         TextView tvAwesomeCount = holder.tvAwesomeCount;
-        ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
+        final ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
         // to resolve bug where icon changes on many items
         btnAwesomeIcon.setImageDrawable(null);
@@ -91,6 +96,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvPostNameBy.setText("WWCode");
             ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
+
+        // Changes color of 'awesomeddd' posts
+        ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
+        awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
+        awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
+        awesomeParseQuery.getFirstInBackground(new GetCallback<Awesome>() {
+            @Override
+            public void done(Awesome a, ParseException e) {
+                if (e == null) {
+                    if (a.getAwesomed()) {
+                        holder.btnAwesomeIcon.setImageResource(R.drawable.awesomeddd);
+                    }
+                } else {
+                    Log.d("POST AWESOME ERROR", "Error getting post awesome status.");
+                }
+            }
+        });
 
         tvPostDescription.setText(post.getDescription());
         tvRelativeTime.setText(post.getPostDateTime());
