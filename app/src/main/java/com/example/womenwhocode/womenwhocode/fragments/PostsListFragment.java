@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
@@ -167,7 +169,18 @@ public class PostsListFragment extends Fragment {
         animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Glide.with(getContext()).load(R.raw.awesomeddd).asGif().into(awesomeIcon);
+                switch (ParseApplication.currentPosition) {
+                    case 0:
+                        Glide.with(getContext()).load(R.raw.awesomeddd_light).asGif().into(awesomeIcon);
+                        break;
+                    case 1:
+                        Glide.with(getContext()).load(R.raw.awesomeddd_dark).asGif().into
+                                (awesomeIcon);
+                        break;
+                    default:
+                        Log.d("NO_THEME", "No theme selected.");
+                        break;
+                }
             }
 
             public void onAnimationEnd(Animation anim) {

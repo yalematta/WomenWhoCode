@@ -97,7 +97,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
         }
 
-        // Changes color of 'awesomeddd' posts
+        // Changes color of 'awesomeddd_light' posts
         ParseQuery<Awesome> awesomeParseQuery = ParseQuery.getQuery(Awesome.class);
         awesomeParseQuery.whereEqualTo(Awesome.POST_KEY, post);
         awesomeParseQuery.whereEqualTo(Awesome.USER_KEY, currentUser);
