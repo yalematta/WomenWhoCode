@@ -123,8 +123,8 @@
 
                 <ImageButton
                     android:id="@+id/btnShare"
-                    android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/view"
                     android:background="@null"
@@ -132,8 +132,7 @@
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
-                    android:paddingTop="@dimen/icon_paddingTop"
-                    android:scaleType="fitXY"
+                    android:paddingTop="7dp"
                     android:src="@drawable/share"/>
 
                 <ImageButton
@@ -159,7 +158,7 @@
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
-                    android:paddingTop="20dp"
+                    android:paddingTop="18dp"
                     android:text="50"/>
 
             </RelativeLayout>
