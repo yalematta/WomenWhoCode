@@ -70,7 +70,12 @@ public class Feature extends ParseObject {
     }
 
     public String getImageUrl() {
-        return this.get(IMAGE_URL_KEY).toString();
+        String url = null;
+        Object image = this.get(IMAGE_URL_KEY);
+        if (url != null) {
+            url = image.toString();
+        }
+        return url;
     }
 
     public String getHexColor() {
