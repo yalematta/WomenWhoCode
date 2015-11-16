@@ -3,6 +3,7 @@ package com.example.womenwhocode.womenwhocode.models;
 import com.example.womenwhocode.womenwhocode.utils.Utilities;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -108,6 +109,15 @@ public class Post extends ParseObject {
     public String getPostDateTime() {
         return Utilities.getRelativeTimeAgo(this.getCreatedAt().toString());
     }
+
+    public ParseFile getPostPicFile() {
+        return getParseFile("photo");
+    }
+
+    public void setPostPicFile(ParseFile file) {
+        put("photo", file);
+    }
+
 
 
 }
