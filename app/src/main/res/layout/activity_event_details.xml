@@ -49,6 +49,7 @@
             android:transitionName="eventTopicPhoto"
             android:layout_width="@dimen/regular_image_view_height_width"
             android:layout_height="@dimen/regular_image_view_height_width"
+            android:scaleType="centerCrop"
             android:layout_marginRight="@dimen/icon_main_padding_right"
             android:layout_alignParentLeft="true" />
 
