@@ -267,34 +267,25 @@ public class TimelineFragment extends Fragment {
     }
 
     private void animateOnAwesome(final ImageButton awesomeIcon) {
-        Animation animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
-                R.anim.hold);
-        animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                switch (ParseApplication.currentPosition) {
-                    case 0:
-                        Glide.with(getContext()).load(R.raw.awesomeddd_light).asGif().into(awesomeIcon);
-                        break;
-                    case 1:
-                        Glide.with(getContext()).load(R.raw.awesomeddd_dark).asGif().into(awesomeIcon);
-                        break;
-                    default:
-                        Log.d("NO_THEME", "No theme selected.");
-                        break;
-                }
-            }
+        switch (ParseApplication.currentPosition) {
+            case 0:
+                Glide.with(getContext()).load(R.raw.awesomeddd_light).asGif().into(awesomeIcon);
+                break;
+            case 1:
+                Glide.with(getContext()).load(R.raw.awesomeddd_dark).asGif().into(awesomeIcon);
+                break;
+            default:
+                Log.d("NO_THEME", "No theme selected.");
+                break;
+        }
 
-            public void onAnimationEnd(Animation anim) {
+        Runnable onAwesomeRunnable = new Runnable() {
+            @Override
+            public void run() {
                 awesomeIcon.setImageResource(R.drawable.awesomeddd);
             }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        awesomeIcon.startAnimation(animateOnAwesome);
+        };
+        handler.postDelayed(onAwesomeRunnable, 2500);
     }
 
     private void onAwesome(Awesome awesome, Post savedPost, View v) {
