@@ -48,7 +48,7 @@
     <dimen name="icon_padding_right">12dp</dimen>
     <dimen name="edittext_padding">8dp</dimen>
     <dimen name="checkbox_padding">72dp</dimen>
-    <dimen name="question_horizontal_padding">28dp</dimen>
+    <dimen name="question_horizontal_padding">48dp</dimen>
     <dimen name="question_horizontal_padding_top">16dp</dimen>
     <dimen name="pf_icon_size">42dp</dimen>
 </resources>

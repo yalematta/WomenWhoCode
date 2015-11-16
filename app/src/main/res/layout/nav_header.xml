@@ -13,7 +13,7 @@
         android:layout_height="@dimen/large_image_view_height_width"
         android:layout_marginBottom="@dimen/icon_padding"
         android:layout_above="@+id/tvFullName"
-        android:background="@drawable/ic_placeholder" />
+        android:background="@drawable/default_user_icon" />
 
     <TextView
         android:id="@+id/tvFullName"
