@@ -2,36 +2,41 @@
     android:layout_width="fill_parent" android:layout_height="fill_parent"
     style="@style/page_background_bl"
     android:padding="15dp">
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_1"
-        android:paddingTop="@dimen/detail_padding_top"
-        android:paddingLeft="112dp"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/img_2"
-        android:layout_toRightOf="@+id/img_1"
-        android:paddingTop="@dimen/detail_padding_top"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/img_3"
-        android:layout_toRightOf="@+id/img_2"
-        android:paddingTop="@dimen/detail_padding_top"/>
+        android:id="@+id/llProgressImages"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_1"/>
+
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_2"/>
+
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_3"/>
+    </LinearLayout>
+
     <TextView
-        style="@style/TextView.TitleText.Light"
+        style="@style/TextView.TitleText.Pf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_1"
+        android:layout_below="@+id/llProgressImages"
         android:text="@string/LoginMessage"
         android:id="@+id/textView"
         android:textColor="@color/white"
-        android:layout_above="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
-        android:layout_marginTop="32dp" />
+        android:paddingTop="@dimen/activity_horizontal_padding"
+        android:paddingBottom="@dimen/activity_horizontal_padding" />
     <Button
         style="@style/button"
         android:layout_width="wrap_content"
@@ -42,7 +47,7 @@
         android:paddingRight="@dimen/activity_horizontal_padding"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:id="@+id/btnGitHubSignUp"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="200dp" />
 
     <Button

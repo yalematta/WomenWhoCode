@@ -29,13 +29,13 @@ public class SignUpFragment extends Fragment {
         ImageView img2=(ImageView)view.findViewById(R.id.img_2);
         ImageView img3=(ImageView)view.findViewById(R.id.img_3);
         Picasso.with(getContext())
-                .load(R.raw.personalization).resize(100,100)
+                .load(R.raw.personalization)
                 .into(img1);
         Picasso.with(getContext())
-                .load(R.raw.personalization).resize(100,100)
+                .load(R.raw.personalization)
                 .into(img2);
         Picasso.with(getContext())
-                .load(R.raw.personalization).resize(100,100)
+                .load(R.raw.personalization)
                 .into(img3);
         btnLogin.setOnClickListener(new View.OnClickListener() {
 

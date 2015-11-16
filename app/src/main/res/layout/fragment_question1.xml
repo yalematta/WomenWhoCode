@@ -3,76 +3,88 @@
                 android:layout_height="match_parent"
                 style="@style/page_background_bl"
                 android:padding="@dimen/activity_horizontal_padding">
-    <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/img_1"
 
-        android:paddingTop="@dimen/detail_padding_top"
-        android:paddingLeft="112dp"/>
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_2"
-        android:layout_toRightOf="@+id/img_1"
+        android:id="@+id/llProgressImages"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin">
 
-        android:paddingTop="@dimen/detail_padding_top"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/img_3"
-        android:layout_toRightOf="@+id/img_2"
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_1"/>
 
-        android:paddingTop="@dimen/detail_padding_top"/>
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_2"/>
 
+        <ImageView
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:id="@+id/img_3"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/img_1"
+        android:layout_below="@+id/llProgressImages"
         android:id="@+id/tvQuestion"
         android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/detail_padding_top"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:gravity="center"
+        android:paddingRight="@dimen/question_horizontal_padding"
+        android:paddingLeft="@dimen/question_horizontal_padding"
         android:paddingBottom="@dimen/activity_horizontal_padding"
-        style="@style/TextView.TitleText.Pf"
-        android:layout_marginTop="64dp" />
+        style="@style/TextView.TitleText.Pf" />
 
-    <LinearLayout android:id="@+id/chkLayout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/chkLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/tvQuestion"
-        android:padding="@dimen/activity_horizontal_padding"/>
-    <EditText
-        style="@style/EditBoxStyle"
-        android:layout_width="300dp"
+        android:layout_marginRight="@dimen/checkbox_padding"
+        android:layout_marginLeft="@dimen/checkbox_padding">
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOtherLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etOther"
-        android:hint="Other"
-        android:paddingTop="@dimen/activity_horizontal_padding"
-        android:paddingBottom="@dimen/activity_horizontal_padding"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/chkLayout"
+        android:orientation="vertical"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:longClickable="false" />
+        android:layout_below="@id/chkLayout"
+        android:layout_marginRight="@dimen/checkbox_padding"
+        android:layout_marginLeft="@dimen/checkbox_padding" >
+
+        <EditText
+            style="@style/EditBoxStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etOther"
+            android:hint="Other"
+            android:layout_marginLeft="40dp"
+            android:paddingTop="@dimen/edittext_padding"
+            android:paddingBottom="@dimen/edittext_padding"
+            android:layout_below="@+id/chkLayout"
+            android:longClickable="false" />
+    </LinearLayout>
+
     <Button
         style="@style/button"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToNextPage"
         android:text="Next"
         android:layout_margin="@dimen/activity_horizontal_padding"
         android:id="@+id/btnNext"
-        android:layout_gravity="right"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+</RelativeLayout>

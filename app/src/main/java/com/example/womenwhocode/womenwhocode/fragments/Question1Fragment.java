@@ -48,32 +48,33 @@ public class Question1Fragment extends Fragment {
         case 0:
             //Glide.with(this).load(R.raw.personalization).asGif().into(img1);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_1).resize(100,100)
+                    .load(R.drawable.personalization_1)
                     .into(img1);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_2_dark).resize(100,100)
+                    .load(R.drawable.personalization_2_dark)
                     .into(img2);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_3_dark).resize(100,100)
+                    .load(R.drawable.personalization_3_dark)
                     .into(img3);
 
             break;
         case 1:
-            Glide.with(this).load(R.raw.personalization).asGif().override(100, 100).into(img1);
+            Glide.with(this).load(R.raw.personalization)
+                    .asGif().into(img1);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_2).resize(100,100)
+                    .load(R.drawable.personalization_2)
                     .into(img2);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_3_dark).resize(100,100)
+                    .load(R.drawable.personalization_3_dark)
                     .into(img3);
             break;
         case 2:
             Picasso.with(getContext())
-                    .load(R.raw.personalization).resize(100,100)
+                    .load(R.raw.personalization)
                     .into(img1);
-            Glide.with(this).load(R.raw.personalization).asGif().override(100, 100).into(img2);
+            Glide.with(this).load(R.raw.personalization).asGif().into(img2);
             Picasso.with(getContext())
-                    .load(R.drawable.personalization_3).resize(100, 100)
+                    .load(R.drawable.personalization_3)
                     .into(img3);
 
             break;
@@ -91,17 +92,19 @@ public class Question1Fragment extends Fragment {
 
 
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // known android bug, when you uncheck it goes doesn't convert properly
                     // http://stackoverflow.com/questions/28047291/api21-setbuttontintlist-on-checkbox
-                cb.setButtonTintList(getContext().getResources().getColorStateList(R.color.checkbox));
+                    cb.setButtonTintList(getContext().getResources().getColorStateList(R.color.checkbox));
                 }
 
+                cb.setPadding(32, 4, 4, 4);
                 cb.setText(An);
 
-                cb.setTextColor(getResources().getColor(R.color.white));
+                cb.setTextColor(getResources().getColor(R.color.tabOpacity));
                 l.addView(cb);
             }
+
 
 
 
