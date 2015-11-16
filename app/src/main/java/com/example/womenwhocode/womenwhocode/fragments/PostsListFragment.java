@@ -1,12 +1,10 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,11 +46,6 @@ public class PostsListFragment extends Fragment {
     private ProgressBar pb;
     private ParseQuery<Awesome> awesomeParseQuery;
     private ParseUser currentUser;
-    private OnAddPostListener listener;
-
-    public interface OnAddPostListener {
-        void onLaunchAddPostDialog();
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,15 +99,6 @@ public class PostsListFragment extends Fragment {
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.subject_share_post);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
-            }
-        });
-
-        // floating action button on click!
-        FloatingActionButton fabAddPost = (FloatingActionButton) v.findViewById(R.id.fabAddPost);
-        fabAddPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onLaunchAddPostDialog();
             }
         });
 
@@ -235,16 +219,5 @@ public class PostsListFragment extends Fragment {
         awesome.saveInBackground();
         savedPost.setAwesomeCount(awesomeCount);
         savedPost.saveInBackground();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof OnAddPostListener) {
-            listener = (OnAddPostListener) activity;
-        } else {
-            throw new ClassCastException(activity.toString()
-                    + " must implement PostListFragment.OnAddPostListener");
-        }
     }
 }

@@ -1,4 +1,13 @@
 <menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.womenwhocode.womenwhocode.activities.EventDetailsActivity">
+
+    <item
+        android:id="@+id/action_add_post"
+        android:icon="@drawable/ic_add_post"
+        android:onClick="onLaunchAddPostDialog"
+        android:title="Add Post"
+        app:showAsAction="always"/>
 </menu>

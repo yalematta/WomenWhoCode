@@ -31,7 +31,6 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
@@ -52,9 +51,7 @@ import java.io.ByteArrayOutputStream;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class EventDetailsActivity extends AppCompatActivity implements
-        PostsListFragment.OnAddPostListener,
-        AddPostDialogFragment.OnSubmitPostListener {
+public class EventDetailsActivity extends AppCompatActivity implements AddPostDialogFragment.OnSubmitPostListener {
 
     private TextView tvEventTitle;
     private TextView tvSubscribeCount;
@@ -284,8 +281,7 @@ public class EventDetailsActivity extends AppCompatActivity implements
         startActivity(browserIntent);
     }
 
-    @Override
-    public void onLaunchAddPostDialog() {
+    public void onLaunchAddPostDialog(MenuItem item) {
         FragmentManager fm = getSupportFragmentManager();
         AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance();
         addPostDialogFragment.show(fm, "fragment_add_post");

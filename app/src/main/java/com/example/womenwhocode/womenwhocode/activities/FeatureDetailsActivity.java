@@ -31,12 +31,12 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.PostsListFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
 import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
 import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
 import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
@@ -47,7 +47,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
-import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -57,7 +56,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by shehba.shahab on 10/18/15.
  */
 public class FeatureDetailsActivity extends AppCompatActivity implements
-        PostsListFragment.OnAddPostListener,
         AddPostDialogFragment.OnSubmitPostListener{
 
     private static final String SUBSCRIBED_TEXT = "unfollow";
@@ -362,8 +360,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         vpPager.setCurrentItem(0);
     }
 
-    @Override
-    public void onLaunchAddPostDialog() {
+    public void onLaunchAddPostDialog(MenuItem item) {
         FragmentManager fm = getSupportFragmentManager();
         AddPostDialogFragment addPostDialogFragment = AddPostDialogFragment.newInstance();
         addPostDialogFragment.show(fm, "fragment_add_post");
