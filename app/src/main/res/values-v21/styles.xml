@@ -9,5 +9,13 @@
                 <!--   theme UI controls like checkboxes and text fields -->
                 <item name="colorAccent">@color/teal</item>
                 <item name="android:windowContentTransitions">true</item>
+                <item name="android:editTextStyle">@style/EditBoxStyle</item>
+        </style>
+
+        <style name="EditBoxStyle" parent="Widget.AppCompat.EditText">
+                <item name="android:textColorHint">@color/mediumGray</item>
+                <item name="android:textSize">@dimen/text_large_text_size</item>
+                <item name="android:textColor">@color/white</item>
+                <item name="android:background">@drawable/ab_transparent_wwc</item>
         </style>
 </resources>

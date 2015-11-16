@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile_fragment"
-            android:icon="@drawable/ic_email"
+            android:icon="@drawable/ic_account"
             android:title="Profile" />
 
         <item
@@ -20,7 +20,7 @@
 
         <item
             android:id="@+id/nav_logout_fragment"
-            android:icon="@drawable/ic_email"
+            android:icon="@drawable/ic_logout"
             android:onClick="logout"
             android:title="Logout" />
     </group>
