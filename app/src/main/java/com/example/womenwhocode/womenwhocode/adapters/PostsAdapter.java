@@ -118,11 +118,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     if(post.getDescription()!=null) {
     tvPostDescription.setText(post.getDescription());
     }
+        // don't display the image view if there are no images
+        ivPostPic.setImageDrawable(null); // for memory leak issues
+        ivPostPic.setVisibility(ImageView.GONE);
         if(post.getPostPicFile()!=null) {
             Picasso.with(context)
                     .load(post.getPostPicFile().getUrl())
-                    .resize(100, 100)
                     .into(ivPostPic);
+            ivPostPic.setVisibility(ImageView.VISIBLE);
         }
         tvRelativeTime.setText(post.getPostDateTime());
 
