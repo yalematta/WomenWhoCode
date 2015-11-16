@@ -25,16 +25,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.parse.ParseFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -42,22 +38,15 @@ import java.io.IOException;
  * Created by zassmin on 11/12/15.
  */
 public class AddPostDialogFragment extends DialogFragment {
+    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    private static final int SELECTED_PICTURE = 1;
+    private final String photoFileName = "photo.jpg";
+    ImageView ivPreview;
+    Bitmap finalImg=null;
     private EditText mEditText;
     private Toolbar toolbar;
     private ImageButton btnCamera;
     private ImageButton btnFileUpload;
-    ImageView ivPreview;
-    Bitmap finalImg=null;
-    private final String photoFileName = "photo.jpg";
-    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    private static final int SELECTED_PICTURE = 1;
-    public interface OnSubmitPostListener {
-        void onSubmitPostListener(String inputText,Bitmap pic);
-    }
-
-
-
-
     public AddPostDialogFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
@@ -66,6 +55,12 @@ public class AddPostDialogFragment extends DialogFragment {
 
     public static AddPostDialogFragment newInstance() {
         return new AddPostDialogFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
 
     @NonNull
@@ -165,11 +160,11 @@ public class AddPostDialogFragment extends DialogFragment {
         }
         return null;
     }
+
     private boolean isExternalStorageAvailable() {
         String state = Environment.getExternalStorageState();
         return state.equals(Environment.MEDIA_MOUNTED);
     }
-
 
     @Override
     public void onResume() {
@@ -269,6 +264,10 @@ public class AddPostDialogFragment extends DialogFragment {
         matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
         // Return result
         return Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
+    }
+
+    public interface OnSubmitPostListener {
+        void onSubmitPostListener(String inputText,Bitmap pic);
     }
 
 }
