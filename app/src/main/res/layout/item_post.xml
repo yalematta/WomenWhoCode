@@ -77,12 +77,22 @@
                     android:layout_alignParentLeft="true"
                     android:visibility="invisible" />
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/postPic"
+                    android:layout_toRightOf="@+id/tvEmpty"
+
+                    android:layout_marginBottom="20dp" />
+
+
                 <TextView
                     android:id="@+id/tvPostDescription"
                     style="?textRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tvEmpty"
+                    android:layout_below="@+id/postPic"
                     android:autoLink="all"
                     android:linksClickable="true"
                     android:text="Description" />

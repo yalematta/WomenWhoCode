@@ -2,6 +2,7 @@ package com.example.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,9 +42,12 @@ import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
 import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.io.ByteArrayOutputStream;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -288,17 +292,26 @@ public class EventDetailsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSubmitPostListener(String inputText) {
-        addPost(inputText);
+    public void onSubmitPostListener(String inputText,Bitmap finalImg) {
+        addPost(inputText,finalImg);
         CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
         Snackbar.make(v, "Thanks for adding a post!", Snackbar.LENGTH_SHORT).show();
         // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
         // FIXME: add post to bottom of the list!
     }
 
-    private void addPost(String postBody) {
+    private void addPost(String postBody,Bitmap finalImg) {
         Post post = new Post();
         post.setDescription(postBody);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        if (finalImg != null) {
+            finalImg.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            // get byte array here
+            byte[] bytearray = stream.toByteArray();
+            ParseFile imgFile = new ParseFile("profileImg.png", bytearray);
+            imgFile.saveInBackground();
+            post.setPostPicFile(imgFile);
+        }
         post.setUser(currentUser);
         post.setEvent(event);
         post.saveInBackground();

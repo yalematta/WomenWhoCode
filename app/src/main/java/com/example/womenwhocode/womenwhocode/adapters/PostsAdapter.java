@@ -59,6 +59,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         // set up vars
         TextView tvPostNameBy = holder.tvPostNameBy;
         ImageView ivUserPhoto = holder.ivUserPhoto;
+        ImageView ivPostPic = holder.ivPostPic;
+
         TextView tvPostDescription = holder.tvPostDescription;
         TextView tvRelativeTime = holder.tvRelativeTime;
         TextView tvAwesomeCount = holder.tvAwesomeCount;
@@ -113,8 +115,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             }
         });
-
-        tvPostDescription.setText(post.getDescription());
+    if(post.getDescription()!=null) {
+    tvPostDescription.setText(post.getDescription());
+    }
+        if(post.getPostPicFile()!=null) {
+            Picasso.with(context)
+                    .load(post.getPostPicFile().getUrl())
+                    .resize(100, 100)
+                    .into(ivPostPic);
+        }
         tvRelativeTime.setText(post.getPostDateTime());
 
         int awesomeCount = post.getAwesomeCount();
@@ -145,6 +154,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ivUserPhoto) public ImageView ivUserPhoto;
+        @Bind(R.id.postPic) public ImageView ivPostPic;
         @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
         @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
         @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
