@@ -146,8 +146,7 @@ public class PostsListFragment extends Fragment {
     }
 
     private void animateOnAwesome(final ImageButton awesomeIcon) {
-        Animation animateOnAwesome;
-        animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
+        Animation animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
                 R.anim.hold);
         awesomeIcon.startAnimation(animateOnAwesome);
         animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
