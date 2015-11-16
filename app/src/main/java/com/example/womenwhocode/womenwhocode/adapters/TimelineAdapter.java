@@ -202,8 +202,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         // don't display the image view if there are no images
         ivPostPic.setImageDrawable(null); // for memory leak issues
         ivPostPic.setVisibility(ImageView.GONE);
+        Context postPhotoContext = ivPostPic.getContext();
         if(post.getPostPicFile()!=null) {
-            Picasso.with(context)
+            Picasso.with(postPhotoContext)
                     .load(post.getPostPicFile().getUrl())
                     .into(ivPostPic);
             ivPostPic.setVisibility(ImageView.VISIBLE);

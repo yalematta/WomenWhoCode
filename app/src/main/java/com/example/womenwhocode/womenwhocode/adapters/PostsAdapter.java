@@ -121,8 +121,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         // don't display the image view if there are no images
         ivPostPic.setImageDrawable(null); // for memory leak issues
         ivPostPic.setVisibility(ImageView.GONE);
+        Context pf = ivPostPic.getContext();
         if(post.getPostPicFile()!=null) {
-            Picasso.with(context)
+            Picasso.with(pf)
                     .load(post.getPostPicFile().getUrl())
                     .into(ivPostPic);
             ivPostPic.setVisibility(ImageView.VISIBLE);
