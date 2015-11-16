@@ -18,6 +18,9 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.squareup.picasso.Picasso;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
 /**
  * Created by pnroy on 10/19/15.
  */
@@ -33,9 +36,9 @@ public class Question1Fragment extends Fragment {
             LinearLayout l = (LinearLayout) view.findViewById(R.id.chkLayout);
             Button btnNext = (Button) view.findViewById(R.id.btnNext);
             PersonalizationDetails pd = new PersonalizationDetails();
-            ImageView img1=(ImageView)view.findViewById(R.id.img_1);
-            ImageView img2=(ImageView)view.findViewById(R.id.img_2);
-            ImageView img3=(ImageView)view.findViewById(R.id.img_3);
+            GifImageView img1=(GifImageView)view.findViewById(R.id.img_1);
+            GifImageView img2=(GifImageView)view.findViewById(R.id.img_2);
+            GifImageView img3=(GifImageView)view.findViewById(R.id.img_3);
 
             //Toast.makeText(getContext(),String.valueOf(cnt),Toast.LENGTH_LONG);
             TextView tvQuestion = (TextView) view.findViewById(R.id.tvQuestion);
@@ -46,7 +49,6 @@ public class Question1Fragment extends Fragment {
             String[] Ans=bundle.getStringArray("Answers");
     switch (clickcnt){
         case 0:
-            //Glide.with(this).load(R.raw.personalization).asGif().into(img1);
             Picasso.with(getContext())
                     .load(R.drawable.personalization_1)
                     .into(img1);
@@ -56,11 +58,9 @@ public class Question1Fragment extends Fragment {
             Picasso.with(getContext())
                     .load(R.drawable.personalization_3_dark)
                     .into(img3);
-
             break;
         case 1:
-            Glide.with(this).load(R.raw.personalization)
-                    .asGif().into(img1);
+            img1.setImageResource(R.drawable.personalization);
             Picasso.with(getContext())
                     .load(R.drawable.personalization_2)
                     .into(img2);
@@ -69,14 +69,11 @@ public class Question1Fragment extends Fragment {
                     .into(img3);
             break;
         case 2:
-            Picasso.with(getContext())
-                    .load(R.raw.personalization)
-                    .into(img1);
-            Glide.with(this).load(R.raw.personalization).asGif().into(img2);
+            img1.setImageResource(R.drawable.personalization_done);
+            img2.setImageResource(R.drawable.personalization);
             Picasso.with(getContext())
                     .load(R.drawable.personalization_3)
                     .into(img3);
-
             break;
 
 }

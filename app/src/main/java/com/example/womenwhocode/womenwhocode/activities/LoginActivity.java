@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.womenwhocode.womenwhocode.R;
 
 import pl.droidsonroids.gif.GifDrawable;
@@ -22,10 +24,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // give gif an endless loop!
         GifImageView gifImageView = (GifImageView) findViewById(R.id.givIntro);
-        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();
-        gifDrawable.setLoopCount(0); // not too helpful
+        GifDrawable gifDrawable = (GifDrawable) gifImageView.getBackground();
+        gifDrawable.setLoopCount(0);
     }
 
     @Override
