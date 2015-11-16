@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:id="@+id/rlPostLists">
 
@@ -18,17 +18,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/lvPosts"
         style="?mainBackground"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_behavior="com.example.womenwhocode.womenwhocode.widgets.ScrollAwareFABBehavior"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:id="@+id/fabAddPost"
-        android:clickable="true"
-        android:src="@mipmap/ic_add"
-        app:layout_anchor="@id/lvPosts"
-        app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
