@@ -60,7 +60,7 @@ public class AddPostDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_NoActionBar_Fullscreen);
     }
 
     @NonNull
@@ -87,6 +87,11 @@ public class AddPostDialogFragment extends DialogFragment {
 
         // get views
         mEditText = (EditText) view.findViewById(R.id.etAddPost);
+        // Show soft keyboard automatically and request focus to field
+        mEditText.requestFocus();
+        getDialog().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
         toolbar.setNavigationIcon(R.drawable.ic_close);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,15 +136,6 @@ public class AddPostDialogFragment extends DialogFragment {
                 return false;
             }
         });
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mEditText.setShowSoftInputOnFocus(true);
-        }
-
-        // Show soft keyboard automatically and request focus to field
-        mEditText.requestFocus();
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     private Uri getPhotoFileUri(String fileName) {
@@ -166,17 +162,17 @@ public class AddPostDialogFragment extends DialogFragment {
         return state.equals(Environment.MEDIA_MOUNTED);
     }
 
-    @Override
-    public void onResume() {
-        // Get existing layout params for the window
-        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
-        // Assign window properties to fill the parent
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.MATCH_PARENT;
-        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
-        // Call super onResume after sizing
-        super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//        // Get existing layout params for the window
+//        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+//        // Assign window properties to fill the parent
+//        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+//        // Call super onResume after sizing
+//        super.onResume();
+//    }
 
     private void onSave() {
         String postBody = mEditText.getText().toString();

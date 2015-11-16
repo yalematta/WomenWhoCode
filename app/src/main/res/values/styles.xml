@@ -91,6 +91,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="FullScreenDialogues" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+    </style>
+
+    <!-- what if I just edit the edit text box? to a rectagle shape and then do everything else -->
+
     <!-- =============================================================== -->
     <!-- Personalization, SignUp, LogIn Styles - Stays Consistent -->
     <!-- =============================================================== -->
