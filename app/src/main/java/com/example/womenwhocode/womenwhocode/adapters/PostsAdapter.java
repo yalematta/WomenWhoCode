@@ -96,7 +96,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     .into(ivUserPhoto);
         } else {
             tvPostNameBy.setText("WWCode");
-            ivUserPhoto.setImageResource(R.mipmap.ic_wwc_launcher); // TODO: switch to official logo
+            ivUserPhoto.setImageResource(R.drawable.official_wwcode_logo);
         }
 
         // Changes color of 'awesomeddd_light' posts

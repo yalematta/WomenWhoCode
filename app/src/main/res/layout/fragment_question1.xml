@@ -12,17 +12,17 @@
         android:orientation="horizontal"
         android:padding="@dimen/activity_horizontal_margin">
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:layout_width="@dimen/pf_icon_size"
             android:layout_height="@dimen/pf_icon_size"
             android:id="@+id/img_1"/>
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:layout_width="@dimen/pf_icon_size"
             android:layout_height="@dimen/pf_icon_size"
             android:id="@+id/img_2"/>
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:layout_width="@dimen/pf_icon_size"
             android:layout_height="@dimen/pf_icon_size"
             android:id="@+id/img_3"/>

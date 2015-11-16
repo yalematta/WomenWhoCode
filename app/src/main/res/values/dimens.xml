@@ -30,7 +30,7 @@
     <dimen name="between_card_margin_top">4dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="button_radius">2dp</dimen>
-    <dimen name="button_border">0.5dp</dimen>
+    <dimen name="button_border">1dp</dimen>
     <dimen name="button_horizontal_padding">32dp</dimen>
     <dimen name="button_vertical_padding">12dp</dimen>
     <dimen name="description_padding_top">12dp</dimen>
@@ -47,7 +47,7 @@
     <dimen name="icon_main_padding_right">8dp</dimen>
     <dimen name="icon_padding_right">12dp</dimen>
     <dimen name="edittext_padding">8dp</dimen>
-    <dimen name="checkbox_padding">72dp</dimen>
+    <dimen name="checkbox_padding">68dp</dimen>
     <dimen name="question_horizontal_padding">48dp</dimen>
     <dimen name="question_horizontal_padding_top">16dp</dimen>
     <dimen name="pf_icon_size">42dp</dimen>

@@ -4,31 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blackish"
-    android:gravity="center"
     android:orientation="vertical">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/givIntro"
         android:layout_width="match_parent"
-        android:layout_height="266dp"
-        android:src="@drawable/wwcode_intro_gif"
+        android:layout_height="300dp"
+        android:background="@drawable/wwc_intro"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
         android:id="@+id/ivLogo"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/official_wwcode_logo"
+        android:layout_marginTop="@dimen/text_large_margin_top"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/givIntro"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rlSignin"
-        android:layout_below="@+id/ivLogo"
-        android:padding="@dimen/detail_padding_top">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ivLogo">
 
         <Button
             style="@style/landingPage"
@@ -37,19 +41,25 @@
             android:layout_height="wrap_content"
             android:onClick="JoinApp"
             android:text="Join Us"
-            android:layout_margin="@dimen/activity_horizontal_padding"
-            android:layout_centerHorizontal="true" />
+            android:minWidth="88dp"
+            android:layout_marginBottom="@dimen/text_large_margin_top"
+            android:layout_marginLeft="@dimen/activity_horizontal_padding"
+            android:layout_marginTop="@dimen/activity_horizontal_padding"
+            android:layout_marginRight="@dimen/icon_padding" />
 
         <Button
             style="@style/landingPage"
             android:id="@+id/btnLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="88dp"
             android:onClick="LogInToApp"
             android:text="Log In"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/btnJoin" />
-    </RelativeLayout>
+            android:layout_marginBottom="@dimen/text_large_margin_top"
+            android:layout_marginLeft="@dimen/icon_padding"
+            android:layout_marginTop="@dimen/activity_horizontal_padding"
+            android:layout_marginRight="@dimen/activity_horizontal_padding"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
