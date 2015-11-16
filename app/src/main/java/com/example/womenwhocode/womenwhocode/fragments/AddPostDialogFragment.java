@@ -217,7 +217,7 @@ public class AddPostDialogFragment extends DialogFragment {
             Bitmap bmap = BitmapFactory
                     .decodeFile(filepath);
 
-            finalImg = Bitmap.createScaledBitmap(bmap, 150, 150, true);
+            finalImg = bmap;
             ivPreview.setImageBitmap(finalImg);
         }
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -228,7 +228,7 @@ public class AddPostDialogFragment extends DialogFragment {
                 //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                 Bitmap rotateImg = rotateBitmapOrientation(takenPhotoUri.getPath());
 
-                finalImg = Bitmap.createScaledBitmap(rotateImg, 150, 150, true);
+                finalImg = rotateImg;
                 // Load the taken image into a preview
 
                 ivPreview.setImageBitmap(finalImg);
