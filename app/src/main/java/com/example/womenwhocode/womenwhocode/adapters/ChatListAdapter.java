@@ -66,7 +66,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.rlOtherUser.setVisibility(View.GONE);
 
             // set views
-            holder.ivCurrentUserProfile.setImageResource(R.mipmap.ic_default_profile_image);
+            holder.ivCurrentUserProfile.setImageResource(R.drawable.default_user_icon);
             holder.tvBody.setText(message.getBody());
             holder.tvCreatedAt.setText(date);
             if (profile != null) {
@@ -92,7 +92,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder.rlCurrentUser.setVisibility(View.GONE);
 
             // set views
-            holder.ivOtherProfileLeft.setImageResource(R.mipmap.ic_default_profile_image);
+            holder.ivOtherProfileLeft.setImageResource(R.drawable.default_user_icon);
             holder.tvOtherBody.setText(message.getBody());
             holder.tvOtherCreatedAt.setText(date);
             if (profile != null) {
