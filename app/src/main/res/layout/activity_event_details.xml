@@ -29,7 +29,7 @@
             app:pstsTabTextColor="@color/tab_text"
             app:pstsDividerColor="@color/blackish"
             app:pstsIndicatorColor="@color/teal"
-            app:pstsIndicatorHeight="4dp"
+            app:pstsIndicatorHeight="2dp"
             app:pstsTabPaddingLeftRight="14dp"/>
 
     <!-- FIXME: consider making this it's own fragment -->

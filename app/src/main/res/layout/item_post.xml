@@ -66,7 +66,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 style="?mainBackground"
-                android:padding="@dimen/activity_horizontal_padding">
+                android:paddingTop="@dimen/activity_horizontal_padding"
+                android:paddingBottom="@dimen/activity_horizontal_padding"
+                android:paddingLeft="@dimen/activity_horizontal_padding">
 
                 <TextView
                     android:id="@+id/tvEmpty"
@@ -82,11 +84,11 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/postPic"
                     android:layout_toRightOf="@+id/tvEmpty"
-
                     android:layout_marginBottom="20dp" />
 
 
                 <TextView
+                    android:paddingRight="@dimen/activity_horizontal_padding"
                     android:id="@+id/tvPostDescription"
                     style="?textRegular"
                     android:layout_width="wrap_content"
@@ -97,9 +99,11 @@
                     android:linksClickable="true"
                     android:text="Description" />
 
-                <View
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/view"
-                    style="?prettyDivider"
+                    android:background="@drawable/post_divider_line"
                     android:layout_below="@+id/tvPostDescription"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@+id/tvEmpty"/>
@@ -114,7 +118,7 @@
                     android:contentDescription="Share button"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
-                    android:paddingRight="@dimen/icon_padding"
+                    android:paddingRight="@dimen/activity_horizontal_padding"
                     android:paddingTop="7dp"
                     android:src="@drawable/share"/>
 

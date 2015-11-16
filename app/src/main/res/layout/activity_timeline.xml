@@ -25,7 +25,7 @@
             android:textSize="13sp"
             app:pstsDividerColor="@color/blackish"
             app:pstsIndicatorColor="@color/teal"
-            app:pstsIndicatorHeight="4dp"
+            app:pstsIndicatorHeight="2dp"
             app:pstsShouldExpand="true"
             app:pstsTabPaddingLeftRight="14dp"
             app:pstsTabTextAllCaps="true"
