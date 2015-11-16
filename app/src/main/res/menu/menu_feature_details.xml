@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/action_disable_notifications"
-        android:title="@string/label_disable_notifications"
+        android:title="View Followers"
         app:showAsAction="never"/>
 
     <item
@@ -23,5 +23,4 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_add_post"
         android:onClick="onLaunchAddPostDialog"/>
-
 </menu>

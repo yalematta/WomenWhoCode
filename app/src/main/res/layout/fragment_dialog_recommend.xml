@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:background="@color/blackish"
-    android:padding="@dimen/activity_horizontal_padding">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightestGray">
 
-    <TextView
-        android:id="@+id/tvRecommendation"
-        android:text="Which app topic would you like added?"
-        android:padding="8dp"
-        android:layout_width="wrap_content"
+    <include
+        layout="@layout/suggest_new_feature"
         android:layout_height="wrap_content"
-        style="@style/TextView.TitleText"/>
+        android:layout_width="match_parent"
+        />
 
     <EditText
+        style="@style/EditBoxStyle"
         android:id="@+id/etRecommendation"
+        android:textColor="@color/darkBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:hint="javascript"
+        android:layout_marginTop="72dp"
+        android:layout_marginLeft="@dimen/question_horizontal_padding"
+        android:layout_marginRight="@dimen/question_horizontal_padding"
+        android:hint="Add Topic"
         android:inputType="text"
-        android:textColorHint="@color/lightGray"
-        android:textColor="@color/lightestGray"
         android:imeOptions="actionDone" />
-</LinearLayout>
+
+    <EditText
+        style="@style/EditBoxStyle"
+        android:textColor="@color/darkBlack"
+        android:id="@+id/etRecommendSomeone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/etRecommendation"
+        android:layout_marginLeft="@dimen/question_horizontal_padding"
+        android:layout_marginRight="@dimen/question_horizontal_padding"
+        android:hint="Recommend Topic Moderator"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
+</RelativeLayout>

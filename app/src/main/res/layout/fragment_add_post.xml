@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/lightestGray">
 
     <!-- action bar -->
     <include
@@ -11,29 +12,44 @@
         />
 
     <ImageView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/question_horizontal_padding"
+        android:layout_marginRight="@dimen/question_horizontal_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tbAddPost"
         android:id="@+id/showImage"
-
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp" />
+         />
+
     <EditText
+        style="@style/EditBoxStyle"
+        android:textColor="@color/darkBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/showImage"
         android:id="@+id/etAddPost"
-        android:minHeight="100dp"
+        android:minHeight="72dp"
+        android:gravity="top"
         android:hint="@string/add_post"
-        android:layout_marginTop="32dp" />
+        android:layout_marginLeft="@dimen/question_horizontal_padding"
+        android:layout_marginRight="@dimen/question_horizontal_padding"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnCamera"
+        android:background="@color/darkGray"
         android:layout_below="@+id/etAddPost"
+        android:layout_marginLeft="@dimen/question_horizontal_padding"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:src="@drawable/ic_camera"
         />
+
     <ImageButton
+        android:background="@color/darkGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnpicUpload"
