@@ -117,6 +117,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tvRelativeDate = holder.tvRelativeDate;
         TextView tvFeatureTitle = holder.tvEventTopicTitle;
         TextView tvAwesomeCount = holder.tvAwesomeCount;
+        ImageView ivPostPic = holder.postPic;
         final ImageButton btnAwesomeIcon = holder.btnAwesomeIcon;
 
         // Set the progress bar
@@ -165,6 +166,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         // in case a post has a user
         ParseUser postUser = post.getUser();
         Profile profile = getUserProfile(postUser);
+        tvPostNameBy.setText("WWCode"); // always have a default
         if (postUser != null) {
             String username = postUser.getUsername();
             if (profile != null && !TextUtils.isEmpty(profile.getFullName())) {
@@ -196,6 +198,18 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         int awesomeCount = post.getAwesomeCount();
 
         tvPostDescription.setText(description);
+
+        // don't display the image view if there are no images
+        ivPostPic.setImageDrawable(null); // for memory leak issues
+        ivPostPic.setVisibility(ImageView.GONE);
+        Context postPhotoContext = ivPostPic.getContext();
+        if(post.getPostPicFile()!=null) {
+            Picasso.with(postPhotoContext)
+                    .load(post.getPostPicFile().getUrl())
+                    .into(ivPostPic);
+            ivPostPic.setVisibility(ImageView.VISIBLE);
+        }
+
         tvRelativeDate.setText(relativeDate);
         tvFeatureTitle.setText(title);
 
@@ -253,6 +267,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @Bind(R.id.rlPostFeature) public RelativeLayout rlPostFeature;
         @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
         @Bind(R.id.btnShare) public ImageButton btnShare;
+        @Bind(R.id.postPic) public ImageView postPic;
 
         public ViewHolderPost(final View itemView) {
             super(itemView);

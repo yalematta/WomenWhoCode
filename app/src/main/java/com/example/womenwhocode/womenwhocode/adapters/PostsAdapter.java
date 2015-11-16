@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Message;
@@ -96,7 +97,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     .into(ivUserPhoto);
         } else {
             tvPostNameBy.setText("WWCode");
-            ivUserPhoto.setImageResource(R.drawable.official_wwcode_logo);
+            ivUserPhoto.setImageResource(R.mipmap.ic_launcher);
         }
 
         // Changes color of 'awesomeddd_light' posts
@@ -118,11 +119,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     if(post.getDescription()!=null) {
     tvPostDescription.setText(post.getDescription());
     }
+        // don't display the image view if there are no images
+        ivPostPic.setImageDrawable(null); // for memory leak issues
+        ivPostPic.setVisibility(ImageView.GONE);
+        Context pf = ivPostPic.getContext();
         if(post.getPostPicFile()!=null) {
-            Picasso.with(context)
+            Picasso.with(pf)
                     .load(post.getPostPicFile().getUrl())
-                    .resize(100, 100)
                     .into(ivPostPic);
+            ivPostPic.setVisibility(ImageView.VISIBLE);
         }
         tvRelativeTime.setText(post.getPostDateTime());
 

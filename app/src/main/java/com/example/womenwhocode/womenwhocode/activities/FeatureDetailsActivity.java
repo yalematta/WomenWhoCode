@@ -381,6 +381,13 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         post.setUser(currentUser);
         post.setFeature(feature);
         post.saveInBackground();
+
+        // notify fragment
+        FeaturePostsFragment pf = (FeaturePostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
+        setTab();
+        if(null != pf) {
+            pf.setReceivedPost(post);
+        }
     }
 
     @Override

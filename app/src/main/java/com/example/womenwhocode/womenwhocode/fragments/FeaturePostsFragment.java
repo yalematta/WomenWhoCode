@@ -9,6 +9,7 @@ import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -46,7 +47,7 @@ public class FeaturePostsFragment extends PostsListFragment {
             public void done(Feature f, ParseException e) {
                 feature = f;
                 postParseQuery.whereEqualTo(Post.FEATURE_KEY, feature);
-                postParseQuery.orderByDescending(Post.AWESOME_COUNT_KEY);
+                postParseQuery.orderByDescending("createdAt");
                 postParseQuery.findInBackground(new FindCallback<Post>() {
                     @Override
                     public void done(List<Post> list, ParseException e) {
@@ -66,5 +67,11 @@ public class FeaturePostsFragment extends PostsListFragment {
                 });
             }
         });
+    }
+
+    public void setReceivedPost(Post post) {
+        add(post);
+        notifiedDataChanged();
+        scrollToPosition();
     }
 }

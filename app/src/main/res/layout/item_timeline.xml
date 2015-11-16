@@ -106,12 +106,23 @@
                     android:layout_marginRight="@dimen/icon_padding_right"
                     android:visibility="invisible"/>
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/postPic"
+                    android:scaleType="centerCrop"
+                    android:layout_toRightOf="@+id/tvEmpty"
+                    android:layout_marginBottom="@dimen/icon_padding"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:visibility="gone"/>
+
                 <TextView
                     android:paddingRight="@dimen/activity_horizontal_padding"
                     android:id="@+id/tvPostDescription"
                     style="?textRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/postPic"
                     android:layout_toRightOf="@+id/tvEmpty"
                     android:autoLink="all"
                     android:linksClickable="true"

@@ -107,7 +107,11 @@ public class Post extends ParseObject {
     }
 
     public String getPostDateTime() {
-        return Utilities.getRelativeTimeAgo(this.getCreatedAt().toString());
+        String rtime = "now";
+        if (this.getCreatedAt() != null) {
+            rtime = Utilities.getRelativeTimeAgo(this.getCreatedAt().toString());
+        }
+        return rtime;
     }
 
     public ParseFile getPostPicFile() {

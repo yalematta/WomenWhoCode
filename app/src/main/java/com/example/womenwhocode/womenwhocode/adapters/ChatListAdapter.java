@@ -58,7 +58,10 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
         Profile profile = message.getProfile();
         final ViewHolder holder = (ViewHolder) convertView.getTag();
         final boolean isMe = message.getUserId().equals(mUserId);
-        String date = Utilities.dateTimeParser(message.getCreatedAt().getTime(), Utilities.TIME_FORMAT);
+        String date = "now";
+        if (message.getCreatedAt() != null) {
+            date = Utilities.getRelativeTimeAgo(message.getCreatedAt().toString());
+        }
         // decide which rl to render
         if (isMe) {
             // make visible one RL rlCurrentUser

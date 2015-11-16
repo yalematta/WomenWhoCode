@@ -31,6 +31,7 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
@@ -311,6 +312,13 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         post.setUser(currentUser);
         post.setEvent(event);
         post.saveInBackground();
+
+        // notify fragment
+        EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
+        setTab();
+        if(null != pf) {
+            pf.setReceivedPost(post);
+        }
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
