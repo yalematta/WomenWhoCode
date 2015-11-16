@@ -121,6 +121,14 @@ public class PostsListFragment extends Fragment {
         posts.addAll(postList);
     }
 
+    void add(Post postList) {
+        posts.add(0, postList);
+    }
+
+    void scrollToPosition() {
+//        rvPosts.scrollToPosition(posts.size() - 1);
+    }
+
     void clear() {
         posts.clear();
     }
