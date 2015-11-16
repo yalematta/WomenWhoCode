@@ -49,9 +49,6 @@
         android:layout_below="@id/tvQuestion"
         android:layout_marginRight="@dimen/checkbox_padding"
         android:layout_marginLeft="@dimen/checkbox_padding">
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
     </LinearLayout>
 
     <LinearLayout
