@@ -148,7 +148,6 @@ public class PostsListFragment extends Fragment {
     private void animateOnAwesome(final ImageButton awesomeIcon) {
         Animation animateOnAwesome = AnimationUtils.loadAnimation(getContext(),
                 R.anim.hold);
-        awesomeIcon.startAnimation(animateOnAwesome);
         animateOnAwesome.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -157,8 +156,7 @@ public class PostsListFragment extends Fragment {
                         Glide.with(getContext()).load(R.raw.awesomeddd_light).asGif().into(awesomeIcon);
                         break;
                     case 1:
-                        Glide.with(getContext()).load(R.raw.awesomeddd_dark).asGif().into
-                                (awesomeIcon);
+                        Glide.with(getContext()).load(R.raw.awesomeddd_dark).asGif().into(awesomeIcon);
                         break;
                     default:
                         Log.d("NO_THEME", "No theme selected.");
@@ -175,6 +173,7 @@ public class PostsListFragment extends Fragment {
 
             }
         });
+        awesomeIcon.startAnimation(animateOnAwesome);
     }
 
     private void onAwesome(Awesome awesome, Post savedPost, View v) {
