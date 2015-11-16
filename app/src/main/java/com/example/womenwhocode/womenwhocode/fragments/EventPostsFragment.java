@@ -45,7 +45,7 @@ public class EventPostsFragment extends PostsListFragment {
             @Override
             public void done(Event event, ParseException e) {
                 postParseQuery.whereEqualTo(Post.EVENT_KEY, event);
-                postParseQuery.orderByDescending(Post.AWESOME_COUNT_KEY);
+                postParseQuery.orderByDescending("createdAt");
                 postParseQuery.findInBackground(new FindCallback<Post>() {
                     @Override
                     public void done(List<Post> list, ParseException e) {
@@ -68,5 +68,11 @@ public class EventPostsFragment extends PostsListFragment {
                 });
             }
         });
+    }
+
+    public void setReceivedPost(Post post) {
+        add(post);
+        notifiedDataChanged();
+        scrollToPosition();
     }
 }

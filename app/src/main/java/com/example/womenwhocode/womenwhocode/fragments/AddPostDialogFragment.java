@@ -184,7 +184,6 @@ public class AddPostDialogFragment extends DialogFragment {
         OnSubmitPostListener listener = (OnSubmitPostListener) getActivity();
         listener.onSubmitPostListener(postBody,finalImg);
 
-
         dismiss();
     }
 
