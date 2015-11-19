@@ -298,7 +298,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     }
 
     private void addPost(String postBody,Bitmap finalImg) {
-        Post post = new Post();
+        final Post post = new Post();
         post.setDescription(postBody);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         if (finalImg != null) {
@@ -311,14 +311,23 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         }
         post.setUser(currentUser);
         post.setEvent(event);
-        post.saveInBackground();
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
+                setTab();
+                if(null != pf) {
+                    pf.setReceivedPost(post);
+                }
+            }
+        });
 
-        // notify fragment
-        EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
-        setTab();
-        if(null != pf) {
-            pf.setReceivedPost(post);
-        }
+//        // notify fragment
+//        EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
+//        setTab();
+//        if(null != pf) {
+//            pf.setReceivedPost(post);
+//        }
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
