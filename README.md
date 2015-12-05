@@ -157,6 +157,6 @@ other apps
 
 ## Current App
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/Tt4ATUSORzk" frameborder="0" allowfullscreen></iframe>
+[![current app](http://img.youtube.com/vi/Tt4ATUSORzk/0.jpg)](http://www.youtube.com/watch?v=Tt4ATUSORzk)
 
 https://www.youtube.com/watch?v=Tt4ATUSORzk
