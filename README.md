@@ -155,10 +155,8 @@ contents of the fragment selected.
 other apps
 * [ ] Include an about WWCode fragment and make it accessible in the drawer
 
-## Sprint 2 Demo
+## Current App
 
-![demo_wwcodeapp_take_2](https://cloud.githubusercontent.com/assets/1654151/10802450/2e76131e-7d7a-11e5-874b-0f0e12257d64.gif)
+![current_app](https://www.youtube.com/watch?v=Tt4ATUSORzk)
 
-## Sprint 1 Demo
-
-![initial_demo_wwcodeapp](https://cloud.githubusercontent.com/assets/1654151/10651944/6a353ef2-7807-11e5-9df1-dd3fd254c2e6.gif)
+https://www.youtube.com/watch?v=Tt4ATUSORzk
