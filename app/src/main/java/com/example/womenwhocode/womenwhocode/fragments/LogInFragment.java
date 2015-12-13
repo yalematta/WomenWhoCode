@@ -18,25 +18,22 @@ import com.example.womenwhocode.womenwhocode.activities.LoginEmailActivity;
 public class LogInFragment extends Fragment {
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        View view=inflater.inflate(R.layout.fragment_login,container,false);
-        Button btnLogin=(Button)view.findViewById(R.id.btnEmailLogin);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        Button btnLogin = (Button) view.findViewById(R.id.btnEmailLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent i = new Intent(getActivity(), LoginEmailActivity.class);
                 startActivity(i);
             }
         });
         return view;
     }
-
 
 
 }

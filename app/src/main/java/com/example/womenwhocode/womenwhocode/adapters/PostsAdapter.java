@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Message;
@@ -116,14 +115,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             }
         });
-    if(post.getDescription()!=null) {
-    tvPostDescription.setText(post.getDescription());
-    }
+        if (post.getDescription() != null) {
+            tvPostDescription.setText(post.getDescription());
+        }
         // don't display the image view if there are no images
         ivPostPic.setImageDrawable(null); // for memory leak issues
         ivPostPic.setVisibility(ImageView.GONE);
         Context pf = ivPostPic.getContext();
-        if(post.getPostPicFile()!=null) {
+        if (post.getPostPicFile() != null) {
             Picasso.with(pf)
                     .load(post.getPostPicFile().getUrl())
                     .into(ivPostPic);
@@ -158,14 +157,22 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.ivUserPhoto) public ImageView ivUserPhoto;
-        @Bind(R.id.postPic) public ImageView ivPostPic;
-        @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
-        @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
-        @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
-        @Bind(R.id.btnAwesomeIcon) public ImageButton btnAwesomeIcon;
-        @Bind(R.id.tvRelativeTime) public TextView tvRelativeTime;
-        @Bind(R.id.btnShare) public ImageButton btnShare;
+        @Bind(R.id.ivUserPhoto)
+        public ImageView ivUserPhoto;
+        @Bind(R.id.postPic)
+        public ImageView ivPostPic;
+        @Bind(R.id.tvPostNameBy)
+        public TextView tvPostNameBy;
+        @Bind(R.id.tvPostDescription)
+        public TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount)
+        public TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon)
+        public ImageButton btnAwesomeIcon;
+        @Bind(R.id.tvRelativeTime)
+        public TextView tvRelativeTime;
+        @Bind(R.id.btnShare)
+        public ImageButton btnShare;
 
         public ViewHolder(final View itemView) {
             super(itemView);

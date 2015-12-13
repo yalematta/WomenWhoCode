@@ -70,7 +70,6 @@
             android:layout_marginLeft="40dp"
             android:paddingTop="@dimen/edittext_padding"
             android:paddingBottom="@dimen/edittext_padding"
-            android:layout_below="@+id/chkLayout"
             android:longClickable="false" />
     </LinearLayout>
 

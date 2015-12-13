@@ -122,18 +122,28 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
 
     static class ViewHolder {
         // current user message view
-        @Bind(R.id.rlCurrentUser) public RelativeLayout rlCurrentUser;
-        @Bind(R.id.ivCurrentUserProfile) public ImageView ivCurrentUserProfile;
-        @Bind(R.id.tvFullName) public TextView tvFullName;
-        @Bind(R.id.tvCreatedAt) public TextView tvCreatedAt;
-        @Bind(R.id.tvBody) public BubbleTextVew tvBody;
+        @Bind(R.id.rlCurrentUser)
+        public RelativeLayout rlCurrentUser;
+        @Bind(R.id.ivCurrentUserProfile)
+        public ImageView ivCurrentUserProfile;
+        @Bind(R.id.tvFullName)
+        public TextView tvFullName;
+        @Bind(R.id.tvCreatedAt)
+        public TextView tvCreatedAt;
+        @Bind(R.id.tvBody)
+        public BubbleTextVew tvBody;
 
         // other users message view
-        @Bind(R.id.rlOtherUser) public RelativeLayout rlOtherUser;
-        @Bind(R.id.ivOtherProfileLeft) public ImageView ivOtherProfileLeft;
-        @Bind(R.id.tvOtherFullName) public TextView tvOtherFullName;
-        @Bind(R.id.tvOtherCreatedAt) public TextView tvOtherCreatedAt;
-        @Bind(R.id.tvOtherBody) public BubbleTextVew tvOtherBody;
+        @Bind(R.id.rlOtherUser)
+        public RelativeLayout rlOtherUser;
+        @Bind(R.id.ivOtherProfileLeft)
+        public ImageView ivOtherProfileLeft;
+        @Bind(R.id.tvOtherFullName)
+        public TextView tvOtherFullName;
+        @Bind(R.id.tvOtherCreatedAt)
+        public TextView tvOtherCreatedAt;
+        @Bind(R.id.tvOtherBody)
+        public BubbleTextVew tvOtherBody;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

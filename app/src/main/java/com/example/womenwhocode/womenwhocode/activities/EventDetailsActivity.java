@@ -31,7 +31,6 @@ import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.models.Subscribe;
