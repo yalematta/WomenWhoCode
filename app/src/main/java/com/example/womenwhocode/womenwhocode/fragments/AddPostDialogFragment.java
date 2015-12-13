@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -41,12 +40,11 @@ public class AddPostDialogFragment extends DialogFragment {
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     private static final int SELECTED_PICTURE = 1;
     private final String photoFileName = "photo.jpg";
-    ImageView ivPreview;
-    Bitmap finalImg=null;
+    private ImageView ivPreview;
+    private Bitmap finalImg = null;
     private EditText mEditText;
     private Toolbar toolbar;
-    private ImageButton btnCamera;
-    private ImageButton btnFileUpload;
+
     public AddPostDialogFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
@@ -99,9 +97,9 @@ public class AddPostDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
-        btnCamera=(ImageButton)view.findViewById(R.id.btnCamera);
-        btnFileUpload=(ImageButton)view.findViewById(R.id.btnpicUpload);
-        ivPreview=(ImageView)view.findViewById(R.id.showImage);
+        ImageButton btnCamera = (ImageButton) view.findViewById(R.id.btnCamera);
+        ImageButton btnFileUpload = (ImageButton) view.findViewById(R.id.btnpicUpload);
+        ivPreview = (ImageView) view.findViewById(R.id.showImage);
         btnCamera.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -182,7 +180,7 @@ public class AddPostDialogFragment extends DialogFragment {
         }
 
         OnSubmitPostListener listener = (OnSubmitPostListener) getActivity();
-        listener.onSubmitPostListener(postBody,finalImg);
+        listener.onSubmitPostListener(postBody, finalImg);
 
         dismiss();
     }
@@ -209,10 +207,9 @@ public class AddPostDialogFragment extends DialogFragment {
             options.inSampleSize = 8;
             options.inJustDecodeBounds = true;
             //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.pic1);
-            Bitmap bmap = BitmapFactory
-                    .decodeFile(filepath);
 
-            finalImg = bmap;
+            finalImg = BitmapFactory
+                    .decodeFile(filepath);
             ivPreview.setImageBitmap(finalImg);
         }
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -221,9 +218,8 @@ public class AddPostDialogFragment extends DialogFragment {
 
                 // by this point we have the camera photo on disk
                 //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
-                Bitmap rotateImg = rotateBitmapOrientation(takenPhotoUri.getPath());
 
-                finalImg = rotateImg;
+                finalImg = rotateBitmapOrientation(takenPhotoUri.getPath());
                 // Load the taken image into a preview
 
                 ivPreview.setImageBitmap(finalImg);
@@ -262,7 +258,7 @@ public class AddPostDialogFragment extends DialogFragment {
     }
 
     public interface OnSubmitPostListener {
-        void onSubmitPostListener(String inputText,Bitmap pic);
+        void onSubmitPostListener(String inputText, Bitmap pic);
     }
 
 }

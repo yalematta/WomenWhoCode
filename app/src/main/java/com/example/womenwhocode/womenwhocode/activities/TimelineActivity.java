@@ -39,7 +39,6 @@ import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Profile;
-import com.example.womenwhocode.womenwhocode.utils.CircleTransform;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
 import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;

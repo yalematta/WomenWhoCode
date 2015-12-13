@@ -114,11 +114,16 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvEventTopicTitle) public TextView tvEventTopicTitle;
-        @Bind(R.id.tvEventLocation) public TextView tvEventLocation;
-        @Bind(R.id.tvEventTime) public TextView tvEventTime;
-        @Bind(R.id.tvEventDate) public TextView tvEventDate;
-        @Bind(R.id.tvEventNetwork) public TextView tvEventNetwork;
+        @Bind(R.id.tvEventTopicTitle)
+        public TextView tvEventTopicTitle;
+        @Bind(R.id.tvEventLocation)
+        public TextView tvEventLocation;
+        @Bind(R.id.tvEventTime)
+        public TextView tvEventTime;
+        @Bind(R.id.tvEventDate)
+        public TextView tvEventDate;
+        @Bind(R.id.tvEventNetwork)
+        public TextView tvEventNetwork;
 
         public ViewHolder(final View itemView) {
             super(itemView);

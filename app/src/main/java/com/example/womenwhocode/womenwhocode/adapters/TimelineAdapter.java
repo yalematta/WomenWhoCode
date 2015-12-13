@@ -203,7 +203,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ivPostPic.setImageDrawable(null); // for memory leak issues
         ivPostPic.setVisibility(ImageView.GONE);
         Context postPhotoContext = ivPostPic.getContext();
-        if(post.getPostPicFile()!=null) {
+        if (post.getPostPicFile() != null) {
             Picasso.with(postPhotoContext)
                     .load(post.getPostPicFile().getUrl())
                     .into(ivPostPic);
@@ -256,18 +256,30 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class ViewHolderPost extends RecyclerView.ViewHolder {
-        @Bind(R.id.ivEventTopicPhoto) public ImageView ivEventTopicPhoto;
-        @Bind(R.id.tvPostDescription) public TextView tvPostDescription;
-        @Bind(R.id.tvAwesomeCount) public TextView tvAwesomeCount;
-        @Bind(R.id.btnAwesomeIcon) public ImageButton btnAwesomeIcon;
-        @Bind(R.id.cvPostFeature) public CardView cvPostFeature;
-        @Bind(R.id.tvRelativeDate) public TextView tvRelativeDate;
-        @Bind(R.id.tvEventTopicTitle) public TextView tvEventTopicTitle;
-        @Bind(R.id.pbLoading) public ProgressBar pb;
-        @Bind(R.id.rlPostFeature) public RelativeLayout rlPostFeature;
-        @Bind(R.id.tvPostNameBy) public TextView tvPostNameBy;
-        @Bind(R.id.btnShare) public ImageButton btnShare;
-        @Bind(R.id.postPic) public ImageView postPic;
+        @Bind(R.id.ivEventTopicPhoto)
+        public ImageView ivEventTopicPhoto;
+        @Bind(R.id.tvPostDescription)
+        public TextView tvPostDescription;
+        @Bind(R.id.tvAwesomeCount)
+        public TextView tvAwesomeCount;
+        @Bind(R.id.btnAwesomeIcon)
+        public ImageButton btnAwesomeIcon;
+        @Bind(R.id.cvPostFeature)
+        public CardView cvPostFeature;
+        @Bind(R.id.tvRelativeDate)
+        public TextView tvRelativeDate;
+        @Bind(R.id.tvEventTopicTitle)
+        public TextView tvEventTopicTitle;
+        @Bind(R.id.pbLoading)
+        public ProgressBar pb;
+        @Bind(R.id.rlPostFeature)
+        public RelativeLayout rlPostFeature;
+        @Bind(R.id.tvPostNameBy)
+        public TextView tvPostNameBy;
+        @Bind(R.id.btnShare)
+        public ImageButton btnShare;
+        @Bind(R.id.postPic)
+        public ImageView postPic;
 
         public ViewHolderPost(final View itemView) {
             super(itemView);
@@ -305,9 +317,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class ViewHolderNotification extends RecyclerView.ViewHolder {
-        @Bind(R.id.ivNotificationImage) public ImageView ivNotificationImage;
-        @Bind(R.id.ibNotificationClose) public ImageButton ibNotificationClose;
-        @Bind(R.id.tvNotificationMessage) public TextView tvNotificationMessage;
+        @Bind(R.id.ivNotificationImage)
+        public ImageView ivNotificationImage;
+        @Bind(R.id.ibNotificationClose)
+        public ImageButton ibNotificationClose;
+        @Bind(R.id.tvNotificationMessage)
+        public TextView tvNotificationMessage;
 
         public ViewHolderNotification(final View itemView) {
             super(itemView);
