@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.activities.LoginActivity;
-import com.example.womenwhocode.womenwhocode.activities.TimelineActivity;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.parse.GetCallback;
