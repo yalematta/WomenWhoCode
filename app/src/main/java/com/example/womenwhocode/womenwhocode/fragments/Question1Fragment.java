@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +79,7 @@ public class Question1Fragment extends Fragment {
             btnNext.setId(clickcnt + 1);
 
             tvQuestion.setText(Question);
-            tvQuestion.setTextColor(getResources().getColor(R.color.white));
+            tvQuestion.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
             for (String An : Ans) {
                 CheckBox cb = new CheckBox(getContext());
                 //cb.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox,0,0,0);
@@ -95,7 +96,7 @@ public class Question1Fragment extends Fragment {
                 cb.setPadding(32, 4, 4, 4);
                 cb.setText(An);
 
-                cb.setTextColor(getResources().getColor(R.color.tabOpacity));
+                cb.setTextColor(ContextCompat.getColor(getContext(), R.color.tabOpacity));
                 l.addView(cb);
             }
 

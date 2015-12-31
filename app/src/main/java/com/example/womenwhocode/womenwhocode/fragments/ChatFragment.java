@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -180,10 +181,10 @@ public class ChatFragment extends Fragment {
 
     private void setColorFilter() {
         if (!TextUtils.isEmpty(etMessage.getText())) {
-            btnSend.setBackgroundColor(getResources().getColor(R.color.teal));
+            btnSend.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.teal));
             btnSend.setPadding(10, 4, 10, 4);
         } else {
-            btnSend.setBackgroundColor(getResources().getColor(R.color.lightestGray));
+            btnSend.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightestGray));
             btnSend.setPadding(10, 4, 10, 4);
         }
     }
@@ -191,7 +192,7 @@ public class ChatFragment extends Fragment {
     private void setUpView() {
         // grab message posting views
         btnSend = (ImageButton) view.findViewById(R.id.btnSend);
-        btnSend.setBackgroundColor(getResources().getColor(R.color.lightestGray));
+        btnSend.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightestGray));
         btnSend.setPadding(10, 4, 10, 4);
         etMessage = (EditText) view.findViewById(R.id.etMessage);
 
