@@ -95,7 +95,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     .centerCrop()
                     .into(ivUserPhoto);
         } else {
-            tvPostNameBy.setText("WWCode");
+            tvPostNameBy.setText(R.string.org_name_short);
             ivUserPhoto.setImageResource(R.mipmap.ic_launcher);
         }
 

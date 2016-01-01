@@ -291,7 +291,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     public void onSubmitPostListener(String inputText,Bitmap finalImg) {
         addPost(inputText,finalImg);
         CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
-        Snackbar.make(v, "Thanks for adding a post!", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(v, R.string.thanks_add_post, Snackbar.LENGTH_SHORT).show();
         // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
         // FIXME: add post to bottom of the list!
     }
@@ -364,7 +364,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         vpPager.setPagingEnabled(false);
         tabStrip.setDisabled(true);
         ViewGroup view = (ViewGroup) this.findViewById(R.id.llEventView);
-        Snackbar.make(view, "Please follow to chat!", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view, R.string.event_follow_chat, Snackbar.LENGTH_LONG).show();
         setTab();
     }
 
