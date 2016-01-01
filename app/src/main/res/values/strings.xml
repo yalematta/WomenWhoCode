@@ -21,4 +21,8 @@
     <string name="label_awesome_x">"AWESOME x "</string>
     <string name="add_post">New post</string>
     <string name="LoginMessage">Thanks !</string>
+    <string name="event_follow_chat">Please follow to chat!</string>
+    <string name="thanks_add_post">Thanks for adding a post!</string>
+    <string name="review_msg">We'll review and get back to you soon enough!</string>
+    <string name="org_name_short">WWCode</string>
 </resources>
