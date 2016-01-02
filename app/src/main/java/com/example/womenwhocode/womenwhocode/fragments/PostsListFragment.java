@@ -97,7 +97,7 @@ public class PostsListFragment extends Fragment {
                 String shareBody = post.getDescription();
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, R.string.subject_share_post);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                startActivity(Intent.createChooser(sharingIntent, "Share Via"));
             }
         });
 

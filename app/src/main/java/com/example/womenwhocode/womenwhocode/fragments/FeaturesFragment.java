@@ -123,7 +123,7 @@ public class FeaturesFragment extends Fragment {
     private void showEditDialog() {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         RecommendFeatureDialog recommendFeatureDialog = RecommendFeatureDialog.newInstance();
-        recommendFeatureDialog.show(fm, "fagment_dialog_recommend");
+        recommendFeatureDialog.show(fm, "fragment_dialog_recommend");
     }
 
 
