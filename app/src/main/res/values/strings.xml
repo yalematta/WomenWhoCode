@@ -21,6 +21,9 @@
     <string name="label_awesome_x">"AWESOME x "</string>
     <string name="add_post">New post</string>
     <string name="LoginMessage">Thanks !</string>
+    <string name="not_valid_username_password">Please fill in a valid username and password</string>
+    <string name="short_password">The password is too short.</string>
+    <string name="not_valid_email">Please fill in a valid email id</string>
     <string name="event_follow_chat">Please follow to chat!</string>
     <string name="thanks_add_post">Thanks for adding a post!</string>
     <string name="review_msg">We will review and get back to you soon enough!</string>
