@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.parse.ParseException;
@@ -20,6 +22,29 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class SignUpEmailActivity extends AppCompatActivity {
     private String userAns = "";
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+    public final static boolean isValidUsername(CharSequence target) {
+        if (TextUtils.isEmpty(target))
+            return false;
+        else
+            return true;
+    }
+
+    public final static boolean isValidPassword(CharSequence target) {
+        if (TextUtils.isEmpty(target) || target.length() <= 5)
+            return false;
+        else
+            return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +59,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -41,48 +67,57 @@ public class SignUpEmailActivity extends AppCompatActivity {
 
     public void signUpUser(View view) {
 
-    //ParseUser userDetail = new ParseUser();
-    EditText tvName = (EditText) findViewById(R.id.txtName);
-    EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
-    EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
-    final String name = tvName.getText().toString();
-    final String email = tvEmail.getText().toString();
-    final String password = tvPassword.getText().toString();
-//create the parse user and save it
-   ParseUser user = new ParseUser();
-    user.setUsername(tvName.getText().toString());
-    user.setPassword(tvPassword.getText().toString());
-    user.setEmail(tvEmail.getText().toString());
+        //ParseUser userDetail = new ParseUser();
+        EditText tvName = (EditText) findViewById(R.id.txtName);
+        EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
+        EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
+        final String name = tvName.getText().toString();
+        final String email = tvEmail.getText().toString();
+        final String password = tvPassword.getText().toString();
+        boolean validEmail = isValidEmail(email);
+        boolean validUsername = isValidUsername(name);
+        boolean validPassword = isValidPassword(password);
+        if (!validUsername && !validPassword) {
+            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.not_valid_username_password), Toast.LENGTH_LONG).show();
+        } else if (!validEmail) {
+            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.not_valid_email), Toast.LENGTH_LONG).show();
+        } else if (!validPassword) {
+            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.short_password), Toast.LENGTH_LONG).show();
+        } else {
+            ParseUser user = new ParseUser();
+            user.setUsername(tvName.getText().toString());
+            user.setPassword(tvPassword.getText().toString());
+            user.setEmail(tvEmail.getText().toString());
 
 
-
-    user.signUpInBackground(new SignUpCallback() {
-        public void done(ParseException e) {
-            if (e == null) {
-                try {
+            user.signUpInBackground(new SignUpCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        try {
 //                    Toast.makeText(getBaseContext(), "User created", Toast.LENGTH_SHORT).show();
-                    // [ ] TODO: auto subscribe user to features with auto subscribe true
+                            // [ ] TODO: auto subscribe user to features with auto subscribe true
 
-                    Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
-                    i.putExtra("Name", name);
-                    i.putExtra("Email", email);
-                    i.putExtra("Password", password);
-                    i.putExtra("userAns",userAns);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                }catch(Exception ex){
+                            Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
+                            i.putExtra("Name", name);
+                            i.putExtra("Email", email);
+                            i.putExtra("Password", password);
+                            i.putExtra("userAns", userAns);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        } catch (Exception ex) {
 
-                }
-            } else {
+                        }
+                    } else {
 //                Toast.makeText(getBaseContext(), "User creation failed" + e.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("User Creation failed", e.toString());
-            }
+                        Log.d("User Creation failed", e.toString());
+                    }
+                }
+            });
+
+
         }
-    });
-
-
-
     }
+
 }
 
 
