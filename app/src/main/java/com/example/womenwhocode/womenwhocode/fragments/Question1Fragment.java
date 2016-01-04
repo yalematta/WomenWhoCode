@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.squareup.picasso.Picasso;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -33,48 +32,47 @@ public class Question1Fragment extends Fragment {
 
             LinearLayout l = (LinearLayout) view.findViewById(R.id.chkLayout);
             Button btnNext = (Button) view.findViewById(R.id.btnNext);
-            PersonalizationDetails pd = new PersonalizationDetails();
-            GifImageView img1=(GifImageView)view.findViewById(R.id.img_1);
-            GifImageView img2=(GifImageView)view.findViewById(R.id.img_2);
-            GifImageView img3=(GifImageView)view.findViewById(R.id.img_3);
+            GifImageView img1 = (GifImageView) view.findViewById(R.id.img_1);
+            GifImageView img2 = (GifImageView) view.findViewById(R.id.img_2);
+            GifImageView img3 = (GifImageView) view.findViewById(R.id.img_3);
 
             //Toast.makeText(getContext(),String.valueOf(cnt),Toast.LENGTH_LONG);
             TextView tvQuestion = (TextView) view.findViewById(R.id.tvQuestion);
 
             Bundle bundle = this.getArguments();
-            int clickcnt=bundle.getInt("clickCnt");
+            int clickcnt = bundle.getInt("clickCnt");
             String Question = bundle.getString("Questions");
-            String[] Ans=bundle.getStringArray("Answers");
-    switch (clickcnt){
-        case 0:
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_1)
-                    .into(img1);
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_2_dark)
-                    .into(img2);
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_3_dark)
-                    .into(img3);
-            break;
-        case 1:
-            img1.setImageResource(R.drawable.personalization);
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_2)
-                    .into(img2);
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_3_dark)
-                    .into(img3);
-            break;
-        case 2:
-            img1.setImageResource(R.drawable.personalization_done);
-            img2.setImageResource(R.drawable.personalization);
-            Picasso.with(getContext())
-                    .load(R.drawable.personalization_3)
-                    .into(img3);
-            break;
+            String[] Ans = bundle.getStringArray("Answers");
+            switch (clickcnt) {
+                case 0:
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_1)
+                            .into(img1);
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_2_dark)
+                            .into(img2);
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_3_dark)
+                            .into(img3);
+                    break;
+                case 1:
+                    img1.setImageResource(R.drawable.personalization);
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_2)
+                            .into(img2);
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_3_dark)
+                            .into(img3);
+                    break;
+                case 2:
+                    img1.setImageResource(R.drawable.personalization_done);
+                    img2.setImageResource(R.drawable.personalization);
+                    Picasso.with(getContext())
+                            .load(R.drawable.personalization_3)
+                            .into(img3);
+                    break;
 
-}
+            }
 
             btnNext.setId(clickcnt + 1);
 
@@ -84,7 +82,6 @@ public class Question1Fragment extends Fragment {
                 CheckBox cb = new CheckBox(getContext());
                 //cb.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox,0,0,0);
                 //cb.setCompoundDrawablePadding(-50);
-
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -99,9 +96,6 @@ public class Question1Fragment extends Fragment {
                 cb.setTextColor(ContextCompat.getColor(getContext(), R.color.tabOpacity));
                 l.addView(cb);
             }
-
-
-
 
 
         } catch (Exception e) {

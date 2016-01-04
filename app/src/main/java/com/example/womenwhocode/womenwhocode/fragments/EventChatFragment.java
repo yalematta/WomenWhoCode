@@ -4,7 +4,6 @@ package com.example.womenwhocode.womenwhocode.fragments;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
@@ -64,7 +63,6 @@ public class EventChatFragment extends ChatFragment {
 
         eventId = getArguments().getString(EVENT_ID, "");
 
-        ParseQuery<Event> eventParseQuery = ParseQuery.getQuery(Event.class);
         ParseQuery<Message> messageParseQuery = ParseQuery.getQuery(Message.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             messageParseQuery.fromPin(eventId + LocalDataStore.MESSAGE_PIN);

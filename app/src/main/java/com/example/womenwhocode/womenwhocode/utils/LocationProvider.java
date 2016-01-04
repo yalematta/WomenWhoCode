@@ -102,7 +102,7 @@ public class LocationProvider implements
     }
 
     public void disconnect() {
-        if(mGoogleApiClient!=null) {
+        if (mGoogleApiClient != null) {
             if (mGoogleApiClient.isConnected()) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
                 mGoogleApiClient.disconnect();
@@ -117,8 +117,7 @@ public class LocationProvider implements
         Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mCurrentLocation == null) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }
-        else {
+        } else {
             mLocationCallback.handleNewLocation(mCurrentLocation);
         }
     }
@@ -134,19 +133,19 @@ public class LocationProvider implements
 
     @Override
     public void onLocationChanged(Location location) {
-        // Report to the UI that the location was updated
+/*        Report to the UI that the location was updated
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-//        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-        // update profile location data!
-        // mLocationCallback.handleNewLocation(mCurrentLocation);
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+        update profile location data !
+                mLocationCallback.handleNewLocation(mCurrentLocation);*/
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
          /*
-		 * Google Play services can resolve some errors it detects. If the error
+         * Google Play services can resolve some errors it detects. If the error
 		 * has a resolution, try sending an Intent to start a Google Play
 		 * services activity that can resolve error.
 		 */

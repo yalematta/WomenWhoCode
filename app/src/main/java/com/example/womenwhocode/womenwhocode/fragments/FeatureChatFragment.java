@@ -3,7 +3,6 @@ package com.example.womenwhocode.womenwhocode.fragments;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
@@ -62,8 +61,6 @@ public class FeatureChatFragment extends ChatFragment {
         }
 
         featureId = getArguments().getString(FEATURE_ID, "");
-
-        ParseQuery<Feature> featureParseQuery = ParseQuery.getQuery(Feature.class);
         ParseQuery<Message> messageParseQuery = ParseQuery.getQuery(Message.class);
         if (!NetworkConnectivityReceiver.isNetworkAvailable(getContext())) {
             messageParseQuery.fromPin(featureId + LocalDataStore.MESSAGE_PIN);
