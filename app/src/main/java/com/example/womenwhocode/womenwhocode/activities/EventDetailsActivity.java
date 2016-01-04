@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,6 +52,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EventDetailsActivity extends AppCompatActivity implements AddPostDialogFragment.OnSubmitPostListener {
 
+    private static final String SUBSCRIBED_TEXT = "unfollow";
+    private static final String SUBSCRIBE_TEXT = "follow";
+    private static final String SUBSCRIBERS_TEXT = " followers";
     private TextView tvEventTitle;
     private TextView tvSubscribeCount;
     private Button btnSubscribeIcon;
@@ -65,13 +67,8 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     private Toolbar toolbar;
     private TextView tvToolbarTitle;
     private ImageView ivEventImage;
-
     private CustomViewPager vpPager;
     private CustomTabStrip tabStrip;
-
-    private static final String SUBSCRIBED_TEXT = "unfollow";
-    private static final String SUBSCRIBE_TEXT = "follow";
-    private static final String SUBSCRIBERS_TEXT = " followers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,10 +112,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     }
 
     private void setUpView() {
-        // set the progress bar
-        ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
-//        pb.setVisibility(ProgressBar.VISIBLE);
-
         // hide scroll view so the progress bar is the center of attention
         rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
 //        rlEvents.setVisibility(ScrollView.INVISIBLE);
@@ -288,15 +281,15 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     }
 
     @Override
-    public void onSubmitPostListener(String inputText,Bitmap finalImg) {
-        addPost(inputText,finalImg);
+    public void onSubmitPostListener(String inputText, Bitmap finalImg) {
+        addPost(inputText, finalImg);
         CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
         Snackbar.make(v, R.string.thanks_add_post, Snackbar.LENGTH_SHORT).show();
         // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
         // FIXME: add post to bottom of the list!
     }
 
-    private void addPost(String postBody,Bitmap finalImg) {
+    private void addPost(String postBody, Bitmap finalImg) {
         final Post post = new Post();
         post.setDescription(postBody);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -315,7 +308,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
             public void done(ParseException e) {
                 EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
                 setTab();
-                if(null != pf) {
+                if (null != pf) {
                     pf.setReceivedPost(post);
                 }
             }
@@ -327,37 +320,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 //        if(null != pf) {
 //            pf.setReceivedPost(post);
 //        }
-    }
-
-    public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = { "posts", "chat" };
-
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        // The order and creation fo fragments within the pager
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return EventPostsFragment.newInstance(event_id);
-            } else if (position == 1) {
-                // TODO: figure out subscription value
-                return EventChatFragment.newInstance(event_id);
-            } else return null;
-        }
-
-        // Return the tab title
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
-        }
-
-        // How many fragments there are to swipe between
-        @Override
-        public int getCount() {
-            return tabTitles.length;
-        }
     }
 
     private void hideChat() {
@@ -413,5 +375,36 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     private void setTab() {
         // Switch to page based on index
         vpPager.setCurrentItem(0);
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+        private final String[] tabTitles = {"posts", "chat"};
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        // The order and creation fo fragments within the pager
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return EventPostsFragment.newInstance(event_id);
+            } else if (position == 1) {
+                // TODO: figure out subscription value
+                return EventChatFragment.newInstance(event_id);
+            } else return null;
+        }
+
+        // Return the tab title
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        // How many fragments there are to swipe between
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
     }
 }

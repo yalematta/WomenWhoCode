@@ -2,7 +2,6 @@ package com.example.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,12 +10,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.LogInFragment;
 import com.example.womenwhocode.womenwhocode.fragments.Question1Fragment;
-
-import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.SignUpFragment;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
 import com.example.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
 
 import org.json.JSONArray;
@@ -37,12 +34,12 @@ public class PersonalizationActivity extends AppCompatActivity {
 
     private final LogInFragment logInFragment = new LogInFragment();
     private final SignUpFragment signUpFragment = new SignUpFragment();
-    private PersonalizationQuestionnaire pq;
-    int pageCnt = 0;
-    private JSONArray arr1=null;
-    private JSONArray arr2=null;
     private final ArrayList<String> Question = new ArrayList<>();
     private final ArrayList<String[]> Ans = new ArrayList<>();
+    int pageCnt = 0;
+    private PersonalizationQuestionnaire pq;
+    private JSONArray arr1 = null;
+    private JSONArray arr2 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +80,6 @@ public class PersonalizationActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -92,7 +87,6 @@ public class PersonalizationActivity extends AppCompatActivity {
 
 
     private void setFragmentData() {
-        PersonalizationDetails pd = new PersonalizationDetails();
         pq.build();
         HashMap<String, String[]> ques = pq.getQuestionnaire();
 
@@ -112,9 +106,6 @@ public class PersonalizationActivity extends AppCompatActivity {
 
     public void goToNextPage(View view) {
         try {
-
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flPersonalization);
-
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
             Bundle bundle = new Bundle();
@@ -128,7 +119,7 @@ public class PersonalizationActivity extends AppCompatActivity {
                     bundle.putStringArray("Answers", Ans.get(1));
                     bundle.putInt("clickCnt", 1);
                     question2Fragment.setArguments(bundle);
-                     arr1 = getAnswersArray(view);
+                    arr1 = getAnswersArray(view);
                     ft.addToBackStack(null);
                     break;
                 case 2:
@@ -138,12 +129,12 @@ public class PersonalizationActivity extends AppCompatActivity {
                     bundle.putStringArray("Answers", Ans.get(2));
                     bundle.putInt("clickCnt", 2);
                     question3Fragment.setArguments(bundle);
-                     arr2 = getAnswersArray(view);
+                    arr2 = getAnswersArray(view);
                     ft.addToBackStack(null);
                     break;
                 case 3:
                     JSONArray arr3 = getAnswersArray(view);
-                    JSONArray finalArray=concatArray(arr1,arr2, arr3);
+                    JSONArray finalArray = concatArray(arr1, arr2, arr3);
                     ft.replace(R.id.flPersonalization, signUpFragment);
                     bundle.putString("userAns", finalArray.toString());
                     signUpFragment.setArguments(bundle);
@@ -161,7 +152,7 @@ public class PersonalizationActivity extends AppCompatActivity {
     private JSONArray getAnswersArray(View view) {
         final JSONArray ja = new JSONArray();
         RelativeLayout formLayout = (RelativeLayout) view.getParent();
-        EditText etOther=(EditText)formLayout.findViewById(R.id.etOther);
+        EditText etOther = (EditText) formLayout.findViewById(R.id.etOther);
         LinearLayout layout = (LinearLayout) formLayout.findViewById(R.id.chkLayout);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
@@ -172,7 +163,7 @@ public class PersonalizationActivity extends AppCompatActivity {
 
             }
         }
-        if(etOther.getText().length()>0) {
+        if (etOther.getText().length() > 0) {
             ja.put(etOther.getText());
         }
         return ja;

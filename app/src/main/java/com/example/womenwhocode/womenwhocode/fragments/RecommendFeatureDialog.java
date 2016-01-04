@@ -21,10 +21,6 @@ public class RecommendFeatureDialog extends DialogFragment {
     private Toolbar toolbar;
     private EditText mEditText;
 
-    public interface RecommendFeatureDialogListener {
-        void onFinishEditDialog(String inputText);
-    }
-
     public RecommendFeatureDialog() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
@@ -86,10 +82,13 @@ public class RecommendFeatureDialog extends DialogFragment {
     }
 
     private void onSave() {
-        String postBody = mEditText.getText().toString();
         RecommendFeatureDialogListener listener = (RecommendFeatureDialogListener) getActivity();
         listener.onFinishEditDialog(mEditText.getText().toString());
         dismiss();
+    }
+
+    public interface RecommendFeatureDialogListener {
+        void onFinishEditDialog(String inputText);
     }
 //
 //    @Override
