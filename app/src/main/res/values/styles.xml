@@ -1,8 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 
     <!-- =============================================================== -->
     <!-- Toolbar Styles - Stays Consistent -->
@@ -91,8 +90,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="FullScreenDialogues" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
-    </style>
+    <style name="FullScreenDialogues" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize"/>
 
     <!-- what if I just edit the edit text box? to a rectagle shape and then do everything else -->
 

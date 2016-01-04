@@ -18,10 +18,6 @@ public class Feature extends ParseObject {
     private static final String SUBSCRIBE_COUNT = "subscribe_count";
     private static final String PHOTO_KEY = "photo_file";
 
-    public void setSubscribeCount(int count) {
-        put(SUBSCRIBE_COUNT, count);
-    }
-
     public int getSubscribeCount() {
         int count;
         Object c = this.get(SUBSCRIBE_COUNT);
@@ -33,40 +29,40 @@ public class Feature extends ParseObject {
         return count;
     }
 
-    public void setAutoSubscribe(boolean autoSubscribe) {
-        put(AUTO_SUBSCRIBE_KEY, autoSubscribe);
+    public void setSubscribeCount(int count) {
+        put(SUBSCRIBE_COUNT, count);
     }
 
     public boolean getAutoSubscribe() {
         return this.getBoolean(AUTO_SUBSCRIBE_KEY);
     }
 
-    public void setDescription(String description) {
-        put(DESCRIPTION_KEY, description);
+    public void setAutoSubscribe(boolean autoSubscribe) {
+        put(AUTO_SUBSCRIBE_KEY, autoSubscribe);
     }
 
     public String getDescription() {
         return this.get(DESCRIPTION_KEY).toString();
     }
 
-    public void setTitle(String title) {
-        put(TITLE_KEY, title);
+    public void setDescription(String description) {
+        put(DESCRIPTION_KEY, description);
     }
 
     public String getTitle() {
         return this.get(TITLE_KEY).toString();
     }
 
-    public void setNetwork(Network network) {
-        put(NETWORK_KEY, network);
+    public void setTitle(String title) {
+        put(TITLE_KEY, title);
     }
 
     public Network getNetwork() {
         return (Network) getParseObject(NETWORK_KEY);
     }
 
-    public void setImageUrl(String imageUrl) {
-        put(IMAGE_URL_KEY, imageUrl);
+    public void setNetwork(Network network) {
+        put(NETWORK_KEY, network);
     }
 
     public String getImageUrl() {
@@ -76,6 +72,10 @@ public class Feature extends ParseObject {
             url = image.toString();
         }
         return url;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        put(IMAGE_URL_KEY, imageUrl);
     }
 
     public String getHexColor() {

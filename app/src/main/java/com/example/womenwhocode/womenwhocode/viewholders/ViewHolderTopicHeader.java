@@ -13,7 +13,8 @@ import butterknife.ButterKnife;
  * Created by zassmin on 11/12/15.
  */
 public class ViewHolderTopicHeader extends RecyclerView.ViewHolder {
-    @Bind(R.id.tvTopicHeader) public TextView tvTopicHeader;
+    @Bind(R.id.tvTopicHeader)
+    public TextView tvTopicHeader;
 
     public ViewHolderTopicHeader(View itemView) {
         super(itemView);

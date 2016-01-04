@@ -39,10 +39,10 @@ public class LoginEmailActivity extends AppCompatActivity {
     }
 
     public void Login(View view) {
-        EditText etEmail=(EditText)findViewById(R.id.etEmail);
-        String email=etEmail.getText().toString();
-        EditText etPassword=(EditText)findViewById(R.id.etPwd);
-        final String pwd=etPassword.getText().toString();
+        EditText etEmail = (EditText) findViewById(R.id.etEmail);
+        String email = etEmail.getText().toString();
+        EditText etPassword = (EditText) findViewById(R.id.etPwd);
+        final String pwd = etPassword.getText().toString();
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("email", email); //

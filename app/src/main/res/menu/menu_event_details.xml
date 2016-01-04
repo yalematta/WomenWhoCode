@@ -1,7 +1,6 @@
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.womenwhocode.womenwhocode.activities.EventDetailsActivity">
 
     <item
@@ -9,5 +8,5 @@
         android:icon="@drawable/ic_add_post"
         android:onClick="onLaunchAddPostDialog"
         android:title="Add Post"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>

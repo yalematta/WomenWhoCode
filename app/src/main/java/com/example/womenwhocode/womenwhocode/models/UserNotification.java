@@ -13,21 +13,20 @@ public class UserNotification extends ParseObject {
     public static final String ENABLED_KEY = "enabled";
     public static final String NOTIFICATION_KEY = "notification";
 
+    public String getUserId() {
+        return getString(USER_ID_KEY);
+    }
 
     public void setUserId(String userId) {
         put(USER_ID_KEY, userId);
     }
 
-    public String getUserId() {
-        return getString(USER_ID_KEY);
+    public boolean getEnabled() {
+        return getBoolean(ENABLED_KEY);
     }
 
     public void setEnabled(boolean enabled) {
         put(ENABLED_KEY, enabled);
-    }
-
-    public boolean getEnabled() {
-        return getBoolean(ENABLED_KEY);
     }
 
     public Notification getNotification() {

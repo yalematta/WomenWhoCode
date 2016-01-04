@@ -29,7 +29,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), SignUpEmailActivity.class);
-                i.putExtra("userAns",userAns);
+                i.putExtra("userAns", userAns);
                 startActivity(i);
 
             }

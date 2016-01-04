@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.WWCodeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader</item>
         <item name="textSecondaryHeaders">@style/TextView.TitleText.Dark</item>
@@ -16,7 +17,8 @@
     </style>
 
     <style name="Theme.WWCodeDark" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader.Light</item>
+        <item name="textPersonalizedListHeaders">@style/TextView.TitleText.FeatureHeader.Light
+        </item>
         <item name="textSecondaryHeaders">@style/TextView.TitleText.Light</item>
         <item name="chatSubheaders">@style/TextView.Subtitle.Light.Small</item>
         <item name="chatBubbleOtherUser">@style/BubbleTextView.ChatBody.OtherUser.Light</item>

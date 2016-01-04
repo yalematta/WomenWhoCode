@@ -35,6 +35,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  * Created by shehba.shahab on 10/16/15.
  */
 public class FeaturesFragment extends Fragment {
+    private final int RUN_FREQUENCY = 1000; // ms
     private FeaturesAdapter aFeatures;
     private RecyclerView rvFeatures;
     private ProgressBar pb;
@@ -46,13 +47,8 @@ public class FeaturesFragment extends Fragment {
     private int listCounter;
     private ArrayList<Object> items;
     private Runnable runnable;
-    private final int RUN_FREQUENCY = 1000; // ms
     private Handler handler;
     private HashSet<Feature> featuresSet;
-
-    public interface OnFeatureItemClickListener {
-        void onFeatureClickListener(Feature feature, View itemView);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +122,6 @@ public class FeaturesFragment extends Fragment {
         recommendFeatureDialog.show(fm, "fragment_dialog_recommend");
     }
 
-
     private void populateFeaturesList() {
         ParseQuery<Feature> query = ParseQuery.getQuery(Feature.class);
 
@@ -165,7 +160,7 @@ public class FeaturesFragment extends Fragment {
                         recommendedFeatures.add(recommendation.getFeature());
                     }
                 }
-                listCounter ++;
+                listCounter++;
             }
         });
 
@@ -180,7 +175,7 @@ public class FeaturesFragment extends Fragment {
                 } else {
                     Log.d("Message", "Error: " + e.getMessage());
                 }
-                listCounter ++;
+                listCounter++;
             }
         });
     }
@@ -231,5 +226,9 @@ public class FeaturesFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement FeaturesFragment.OnFeatureItemClickListener");
         }
+    }
+
+    public interface OnFeatureItemClickListener {
+        void onFeatureClickListener(Feature feature, View itemView);
     }
 }

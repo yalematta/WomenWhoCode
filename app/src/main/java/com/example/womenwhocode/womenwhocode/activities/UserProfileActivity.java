@@ -73,7 +73,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private String email = "";
     private ImageView ivPic;
     private ParseUser currentUser;
-    private boolean animate_flag=false;
+    private boolean animate_flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,7 @@ public class UserProfileActivity extends AppCompatActivity {
         EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtjobTitle = (EditText) findViewById(R.id.etJob);
         spnNetwork = (Spinner) findViewById(R.id.spnNetwork);
-        ivPic=(ImageView)findViewById(R.id.ivphoto);
+        ivPic = (ImageView) findViewById(R.id.ivphoto);
         ivPic.clearAnimation();
 
         //get the Network data
@@ -144,24 +144,27 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
     @Override
     public void onBackPressed() {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(!animate_flag) {
+        if (!animate_flag) {
             doAlpha();
         }
     }
-    private void doAlpha(){
+
+    private void doAlpha() {
         Animation alphaAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha_animation);
         ivPic.startAnimation(alphaAnimation); //image is my ImageView
     }
+
     public void OnFinalize(View view) {
         // Save user with the updated input in Profile model
-        if(!TextUtils.isEmpty(txtName.getText().toString())) {
+        if (!TextUtils.isEmpty(txtName.getText().toString())) {
             userProfile.setFullName(txtName.getText().toString());
         }
         if (spnNetwork.getSelectedItem().toString().equals("select")) {
@@ -169,7 +172,7 @@ public class UserProfileActivity extends AppCompatActivity {
         } else {
             userProfile.setNetwork(spnNetwork.getSelectedItem().toString());
         }
-        if(!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
+        if (!TextUtils.isEmpty(txtjobTitle.getText().toString())) {
             userProfile.setJobTitle(txtjobTitle.getText().toString());
         }
         userProfile.setUser(currentUser);
@@ -220,35 +223,35 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void recommendUserToTopic() {
-          // parse answers
-          String[] parsed = userAns.split("\"");
+        // parse answers
+        String[] parsed = userAns.split("\"");
 
-          // query tags for answers
-          ParseQuery<Tag> tagParseQuery = ParseQuery.getQuery(Tag.class);
-          tagParseQuery.whereContainedIn(Tag.NAME_KEY, Arrays.asList(parsed));
-          // get features with those tags
-          ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
-          featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
-          featureTagParseQuery.include("feature");
-          featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
-              @Override
-              public void done(List<FeatureTag> list, ParseException e) {
-                  if (e == null) {
-                      HashSet<Feature> featureSet = new HashSet<>(); // to catch dups!
-                      for (FeatureTag featureTag : list) {
-                          if (featureSet.add(featureTag.getFeature())) { // 0 and 3
-                              // create recommendations
-                              Recommendation r = new Recommendation();
-                              r.setFeature(featureTag.getFeature());
-                              r.setFeatureId(featureTag.getFeature().getObjectId());
-                              r.setUserId(currentUser.getObjectId());
-                              r.setValid(true);
-                              r.saveInBackground();
-                          }
-                      }
-                  }
-              }
-          });
+        // query tags for answers
+        ParseQuery<Tag> tagParseQuery = ParseQuery.getQuery(Tag.class);
+        tagParseQuery.whereContainedIn(Tag.NAME_KEY, Arrays.asList(parsed));
+        // get features with those tags
+        ParseQuery<FeatureTag> featureTagParseQuery = ParseQuery.getQuery(FeatureTag.class);
+        featureTagParseQuery.whereMatchesQuery(FeatureTag.TAG_KEY, tagParseQuery);
+        featureTagParseQuery.include("feature");
+        featureTagParseQuery.findInBackground(new FindCallback<FeatureTag>() {
+            @Override
+            public void done(List<FeatureTag> list, ParseException e) {
+                if (e == null) {
+                    HashSet<Feature> featureSet = new HashSet<>(); // to catch dups!
+                    for (FeatureTag featureTag : list) {
+                        if (featureSet.add(featureTag.getFeature())) { // 0 and 3
+                            // create recommendations
+                            Recommendation r = new Recommendation();
+                            r.setFeature(featureTag.getFeature());
+                            r.setFeatureId(featureTag.getFeature().getObjectId());
+                            r.setUserId(currentUser.getObjectId());
+                            r.setValid(true);
+                            r.saveInBackground();
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void savePersonalizationDetails() {
@@ -282,7 +285,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onSelectImage(View view) {
-        animate_flag=true;
+        animate_flag = true;
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
@@ -359,7 +362,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onLaunchCamera(View view) {
-        animate_flag=true;
+        animate_flag = true;
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
@@ -424,9 +427,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
     public void showCameraIcons(View view) {
         view.clearAnimation();
-        RelativeLayout rl=(RelativeLayout)view.getParent();
+        RelativeLayout rl = (RelativeLayout) view.getParent();
 
-        LinearLayout child=(LinearLayout)rl.getChildAt(2);
+        LinearLayout child = (LinearLayout) rl.getChildAt(2);
 
         child.findViewById(R.id.btnUpload).setVisibility(View.VISIBLE);
         child.findViewById(R.id.btnCamera).setVisibility(View.VISIBLE);

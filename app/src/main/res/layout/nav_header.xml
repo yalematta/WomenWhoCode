@@ -11,25 +11,25 @@
         android:id="@+id/ivPhoto"
         android:layout_width="@dimen/large_image_view_height_width"
         android:layout_height="@dimen/large_image_view_height_width"
-        android:layout_marginBottom="@dimen/icon_padding"
         android:layout_above="@+id/tvFullName"
+        android:layout_marginBottom="@dimen/icon_padding"
         android:background="@drawable/default_user_icon" />
 
     <TextView
         android:id="@+id/tvFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/icon_padding"
         android:layout_above="@+id/tvJobTitle"
-        android:textStyle="bold"
-        android:text="Full Name" />
+        android:paddingTop="@dimen/icon_padding"
+        android:text="Full Name"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvJobTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/icon_padding"
         android:layout_alignParentBottom="true"
+        android:paddingTop="@dimen/icon_padding"
         android:text="Job Title" />
 
 </RelativeLayout>
