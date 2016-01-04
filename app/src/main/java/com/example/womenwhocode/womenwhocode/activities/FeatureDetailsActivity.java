@@ -56,7 +56,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by shehba.shahab on 10/18/15.
  */
 public class FeatureDetailsActivity extends AppCompatActivity implements
-        AddPostDialogFragment.OnSubmitPostListener{
+        AddPostDialogFragment.OnSubmitPostListener {
 
     private static final String SUBSCRIBED_TEXT = "unfollow";
     private static final String SUBSCRIBE_TEXT = "follow";
@@ -366,7 +366,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         addPostDialogFragment.show(fm, "fragment_add_post");
     }
 
-    private void addPost(String postBody,Bitmap finalImg) {
+    private void addPost(String postBody, Bitmap finalImg) {
         final Post post = new Post();
         post.setDescription(postBody);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -386,7 +386,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                 // notify fragment
                 FeaturePostsFragment pf = (FeaturePostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
                 setTab();
-                if(null != pf) {
+                if (null != pf) {
                     pf.setReceivedPost(post);
                 }
             }
@@ -396,14 +396,13 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSubmitPostListener(String inputText,Bitmap finalimg) {
-        addPost(inputText,finalimg);
+    public void onSubmitPostListener(String inputText, Bitmap finalimg) {
+        addPost(inputText, finalimg);
         CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
         Snackbar.make(v, R.string.thanks_add_post, Snackbar.LENGTH_SHORT).show();
         // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
         // FIXME: add post to bottom of the list!
     }
-
 
 
     public class PagerAdapter extends FragmentPagerAdapter {

@@ -1,168 +1,172 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/page_background_bl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/page_background_bl"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".LoginActivity">
+    tools:context=".LoginActivity">
 
 
     <TextView
+        android:id="@+id/txtReview"
+        style="@style/TextView.TitleText.Pf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/text_large_pf_padding_top"
-        android:text="@string/reviewProfile"
-        android:id="@+id/txtReview"
-        android:focusable="false"
-        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        style="@style/TextView.TitleText.Pf"/>
+        android:focusable="false"
+        android:paddingTop="@dimen/text_large_pf_padding_top"
+        android:text="@string/reviewProfile" />
 
     <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+        android:id="@+id/ivphoto"
         android:layout_width="@dimen/large_image_view_height_width"
         android:layout_height="@dimen/large_image_view_height_width"
-        android:id="@+id/ivphoto"
-        android:background="@drawable/default_user_icon"
         android:layout_below="@+id/txtReview"
         android:layout_centerHorizontal="true"
-        android:onClick="showCameraIcons"
         android:layout_marginTop="@dimen/activity_horizontal_padding"
-        />
-    
+        android:background="@drawable/default_user_icon"
+        android:onClick="showCameraIcons" />
+
     <LinearLayout
         android:id="@+id/icPhotoIcons"
-        android:layout_below="@+id/ivphoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ivphoto"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:padding="@dimen/activity_horizontal_padding">
 
         <ImageButton
+            android:id="@+id/btnCamera"
             style="@style/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_camera"
-            android:id="@+id/btnCamera"
+            android:background="@color/blackish"
             android:onClick="onLaunchCamera"
-            android:visibility="invisible"
-            android:background="@color/blackish" />
+            android:src="@drawable/ic_camera"
+            android:visibility="invisible" />
 
         <ImageButton
+            android:id="@+id/btnUpload"
             style="@style/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_fileimage"
             android:background="@color/blackish"
-            android:id="@+id/btnUpload"
-            android:visibility="invisible"
-            android:onClick="onSelectImage" />
+            android:onClick="onSelectImage"
+            android:src="@drawable/ic_fileimage"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvName"
         style="@style/TextViewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvName"
-        android:text="@string/tvName"
         android:layout_below="@id/icPhotoIcons"
+        android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:layout_marginLeft="@dimen/activity_horizontal_padding"/>
+        android:text="@string/tvName" />
+
     <EditText
+        android:id="@+id/txtName"
         style="@style/EditBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtName"
         android:layout_below="@+id/tvName"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="@dimen/activity_horizontal_padding"
+        android:layout_marginBottom="@dimen/activity_horizontal_padding"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
-        android:layout_marginBottom="@dimen/activity_horizontal_padding"/>
+        android:layout_marginRight="@dimen/activity_horizontal_padding" />
+
     <TextView
+        android:id="@+id/tvEmail"
         style="@style/TextViewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvEmail"
-        android:text="@string/tvEmail"
         android:layout_below="@id/txtName"
-        android:layout_marginRight="@dimen/activity_horizontal_padding"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
-         />
+        android:layout_marginRight="@dimen/activity_horizontal_padding"
+        android:text="@string/tvEmail" />
+
     <EditText
+        android:id="@+id/txtEmail"
         style="@style/EditBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="email address"
-        android:id="@+id/txtEmail"
+        android:layout_alignParentTop="false"
         android:layout_below="@+id/tvEmail"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="false"
-        android:layout_marginRight="@dimen/activity_horizontal_padding"
+        android:layout_marginBottom="@dimen/activity_horizontal_padding"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
-        android:layout_marginBottom="@dimen/activity_horizontal_padding"/>
+        android:layout_marginRight="@dimen/activity_horizontal_padding"
+        android:text="email address" />
+
     <TextView
+        android:id="@+id/tvJob"
         style="@style/TextViewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvJob"
-        android:text="@string/tvJob"
         android:layout_below="@+id/txtEmail"
-        android:layout_marginRight="@dimen/activity_horizontal_padding"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
-         />
+        android:layout_marginRight="@dimen/activity_horizontal_padding"
+        android:text="@string/tvJob" />
+
     <EditText
+        android:id="@+id/etJob"
         style="@style/EditBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etJob"
         android:layout_below="@+id/tvJob"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginBottom="@dimen/activity_horizontal_padding"
-       />
+        android:layout_marginLeft="@dimen/activity_horizontal_padding"
+        android:layout_marginRight="@dimen/activity_horizontal_padding" />
 
     <TextView
+        android:id="@+id/tvNetwrks"
         style="@style/TextViewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvNetwrks"
-        android:text="@string/tvNetworks"
         android:layout_below="@+id/etJob"
+        android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:layout_marginLeft="@dimen/activity_horizontal_padding" />
+        android:text="@string/tvNetworks" />
 
     <fr.ganfra.materialspinner.MaterialSpinner
-        app:ms_multiline="false"
-        app:ms_arrowColor="@color/darkGray"
-        app:ms_baseColor="@color/darkGray"
-        app:ms_thickness="0.8dp"
+        android:id="@+id/spnNetwork"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spnNetwork"
         android:layout_below="@+id/tvNetwrks"
-        android:prompt="@string/spinnerPrompt"
-        android:minHeight="20dp"
-        android:focusable="true"
-        android:clickable="true"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center"
+        android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:layout_marginLeft="@dimen/activity_horizontal_padding"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="20dp"
+        android:prompt="@string/spinnerPrompt"
+        android:textAlignment="center"
+        app:ms_arrowColor="@color/darkGray"
+        app:ms_baseColor="@color/darkGray"
+        app:ms_multiline="false"
+        app:ms_thickness="0.8dp" />
 
     <Button
+        android:id="@+id/btnFinalize"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finalize Profile"
-        android:id="@+id/btnFinalize"
-        android:onClick="OnFinalize"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="48dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:onClick="OnFinalize"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:text="Finalize Profile" />
 
 </RelativeLayout>

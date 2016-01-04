@@ -29,107 +29,6 @@ public class Event extends ParseObject {
     private static final String SUBSCRIBE_COUNT = "subscribe_count";
     private static final String HEX_COLOR = "hex_color";
 
-    public void setHexColor(String hexColor) {
-        put(HEX_COLOR, hexColor);
-    }
-
-    public String getHexColor() {
-        return this.get(HEX_COLOR).toString();
-    }
-
-    public void setSubscribeCount(int count) {
-        put(SUBSCRIBE_COUNT, count);
-    }
-
-    public int getSubscribeCount() {
-        int count;
-        Object c = this.get(SUBSCRIBE_COUNT);
-        if (c != null) {
-            count = Integer.parseInt(c.toString());
-        } else {
-            count = 0;
-        }
-        return count;
-    }
-
-    private void setNetwork(Network network) {
-        put(NETWORK_KEY, network);
-    }
-
-    public Network getNetwork() {
-        Network network= null;
-        try {
-            network = this.getParseObject(NETWORK_KEY).fetchIfNeeded();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return network;
-    }
-
-    private void setEventDateTime(String datetime) {
-        put(DATETIME_KEY, datetime);
-    }
-
-    public String getEventDateTime() {
-        return this.get(DATETIME_KEY).toString();
-    }
-
-    private void setLocation(String location) {
-        put(LOCATION_KEY, location);
-    }
-
-    public String getLocation() {
-        return this.get(LOCATION_KEY).toString();
-    }
-
-    private void setUrl(String url) {
-        put(URL_KEY, url);
-    }
-
-    public String getUrl() {
-        return this.get(URL_KEY).toString();
-    }
-
-    private void setTitle(String title) {
-        put(TITLE_KEY, title);
-    }
-
-    public String getTitle() {
-        return this.get(TITLE_KEY).toString();
-    }
-
-    private void setFeatured(boolean featured) {
-        put(FEATURED_KEY, featured);
-    }
-
-    public boolean getFeatured() {
-        return this.getBoolean(FEATURED_KEY);
-    }
-
-    private void setMeetupEventId(String id) {
-        put(MEETUP_EVENT_ID_KEY, id);
-    }
-
-    public String getMeetupEventId() {
-        return this.get(MEETUP_EVENT_ID_KEY).toString();
-    }
-
-    private void setDescription(String description) {
-        put(DESCRIPTION_KEY, description);
-    }
-
-    public String getDescription() {
-        return this.get(DESCRIPTION_KEY).toString();
-    }
-
-    private void setTimeZone(String timeZone) {
-        put(TIMEZONE_KEY, timeZone);
-    }
-
-    public String getTimezone() {
-        return this.getString(TIMEZONE_KEY);
-    }
-
     private static Event fromJSON(ModelJSONObject jsonObject) {
         String eventId = "";
         try {
@@ -190,6 +89,107 @@ public class Event extends ParseObject {
         }
 
         return events;
+    }
+
+    public String getHexColor() {
+        return this.get(HEX_COLOR).toString();
+    }
+
+    public void setHexColor(String hexColor) {
+        put(HEX_COLOR, hexColor);
+    }
+
+    public int getSubscribeCount() {
+        int count;
+        Object c = this.get(SUBSCRIBE_COUNT);
+        if (c != null) {
+            count = Integer.parseInt(c.toString());
+        } else {
+            count = 0;
+        }
+        return count;
+    }
+
+    public void setSubscribeCount(int count) {
+        put(SUBSCRIBE_COUNT, count);
+    }
+
+    public Network getNetwork() {
+        Network network = null;
+        try {
+            network = this.getParseObject(NETWORK_KEY).fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return network;
+    }
+
+    private void setNetwork(Network network) {
+        put(NETWORK_KEY, network);
+    }
+
+    public String getEventDateTime() {
+        return this.get(DATETIME_KEY).toString();
+    }
+
+    private void setEventDateTime(String datetime) {
+        put(DATETIME_KEY, datetime);
+    }
+
+    public String getLocation() {
+        return this.get(LOCATION_KEY).toString();
+    }
+
+    private void setLocation(String location) {
+        put(LOCATION_KEY, location);
+    }
+
+    public String getUrl() {
+        return this.get(URL_KEY).toString();
+    }
+
+    private void setUrl(String url) {
+        put(URL_KEY, url);
+    }
+
+    public String getTitle() {
+        return this.get(TITLE_KEY).toString();
+    }
+
+    private void setTitle(String title) {
+        put(TITLE_KEY, title);
+    }
+
+    public boolean getFeatured() {
+        return this.getBoolean(FEATURED_KEY);
+    }
+
+    private void setFeatured(boolean featured) {
+        put(FEATURED_KEY, featured);
+    }
+
+    public String getMeetupEventId() {
+        return this.get(MEETUP_EVENT_ID_KEY).toString();
+    }
+
+    private void setMeetupEventId(String id) {
+        put(MEETUP_EVENT_ID_KEY, id);
+    }
+
+    public String getDescription() {
+        return this.get(DESCRIPTION_KEY).toString();
+    }
+
+    private void setDescription(String description) {
+        put(DESCRIPTION_KEY, description);
+    }
+
+    private void setTimeZone(String timeZone) {
+        put(TIMEZONE_KEY, timeZone);
+    }
+
+    public String getTimezone() {
+        return this.getString(TIMEZONE_KEY);
     }
 
     // FIXME: display time according to local time zone

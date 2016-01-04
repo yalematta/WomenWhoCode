@@ -24,18 +24,12 @@ public class LocationProvider implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    public interface LocationCallback {
-        void handleNewLocation(Location location);
-    }
-
-    private static final String TAG = LocationProvider.class.getSimpleName();
-
     /*
      * Define a request code to send to Google Play services
      * This code is returned in Activity.onActivityResult
      */
     public final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
+    private static final String TAG = LocationProvider.class.getSimpleName();
     private final LocationCallback mLocationCallback;
     private final Context mContext;
     private GoogleApiClient mGoogleApiClient;
@@ -155,8 +149,8 @@ public class LocationProvider implements
                 // Start an Activity that tries to resolve the error
                 connectionResult.startResolutionForResult(activity,
                         CONNECTION_FAILURE_RESOLUTION_REQUEST);
-				/*
-				 * Thrown if Google Play services canceled the original
+                /*
+                 * Thrown if Google Play services canceled the original
 				 * PendingIntent
 				 */
             } catch (IntentSender.SendIntentException e) {
@@ -167,5 +161,9 @@ public class LocationProvider implements
 //            Toast.makeText(mContext,
 //                    "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public interface LocationCallback {
+        void handleNewLocation(Location location);
     }
 }

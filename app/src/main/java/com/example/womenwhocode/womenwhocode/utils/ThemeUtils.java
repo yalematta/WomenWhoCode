@@ -10,10 +10,9 @@ import com.example.womenwhocode.womenwhocode.R;
  * Created by zassmin on 11/13/15.
  */
 public class ThemeUtils {
-    private static int sTheme;
-
     public final static int THEME_WWCODE_LIGHT = 0;
     public final static int THEME_WWCODE_DARK = 1;
+    private static int sTheme;
 
     public static void changeToTheme(Activity activity, int theme) {
         sTheme = theme;

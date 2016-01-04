@@ -10,13 +10,13 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Message")
 public class Message extends ParseObject {
-    private static final String USER_ID_KEY = "user_id";
-    private static final String BODY_KEY = "body";
     public static final String EVENT_ID_KEY = "event_id";
     public static final String FEATURE_ID_KEY = "event_id";
     public static final String CREATED_AT_KEY = "createdAt";
     public static final String PROFILE_KEY = "profile";
     public static final String USER_KEY = "user";
+    private static final String USER_ID_KEY = "user_id";
+    private static final String BODY_KEY = "body";
 
     public void setUser(ParseUser user) {
         put(USER_KEY, user);
@@ -36,28 +36,28 @@ public class Message extends ParseObject {
         put(PROFILE_KEY, profile);
     }
 
-    public void setFeatureId(String userId) {
-        put(FEATURE_ID_KEY, userId);
-    }
-
     public String getFeatureId() {
         return getString(FEATURE_ID_KEY);
     }
 
-    public void setEventId(String userId) {
-        put(EVENT_ID_KEY, userId);
+    public void setFeatureId(String userId) {
+        put(FEATURE_ID_KEY, userId);
     }
 
     public String getEventId() {
         return getString(EVENT_ID_KEY);
     }
 
-    public void setUserId(String userId) {
-        put(USER_ID_KEY, userId);
+    public void setEventId(String userId) {
+        put(EVENT_ID_KEY, userId);
     }
 
     public String getUserId() {
         return getString(USER_ID_KEY);
+    }
+
+    public void setUserId(String userId) {
+        put(USER_ID_KEY, userId);
     }
 
     public String getBody() {

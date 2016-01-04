@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llFeatureView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/llFeatureView"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <!-- action bar -->
     <include
         layout="@layout/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -23,81 +23,81 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:pstsShouldExpand="true"
-        app:pstsTabTextAllCaps="true"
-        android:textSize="13sp"
         android:background="@color/blackish"
-        app:pstsTabTextColor="@color/tab_text"
+        android:textSize="13sp"
         app:pstsDividerColor="@color/blackish"
         app:pstsIndicatorColor="@color/teal"
         app:pstsIndicatorHeight="2dp"
-        app:pstsTabPaddingLeftRight="14dp"/>
+        app:pstsShouldExpand="true"
+        app:pstsTabPaddingLeftRight="14dp"
+        app:pstsTabTextAllCaps="true"
+        app:pstsTabTextColor="@color/tab_text" />
 
-        <!-- FIXME: consider making this it's own fragment -->
+    <!-- FIXME: consider making this it's own fragment -->
     <RelativeLayout
         android:id="@+id/rlFeatures"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/detail_padding_top"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingBottom="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding">
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingTop="@dimen/detail_padding_top">
 
         <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
             android:id="@+id/ivEventTopicPhoto"
             android:layout_width="@dimen/regular_image_view_height_width"
             android:layout_height="@dimen/regular_image_view_height_width"
+            android:layout_alignParentLeft="true"
             android:layout_marginRight="@dimen/icon_main_padding_right"
-            android:transitionName="eventTopicPhoto"
             android:scaleType="centerCrop"
-            android:layout_alignParentLeft="true" />
+            android:transitionName="eventTopicPhoto" />
 
         <TextView
             android:id="@+id/tvEventTopicTitle"
-            android:transitionName="eventTopicTitle"
+            style="@style/TextView.DetailTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            android:paddingTop="@dimen/icon_padding"
-            android:paddingRight="@dimen/icon_padding"
             android:paddingLeft="@dimen/icon_padding_right"
-            style="@style/TextView.DetailTitle"/>
+            android:paddingRight="@dimen/icon_padding"
+            android:paddingTop="@dimen/icon_padding"
+            android:transitionName="eventTopicTitle" />
 
         <TextView
             android:id="@+id/tvSubscriberCount"
+            style="@style/TextView.Subtitle"
             android:layout_width="match_parent"
-            android:paddingBottom="@dimen/icon_padding"
-            android:paddingLeft="@dimen/icon_padding_right"
-            android:paddingRight="@dimen/icon_padding"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvEventTopicTitle"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            style="@style/TextView.Subtitle"/>
+            android:paddingBottom="@dimen/icon_padding"
+            android:paddingLeft="@dimen/icon_padding_right"
+            android:paddingRight="@dimen/icon_padding" />
 
         <TextView
             android:id="@+id/tvFeatureDescription"
+            style="@style/TextView.DetailDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/description_padding_top"
+            android:layout_below="@+id/tvSubscriberCount"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             android:paddingBottom="@dimen/description_padding_bottom"
             android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
-            android:layout_below="@+id/tvSubscriberCount"
-            android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            style="@style/TextView.DetailDescription"/>
+            android:paddingTop="@dimen/description_padding_top" />
 
         <Button
             android:id="@+id/btnSubscribe"
+            style="@style/FollowButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFeatureDescription"
-            android:layout_toRightOf="@+id/ivEventTopicPhoto"
-            android:layout_marginTop="@dimen/icon_padding"
             android:layout_marginBottom="@dimen/icon_padding"
-            android:layout_marginRight="@dimen/icon_padding"
             android:layout_marginLeft="@dimen/icon_padding_right"
+            android:layout_marginRight="@dimen/icon_padding"
+            android:layout_marginTop="@dimen/icon_padding"
+            android:layout_toRightOf="@+id/ivEventTopicPhoto"
             android:onClick="onSubscribe"
-            style="@style/FollowButton"
             android:text="Follow" />
 
     </RelativeLayout>
@@ -111,7 +111,6 @@
     <FrameLayout
         android:id="@+id/flFeatureContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>
 

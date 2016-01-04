@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, PersonalizationActivity.class);
         i.putExtra("type", "Join");
         startActivity(i);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public void LogInToApp(View view) {

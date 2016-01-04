@@ -13,13 +13,13 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class Utilities {
+    public static final String TIME_FORMAT = "h:mm a";
+    public static final String DATE_FORMAT = "MMMM dd";
     private static final String ABBR_YEAR = "y";
     private static final String ABBR_WEEK = "w";
     private static final String ABBR_DAY = "d";
     private static final String ABBR_HOUR = "h";
     private static final String ABBR_MINUTE = "m";
-    public static final String TIME_FORMAT = "h:mm a";
-    public static final String DATE_FORMAT = "MMMM dd";
 
     public static String getRelativeTimeAgo(String rawJsonDate) {
         String parseFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";

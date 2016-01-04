@@ -29,11 +29,11 @@ public class Notification extends ParseObject {
         put(MESSAGE_KEY, message);
     }
 
-    public void setType(String userId) {
-        put(TYPE_KEY, userId);
-    }
-
     public String getType() {
         return getString(TYPE_KEY);
+    }
+
+    public void setType(String userId) {
+        put(TYPE_KEY, userId);
     }
 }

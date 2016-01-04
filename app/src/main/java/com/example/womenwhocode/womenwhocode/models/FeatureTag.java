@@ -9,12 +9,8 @@ import com.parse.ParseObject;
  */
 @ParseClassName("FeatureTag")
 public class FeatureTag extends ParseObject {
-    private static final String FEATURE_KEY = "feature";
     public static final String TAG_KEY = "tag";
-
-    public void setFeature(Feature feature) {
-        put(FEATURE_KEY, feature);
-    }
+    private static final String FEATURE_KEY = "feature";
 
     public Feature getFeature() {
         Feature feature = null;
@@ -26,8 +22,8 @@ public class FeatureTag extends ParseObject {
         return feature;
     }
 
-    public void setTag(Tag tag) {
-        put(TAG_KEY, tag);
+    public void setFeature(Feature feature) {
+        put(FEATURE_KEY, feature);
     }
 
     public Tag getTag() {
@@ -38,6 +34,10 @@ public class FeatureTag extends ParseObject {
             e.printStackTrace();
         }
         return tag;
+    }
+
+    public void setTag(Tag tag) {
+        put(TAG_KEY, tag);
     }
 }
 

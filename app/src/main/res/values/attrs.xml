@@ -9,15 +9,15 @@
 
     <attr name="pageBackground" format="reference" />
     <attr name="button" format="reference" />
-    <attr name="editBox" format="reference"/>
-    <attr name="textView" format="reference"/>
+    <attr name="editBox" format="reference" />
+    <attr name="textView" format="reference" />
 
     <!-- =============================================================== -->
     <!-- Needs to Switch Based on Theme Selected -->
     <!-- =============================================================== -->
 
-    <attr name="subBackground" format="reference"/>
-    <attr name="mainBackground" format="reference"/>
+    <attr name="subBackground" format="reference" />
+    <attr name="mainBackground" format="reference" />
     <attr name="textSecondaryHeaders" format="reference" />
     <attr name="textPersonalizedListHeaders" format="reference" />
     <attr name="textRegular" format="reference" />

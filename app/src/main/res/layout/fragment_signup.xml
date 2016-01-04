@@ -1,72 +1,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
     style="@style/page_background_bl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:padding="15dp">
+
     <LinearLayout
+        android:id="@+id/llProgressImages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/llProgressImages"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:padding="@dimen/activity_horizontal_margin">
 
         <pl.droidsonroids.gif.GifImageView
-            android:layout_width="@dimen/pf_icon_size"
-            android:layout_height="@dimen/pf_icon_size"
             android:id="@+id/img_1"
-            android:background="@drawable/personalization_done"/>
-
-        <pl.droidsonroids.gif.GifImageView
             android:layout_width="@dimen/pf_icon_size"
             android:layout_height="@dimen/pf_icon_size"
+            android:background="@drawable/personalization_done" />
+
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/img_2"
-            android:background="@drawable/personalization_done"/>
-
-        <pl.droidsonroids.gif.GifImageView
             android:layout_width="@dimen/pf_icon_size"
             android:layout_height="@dimen/pf_icon_size"
+            android:background="@drawable/personalization_done" />
+
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/img_3"
-            android:background="@drawable/personalization"/>
+            android:layout_width="@dimen/pf_icon_size"
+            android:layout_height="@dimen/pf_icon_size"
+            android:background="@drawable/personalization" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView"
         style="@style/TextView.TitleText.Pf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llProgressImages"
-        android:text="@string/LoginMessage"
-        android:id="@+id/textView"
-        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/activity_horizontal_padding"
         android:paddingTop="@dimen/activity_horizontal_padding"
-        android:paddingBottom="@dimen/activity_horizontal_padding" />
-    <Button
-        style="@style/button"
-        android:layout_width="wrap_content"
-        android:minWidth="220dp"
-        android:drawableLeft="@drawable/ic_github"
-        android:layout_height="wrap_content"
-        android:text="Sign up with github"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:id="@+id/btnGitHubSignUp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="200dp" />
+        android:text="@string/LoginMessage"
+        android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/btnGitHubSignUp"
         style="@style/button"
         android:layout_width="wrap_content"
-        android:minWidth="220dp"
-        android:drawableLeft="@drawable/ic_email"
         android:layout_height="wrap_content"
-        android:text="Sign up with Email"
-        android:id="@+id/btnEmailSignUp"
-        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/ic_github"
+        android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:layout_centerHorizontal="true"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:text="Sign up with github" />
+
+    <Button
+        android:id="@+id/btnEmailSignUp"
+        style="@style/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/btnGitHubSignUp"
-        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        />
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_email"
+        android:minWidth="220dp"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:text="Sign up with Email" />
 
 </RelativeLayout>

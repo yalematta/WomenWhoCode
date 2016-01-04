@@ -10,11 +10,11 @@ import com.parse.ParseObject;
 public class Tag extends ParseObject {
     public static final String NAME_KEY = "name";
 
-    public void setName(String name) {
-        put(NAME_KEY, name);
-    }
-
     public String getName() {
         return get(NAME_KEY).toString();
+    }
+
+    public void setName(String name) {
+        put(NAME_KEY, name);
     }
 }

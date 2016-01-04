@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-                <!--   darker variant for the status bar and contextual app bars -->
-                <item name="colorPrimaryDark">@color/black</item>
-                <!--   app branding color for the app bar -->
-                <item name="colorPrimary">@color/blackish</item>
-                <!--   theme UI controls like checkboxes and text fields -->
-                <item name="colorAccent">@color/teal</item>
-                <item name="android:windowContentTransitions">true</item>
-                <item name="android:editTextStyle">@style/EditBoxStyle</item>
-        </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/black</item>
+        <!--   app branding color for the app bar -->
+        <item name="colorPrimary">@color/blackish</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/teal</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:editTextStyle">@style/EditBoxStyle</item>
+    </style>
 
-        <style name="EditBoxStyle" parent="Widget.AppCompat.EditText">
-                <item name="android:textColorHint">@color/mediumGray</item>
-                <item name="android:textSize">@dimen/text_large_text_size</item>
-                <item name="android:textColor">@color/white</item>
-                <item name="android:background">@drawable/ab_transparent_wwc</item>
-        </style>
+    <style name="EditBoxStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColorHint">@color/mediumGray</item>
+        <item name="android:textSize">@dimen/text_large_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/ab_transparent_wwc</item>
+    </style>
 </resources>

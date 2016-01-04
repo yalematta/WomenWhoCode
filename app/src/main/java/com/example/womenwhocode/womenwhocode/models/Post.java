@@ -12,12 +12,12 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Post")
 public class Post extends ParseObject {
-    private static final String DESCRIPTION_KEY = "description";
-    private static final String NETWORK_KEY = "network";
     public static final String EVENT_KEY = "event";
     public static final String FEATURE_KEY = "feature";
     public static final String AWESOME_COUNT_KEY = "awesome_count";
     public static final String USER_KEY = "user";
+    private static final String DESCRIPTION_KEY = "description";
+    private static final String NETWORK_KEY = "network";
 
     public String getDescription() {
         return this.get(DESCRIPTION_KEY).toString();
@@ -121,7 +121,6 @@ public class Post extends ParseObject {
     public void setPostPicFile(ParseFile file) {
         put("photo", file);
     }
-
 
 
 }

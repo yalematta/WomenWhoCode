@@ -16,15 +16,15 @@ public class LocalDataStore {
     public static final String FEATURES_PIN = "features";
     public static final String POSTS_PIN = "posts";
     public static final String PROFILE_PIN = "user_profile";
-    public static String NETWORK_PIN = "networks";
     public static final String LOCAL_NETWORK_PIN = "local_networks";
+    public static final String MESSAGE_PIN = "messages";
+    public static String NETWORK_PIN = "networks";
     public static String EVENT_POSTS_PIN = "event_posts";
     public static String FEATURE_POSTS_PIN = "feature_posts";
-    public static String PERSONALIZATION_DETAIL_PIN="personalization_detail";
-    public static final String MESSAGE_PIN = "messages";
+    public static String PERSONALIZATION_DETAIL_PIN = "personalization_detail";
 
     public static void unpinAndRepin(final List data, final String pinName) {
-       // Unpin old data and pin new data to local datastore
+        // Unpin old data and pin new data to local datastore
         ParseObject.unpinAllInBackground(pinName, new DeleteCallback() {
             @Override
             public void done(ParseException e) {

@@ -31,18 +31,14 @@ import java.util.List;
  * Created by shehba.shahab on 10/16/15.
  */
 public class EventsFragment extends Fragment {
+    private static final int MILE_RANGE = 25;
     private EventsAdapter aEvents;
     private RecyclerView rvEvents;
     private OnEventItemClickListener listener;
     private ProgressBar pb;
     private ParseQuery<Event> query;
     private ParseQuery<Network> networkParseQuery;
-    private static final int MILE_RANGE = 25;
     private ArrayList<Object> items;
-
-    public interface OnEventItemClickListener {
-        void onEventClickListener(Event event, View itemView);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,5 +137,9 @@ public class EventsFragment extends Fragment {
         });
 
         // TODO: Upcoming global events
+    }
+
+    public interface OnEventItemClickListener {
+        void onEventClickListener(Event event, View itemView);
     }
 }

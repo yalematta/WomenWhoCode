@@ -12,11 +12,12 @@
             android:icon="@drawable/ic_email"
             android:title="Contact WWCode" />
 
-        <item android:id="@+id/theme_switch"
+        <item
+            android:id="@+id/theme_switch"
             android:icon="@drawable/ic_invert_colors"
-            app:actionLayout="@layout/action_switch_theme"
             android:title="Switch your theme!"
-            app:actionViewClass="android.support.v7.widget.SwitchCompat"/>
+            app:actionLayout="@layout/action_switch_theme"
+            app:actionViewClass="android.support.v7.widget.SwitchCompat" />
 
         <item
             android:id="@+id/nav_logout_fragment"

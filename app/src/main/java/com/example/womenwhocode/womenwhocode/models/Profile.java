@@ -14,20 +14,16 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Profile")
 public class Profile extends ParseObject {
+    public static final String USER_KEY = "user";
     private static final String FULL_NAME_KEY = "full_name";
     private static final String JOB_TITLE_KEY = "job_title";
-    public static String IMAGE_URL_KEY = "image_url";
     private static final String NETWORK_KEY = "network";
     private static final String LOCATION_KEY = "location";
-    public static final String USER_KEY = "user";
     private static final String ABOUT_YEARS_EXPERIENCE_KEY = "about_years_experience";
     private static final String GITHUB_ACCESS_TOKEN = "github_access_token";
     private static final String GITHUB_ID = "github_id";
     private static final String THEME_KEY = "theme_type";
-
-    public void setFullName(String fullName) {
-        put(FULL_NAME_KEY, fullName);
-    }
+    public static String IMAGE_URL_KEY = "image_url";
 
     public String getFullName() {
         String fn = "";
@@ -39,8 +35,8 @@ public class Profile extends ParseObject {
         return fn;
     }
 
-    public void setJobTitle(String jobTitle) {
-        put(JOB_TITLE_KEY, jobTitle);
+    public void setFullName(String fullName) {
+        put(FULL_NAME_KEY, fullName);
     }
 
     public String getJobTitle() {
@@ -53,6 +49,10 @@ public class Profile extends ParseObject {
         return fn;
     }
 
+    public void setJobTitle(String jobTitle) {
+        put(JOB_TITLE_KEY, jobTitle);
+    }
+
     public ParseFile getPhotoFile() {
         return getParseFile("photo");
     }
@@ -61,28 +61,28 @@ public class Profile extends ParseObject {
         put("photo", file);
     }
 
-    public void setNetwork(String network) {
-        put(NETWORK_KEY, network);
-    }
-
     public Network getNetwork() {
         return (Network) getParseObject(NETWORK_KEY);
     }
 
-    public void setUser(ParseUser user) {
-        put(USER_KEY, user);
+    public void setNetwork(String network) {
+        put(NETWORK_KEY, network);
     }
 
     public ParseUser getUser() {
         return (ParseUser) getParseObject(USER_KEY);
     }
 
-    public void setLocation(ParseGeoPoint geoPoint) {
-        put(LOCATION_KEY, geoPoint);
+    public void setUser(ParseUser user) {
+        put(USER_KEY, user);
     }
 
     public ParseGeoPoint getLocation() {
         return getParseGeoPoint(LOCATION_KEY);
+    }
+
+    public void setLocation(ParseGeoPoint geoPoint) {
+        put(LOCATION_KEY, geoPoint);
     }
 
     // NOTE: this a stretch goal getter and setter
@@ -94,12 +94,16 @@ public class Profile extends ParseObject {
         return this.get(ABOUT_YEARS_EXPERIENCE_KEY).toString();
     }
 
+    public String getGithubAccessToken() {
+        return this.get(GITHUB_ACCESS_TOKEN).toString();
+    }
+
     public void setGithubAccessToken(String token) {
         this.put(GITHUB_ACCESS_TOKEN, token);
     }
 
-    public String getGithubAccessToken() {
-        return this.get(GITHUB_ACCESS_TOKEN).toString();
+    public long getGithubId() {
+        return (long) this.get(GITHUB_ID);
     }
 
     // for user's github id after github oauth call GET https://api.github.com/user
@@ -107,15 +111,11 @@ public class Profile extends ParseObject {
         this.put(GITHUB_ID, githubId);
     }
 
-    public long getGithubId() {
-        return (long) this.get(GITHUB_ID);
+    public int getTheme() {
+        return (int) this.getNumber(THEME_KEY);
     }
 
     public void setTheme(int type) {
         this.put(THEME_KEY, type);
-    }
-
-    public int getTheme() {
-        return (int) this.getNumber(THEME_KEY);
     }
 }

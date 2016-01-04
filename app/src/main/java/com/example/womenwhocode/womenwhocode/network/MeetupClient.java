@@ -28,8 +28,8 @@ class MeetupClient {
     // FIXME: consider overriding toString() on String[] with this
     private String join(String[] groupIds) {
         String joinedString = "";
-        for(int i=0; i<groupIds.length; i++) {
-            if (i == (groupIds.length-1)) {
+        for (int i = 0; i < groupIds.length; i++) {
+            if (i == (groupIds.length - 1)) {
                 joinedString += groupIds[i];
             } else {
                 joinedString += groupIds[i] + ",";
