@@ -3,12 +3,13 @@ package com.example.womenwhocode.womenwhocode.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.parse.ParseException;
@@ -22,6 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class SignUpEmailActivity extends AppCompatActivity {
     private String userAns = "";
+    private RelativeLayout msnackbar;
 
     public final static boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
@@ -68,6 +70,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
     public void signUpUser(View view) {
 
         //ParseUser userDetail = new ParseUser();
+        msnackbar = (RelativeLayout) findViewById(R.id.signUp);
         EditText tvName = (EditText) findViewById(R.id.txtName);
         EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
         EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
@@ -78,11 +81,11 @@ public class SignUpEmailActivity extends AppCompatActivity {
         boolean validUsername = isValidUsername(name);
         boolean validPassword = isValidPassword(password);
         if (!validUsername && !validPassword) {
-            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.not_valid_username_password), Toast.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.not_valid_username_password), Snackbar.LENGTH_LONG).show();
         } else if (!validEmail) {
-            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.not_valid_email), Toast.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.not_valid_email), Snackbar.LENGTH_LONG).show();
         } else if (!validPassword) {
-            Toast.makeText(SignUpEmailActivity.this, getResources().getString(R.string.short_password), Toast.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.short_password), Snackbar.LENGTH_LONG).show();
         } else {
             ParseUser user = new ParseUser();
             user.setUsername(tvName.getText().toString());
