@@ -30,4 +30,5 @@
     <string name="org_name_short">WWCode</string>
     <string name="network_title">%1$s network</string>
     <string name="event_location">at %1$s</string>
+    <string name="no_event_found">No events found near you, sorry.</string>
 </resources>

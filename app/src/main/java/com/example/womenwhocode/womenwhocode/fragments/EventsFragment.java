@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.EventsAdapter;
@@ -39,6 +40,7 @@ public class EventsFragment extends Fragment {
     private ParseQuery<Event> query;
     private ParseQuery<Network> networkParseQuery;
     private ArrayList<Object> items;
+    private TextView noEvents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,8 @@ public class EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         rvEvents = (RecyclerView) view.findViewById(R.id.lvEvents);
+        noEvents = (TextView)view.findViewById(R.id.noEventFoundText);
         // hide the recycler view until data is loaded
-        rvEvents.setVisibility(RecyclerView.INVISIBLE);
 
         // load progress bar
         pb = (ProgressBar) view.findViewById(R.id.pbLoading);
@@ -109,6 +111,8 @@ public class EventsFragment extends Fragment {
             public void done(Profile profile, ParseException e) {
                 if (profile != null) {
                     if (profile.getLocation() == null) {
+                        pb.setVisibility(ProgressBar.GONE);
+                        noEvents.setVisibility(View.VISIBLE);
                         return;
                     }
                     networkParseQuery.whereWithinMiles(Network.LOCATION_KEY, profile.getLocation(), MILE_RANGE);
@@ -128,7 +132,8 @@ public class EventsFragment extends Fragment {
                             } else if (e != null) {
                                 Log.d("PARSE_EVENTS_FAIL", "Error: " + e.getMessage());
                             } else {
-//                                Toast.makeText(getContext(), "who knows events", Toast.LENGTH_LONG).show();
+                                pb.setVisibility(ProgressBar.GONE);
+                                noEvents.setVisibility(View.VISIBLE);
                             }
                         }
                     });
