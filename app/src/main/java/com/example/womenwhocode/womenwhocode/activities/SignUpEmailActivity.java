@@ -23,9 +23,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class SignUpEmailActivity extends AppCompatActivity {
     private String userAns = "";
-    private RelativeLayout msnackbar;
 
-    public final static boolean isValidEmail(CharSequence target) {
+    private static boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
             return false;
         } else {
@@ -33,14 +32,14 @@ public class SignUpEmailActivity extends AppCompatActivity {
         }
     }
 
-    public final static boolean isValidUsername(CharSequence target) {
+    private static boolean isValidUsername(CharSequence target) {
         if (TextUtils.isEmpty(target))
             return false;
         else
             return true;
     }
 
-    public final static boolean isValidPassword(CharSequence target) {
+    private static boolean isValidPassword(CharSequence target) {
         if (TextUtils.isEmpty(target) || target.length() <= 5)
             return false;
         else
@@ -70,7 +69,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
     public void signUpUser(View view) {
 
         //ParseUser userDetail = new ParseUser();
-        msnackbar = (RelativeLayout) findViewById(R.id.signUp);
+        RelativeLayout msnackbar = (RelativeLayout) findViewById(R.id.signUp);
         EditText tvName = (EditText) findViewById(R.id.txtName);
         EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
         EditText tvPassword = (EditText) findViewById(R.id.txtPwd);

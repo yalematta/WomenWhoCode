@@ -95,7 +95,6 @@ public class FeatureChatFragment extends ChatFragment {
                         // other things
                         scrollToBottom();
                         setFirstLoad(false);
-//                        clearSpinners();
                     } else {
                         add(list);
                         scrollToBottom();
@@ -104,7 +103,6 @@ public class FeatureChatFragment extends ChatFragment {
                 } else if (e != null) {
                     Log.d("PARSE_FEATURE_POST_FAIL", "Error: " + e.getMessage());
                 } else {
-//                    clearSpinners();
                 }
             }
         });

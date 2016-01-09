@@ -36,7 +36,6 @@ public class PersonalizationActivity extends AppCompatActivity {
     private final SignUpFragment signUpFragment = new SignUpFragment();
     private final ArrayList<String> Question = new ArrayList<>();
     private final ArrayList<String[]> Ans = new ArrayList<>();
-    int pageCnt = 0;
     private PersonalizationQuestionnaire pq;
     private JSONArray arr1 = null;
     private JSONArray arr2 = null;

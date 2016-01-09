@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llTimelineItems"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,8 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cvPostFeature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,14 +21,12 @@
         card_view:cardCornerRadius="1.5dp"
         card_view:cardElevation="@dimen/card_elevation">
 
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/rlFeaturePosts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rlPostFeature"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -84,8 +80,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rlPost"
                 style="?mainBackground"
                 android:layout_width="match_parent"

@@ -18,7 +18,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
@@ -44,7 +43,6 @@ public class ChatFragment extends Fragment {
     private View view;
     private ListView lvChat;
     private ChatListAdapter aChatList;
-    private ProgressBar pb;
     private ParseUser currentUser;
     private ImageButton btnSend;
     private EditText etMessage;
@@ -53,7 +51,6 @@ public class ChatFragment extends Fragment {
     private Runnable runnable;
     private Date recentCreatedAt;
     private Profile profile;
-    private TextView noChats;
 
     // TODO: use material icon for button, initial is gray and when you start typing make it teal
     // TODO: FeatureChatFragment - feature_id, subscribe_id?
@@ -116,17 +113,6 @@ public class ChatFragment extends Fragment {
 
         // stop handler
         handler.removeCallbacks(runnable);
-    }
-
-    protected void setSpinners() {
-        lvChat.setVisibility(ListView.INVISIBLE);
-        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
-        pb.setVisibility(ProgressBar.VISIBLE);
-    }
-
-    protected void clearSpinners() {
-        lvChat.setVisibility(ListView.VISIBLE);
-        pb.setVisibility(ProgressBar.GONE);
     }
 
     void addAll(List<Message> messageList) {

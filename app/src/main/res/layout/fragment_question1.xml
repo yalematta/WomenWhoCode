@@ -48,7 +48,7 @@
         android:layout_below="@id/tvQuestion"
         android:layout_marginLeft="@dimen/checkbox_padding"
         android:layout_marginRight="@dimen/checkbox_padding"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:id="@+id/llOtherLayout"
