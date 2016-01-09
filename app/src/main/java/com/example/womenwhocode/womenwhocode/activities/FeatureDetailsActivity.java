@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,7 +61,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     private static final String SUBSCRIBE_TEXT = "follow";
     private static final String SUBSCRIBERS_TEXT = " followers";
     private String feature_id;
-    private ProgressBar pb;
     private RelativeLayout rlFeatures;
     private Feature feature;
     private TextView tvFeatureTitle;
@@ -155,10 +153,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     }
 
     private void setUpView() {
-        // set the progress bar
-//        pb = (ProgressBar) findViewById(R.id.pbLoading);
-//        pb.setVisibility(ProgressBar.VISIBLE);
-
         // hide scroll view so the progress bar is the center of attention
         rlFeatures = (RelativeLayout) findViewById(R.id.rlFeatures); // TODO: animate!
 //        rlFeatures.setVisibility(RelativeLayout.INVISIBLE);
@@ -206,10 +200,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                                     hideChat();
                                     btnSubscribe.setText(SUBSCRIBE_TEXT);
                                 }
-
-                                // hide the progress bar, show the main view
-//                                pb.setVisibility(ProgressBar.GONE);
-//                                rlFeatures.setVisibility(RelativeLayout.VISIBLE);
                             }
                         });
                     } else {

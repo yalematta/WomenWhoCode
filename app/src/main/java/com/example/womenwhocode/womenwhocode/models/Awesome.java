@@ -2,7 +2,6 @@ package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -14,12 +13,6 @@ public class Awesome extends ParseObject {
     public static final String USER_KEY = "user";
     public static final String POST_KEY = "post";
     private static final String AWESOMED_KEY = "awesomed";
-
-    private static ParseQuery<Awesome> query;
-
-    public static ParseQuery<Awesome> getQuery() {
-        return ParseQuery.getQuery(Awesome.class);
-    }
 
     public boolean getAwesomed() {
         return getBoolean(AWESOMED_KEY);

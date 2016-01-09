@@ -6,8 +6,7 @@
     android:padding="@dimen/view_margin">
 
     <!-- make one or the other gone depending whether message matches current user -->
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rlCurrentUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
             android:padding="@dimen/icon_padding"
-            android:text="Venus"/>
+            android:text="Venus" />
 
         <TextView
             android:id="@+id/tvCreatedAt"
@@ -37,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tvFullName"
             android:padding="@dimen/icon_padding"
-            android:text="3 pm"/>
+            android:text="3 pm" />
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvBody"
@@ -56,8 +55,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rlOtherUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -78,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
             android:padding="@dimen/icon_padding"
-            android:text="Sailor Moon"/>
+            android:text="Sailor Moon" />
 
         <TextView
             android:id="@+id/tvOtherCreatedAt"
@@ -87,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvOtherFullName"
             android:padding="@dimen/icon_padding"
-            android:text="3 pm"/>
+            android:text="3 pm" />
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvOtherBody"

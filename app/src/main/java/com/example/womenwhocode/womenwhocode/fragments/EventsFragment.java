@@ -54,7 +54,7 @@ public class EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         rvEvents = (RecyclerView) view.findViewById(R.id.lvEvents);
-        noEvents = (TextView)view.findViewById(R.id.noEventFoundText);
+        noEvents = (TextView) view.findViewById(R.id.noEventFoundText);
         // hide the recycler view until data is loaded
 
         // load progress bar

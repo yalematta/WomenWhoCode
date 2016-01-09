@@ -2,7 +2,6 @@ package com.example.womenwhocode.womenwhocode.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -15,13 +14,6 @@ public class Subscribe extends ParseObject {
     public static final String SUBSCRIBED_KEY = "subscribed";
     public static final String USER_KEY = "user";
     private static final String NETWORK_KEY = "network";
-    public static ParseQuery<Subscribe> subscribeParseQuery;
-    // FIXME: temp pointer, should remove when currentUser is in!
-    public static boolean subscribed = false;
-
-    public static ParseQuery<Subscribe> getQuery() {
-        return ParseQuery.getQuery(Subscribe.class);
-    }
 
     public Network getNetwork() {
         return (Network) getParseObject(NETWORK_KEY);

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/noEventFoundText"
@@ -26,8 +26,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:visibility="gone"
+        android:text="@string/no_event_found"
         android:textSize="18sp"
-        android:text="@string/no_event_found"/>
+        android:visibility="gone" />
 
 </LinearLayout>
