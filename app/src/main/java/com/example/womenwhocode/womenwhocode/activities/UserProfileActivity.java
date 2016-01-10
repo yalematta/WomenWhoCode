@@ -322,11 +322,10 @@ public class UserProfileActivity extends AppCompatActivity {
                         .decodeFile(filepath);
 
                 finalImg = Bitmap.createScaledBitmap(bmap, 150, 150, true);
-                ImageView imgView = (ImageView) findViewById(R.id.ivphoto);
 
                 // Set the Image in ImageView after decoding the String
                 // Picasso.with(getContext()).load(photo.proPic).transform(new CircleTransform()).into(viewHolder.ivProPic);
-                imgView.setImageBitmap(finalImg);
+                ivPic.setImageBitmap(finalImg);
             }
 
             if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -339,8 +338,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
                     finalImg = Bitmap.createScaledBitmap(rotateImg, 150, 150, true);
                     // Load the taken image into a preview
-                    ImageView ivPreview = (ImageView) findViewById(R.id.ivphoto);
-                    ivPreview.setImageBitmap(finalImg);
+                    ivPic.setImageBitmap(finalImg);
                 } else { // Result was a failure
 //                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
                 }
