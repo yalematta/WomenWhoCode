@@ -21,14 +21,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
-import com.example.womenwhocode.womenwhocode.fragments.FeatureChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
@@ -74,7 +72,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     private int subscribeCount;
     private RoundedImageView ivFeatureImage;
     private CustomViewPager vpPager;
-    private CustomTabStrip tabStrip;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -82,25 +79,10 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         return true;
     }
 
-    // Hides chat related options from menu
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem viewParticipantsMenuItem = menu.findItem(R.id.action_view_members);
-        MenuItem addParticipantsMenuItem = menu.findItem(R.id.action_add_members);
-        if (vpPager.getCurrentItem() == 0) {
-            viewParticipantsMenuItem.setVisible(false);
-            addParticipantsMenuItem.setVisible(false);
-        } else {
-            viewParticipantsMenuItem.setVisible(true);
-            addParticipantsMenuItem.setVisible(true);
-        }
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_view_members:
-                // Display participants
+            case R.id.action_view_followers:
                 return true;
             case android.R.id.home:
                 supportFinishAfterTransition();
@@ -190,20 +172,17 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                                 if (sub != null) {
                                     subscribe = sub;
                                     if (sub.getSubscribed()) {
-                                        displayChat();
                                         btnSubscribe.setText(SUBSCRIBED_TEXT);
                                     } else {
-                                        hideChat();
                                         btnSubscribe.setText(SUBSCRIBE_TEXT);
                                     }
                                 } else {
-                                    hideChat();
                                     btnSubscribe.setText(SUBSCRIBE_TEXT);
                                 }
                             }
                         });
                     } else {
-                        Log.d("FEATURE_PS_NO_DATA", e != null ? e.toString() : null);
+                        Log.d("FEATURE_PS_NO_DATA", e.toString());
                     }
                 } else {
                     Log.d("FEATURE_PS_ERROR", e.toString());
@@ -241,7 +220,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         if (subscribe != null) {
             if (subscribe.getSubscribed()) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
-                hideChat();
 
                 // decrement counter
                 subscribeCount = feature.getSubscribeCount() - 1;
@@ -257,7 +235,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                 });
             } else {
                 subscribe.setSubscribed(true);
-                displayChat();
 
                 // increment counter
                 subscribeCount = feature.getSubscribeCount() + 1;
@@ -278,7 +255,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
             subscribe.setSubscribed(true);
             subscribe.setUser(currentUser);
             subscribe.setFeature(feature);
-            displayChat();
 
             // increment counter
             subscribeCount = feature.getSubscribeCount() + 1;
@@ -295,19 +271,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         }
     }
 
-    private void hideChat() {
-        vpPager.setPagingEnabled(false);
-        tabStrip.setDisabled(true);
-        ViewGroup view = (ViewGroup) this.findViewById(R.id.llFeatureView);
-        Snackbar.make(view, R.string.event_follow_chat, Snackbar.LENGTH_LONG).show();
-        setTab();
-    }
-
-    private void displayChat() {
-        vpPager.setPagingEnabled(true);
-        tabStrip.setDisabled(false);
-    }
-
     private void setUpViewPager() {
         // Get the viewpager
         vpPager = (CustomViewPager) findViewById(R.id.viewpager);
@@ -316,7 +279,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // Find the sliding tabstrip
-        tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
+        CustomTabStrip tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
         tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
 
 
@@ -382,7 +345,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
             }
         });
 
-
     }
 
     @Override
@@ -396,7 +358,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
 
 
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = {"posts", "chat"};
+        private final String[] tabTitles = {"posts"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -407,8 +369,6 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         public Fragment getItem(int position) {
             if (position == 0) {
                 return FeaturePostsFragment.newInstance(feature_id);
-            } else if (position == 1) {
-                return FeatureChatFragment.newInstance(feature_id);
             } else return null;
         }
 
