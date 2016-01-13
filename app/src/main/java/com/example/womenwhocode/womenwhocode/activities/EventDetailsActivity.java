@@ -3,16 +3,12 @@ package com.example.womenwhocode.womenwhocode.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,8 +30,6 @@ import com.example.womenwhocode.womenwhocode.models.Subscribe;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
 import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
-import com.example.womenwhocode.womenwhocode.widgets.CustomTabStrip;
-import com.example.womenwhocode.womenwhocode.widgets.CustomViewPager;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -57,7 +51,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     private TextView tvSubscribeCount;
     private Button btnSubscribeIcon;
     private Event event;
-    private RelativeLayout rlEvents;
     private String event_id;
     private ParseUser currentUser;
     private Subscribe subscribe;
@@ -65,7 +58,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     private Toolbar toolbar;
     private TextView tvToolbarTitle;
     private ImageView ivEventImage;
-    private CustomViewPager vpPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +79,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         currentUser = ParseUser.getCurrentUser();
 
         setUpView();
-        setUpViewPager();
     }
 
     @Override
@@ -110,8 +101,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 
     private void setUpView() {
         // hide scroll view so the progress bar is the center of attention
-        rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
-//        rlEvents.setVisibility(ScrollView.INVISIBLE);
+        RelativeLayout rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
 
         // get title on tool bar
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
@@ -174,6 +164,8 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                 }
             }
         });
+
+        getSupportFragmentManager().beginTransaction().add(R.id.flEventContainer, EventPostsFragment.newInstance(event_id)).commit();
     }
 
     private void setEventData() {
@@ -298,7 +290,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
             @Override
             public void done(ParseException e) {
                 EventPostsFragment pf = (EventPostsFragment) getSupportFragmentManager().getFragments().get(0); // make sure it will aways be that 0! posts are zero in view pager
-                setTab();
                 if (null != pf) {
                     pf.setReceivedPost(post);
                 }
@@ -311,75 +302,5 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 //        if(null != pf) {
 //            pf.setReceivedPost(post);
 //        }
-    }
-
-    private void setUpViewPager() {
-        // Get the viewpager
-        vpPager = (CustomViewPager) findViewById(R.id.viewpager);
-
-        // Set the viewpager adapter for the pager
-        vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
-
-        // Find the sliding tabstrip
-        CustomTabStrip tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
-        tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
-
-
-        // Attach the tabstrip to the viewpager
-        tabStrip.setViewPager(vpPager);
-
-        // Hides header card when the chat view is selected
-        tabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 1) {
-                    rlEvents.setVisibility(View.GONE);
-                } else {
-                    rlEvents.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-        });
-    }
-
-    private void setTab() {
-        // Switch to page based on index
-        vpPager.setCurrentItem(0);
-    }
-
-    public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = {"posts"};
-
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        // The order and creation fo fragments within the pager
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return EventPostsFragment.newInstance(event_id);
-            } else return null;
-        }
-
-        // Return the tab title
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
-        }
-
-        // How many fragments there are to swipe between
-        @Override
-        public int getCount() {
-            return tabTitles.length;
-        }
     }
 }
