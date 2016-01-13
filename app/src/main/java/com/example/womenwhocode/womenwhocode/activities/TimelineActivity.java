@@ -70,7 +70,7 @@ public class TimelineActivity extends AppCompatActivity implements
     private LocationProvider mLocationProvider;
     private ViewPager vpPager;
     private View parentLayout;
-
+    private ParseQuery<Profile> parseQuery;
     private DrawerLayout mDrawer;
 
 
@@ -81,8 +81,9 @@ public class TimelineActivity extends AppCompatActivity implements
         ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_timeline);
         parentLayout = findViewById(R.id.timeline_activity_view);
-
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        parseQuery = ParseQuery.getQuery(Profile.class);
 
         // set tool bar to replace actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,7 +112,6 @@ public class TimelineActivity extends AppCompatActivity implements
         final TextView tvFullName = (TextView) headerLayout.findViewById(R.id.tvFullName);
         final TextView tvJobTitle = (TextView) headerLayout.findViewById(R.id.tvJobTitle);
 
-        ParseQuery<Profile> parseQuery = ParseQuery.getQuery(Profile.class);
         parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
         parseQuery.getFirstInBackground(new GetCallback<Profile>() {
             @Override
@@ -264,9 +264,8 @@ public class TimelineActivity extends AppCompatActivity implements
     private void updateUserProfile(final LatLng latLng) {
         // FIXME: only update if the location has changed.
         // FIXME: clean up dup profile request!
-        ParseQuery<Profile> query = ParseQuery.getQuery(Profile.class);
-        query.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
-        query.getFirstInBackground(new GetCallback<Profile>() {
+        parseQuery.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
+        parseQuery.getFirstInBackground(new GetCallback<Profile>() {
             @Override
             public void done(Profile profile, ParseException e) {
                 if (e == null && profile != null) {
