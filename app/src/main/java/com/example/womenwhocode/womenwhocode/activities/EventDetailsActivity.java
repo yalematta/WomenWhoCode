@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
-import com.example.womenwhocode.womenwhocode.fragments.EventChatFragment;
 import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Post;
@@ -68,7 +66,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     private TextView tvToolbarTitle;
     private ImageView ivEventImage;
     private CustomViewPager vpPager;
-    private CustomTabStrip tabStrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,16 +150,13 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                                 if (sub != null) {
                                     subscribe = sub;
                                     if (sub.getSubscribed()) {
-                                        displayChat();
                                         btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
                                         ivEventImage.setImageResource(R.drawable.ic_calendar_check);
                                     } else {
-                                        hideChat();
                                         btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
                                         ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                     }
                                 } else {
-                                    hideChat();
                                     btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
                                     ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                 }
@@ -210,7 +204,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         if (subscribe != null) {
             if (subscribe.getSubscribed()) { // maybe just check against icon value
                 subscribe.setSubscribed(false);
-                hideChat(); //
 
                 // decrement counter
                 subscribeCount = event.getSubscribeCount() - 1;
@@ -228,7 +221,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                 });
             } else {
                 subscribe.setSubscribed(true);
-                displayChat();
 
                 // increment counter
                 subscribeCount = event.getSubscribeCount() + 1;
@@ -251,7 +243,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
             subscribe.setSubscribed(true);
             subscribe.setUser(currentUser);
             subscribe.setEvent(event);
-            displayChat();
 
             // increment counter
             subscribeCount = event.getSubscribeCount() + 1;
@@ -322,19 +313,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 //        }
     }
 
-    private void hideChat() {
-        vpPager.setPagingEnabled(false);
-        tabStrip.setDisabled(true);
-        ViewGroup view = (ViewGroup) this.findViewById(R.id.llEventView);
-        Snackbar.make(view, R.string.event_follow_chat, Snackbar.LENGTH_LONG).show();
-        setTab();
-    }
-
-    private void displayChat() {
-        vpPager.setPagingEnabled(true);
-        tabStrip.setDisabled(false);
-    }
-
     private void setUpViewPager() {
         // Get the viewpager
         vpPager = (CustomViewPager) findViewById(R.id.viewpager);
@@ -343,7 +321,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         vpPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         // Find the sliding tabstrip
-        tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
+        CustomTabStrip tabStrip = (CustomTabStrip) findViewById(R.id.tabs);
         tabStrip.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.ttf"), Typeface.NORMAL);
 
 
@@ -378,7 +356,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
-        private final String[] tabTitles = {"posts", "chat"};
+        private final String[] tabTitles = {"posts"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
@@ -389,9 +367,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
         public Fragment getItem(int position) {
             if (position == 0) {
                 return EventPostsFragment.newInstance(event_id);
-            } else if (position == 1) {
-                // TODO: figure out subscription value
-                return EventChatFragment.newInstance(event_id);
             } else return null;
         }
 
