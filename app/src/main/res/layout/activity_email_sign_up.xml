@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/signUp"
     style="@style/page_background_bl"
     android:layout_width="match_parent"
@@ -56,14 +57,24 @@
         android:hint="Password"
         android:inputType="textPassword" />
 
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple_email"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/ripple"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:mrl_rippleColor="#FFFFFF"
+        app:mrl_rippleAlpha="0.5"
+        android:layout_margin="@dimen/activity_horizontal_padding"
+        android:layout_alignParentBottom="true"
+        app:mrl_rippleOverlay="true">
+
     <Button
         android:id="@+id/txtSignUp"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/activity_horizontal_padding"
         android:onClick="signUpUser"
         android:text="Sign Up!" />
+    </com.balysv.materialripple.MaterialRippleLayout>
 </RelativeLayout>

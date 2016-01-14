@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/page_background_bl"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,17 +31,29 @@
         android:textColor="@color/white"
         android:textColorHint="@color/lightGray" />
 
-    <Button
-        android:id="@+id/txtSignUp"
-        style="@style/button"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple_email"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        app:mrl_rippleColor="#FFFFFF"
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleOverlay="true"
         android:layout_alignEnd="@+id/etPwd"
         android:layout_alignLeft="@+id/etPwd"
         android:layout_alignRight="@+id/etPwd"
         android:layout_alignStart="@+id/etPwd"
         android:layout_below="@+id/etPwd"
-        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp">
+
+    <Button
+        android:id="@+id/txtSignUp"
+        style="@style/button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:onClick="Login"
         android:text="Log In" />
+
+    </com.balysv.materialripple.MaterialRippleLayout>
 </RelativeLayout>
