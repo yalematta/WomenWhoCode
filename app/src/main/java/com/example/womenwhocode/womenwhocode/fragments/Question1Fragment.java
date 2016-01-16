@@ -83,15 +83,11 @@ public class Question1Fragment extends Fragment {
                 //cb.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox,0,0,0);
                 //cb.setCompoundDrawablePadding(-50);
 
+                cb.setButtonDrawable(getResources().getDrawable(R.drawable.check_box_selector));
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // known android bug, when you uncheck it goes doesn't convert properly
-                    // http://stackoverflow.com/questions/28047291/api21-setbuttontintlist-on-checkbox
-                    cb.setButtonTintList(getContext().getResources().getColorStateList(R.color.checkbox));
-                }
-
-                cb.setPadding(32, 4, 4, 4);
                 cb.setText(An);
+
+                cb.setPadding(32, 16, 4, 16);
 
                 cb.setTextColor(ContextCompat.getColor(getContext(), R.color.tabOpacity));
                 l.addView(cb);
