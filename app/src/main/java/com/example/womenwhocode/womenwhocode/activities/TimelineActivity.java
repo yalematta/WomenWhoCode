@@ -302,7 +302,7 @@ public class TimelineActivity extends AppCompatActivity implements
     public void onFinishEditDialog(String inputText) {
         if (!TextUtils.isEmpty(inputText)) {
             Snackbar.make(
-                    parentLayout, R.string.review_msg, Snackbar.LENGTH_SHORT)
+                    parentLayout, R.string.msg_review, Snackbar.LENGTH_SHORT)
                     .show();
         }
     }

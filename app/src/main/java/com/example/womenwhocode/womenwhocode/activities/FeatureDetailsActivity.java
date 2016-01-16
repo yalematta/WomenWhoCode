@@ -300,7 +300,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
     public void onSubmitPostListener(String inputText, Bitmap finalimg) {
         addPost(inputText, finalimg);
         CoordinatorLayout v = (CoordinatorLayout) findViewById(R.id.rlPostLists);
-        Snackbar.make(v, R.string.thanks_add_post, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(v, R.string.msg_thanks_adding_post, Snackbar.LENGTH_SHORT).show();
         // FIXME: make it so you go to the last item position when this is final so the user can see their post was submitted
         // FIXME: add post to bottom of the list!
     }

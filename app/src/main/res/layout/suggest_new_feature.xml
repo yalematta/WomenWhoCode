@@ -16,6 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/icon_padding"
-        android:text="Suggest New Topic" />
+        android:text="@string/title_suggest_new_topic" />
 
 </android.support.v7.widget.Toolbar>

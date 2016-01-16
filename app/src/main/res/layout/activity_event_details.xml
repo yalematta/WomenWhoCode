@@ -47,7 +47,7 @@
             android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
             android:paddingTop="@dimen/icon_padding"
-            android:text="Security with Expert"
+            android:text="@string/hint_event_title"
             android:transitionName="eventTopicTitle" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:paddingBottom="@dimen/icon_padding"
             android:paddingLeft="@dimen/icon_padding_right"
             android:paddingRight="@dimen/icon_padding"
-            android:text="260 Subscribed" />
+            android:text="@string/hint_subscriber_count" />
 
         <Button
             android:id="@+id/btnEventUrl"
@@ -74,7 +74,7 @@
             android:layout_marginTop="@dimen/button_margin_top"
             android:layout_toRightOf="@+id/ivEventImage"
             android:onClick="onEventInfo"
-            android:text="event info" />
+            android:text="@string/action_view_event_info" />
 
         <!-- might want to make this linear layout for the animation piece -->
         <Button

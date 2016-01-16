@@ -15,6 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/icon_padding"
-        android:text="New Post" />
+        android:text="@string/title_new_post" />
 
 </android.support.v7.widget.Toolbar>

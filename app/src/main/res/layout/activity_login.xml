@@ -45,7 +45,7 @@
             android:layout_marginTop="@dimen/activity_horizontal_padding"
             android:minWidth="88dp"
             android:onClick="JoinApp"
-            android:text="Join Us" />
+            android:text="@string/action_join_us" />
 
         <Button
             android:id="@+id/btnLogIn"
@@ -58,7 +58,7 @@
             android:layout_marginTop="@dimen/activity_horizontal_padding"
             android:minWidth="88dp"
             android:onClick="LogInToApp"
-            android:text="Log In" />
+            android:text="@string/action_login" />
     </LinearLayout>
 
 

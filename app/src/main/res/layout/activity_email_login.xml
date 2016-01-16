@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:hint="Email"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/lightGray"
@@ -25,13 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/lightGray" />
 
     <Button
-        android:id="@+id/txtSignUp"
+        android:id="@+id/btnLogin"
         style="@style/button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -42,5 +42,5 @@
         android:layout_below="@+id/etPwd"
         android:layout_marginTop="70dp"
         android:onClick="Login"
-        android:text="Log In" />
+        android:text="@string/action_login" />
 </RelativeLayout>
