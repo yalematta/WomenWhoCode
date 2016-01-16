@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:focusable="false"
         android:paddingTop="@dimen/text_large_pf_padding_top"
-        android:text="@string/reviewProfile" />
+        android:text="@string/action_review_profile" />
 
     <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
         android:id="@+id/ivphoto"
@@ -71,7 +71,7 @@
         android:layout_below="@id/icPhotoIcons"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:text="@string/tvName" />
+        android:text="@string/prompt_name" />
 
     <EditText
         android:id="@+id/txtName"
@@ -92,7 +92,7 @@
         android:layout_below="@id/txtName"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:text="@string/tvEmail" />
+        android:text="@string/prompt_email" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -105,7 +105,7 @@
         android:layout_marginBottom="@dimen/activity_horizontal_padding"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:text="email address" />
+        android:text="@string/prompt_email" />
 
     <TextView
         android:id="@+id/tvJob"
@@ -115,7 +115,7 @@
         android:layout_below="@+id/txtEmail"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:text="@string/tvJob" />
+        android:text="@string/prompt_job_title" />
 
     <EditText
         android:id="@+id/etJob"
@@ -136,7 +136,7 @@
         android:layout_below="@+id/etJob"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:text="@string/tvNetworks" />
+        android:text="@string/prompt_networks" />
 
     <fr.ganfra.materialspinner.MaterialSpinner
         android:id="@+id/spnNetwork"
@@ -167,6 +167,6 @@
         android:onClick="OnFinalize"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="Finalize Profile" />
+        android:text="@string/action_finalize" />
 
 </RelativeLayout>

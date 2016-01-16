@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:text="@string/no_event_found"
+        android:text="@string/msg_no_events"
         android:textSize="18sp"
         android:visibility="gone" />
 

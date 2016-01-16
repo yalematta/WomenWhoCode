@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:paddingBottom="@dimen/activity_horizontal_padding"
         android:paddingTop="@dimen/activity_horizontal_padding"
-        android:text="@string/LoginMessage"
+        android:text="@string/msg_thanks"
         android:textColor="@color/white" />
 
     <Button
@@ -54,7 +54,7 @@
         android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="Sign up with github" />
+        android:text="@string/action_signup_github" />
 
     <Button
         android:id="@+id/btnEmailSignUp"
@@ -69,6 +69,6 @@
         android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="Sign up with Email" />
+        android:text="@string/action_signup_email" />
 
 </RelativeLayout>

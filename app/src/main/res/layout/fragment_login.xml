@@ -16,7 +16,7 @@
         android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/loginWithGitHub" />
+        android:text="@string/action_login_github" />
 
     <Button
         android:id="@+id/btnEmailLogin"
@@ -30,6 +30,6 @@
         android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/loginWithEmail" />
+        android:text="@string/action_login_email" />
 
 </RelativeLayout>

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvJobTitle"
         android:paddingTop="@dimen/icon_padding"
-        android:text="Full Name"
+        android:text="@string/prompt_name"
         android:textStyle="bold" />
 
     <TextView
@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:paddingTop="@dimen/icon_padding"
-        android:text="Job Title" />
+        android:text="@string/prompt_job_title" />
 
 </RelativeLayout>
