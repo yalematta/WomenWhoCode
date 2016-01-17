@@ -15,5 +15,5 @@
     <item android:duration="35" android:drawable="@drawable/on_12" />
     <item android:duration="35" android:drawable="@drawable/on_13" />
     <item android:duration="35" android:drawable="@drawable/on_14" />
-	<item android:duration="35" android:drawable="@drawable/on_15" />
+	<item android:duration="35" android:drawable="@drawable/btn_check_on" />
 </animation-list>

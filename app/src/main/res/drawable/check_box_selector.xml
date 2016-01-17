@@ -33,9 +33,9 @@
         android:drawable="@drawable/btn_check_off_disabled" />
 
     <item android:state_checked="true" android:state_focused="true"
-        android:drawable="@drawable/btn_check_on_disabled_focused" />
+        android:drawable="@drawable/btn_check_on_disabled" />
     <item android:state_checked="false" android:state_focused="true"
-        android:drawable="@drawable/btn_check_off_disabled_focused" />
+        android:drawable="@drawable/btn_check_off_disabled" />
 
     <item android:state_checked="false" android:drawable="@drawable/btn_check_off_disabled" />
     <item android:state_checked="true" android:drawable="@drawable/btn_check_on_disabled" />
