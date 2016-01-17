@@ -18,7 +18,7 @@
         android:layout_marginLeft="@dimen/question_horizontal_padding"
         android:layout_marginRight="@dimen/question_horizontal_padding"
         android:layout_marginTop="72dp"
-        android:hint="Add Topic"
+        android:hint="@string/prompt_add_topic"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:textColor="@color/darkBlack" />
@@ -32,7 +32,7 @@
         android:layout_marginLeft="@dimen/question_horizontal_padding"
         android:layout_marginRight="@dimen/question_horizontal_padding"
         android:layout_marginTop="16dp"
-        android:hint="Recommend Topic Moderator"
+        android:hint="@string/prompt_recommend_moderator"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:textColor="@color/darkBlack" />

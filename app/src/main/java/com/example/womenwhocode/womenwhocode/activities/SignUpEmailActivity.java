@@ -80,11 +80,11 @@ public class SignUpEmailActivity extends AppCompatActivity {
         boolean validUsername = isValidUsername(name);
         boolean validPassword = isValidPassword(password);
         if (!validUsername && !validPassword) {
-            Snackbar.make(msnackbar, getResources().getString(R.string.not_valid_username_password), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.error_invalid_username_password), Snackbar.LENGTH_LONG).show();
         } else if (!validEmail) {
-            Snackbar.make(msnackbar, getResources().getString(R.string.not_valid_email), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.error_invalid_email), Snackbar.LENGTH_LONG).show();
         } else if (!validPassword) {
-            Snackbar.make(msnackbar, getResources().getString(R.string.short_password), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(msnackbar, getResources().getString(R.string.error_invalid_password), Snackbar.LENGTH_LONG).show();
         } else {
             ParseUser user = new ParseUser();
             user.setUsername(tvName.getText().toString());

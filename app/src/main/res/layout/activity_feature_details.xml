@@ -83,7 +83,7 @@
             android:layout_marginTop="@dimen/icon_padding"
             android:layout_toRightOf="@+id/ivEventTopicPhoto"
             android:onClick="onSubscribe"
-            android:text="Follow" />
+            android:text="@string/action_subscribe" />
 
     </RelativeLayout>
 

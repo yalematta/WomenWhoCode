@@ -39,7 +39,7 @@
             android:id="@+id/ripple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:mrl_rippleColor="#FFFFFF"
+            app:mrl_rippleColor="@color/white"
             app:mrl_rippleAlpha="0.5"
             app:mrl_rippleOverlay="true"
             android:layout_marginBottom="@dimen/text_large_margin_top"
@@ -52,10 +52,12 @@
             style="@style/landingPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="88dp"
+            android:minWidth="@dimen/login_button_minWidth"
             android:onClick="JoinApp"
-            android:text="Join Us" />
+            android:text="@string/action_join_us" />
         </com.balysv.materialripple.MaterialRippleLayout>
+
+
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/ripple_login"
@@ -73,10 +75,12 @@
             style="@style/landingPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="88dp"
+            android:minWidth="@dimen/login_button_minWidth"
             android:onClick="LogInToApp"
-            android:text="Log In" />
+            android:text="@string/action_login" />
         </com.balysv.materialripple.MaterialRippleLayout>
+
+
     </LinearLayout>
 
 

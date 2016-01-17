@@ -7,6 +7,6 @@
         android:id="@+id/action_add_post"
         android:icon="@drawable/ic_add_post"
         android:onClick="onLaunchAddPostDialog"
-        android:title="Add Post"
+        android:title="@string/hint_new_post"
         app:showAsAction="always" />
 </menu>

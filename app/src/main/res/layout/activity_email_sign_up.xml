@@ -18,7 +18,7 @@
         android:paddingLeft="@dimen/question_horizontal_padding"
         android:paddingRight="@dimen/question_horizontal_padding"
         android:paddingTop="78dp"
-        android:text="Sign up" />
+        android:text="@string/title_signup" />
 
     <EditText
         android:id="@+id/txtName"
@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
-        android:hint="Username"
+        android:hint="@string/prompt_username"
         android:inputType="text" />
 
     <EditText
@@ -41,7 +41,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
         android:layout_marginTop="36dp"
-        android:hint="Email Address"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -54,7 +54,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_padding"
         android:layout_marginRight="@dimen/activity_horizontal_padding"
         android:layout_marginTop="35dp"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         android:inputType="textPassword" />
 
     <com.balysv.materialripple.MaterialRippleLayout
@@ -63,18 +63,19 @@
         android:layout_below="@+id/ripple"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        app:mrl_rippleColor="#FFFFFF"
+        app:mrl_rippleColor="@color/white"
         app:mrl_rippleAlpha="0.5"
         android:layout_margin="@dimen/activity_horizontal_padding"
         android:layout_alignParentBottom="true"
         app:mrl_rippleOverlay="true">
 
     <Button
-        android:id="@+id/txtSignUp"
+        android:id="@+id/btnLogin"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="signUpUser"
-        android:text="Sign Up!" />
+        android:text="@string/action_signup" />
     </com.balysv.materialripple.MaterialRippleLayout>
+
 </RelativeLayout>

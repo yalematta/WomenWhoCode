@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:hint="Email"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/lightGray"
@@ -26,34 +26,34 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/lightGray" />
 
-    <com.balysv.materialripple.MaterialRippleLayout
-        android:id="@+id/ripple_email"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        app:mrl_rippleColor="#FFFFFF"
-        app:mrl_rippleAlpha="0.5"
-        app:mrl_rippleOverlay="true"
-        android:layout_alignEnd="@+id/etPwd"
-        android:layout_alignLeft="@+id/etPwd"
-        android:layout_alignRight="@+id/etPwd"
-        android:layout_alignStart="@+id/etPwd"
-        android:layout_below="@+id/etPwd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp">
 
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/ripple_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mrl_rippleColor="@color/white"
+            app:mrl_rippleAlpha="0.5"
+            app:mrl_rippleOverlay="true"
+            android:layout_alignEnd="@+id/etPwd"
+            android:layout_alignLeft="@+id/etPwd"
+            android:layout_alignRight="@+id/etPwd"
+            android:layout_alignStart="@+id/etPwd"
+            android:layout_below="@+id/etPwd"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/ripple_margin_top">
     <Button
         android:id="@+id/txtSignUp"
         style="@style/button"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="Login"
-        android:text="Log In" />
-
+        android:text="@string/action_login" />
     </com.balysv.materialripple.MaterialRippleLayout>
+
 </RelativeLayout>

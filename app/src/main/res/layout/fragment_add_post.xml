@@ -32,7 +32,7 @@
         android:layout_marginRight="@dimen/question_horizontal_padding"
         android:layout_marginTop="32dp"
         android:gravity="top"
-        android:hint="@string/add_post"
+        android:hint="@string/hint_new_post"
         android:minHeight="72dp"
         android:textColor="@color/darkBlack" />
 

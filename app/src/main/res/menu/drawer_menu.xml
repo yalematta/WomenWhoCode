@@ -5,17 +5,17 @@
         <item
             android:id="@+id/nav_profile_fragment"
             android:icon="@drawable/ic_account"
-            android:title="Profile" />
+            android:title="@string/action_view_profile" />
 
         <item
             android:id="@+id/nav_contact_us_fragment"
             android:icon="@drawable/ic_email"
-            android:title="Contact WWCode" />
+            android:title="@string/action_contact_us" />
 
         <item
             android:id="@+id/theme_switch"
             android:icon="@drawable/ic_invert_colors"
-            android:title="Switch your theme!"
+            android:title="@string/action_switch_theme"
             app:actionLayout="@layout/action_switch_theme"
             app:actionViewClass="android.support.v7.widget.SwitchCompat" />
 
@@ -23,7 +23,7 @@
             android:id="@+id/nav_logout_fragment"
             android:icon="@drawable/ic_logout"
             android:onClick="logout"
-            android:title="Logout" />
+            android:title="@string/action_logout" />
     </group>
 
 </menu>

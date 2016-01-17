@@ -40,7 +40,7 @@
             android:layout_toLeftOf="@+id/btnSend"
             android:ems="10"
             android:gravity="top"
-            android:hint="@string/message_hint"
+            android:hint="@string/hint_chat_body"
             android:imeOptions="actionSend"
             android:inputType="textMultiLine|textFilter|textVisiblePassword|textNoSuggestions"
             android:maxLines="5"
@@ -61,7 +61,7 @@
             android:paddingRight="10dp"
             android:paddingTop="@dimen/icon_padding"
             android:src="@drawable/ic_send"
-            android:text="@string/send"
+            android:text="@string/action_send"
             android:textSize="13sp" />
 
     </RelativeLayout>

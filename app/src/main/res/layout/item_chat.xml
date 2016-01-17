@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ivCurrentUserProfile"
             android:padding="@dimen/icon_padding"
-            android:text="Venus" />
+            android:text="@string/hint_name" />
 
         <TextView
             android:id="@+id/tvCreatedAt"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tvFullName"
             android:padding="@dimen/icon_padding"
-            android:text="3 pm" />
+            android:text="@string/hint_time" />
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvBody"
@@ -46,7 +46,7 @@
             android:layout_below="@+id/tvFullName"
             android:layout_toLeftOf="@id/ivCurrentUserProfile"
             android:padding="@dimen/bubble_padding"
-            android:text="message body"
+            android:text="@string/hint_msg_body"
             app:angle="@dimen/button_radius"
             app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="right"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
             android:padding="@dimen/icon_padding"
-            android:text="Sailor Moon" />
+            android:text="@string/hint_name" />
 
         <TextView
             android:id="@+id/tvOtherCreatedAt"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvOtherFullName"
             android:padding="@dimen/icon_padding"
-            android:text="3 pm" />
+            android:text="@string/hint_time" />
 
         <com.github.library.bubbleview.BubbleTextVew
             android:id="@+id/tvOtherBody"
@@ -95,7 +95,7 @@
             android:layout_below="@id/tvOtherFullName"
             android:layout_toRightOf="@+id/ivOtherProfileLeft"
             android:padding="@dimen/bubble_padding"
-            android:text="message body"
+            android:text="@string/hint_msg_body"
             app:angle="@dimen/button_radius"
             app:arrowHeight="@dimen/arrow_height"
             app:arrowLocation="left"

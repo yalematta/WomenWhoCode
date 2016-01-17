@@ -43,7 +43,7 @@
                     android:layout_toLeftOf="@+id/tvRelativeTime"
                     android:layout_toRightOf="@+id/ivUserPhoto"
                     android:padding="@dimen/icon_padding"
-                    android:text="WWCode" />
+                    android:text="@string/org_name_short" />
 
                 <TextView
                     android:id="@+id/tvRelativeTime"
@@ -54,7 +54,7 @@
                     android:layout_centerVertical="true"
                     android:paddingLeft="@dimen/icon_padding"
                     android:singleLine="true"
-                    android:text="1s" />
+                    android:text="@string/hint_relative_time" />
 
             </RelativeLayout>
 
@@ -99,7 +99,7 @@
                     android:autoLink="all"
                     android:linksClickable="true"
                     android:paddingRight="@dimen/activity_horizontal_padding"
-                    android:text="Description" />
+                    android:text="@string/hint_description" />
 
                 <TextView
                     android:id="@+id/view"
@@ -117,7 +117,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/view"
                     android:background="@null"
-                    android:contentDescription="Share button"
                     android:paddingBottom="@dimen/icon_padding"
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/activity_horizontal_padding"
@@ -132,7 +131,6 @@
                     android:layout_alignStart="@+id/tvPostDescription"
                     android:layout_below="@+id/view"
                     android:background="@null"
-                    android:contentDescription="Awesome Icon"
                     android:scaleType="fitXY"
                     android:src="@drawable/awesome" />
 
@@ -148,7 +146,7 @@
                     android:paddingLeft="@dimen/icon_padding"
                     android:paddingRight="@dimen/icon_padding"
                     android:paddingTop="20dp"
-                    android:text="50" />
+                    android:text="@string/hint_awesome_count" />
             </RelativeLayout>
         </RelativeLayout>
 
