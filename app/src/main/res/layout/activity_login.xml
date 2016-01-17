@@ -63,7 +63,7 @@
             android:id="@+id/ripple_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:mrl_rippleColor="#FFFFFF"
+            app:mrl_rippleColor="@color/white"
             app:mrl_rippleAlpha="0.5"
             app:mrl_rippleOverlay="true"
             android:layout_marginBottom="@dimen/text_large_margin_top"
