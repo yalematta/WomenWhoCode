@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/page_background_bl"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -43,32 +44,54 @@
         android:text="@string/msg_thanks"
         android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/btnGitHubSignUp"
-        style="@style/button"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleOverlay="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="200dp"
-        android:drawableLeft="@drawable/ic_github"
-        android:minWidth="220dp"
         android:paddingLeft="@dimen/activity_horizontal_padding"
         android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/action_signup_github" />
+        android:layout_marginTop="@dimen/ripple_margin_top_signup">
 
-    <Button
-        android:id="@+id/btnEmailSignUp"
-        style="@style/button"
+
+        <Button
+            android:id="@+id/btnGitHubSignUp"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_github"
+            android:minWidth="@dimen/button_minWidth"
+            android:paddingLeft="@dimen/activity_horizontal_padding"
+            android:paddingRight="@dimen/activity_horizontal_padding"
+            android:text="@string/action_signup_github"  />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGitHubSignUp"
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleOverlay="true"
+        android:layout_below="@+id/ripple"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_email"
-        android:minWidth="220dp"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/action_signup_email" />
+        android:layout_marginBottom="@dimen/ripple_margin"
+        android:layout_marginTop="@dimen/ripple_margin">
+
+        <Button
+            android:id="@+id/btnEmailSignUp"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_email"
+            android:minWidth="@dimen/button_minWidth"
+            android:paddingLeft="@dimen/activity_horizontal_padding"
+            android:paddingRight="@dimen/activity_horizontal_padding"
+            android:text="@string/action_signup_email" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
 
 </RelativeLayout>
