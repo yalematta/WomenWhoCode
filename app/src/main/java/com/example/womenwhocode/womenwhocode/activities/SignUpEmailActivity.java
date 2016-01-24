@@ -1,5 +1,10 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

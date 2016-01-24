@@ -1,5 +1,7 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import com.example.womenwhocode.womenwhocode.R;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -11,8 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-
-import com.example.womenwhocode.womenwhocode.R;
 
 /**
  * Created by zassmin on 11/4/15.

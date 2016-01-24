@@ -1,5 +1,28 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import com.astuetz.PagerSlidingTabStrip;
+import com.example.womenwhocode.womenwhocode.ParseApplication;
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
+import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
+import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
+import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
+import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,28 +51,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.astuetz.PagerSlidingTabStrip;
-import com.example.womenwhocode.womenwhocode.ParseApplication;
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
-import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
-import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
-import com.example.womenwhocode.womenwhocode.fragments.TimelineFragment;
-import com.example.womenwhocode.womenwhocode.models.Event;
-import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.models.Profile;
-import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.example.womenwhocode.womenwhocode.utils.LocationProvider;
-import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
-import com.google.android.gms.maps.model.LatLng;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

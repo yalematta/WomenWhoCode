@@ -1,5 +1,14 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.adapters.ChatListAdapter;
+import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,15 +28,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.adapters.ChatListAdapter;
-import com.example.womenwhocode.womenwhocode.models.Message;
-import com.example.womenwhocode.womenwhocode.models.Profile;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Date;

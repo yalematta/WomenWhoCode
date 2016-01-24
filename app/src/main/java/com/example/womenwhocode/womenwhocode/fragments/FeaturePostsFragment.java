@@ -1,8 +1,5 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
-import android.os.Bundle;
-import android.util.Log;
-
 import com.example.womenwhocode.womenwhocode.models.Feature;
 import com.example.womenwhocode.womenwhocode.models.Post;
 import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
@@ -11,6 +8,9 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import android.os.Bundle;
+import android.util.Log;
 
 import java.util.List;
 

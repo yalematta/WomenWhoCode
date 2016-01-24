@@ -1,5 +1,23 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
+import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
+import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,24 +38,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
-import com.example.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
-import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.models.Post;
-import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.example.womenwhocode.womenwhocode.utils.RoundedImageView;
-import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 

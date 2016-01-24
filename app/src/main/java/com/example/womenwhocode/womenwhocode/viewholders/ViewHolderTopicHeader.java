@@ -1,10 +1,10 @@
 package com.example.womenwhocode.womenwhocode.viewholders;
 
+import com.example.womenwhocode.womenwhocode.R;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
