@@ -60,22 +60,22 @@
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/ripple_email"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/ripple"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:mrl_rippleColor="@color/white"
-        app:mrl_rippleAlpha="0.5"
-        android:layout_margin="@dimen/activity_horizontal_padding"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ripple"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_padding"
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleColor="@color/white"
         app:mrl_rippleOverlay="true">
 
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="signUpUser"
-        android:text="@string/action_signup" />
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="signUpUser"
+            android:text="@string/action_signup" />
     </com.balysv.materialripple.MaterialRippleLayout>
 
 </RelativeLayout>

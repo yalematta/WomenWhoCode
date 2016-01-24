@@ -11,43 +11,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:mrl_rippleColor="@color/white"
         app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleColor="@color/white"
         app:mrl_rippleOverlay="true">
 
-    <Button
-        android:id="@+id/button"
-        style="@style/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_github"
-        android:minWidth="@dimen/button_minWidth"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/action_login_github" />
-</com.balysv.materialripple.MaterialRippleLayout>
+        <Button
+            android:id="@+id/button"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_github"
+            android:minWidth="@dimen/button_minWidth"
+            android:paddingLeft="@dimen/activity_horizontal_padding"
+            android:paddingRight="@dimen/activity_horizontal_padding"
+            android:text="@string/action_login_github" />
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/ripple_email"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ripple"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        app:mrl_rippleColor="@color/white"
-        app:mrl_rippleAlpha="0.5"
         android:layout_marginTop="@dimen/ripple_margin"
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleColor="@color/white"
         app:mrl_rippleOverlay="true">
-    <Button
-        android:id="@+id/btnEmailLogin"
-        style="@style/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_email"
-        android:minWidth="@dimen/button_minWidth"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/action_login_email" />
+
+        <Button
+            android:id="@+id/btnEmailLogin"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_email"
+            android:minWidth="@dimen/button_minWidth"
+            android:paddingLeft="@dimen/activity_horizontal_padding"
+            android:paddingRight="@dimen/activity_horizontal_padding"
+            android:text="@string/action_login_email" />
     </com.balysv.materialripple.MaterialRippleLayout>
 
 </RelativeLayout>
