@@ -1,5 +1,17 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
+import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.Recommendation;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,18 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.adapters.FeaturesAdapter;
-import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.models.Recommendation;
-import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.HashSet;

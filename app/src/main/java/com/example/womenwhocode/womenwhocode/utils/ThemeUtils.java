@@ -1,10 +1,10 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
-import android.app.Activity;
-import android.content.Intent;
-
 import com.example.womenwhocode.womenwhocode.ParseApplication;
 import com.example.womenwhocode.womenwhocode.R;
+
+import android.app.Activity;
+import android.content.Intent;
 
 /**
  * Created by zassmin on 11/13/15.

@@ -1,7 +1,5 @@
 package com.example.womenwhocode.womenwhocode;
 
-import android.app.Application;
-
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
 import com.example.womenwhocode.womenwhocode.models.Feature;
@@ -18,6 +16,8 @@ import com.example.womenwhocode.womenwhocode.models.Tag;
 import com.example.womenwhocode.womenwhocode.models.UserNotification;
 import com.parse.Parse;
 import com.parse.ParseObject;
+
+import android.app.Application;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 

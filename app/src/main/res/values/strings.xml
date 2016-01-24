@@ -21,7 +21,8 @@
     <string name="action_view_profile">Profile</string>
     <string name="error_invalid_email">Please fill in a valid email id</string>
     <string name="error_invalid_password">The password is too short.</string>
-    <string name="error_invalid_username_password">Please fill in a valid username and password</string>
+    <string name="error_invalid_username_password">Please fill in a valid username and password
+    </string>
     <string name="event_location">at %1$s</string>
     <string name="hint_awesome_count">50</string>
     <string name="hint_chat_body">Write a message</string>
@@ -40,7 +41,8 @@
     <string name="hint_title">Title</string>
     <string name="label_awesome_x">AWESOME x %1$d</string>
     <string name="msg_no_events">No events found near you, sorry.</string>
-    <string name="msg_notification_detail">This timeline shows posts that you are following.</string>
+    <string name="msg_notification_detail">This timeline shows posts that you are following.
+    </string>
     <string name="msg_thanks_adding_post">Thanks for adding a post!</string>
     <string name="msg_thanks">Thanks!</string>
     <string name="network_title">%1$s network</string>

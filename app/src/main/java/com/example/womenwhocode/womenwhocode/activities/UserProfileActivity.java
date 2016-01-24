@@ -1,5 +1,24 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Feature;
+import com.example.womenwhocode.womenwhocode.models.FeatureTag;
+import com.example.womenwhocode.womenwhocode.models.Message;
+import com.example.womenwhocode.womenwhocode.models.Notification;
+import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
+import com.example.womenwhocode.womenwhocode.models.Profile;
+import com.example.womenwhocode.womenwhocode.models.Recommendation;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.models.Tag;
+import com.example.womenwhocode.womenwhocode.models.UserNotification;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,25 +45,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.Feature;
-import com.example.womenwhocode.womenwhocode.models.FeatureTag;
-import com.example.womenwhocode.womenwhocode.models.Message;
-import com.example.womenwhocode.womenwhocode.models.Notification;
-import com.example.womenwhocode.womenwhocode.models.PersonalizationDetails;
-import com.example.womenwhocode.womenwhocode.models.Profile;
-import com.example.womenwhocode.womenwhocode.models.Recommendation;
-import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.models.Tag;
-import com.example.womenwhocode.womenwhocode.models.UserNotification;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

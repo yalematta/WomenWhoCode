@@ -1,16 +1,16 @@
 package com.example.womenwhocode.womenwhocode.adapters;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.utils.Utilities;
+import com.example.womenwhocode.womenwhocode.viewholders.ViewHolderTopicHeader;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.models.Event;
-import com.example.womenwhocode.womenwhocode.utils.Utilities;
-import com.example.womenwhocode.womenwhocode.viewholders.ViewHolderTopicHeader;
 
 import java.util.List;
 

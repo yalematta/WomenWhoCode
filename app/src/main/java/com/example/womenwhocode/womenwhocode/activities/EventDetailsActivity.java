@@ -1,5 +1,21 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
+import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
+import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
+import com.example.womenwhocode.womenwhocode.models.Event;
+import com.example.womenwhocode.womenwhocode.models.Post;
+import com.example.womenwhocode.womenwhocode.models.Subscribe;
+import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,24 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.example.womenwhocode.womenwhocode.R;
-import com.example.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
-import com.example.womenwhocode.womenwhocode.fragments.EventPostsFragment;
-import com.example.womenwhocode.womenwhocode.models.Event;
-import com.example.womenwhocode.womenwhocode.models.Post;
-import com.example.womenwhocode.womenwhocode.models.Subscribe;
-import com.example.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.example.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.example.womenwhocode.womenwhocode.utils.ThemeUtils;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 
@@ -100,9 +99,6 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
     }
 
     private void setUpView() {
-        // hide scroll view so the progress bar is the center of attention
-        RelativeLayout rlEvents = (RelativeLayout) findViewById(R.id.rlEvents);
-
         // get title on tool bar
         tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 
