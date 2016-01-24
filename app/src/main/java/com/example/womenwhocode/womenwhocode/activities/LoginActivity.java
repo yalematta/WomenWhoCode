@@ -38,15 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void JoinApp(View view) {
         // Puja, you can use this to get the questionnaire data.
         Intent i = new Intent(this, PersonalizationActivity.class);
