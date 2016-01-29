@@ -82,7 +82,7 @@ public class Question1Fragment extends Fragment {
                 //cb.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox,0,0,0);
                 //cb.setCompoundDrawablePadding(-50);
 
-                cb.setButtonDrawable(getResources().getDrawable(R.drawable.check_box_selector));
+                cb.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.check_box_selector));
 
                 cb.setText(An);
 
