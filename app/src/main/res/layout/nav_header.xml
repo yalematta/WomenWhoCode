@@ -7,7 +7,7 @@
                 android:padding="16dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+    <com.womenwhocode.womenwhocode.utils.RoundedImageView
             android:id="@+id/ivPhoto"
             android:layout_width="@dimen/large_image_view_height_width"
             android:layout_height="@dimen/large_image_view_height_width"

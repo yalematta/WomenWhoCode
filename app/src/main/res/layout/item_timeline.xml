@@ -35,7 +35,7 @@
                             android:background="@color/teal"
                             android:padding="@dimen/activity_horizontal_padding">
 
-                <com.example.womenwhocode.womenwhocode.utils.RoundedImageView
+                <com.womenwhocode.womenwhocode.utils.RoundedImageView
                         android:id="@+id/ivEventTopicPhoto"
                         android:layout_width="@dimen/regular_image_view_height_width"
                         android:layout_height="@dimen/regular_image_view_height_width"
