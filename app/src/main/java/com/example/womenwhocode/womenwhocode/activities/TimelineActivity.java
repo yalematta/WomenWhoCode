@@ -3,7 +3,7 @@ package com.example.womenwhocode.womenwhocode.activities;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.example.womenwhocode.womenwhocode.ParseApplication;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
@@ -376,7 +376,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
     private void switchThemeForUser(int theme) {
         ThemeUtils.changeToTheme(this, theme);
-        ParseApplication.currentPosition = theme;
+        WomenWhoCodeApplication.currentPosition = theme;
         profile.setTheme(theme);
         profile.saveInBackground();
     }

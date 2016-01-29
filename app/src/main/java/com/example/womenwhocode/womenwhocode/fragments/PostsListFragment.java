@@ -1,7 +1,7 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import com.bumptech.glide.Glide;
-import com.example.womenwhocode.womenwhocode.ParseApplication;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
@@ -154,7 +154,7 @@ public class PostsListFragment extends Fragment {
 
     private void animateOnAwesome(final ImageButton awesomeIcon) {
         Handler handler = new Handler();
-        switch (ParseApplication.currentPosition) {
+        switch (WomenWhoCodeApplication.currentPosition) {
             case 0:
                 Glide.with(getContext()).load(R.raw.awesomeddd_light).asGif().into(awesomeIcon);
                 break;

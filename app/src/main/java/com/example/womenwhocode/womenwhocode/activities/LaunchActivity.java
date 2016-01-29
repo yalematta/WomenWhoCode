@@ -1,6 +1,6 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import com.example.womenwhocode.womenwhocode.ParseApplication;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Profile;
@@ -33,7 +33,7 @@ public class LaunchActivity extends AppCompatActivity {
             }
             // temporary backwards migration for users without profiles
             if (profile == null) {
-                ParseApplication.currentPosition = 0; // default theme
+                WomenWhoCodeApplication.currentPosition = 0; // default theme
                 ParseQuery<Profile> profileParseQuery = ParseQuery.getQuery(Profile.class);
                 profileParseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
                 profileParseQuery.getFirstInBackground(new GetCallback<Profile>() {
@@ -51,9 +51,9 @@ public class LaunchActivity extends AppCompatActivity {
                 });
             } else {
                 if (profile.getTheme() >= 0) {
-                    ParseApplication.currentPosition = profile.getTheme();
+                    WomenWhoCodeApplication.currentPosition = profile.getTheme();
                 } else {
-                    ParseApplication.currentPosition = 0;
+                    WomenWhoCodeApplication.currentPosition = 0;
                 }
             }
             Intent timelineIntent = new Intent(this, TimelineActivity.class);
