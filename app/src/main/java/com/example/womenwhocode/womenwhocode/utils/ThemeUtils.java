@@ -1,6 +1,6 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
-import com.example.womenwhocode.womenwhocode.ParseApplication;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
 
 import android.app.Activity;
@@ -23,8 +23,8 @@ public class ThemeUtils {
     }
 
     public static void onActivityCreateSetTheme(Activity activity) {
-        if (ParseApplication.currentPosition != sTheme) {
-            sTheme = ParseApplication.currentPosition;
+        if (WomenWhoCodeApplication.currentPosition != sTheme) {
+            sTheme = WomenWhoCodeApplication.currentPosition;
         }
 
         switch (sTheme) {

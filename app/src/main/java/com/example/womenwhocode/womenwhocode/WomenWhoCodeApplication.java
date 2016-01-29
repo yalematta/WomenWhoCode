@@ -24,7 +24,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 /**
  * Created by zassmin on 10/15/15.
  */
-public class ParseApplication extends Application {
+public class WomenWhoCodeApplication extends Application {
     private static final String PARSE_APPLICATION_ID = "twI2kWhB1ImLgnc5rDpA2F8b7TfRVImbZqsywWO1";
     private static final String PARSE_CLIENT_KEY = "QpMOPn0fte0sdkY8GYKcpsSFhEY2rn3eoJxH73wO";
     public static int currentPosition;
