@@ -1,7 +1,7 @@
 package com.example.womenwhocode.womenwhocode.utils;
 
-import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 
 import android.app.Activity;
 import android.content.Intent;

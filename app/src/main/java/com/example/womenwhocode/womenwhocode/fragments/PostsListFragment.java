@@ -1,8 +1,8 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import com.bumptech.glide.Glide;
-import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.adapters.PostsAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Post;
