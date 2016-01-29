@@ -1,8 +1,8 @@
 package com.example.womenwhocode.womenwhocode.fragments;
 
 import com.bumptech.glide.Glide;
-import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.adapters.TimelineAdapter;
 import com.example.womenwhocode.womenwhocode.models.Awesome;
 import com.example.womenwhocode.womenwhocode.models.Event;
@@ -19,6 +19,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -173,8 +174,9 @@ public class TimelineFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = (Activity) context;
         if (activity instanceof OnItemClickListener) {
             listener = (OnItemClickListener) activity;
         } else {
