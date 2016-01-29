@@ -1,7 +1,7 @@
 package com.example.womenwhocode.womenwhocode.activities;
 
-import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.models.Message;
 import com.example.womenwhocode.womenwhocode.models.Profile;
 import com.parse.GetCallback;

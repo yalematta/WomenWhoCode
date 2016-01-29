@@ -25,25 +25,15 @@ public class SignUpEmailActivity extends AppCompatActivity {
     private String userAns = "";
 
     private static boolean isValidEmail(CharSequence target) {
-        if (TextUtils.isEmpty(target)) {
-            return false;
-        } else {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-        }
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
     private static boolean isValidUsername(CharSequence target) {
-        if (TextUtils.isEmpty(target))
-            return false;
-        else
-            return true;
+        return !TextUtils.isEmpty(target);
     }
 
     private static boolean isValidPassword(CharSequence target) {
-        if (TextUtils.isEmpty(target) || target.length() <= 5)
-            return false;
-        else
-            return true;
+        return !(TextUtils.isEmpty(target) || target.length() <= 5);
     }
 
     @Override

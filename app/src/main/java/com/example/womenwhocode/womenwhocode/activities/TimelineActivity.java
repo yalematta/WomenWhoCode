@@ -3,8 +3,8 @@ package com.example.womenwhocode.womenwhocode.activities;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.R;
+import com.example.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.example.womenwhocode.womenwhocode.fragments.EventsFragment;
 import com.example.womenwhocode.womenwhocode.fragments.FeaturesFragment;
 import com.example.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
