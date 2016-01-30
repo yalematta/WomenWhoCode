@@ -69,6 +69,7 @@ public class FeaturePostsFragment extends PostsListFragment {
     }
 
     public void setReceivedPost(Post post) {
+        showPosts();
         add(post);
         notifiedDataChanged();
         scrollToPosition();

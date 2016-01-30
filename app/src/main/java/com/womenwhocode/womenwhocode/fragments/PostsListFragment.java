@@ -1,5 +1,16 @@
 package com.womenwhocode.womenwhocode.fragments;
 
+import com.bumptech.glide.Glide;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
+import com.womenwhocode.womenwhocode.adapters.PostsAdapter;
+import com.womenwhocode.womenwhocode.models.Awesome;
+import com.womenwhocode.womenwhocode.models.Post;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,17 +28,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
-import com.womenwhocode.womenwhocode.adapters.PostsAdapter;
-import com.womenwhocode.womenwhocode.models.Awesome;
-import com.womenwhocode.womenwhocode.models.Post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,9 +136,25 @@ public class PostsListFragment extends Fragment {
     }
 
     void noPostsView(String color) {
+        // Set background color of layout
         CoordinatorLayout rlPostLists = (CoordinatorLayout) v.findViewById(R.id.rlPostLists);
         int intColor = Color.parseColor(String.valueOf(color));
         rlPostLists.setBackgroundColor(intColor);
+
+        // Show empty list view
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lvPosts);
+        TextView emptyView = (TextView) v.findViewById(R.id.empty_view);
+        recyclerView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
+    }
+
+    void showPosts()
+    {
+        // Hide empty list view
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lvPosts);
+        TextView emptyView = (TextView) v.findViewById(R.id.empty_view);
+        recyclerView.setVisibility(View.VISIBLE);
+        emptyView.setVisibility(View.GONE);
     }
 
     void populatePosts() {
