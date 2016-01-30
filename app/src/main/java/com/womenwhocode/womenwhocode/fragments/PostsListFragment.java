@@ -45,6 +45,7 @@ public class PostsListFragment extends Fragment {
     private ProgressBar pb;
     private ParseQuery<Awesome> awesomeParseQuery;
     private ParseUser currentUser;
+    private TextView emptyView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class PostsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_posts_list, container, false);
         rvPosts = (RecyclerView) v.findViewById(R.id.lvPosts);
+        emptyView = (TextView) v.findViewById(R.id.empty_view);
 
         // setup the view
         setUpView();
@@ -119,11 +121,11 @@ public class PostsListFragment extends Fragment {
         posts.addAll(postList);
     }
 
-    void add(Post postList) {
+    private void add(Post postList) {
         posts.add(0, postList);
     }
 
-    void scrollToPosition() {
+    private void scrollToPosition() {
         rvPosts.scrollToPosition(0);
     }
 
@@ -142,17 +144,13 @@ public class PostsListFragment extends Fragment {
         rlPostLists.setBackgroundColor(intColor);
 
         // Show empty list view
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lvPosts);
-        TextView emptyView = (TextView) v.findViewById(R.id.empty_view);
-        recyclerView.setVisibility(View.GONE);
+        rvPosts.setVisibility(View.GONE);
         emptyView.setVisibility(View.VISIBLE);
     }
 
-    void showPosts() {
+    private void showPosts() {
         // Hide empty list view
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lvPosts);
-        TextView emptyView = (TextView) v.findViewById(R.id.empty_view);
-        recyclerView.setVisibility(View.VISIBLE);
+        rvPosts.setVisibility(View.VISIBLE);
         emptyView.setVisibility(View.GONE);
     }
 
@@ -162,8 +160,6 @@ public class PostsListFragment extends Fragment {
 
     private void setUpView() {
         setSpinners();
-
-        // populate data
         populatePosts();
     }
 

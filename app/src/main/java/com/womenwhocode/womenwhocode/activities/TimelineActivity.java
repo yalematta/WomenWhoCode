@@ -1,5 +1,28 @@
 package com.womenwhocode.womenwhocode.activities;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import com.astuetz.PagerSlidingTabStrip;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
+import com.womenwhocode.womenwhocode.fragments.EventsFragment;
+import com.womenwhocode.womenwhocode.fragments.FeaturesFragment;
+import com.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
+import com.womenwhocode.womenwhocode.fragments.TimelineFragment;
+import com.womenwhocode.womenwhocode.models.Event;
+import com.womenwhocode.womenwhocode.models.Feature;
+import com.womenwhocode.womenwhocode.models.Profile;
+import com.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.womenwhocode.womenwhocode.utils.LocationProvider;
+import com.womenwhocode.womenwhocode.utils.ThemeUtils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,28 +51,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.astuetz.PagerSlidingTabStrip;
-import com.google.android.gms.maps.model.LatLng;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.squareup.picasso.Picasso;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
-import com.womenwhocode.womenwhocode.fragments.EventsFragment;
-import com.womenwhocode.womenwhocode.fragments.FeaturesFragment;
-import com.womenwhocode.womenwhocode.fragments.RecommendFeatureDialog.RecommendFeatureDialogListener;
-import com.womenwhocode.womenwhocode.fragments.TimelineFragment;
-import com.womenwhocode.womenwhocode.models.Event;
-import com.womenwhocode.womenwhocode.models.Feature;
-import com.womenwhocode.womenwhocode.models.Profile;
-import com.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.womenwhocode.womenwhocode.utils.LocationProvider;
-import com.womenwhocode.womenwhocode.utils.ThemeUtils;
 
 import java.util.ArrayList;
 
