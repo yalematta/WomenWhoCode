@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -379,6 +380,12 @@ public class TimelineActivity extends AppCompatActivity implements
         WomenWhoCodeApplication.currentPosition = theme;
         profile.setTheme(theme);
         profile.saveInBackground();
+    }
+
+    public void launchMailClient(MenuItem item) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto", "contact@womenwhocode.com", null));
+        startActivity(Intent.createChooser(emailIntent, null));
     }
 
     // Return the order of the fragments in the view pager
