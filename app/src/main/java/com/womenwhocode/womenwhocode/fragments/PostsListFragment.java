@@ -148,8 +148,7 @@ public class PostsListFragment extends Fragment {
         emptyView.setVisibility(View.VISIBLE);
     }
 
-    void showPosts()
-    {
+    void showPosts() {
         // Hide empty list view
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lvPosts);
         TextView emptyView = (TextView) v.findViewById(R.id.empty_view);
@@ -166,6 +165,13 @@ public class PostsListFragment extends Fragment {
 
         // populate data
         populatePosts();
+    }
+
+    public void setReceivedPost(Post post) {
+        showPosts();
+        add(post);
+        notifiedDataChanged();
+        scrollToPosition();
     }
 
     private void animateOnAwesome(final ImageButton awesomeIcon) {
