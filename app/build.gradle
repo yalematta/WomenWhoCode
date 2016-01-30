@@ -9,7 +9,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.womenwhocode.womenwhocode"
+        applicationId "com.womenwhocode.womenwhocode"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
