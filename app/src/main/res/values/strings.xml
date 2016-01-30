@@ -66,4 +66,5 @@
     <string name="title_new_post">New Post</string>
     <string name="title_signup">Sign Up</string>
     <string name="title_suggest_new_topic">Suggest New Topic</string>
+    <string name="no_data_available">\"Be the first to post!\"</string>
 </resources>
