@@ -74,7 +74,7 @@ public class TimelineActivity extends AppCompatActivity implements
     private View parentLayout;
     private ParseQuery<Profile> parseQuery;
     private DrawerLayout mDrawer;
-
+    private ParseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +91,11 @@ public class TimelineActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false); // hide the action bar title to only so toolbar title
 
         //for drawer view
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser = ParseUser.getCurrentUser();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -266,7 +267,7 @@ public class TimelineActivity extends AppCompatActivity implements
     private void updateUserProfile(final LatLng latLng) {
         // FIXME: only update if the location has changed.
         // FIXME: clean up dup profile request!
-        parseQuery.whereEqualTo(Profile.USER_KEY, ParseUser.getCurrentUser());
+        parseQuery.whereEqualTo(Profile.USER_KEY, currentUser);
         parseQuery.getFirstInBackground(new GetCallback<Profile>() {
             @Override
             public void done(Profile profile, ParseException e) {
