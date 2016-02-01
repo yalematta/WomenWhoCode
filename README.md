@@ -62,6 +62,8 @@ When a repository is cloned, it has a default remote called `origin` that points
 1. Go into [the Github repo](https://github.com/WomenWhoCode/WomenWhoCode.git/) and create a pull request explaining your changes
 1. You will need to add a message on the pull request notifying your changes to your reviewer
 
+*Sign Up for the [Slack Group](https://docs.google.com/a/womenwhocode.com/forms/d/14fvqd92DimIADyyhyu9QFI7U6onWtDSvafwY0GTJPRs/viewform) to discuss issues with fellow developers and contrbutors.*
+
 ## Current App
 
 [![current app](http://img.youtube.com/vi/Tt4ATUSORzk/0.jpg)](http://www.youtube.com/watch?v=Tt4ATUSORzk)
