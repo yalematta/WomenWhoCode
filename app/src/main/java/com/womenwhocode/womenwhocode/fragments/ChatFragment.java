@@ -8,6 +8,7 @@ import com.womenwhocode.womenwhocode.R;
 import com.womenwhocode.womenwhocode.adapters.ChatListAdapter;
 import com.womenwhocode.womenwhocode.models.Message;
 import com.womenwhocode.womenwhocode.models.Profile;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -95,6 +96,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chat, container, false);
         lvChat = (ListView) view.findViewById(R.id.lvChat);
+        KeyBoardSupport.helperHideKeyboard(view.findViewById(R.id.rlChatMessagesFragment), getActivity());
         //RelativeLayout rlChatMessagesFragment = (RelativeLayout) view.findViewById(R.id.rlChatMessagesFragment);
         return view;
     }

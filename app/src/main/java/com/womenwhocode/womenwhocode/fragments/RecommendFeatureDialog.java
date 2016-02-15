@@ -1,6 +1,7 @@
 package com.womenwhocode.womenwhocode.fragments;
 
 import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ public class RecommendFeatureDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_dialog_recommend, container);
         toolbar = (Toolbar) view.findViewById(R.id.tbSuggestNewTopic);
         toolbar.inflateMenu(R.menu.menu_add_post_fragment);
+        KeyBoardSupport.helperHideKeyboard(view.findViewById(R.id.edit_name), getActivity());
 
 
         return view;

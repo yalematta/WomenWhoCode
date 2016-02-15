@@ -10,6 +10,7 @@ import com.womenwhocode.womenwhocode.R;
 import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.womenwhocode.womenwhocode.models.Message;
 import com.womenwhocode.womenwhocode.models.Profile;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class LoginEmailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_login);
+        KeyBoardSupport.helperHideKeyboard(findViewById(R.id.email_login), this);
     }
 
     @Override
