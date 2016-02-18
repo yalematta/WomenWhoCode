@@ -2,6 +2,7 @@ package com.womenwhocode.womenwhocode.fragments;
 
 import com.squareup.picasso.Picasso;
 import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -81,6 +82,7 @@ public class Question1Fragment extends Fragment {
                 CheckBox cb = new CheckBox(getContext());
                 //cb.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_checkbox,0,0,0);
                 //cb.setCompoundDrawablePadding(-50);
+                KeyBoardSupport.helperHideKeyboard(cb, getActivity());
 
                 cb.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.check_box_selector));
 

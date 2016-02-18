@@ -4,6 +4,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_sign_up);
         Bundle extras = getIntent().getExtras();
+        KeyBoardSupport.helperHideKeyboard(findViewById(R.id.signUp), this);
 
         if (extras != null) {
             userAns = extras.getString("userAns");

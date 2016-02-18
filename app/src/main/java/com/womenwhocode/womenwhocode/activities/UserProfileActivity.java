@@ -18,6 +18,7 @@ import com.womenwhocode.womenwhocode.models.Recommendation;
 import com.womenwhocode.womenwhocode.models.Subscribe;
 import com.womenwhocode.womenwhocode.models.Tag;
 import com.womenwhocode.womenwhocode.models.UserNotification;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import android.content.Context;
 import android.content.Intent;
@@ -80,6 +81,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
+        KeyBoardSupport.helperHideKeyboard(findViewById(R.id.userProfile), this);
 
         Bundle extras = getIntent().getExtras();
         final ArrayList<String> networks = new ArrayList<>();

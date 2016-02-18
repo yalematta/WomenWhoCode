@@ -5,6 +5,7 @@ import com.womenwhocode.womenwhocode.fragments.LogInFragment;
 import com.womenwhocode.womenwhocode.fragments.Question1Fragment;
 import com.womenwhocode.womenwhocode.fragments.SignUpFragment;
 import com.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class PersonalizationActivity extends AppCompatActivity {
         pq.build();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalization);
-
+        KeyBoardSupport.helperHideKeyboard(findViewById(R.id.flPersonalization), this);
 
         Bundle extras = getIntent().getExtras();
         String type = "";
