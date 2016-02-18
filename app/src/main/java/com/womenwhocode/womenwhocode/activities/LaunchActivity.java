@@ -24,6 +24,7 @@ public class LaunchActivity extends AppCompatActivity {
         if (currentUser == null) {
             Intent signUpIntent = new Intent(this, LoginActivity.class);
             startActivity(signUpIntent);
+            finish();
         } else {
             Profile profile = null;
             try {
@@ -58,6 +59,7 @@ public class LaunchActivity extends AppCompatActivity {
             }
             Intent timelineIntent = new Intent(this, TimelineActivity.class);
             startActivity(timelineIntent);
+            finish();
         }
     }
 }
