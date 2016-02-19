@@ -69,3 +69,11 @@ When a repository is cloned, it has a default remote called `origin` that points
 [![current app](http://img.youtube.com/vi/Tt4ATUSORzk/0.jpg)](http://www.youtube.com/watch?v=Tt4ATUSORzk)
 
 https://www.youtube.com/watch?v=Tt4ATUSORzk
+
+## Open Source License
+
+[The Non-Profit Open Software License version 3.0 (NPOSL-3.0)](https://opensource.org/licenses/NPOSL-3.0)
+
+contact@womenwhocode.com for any questions
+
+*WWCode reserve the right to change the open source license at anytime*
