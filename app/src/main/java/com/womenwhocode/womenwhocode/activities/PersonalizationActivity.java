@@ -1,15 +1,5 @@
 package com.womenwhocode.womenwhocode.activities;
 
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.fragments.LogInFragment;
-import com.womenwhocode.womenwhocode.fragments.Question1Fragment;
-import com.womenwhocode.womenwhocode.fragments.SignUpFragment;
-import com.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
-import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +9,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.fragments.LogInFragment;
+import com.womenwhocode.womenwhocode.fragments.Question1Fragment;
+import com.womenwhocode.womenwhocode.fragments.SignUpFragment;
+import com.womenwhocode.womenwhocode.models.PersonalizationQuestionnaire;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

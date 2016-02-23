@@ -1,5 +1,12 @@
 package com.womenwhocode.womenwhocode.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.LogInCallback;
@@ -11,13 +18,6 @@ import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
 import com.womenwhocode.womenwhocode.models.Message;
 import com.womenwhocode.womenwhocode.models.Profile;
 import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.EditText;
 
 import java.util.List;
 

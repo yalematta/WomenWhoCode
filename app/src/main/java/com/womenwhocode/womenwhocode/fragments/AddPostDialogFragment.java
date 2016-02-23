@@ -1,7 +1,5 @@
 package com.womenwhocode.womenwhocode.fragments;
 
-import com.womenwhocode.womenwhocode.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -29,6 +27,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.womenwhocode.womenwhocode.R;
 
 import java.io.File;
 import java.io.IOException;

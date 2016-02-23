@@ -1,8 +1,5 @@
 package com.womenwhocode.womenwhocode.fragments;
 
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +11,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 /**
  * Created by zassmin on 11/4/15.

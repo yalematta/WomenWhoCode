@@ -1,16 +1,5 @@
 package com.womenwhocode.womenwhocode.fragments;
 
-import com.bumptech.glide.Glide;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
-import com.womenwhocode.womenwhocode.adapters.PostsAdapter;
-import com.womenwhocode.womenwhocode.models.Awesome;
-import com.womenwhocode.womenwhocode.models.Post;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +17,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.WomenWhoCodeApplication;
+import com.womenwhocode.womenwhocode.adapters.PostsAdapter;
+import com.womenwhocode.womenwhocode.models.Awesome;
+import com.womenwhocode.womenwhocode.models.Post;
 
 import java.util.ArrayList;
 import java.util.List;
