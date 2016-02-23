@@ -1,11 +1,5 @@
 package com.womenwhocode.womenwhocode.activities;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -112,6 +112,11 @@ public class SignUpEmailActivity extends AppCompatActivity {
         }
     }
 
+    public void goHome(View view) {
+        Intent intent = new Intent(SignUpEmailActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }
 
 

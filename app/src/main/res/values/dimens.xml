@@ -50,4 +50,5 @@
     <dimen name="topic_header_horizontal_padding">24dp</dimen>
     <dimen name="view_margin">20dp</dimen>
     <dimen name="white_background_padding">20dp</dimen>
+    <dimen name="system_icon_size">24dp</dimen>
 </resources>
