@@ -1,23 +1,5 @@
 package com.womenwhocode.womenwhocode.activities;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.squareup.picasso.Picasso;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
-import com.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
-import com.womenwhocode.womenwhocode.models.Feature;
-import com.womenwhocode.womenwhocode.models.Post;
-import com.womenwhocode.womenwhocode.models.Subscribe;
-import com.womenwhocode.womenwhocode.utils.LocalDataStore;
-import com.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
-import com.womenwhocode.womenwhocode.utils.RoundedImageView;
-import com.womenwhocode.womenwhocode.utils.ThemeUtils;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -38,6 +20,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.fragments.AddPostDialogFragment;
+import com.womenwhocode.womenwhocode.fragments.FeaturePostsFragment;
+import com.womenwhocode.womenwhocode.models.Feature;
+import com.womenwhocode.womenwhocode.models.Post;
+import com.womenwhocode.womenwhocode.models.Subscribe;
+import com.womenwhocode.womenwhocode.utils.LocalDataStore;
+import com.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
+import com.womenwhocode.womenwhocode.utils.RoundedImageView;
+import com.womenwhocode.womenwhocode.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
 

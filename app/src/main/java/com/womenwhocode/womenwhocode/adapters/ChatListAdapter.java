@@ -1,15 +1,5 @@
 package com.womenwhocode.womenwhocode.adapters;
 
-import com.github.library.bubbleview.BubbleTextVew;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.squareup.picasso.Picasso;
-import com.womenwhocode.womenwhocode.R;
-import com.womenwhocode.womenwhocode.models.Message;
-import com.womenwhocode.womenwhocode.models.Profile;
-import com.womenwhocode.womenwhocode.utils.CircleTransform;
-import com.womenwhocode.womenwhocode.utils.Utilities;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,6 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.github.library.bubbleview.BubbleTextVew;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
+import com.womenwhocode.womenwhocode.R;
+import com.womenwhocode.womenwhocode.models.Message;
+import com.womenwhocode.womenwhocode.models.Profile;
+import com.womenwhocode.womenwhocode.utils.CircleTransform;
+import com.womenwhocode.womenwhocode.utils.Utilities;
 
 import java.util.ArrayList;
 
