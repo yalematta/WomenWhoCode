@@ -156,18 +156,25 @@
         app:ms_baseColor="@color/darkGray"
         app:ms_multiline="false"
         app:ms_thickness="0.8dp" />
-
-    <Button
-        android:id="@+id/btnFinalize"
-        style="@style/button"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple_finalize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
-        android:onClick="OnFinalize"
-        android:paddingLeft="@dimen/activity_horizontal_padding"
-        android:paddingRight="@dimen/activity_horizontal_padding"
-        android:text="@string/action_finalize" />
+        app:mrl_rippleAlpha="0.5"
+        app:mrl_rippleColor="@color/white"
+        app:mrl_rippleOverlay="true">
+        <Button
+            android:id="@+id/btnFinalize"
+            style="@style/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="OnFinalize"
+            android:paddingLeft="@dimen/activity_horizontal_padding"
+            android:paddingRight="@dimen/activity_horizontal_padding"
+            android:text="@string/action_finalize" />
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </RelativeLayout>
