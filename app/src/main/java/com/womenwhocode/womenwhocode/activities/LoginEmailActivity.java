@@ -3,9 +3,11 @@ package com.womenwhocode.womenwhocode.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -28,6 +30,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class LoginEmailActivity extends AppCompatActivity {
 
+    private RelativeLayout msnackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     public void Login(View view) {
         EditText etEmail = (EditText) findViewById(R.id.etEmail);
+        msnackbar = (RelativeLayout) findViewById(R.id.email_login);
         String email = etEmail.getText().toString();
         EditText etPassword = (EditText) findViewById(R.id.etPwd);
         final String pwd = etPassword.getText().toString();
@@ -55,8 +59,11 @@ public class LoginEmailActivity extends AppCompatActivity {
                     if (objects.size() != 0) {
                         ValidateUser(objects.get(0).getString("username"), pwd);
                         // Toast.makeText(getBaseContext(), objects.get(0).getString("username"), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(msnackbar, getResources().getString(R.string.error_invalid_username_password), Snackbar.LENGTH_LONG).show();
                     }
                 } else {
+                    Snackbar.make(msnackbar, getResources().getString(R.string.error_login_failed), Snackbar.LENGTH_LONG).show();
 //                    Toast.makeText(getBaseContext(), "Query unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -108,6 +115,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                     startActivity(i);
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 } else {
+                    Snackbar.make(msnackbar, getResources().getString(R.string.error_invalid_username_password), Snackbar.LENGTH_LONG).show();
 //                    Toast.makeText(getBaseContext(), "User Login failed", Toast.LENGTH_SHORT).show();
                 }
             }

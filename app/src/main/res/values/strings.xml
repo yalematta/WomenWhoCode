@@ -23,6 +23,8 @@
     <string name="error_invalid_password">The password is too short.</string>
     <string name="error_invalid_username_password">Please fill in a valid username and password
     </string>
+    <string name="error_login_failed">Login failed, please try again
+    </string>
     <string name="event_location">at %1$s</string>
     <string name="hint_awesome_count">50</string>
     <string name="hint_chat_body">Write a message</string>
