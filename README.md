@@ -64,6 +64,20 @@ When a repository is cloned, it has a default remote called `origin` that points
 
 *Sign Up for the [Slack Group](https://docs.google.com/a/womenwhocode.com/forms/d/14fvqd92DimIADyyhyu9QFI7U6onWtDSvafwY0GTJPRs/viewform) to discuss issues with fellow developers and contrbutors.*
 
+## Open Source Libraries Used 
+- [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
+- [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
+- [Calligraphy](https://github.com/chrisjenx/Calligraphy) - Custom fonts in Android an OK way.
+- [Material Tab Strip](https://github.com/jpardogo/PagerSlidingTabStrip) -  An interactive indicator to navigate between the different pages of a ViewPager
+- [KenBurnsView](https://github.com/flavioarfaria/KenBurnsView) - Android library that provides an extension to ImageView that creates an immersive experience by animating its drawable using the Ken Burns Effect.
+- [Android GIF Drawable](https://github.com/koral--/android-gif-drawable) - Views and Drawable for displaying animated GIFs on Android
+- [Butterknife](https://github.com/JakeWharton/butterknife) - Field and method binding for Android views which uses annotation processing to generate boilerplate code for you.
+- [Glide](https://github.com/bumptech/glide) -  An image loading and caching library for Android focused on smooth scrolling 
+- [Bubble View](https://github.com/lguipeng/BubbleView) - Bubble View to implement chat conversation's UI.
+- [Material Spinner](https://github.com/ganfra/MaterialSpinner) -  Spinner with Material Design - Down to API 9 
+- [Material Ripple](https://github.com/balysv/material-ripple) -  Android L Ripple effect wrapper for Views 
+- [Recycler View Animators](https://github.com/wasabeef/recyclerview-animators) -  An Android Animation library which easily add itemanimator to RecyclerView items. 
+
 ## Current App
 
 [![current app](http://img.youtube.com/vi/Tt4ATUSORzk/0.jpg)](http://www.youtube.com/watch?v=Tt4ATUSORzk)
