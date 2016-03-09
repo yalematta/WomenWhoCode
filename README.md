@@ -61,6 +61,7 @@ When a repository is cloned, it has a default remote called `origin` that points
 1. Push to your repo `git push origin branch-name`
 1. Go into [the Github repo](https://github.com/WomenWhoCode/WomenWhoCode.git/) and create a pull request explaining your changes
 1. Please add a message on the pull request notifying your changes to @WomenWhoCode/android-reviewers
+2. An @WomenWhoCode/android-reviewers will merge your PR when it's ready for merging :+1:
 
 ## Project Reviewers
 * [Shehba](https://github.com/shehbashahab)
