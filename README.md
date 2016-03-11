@@ -60,9 +60,18 @@ When a repository is cloned, it has a default remote called `origin` that points
 1. We have small Pull Requests, try to keep one commit per feature. If you forgot to add changes, you can edit the previous commit `git commit --amend`
 1. Push to your repo `git push origin branch-name`
 1. Go into [the Github repo](https://github.com/WomenWhoCode/WomenWhoCode.git/) and create a pull request explaining your changes
-1. You will need to add a message on the pull request notifying your changes to your reviewer
+1. Please add a message on the pull request notifying your changes to @WomenWhoCode/android-reviewers
+2. An @WomenWhoCode/android-reviewers will merge your PR when it's ready for merging :+1:
 
-*Sign Up for the [Slack Group](https://docs.google.com/a/womenwhocode.com/forms/d/14fvqd92DimIADyyhyu9QFI7U6onWtDSvafwY0GTJPRs/viewform) to discuss issues with fellow developers and contrbutors.*
+## Project Reviewers
+* [Shehba](https://github.com/shehbashahab)
+* [Puja](https://github.com/RoyPuja)
+* [Zassmin](https://github.com/zassmin)
+
+You can metion all of us using @WomenWhoCode/android-reviewers
+
+## Join in on conversations related to this project! 
+* Sign Up for the [Slack Group](https://docs.google.com/a/womenwhocode.com/forms/d/14fvqd92DimIADyyhyu9QFI7U6onWtDSvafwY0GTJPRs/viewform) to discuss issues with fellow developers and contrbutors.*
 
 ## Open Source Libraries Used 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
