@@ -112,9 +112,6 @@ public class UserProfileActivity extends AppCompatActivity {
                         networks.add(networkList.get(i).getString("title"));
                         Collections.sort(networks);
                     }
-
-                    //  Toast.makeText(getApplicationContext(),networkList.get(0).getString("title"),Toast.LENGTH_LONG).show();
-
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -343,7 +340,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     // Load the taken image into a preview
                     ivPic.setImageBitmap(finalImg);
                 } else { // Result was a failure
-//                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                    // TODO: Provide feedback to user when photo capture fails
                 }
             }
 
@@ -357,8 +354,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 userProfile.setPhotoFile(imgFile);
             }
         } catch (Exception e) {
-//            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
-//                    .show();
+            // TODO: Provide feedback to user when photo save fails
         }
     }
 
