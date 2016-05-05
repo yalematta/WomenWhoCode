@@ -69,4 +69,7 @@
     <string name="title_new_post">New Post</string>
     <string name="title_signup">Sign Up</string>
     <string name="title_suggest_new_topic">Suggest New Topic</string>
+    <string name="network_not_available">Please Check Your Network Connection and Try Again!</string>
+    <string name="user_creation_failed">Something went wrong. Try Again? Thanks!</string>
+    <string name="user_creation_failed_message">User information is invalid, please Try Again</string>
 </resources>
