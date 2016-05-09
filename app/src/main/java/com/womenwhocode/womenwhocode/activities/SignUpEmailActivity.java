@@ -2,6 +2,8 @@ package com.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.womenwhocode.womenwhocode.R;
 import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
+import com.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -61,7 +64,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
     public void signUpUser(View view) {
 
         //ParseUser userDetail = new ParseUser();
-        RelativeLayout msnackbar = (RelativeLayout) findViewById(R.id.signUp);
+        final RelativeLayout msnackbar = (RelativeLayout) findViewById(R.id.signUp);
         EditText tvName = (EditText) findViewById(R.id.txtName);
         EditText tvEmail = (EditText) findViewById(R.id.txtEmail);
         EditText tvPassword = (EditText) findViewById(R.id.txtPwd);
@@ -84,28 +87,33 @@ public class SignUpEmailActivity extends AppCompatActivity {
             user.setEmail(tvEmail.getText().toString());
 
 
-            user.signUpInBackground(new SignUpCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        try {
-                            // [ ] TODO: auto subscribe user to features with auto subscribe true
+            if(NetworkConnectivityReceiver.isNetworkAvailable(this)) {
+                user.signUpInBackground(new SignUpCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            try {
+                                // [ ] TODO: auto subscribe user to features with auto subscribe true
 
-                            Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
-                            i.putExtra("Name", name);
-                            i.putExtra("Email", email);
-                            i.putExtra("Password", password);
-                            i.putExtra("userAns", userAns);
-                            startActivity(i);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        } catch (Exception ex) {
+                                Intent i = new Intent(SignUpEmailActivity.this, UserProfileActivity.class);
+                                i.putExtra("Name", name);
+                                i.putExtra("Email", email);
+                                i.putExtra("Password", password);
+                                i.putExtra("userAns", userAns);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            } catch (Exception ex) {
 
+                            }
+                        } else {
+                            // TODO: Provide feedback and next steps to user when creation fails
+                            Snackbar.make(msnackbar, R.string.user_creation_failed, Snackbar.LENGTH_LONG).show();
+                            Log.d(getResources().getString(R.string.user_creation_failed_message), e.toString());
                         }
-                    } else {
-                        // TODO: Provide feedback and next steps to user when creation fails
-                        Log.d("User Creation failed", e.toString());
                     }
-                }
-            });
+                });
+            }else{
+                Snackbar.make(msnackbar, R.string.network_not_available, Snackbar.LENGTH_LONG).show();
+            }
 
 
         }
@@ -116,6 +124,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+    
 }
 
 
