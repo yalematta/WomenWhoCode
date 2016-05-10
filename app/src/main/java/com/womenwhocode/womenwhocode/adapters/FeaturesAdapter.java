@@ -106,6 +106,7 @@ public class FeaturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .load(imageUrl)
                     .resize(48, 48)
                     .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(ivFeatureImage);
         }
     }

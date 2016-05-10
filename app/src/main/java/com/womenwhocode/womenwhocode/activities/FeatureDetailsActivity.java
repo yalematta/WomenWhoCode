@@ -199,6 +199,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                 .load(imageUrl)
                 .resize(40, 40)
                 .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
                 .into(ivFeatureImage);
 
         tvFeatureTitle.setText(title);

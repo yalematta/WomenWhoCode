@@ -46,21 +46,26 @@ public class Question1Fragment extends Fragment {
                 case 0:
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_1)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img1);
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_2_dark)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img2);
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_3_dark)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img3);
                     break;
                 case 1:
                     img1.setImageResource(R.drawable.personalization);
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_2)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img2);
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_3_dark)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img3);
                     break;
                 case 2:
@@ -68,6 +73,7 @@ public class Question1Fragment extends Fragment {
                     img2.setImageResource(R.drawable.personalization);
                     Picasso.with(getContext())
                             .load(R.drawable.personalization_3)
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(img3);
                     break;
 

@@ -79,6 +79,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
                             .transform(new CircleTransform())
                             .resize(40, 40)
                             .centerCrop()
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(holder.ivCurrentUserProfile);
                 }
                 if (!TextUtils.isEmpty(profile.getFullName())) {
@@ -105,6 +106,7 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
                             .transform(new CircleTransform())
                             .resize(40, 40)
                             .centerCrop()
+                            .placeholder(R.mipmap.ic_launcher)
                             .into(holder.ivOtherProfileLeft);
                 }
                 if (!TextUtils.isEmpty(profile.getFullName())) {

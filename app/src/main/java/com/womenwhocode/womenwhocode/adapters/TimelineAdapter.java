@@ -154,6 +154,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .resize(40, 40)
                     .centerCrop()
                     .transform(new CircleTransform())
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(ivPostPhoto);
 
         } else if (event != null) {
@@ -206,6 +207,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (post.getPostPicFile() != null) {
             Picasso.with(postPhotoContext)
                     .load(post.getPostPicFile().getUrl())
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(ivPostPic);
             ivPostPic.setVisibility(ImageView.VISIBLE);
         }
