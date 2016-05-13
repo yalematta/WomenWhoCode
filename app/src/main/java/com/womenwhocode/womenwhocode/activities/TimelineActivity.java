@@ -126,6 +126,7 @@ public class TimelineActivity extends AppCompatActivity implements
                                     .load(p.getPhotoFile().getUrl())
                                     .resize(48, 48)
                                     .centerCrop()
+                                    .placeholder(R.mipmap.ic_launcher)
                                     .into(ivHeaderPhoto);
                         }
                         tvFullName.setText(p.getFullName());

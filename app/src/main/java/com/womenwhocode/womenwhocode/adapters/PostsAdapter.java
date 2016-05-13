@@ -93,6 +93,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     .transform(new CircleTransform())
                     .resize(40, 40)
                     .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(ivUserPhoto);
         } else {
             tvPostNameBy.setText(R.string.org_name_short);
@@ -125,6 +126,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         if (post.getPostPicFile() != null) {
             Picasso.with(pf)
                     .load(post.getPostPicFile().getUrl())
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(ivPostPic);
             ivPostPic.setVisibility(ImageView.VISIBLE);
         }
