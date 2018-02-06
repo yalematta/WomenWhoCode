@@ -49,9 +49,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class FeatureDetailsActivity extends AppCompatActivity implements
         AddPostDialogFragment.OnSubmitPostListener {
 
-    private static final String SUBSCRIBED_TEXT = "unfollow";
-    private static final String SUBSCRIBE_TEXT = "follow";
-    private static final String SUBSCRIBERS_TEXT = " followers";
     private String feature_id;
     private RelativeLayout rlFeatures;
     private Feature feature;
@@ -151,7 +148,7 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
 
                         // set up count
                         subscribeCount = feature.getSubscribeCount();
-                        tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                        tvSubscriberCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
 
                         ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
                         subscribeParseQuery.whereEqualTo(Subscribe.FEATURE_KEY, feature);
@@ -162,12 +159,12 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                                 if (sub != null) {
                                     subscribe = sub;
                                     if (sub.getSubscribed()) {
-                                        btnSubscribe.setText(SUBSCRIBED_TEXT);
+                                        btnSubscribe.setText(getResources().getString(R.string.subscribed_button_text));
                                     } else {
-                                        btnSubscribe.setText(SUBSCRIBE_TEXT);
+                                        btnSubscribe.setText(getResources().getString(R.string.subscribe_button_text));
                                     }
                                 } else {
-                                    btnSubscribe.setText(SUBSCRIBE_TEXT);
+                                    btnSubscribe.setText(getResources().getString(R.string.subscribe_button_text));
                                 }
                             }
                         });
@@ -218,12 +215,12 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                 subscribeCount = feature.getSubscribeCount() - 1;
                 feature.setSubscribeCount(subscribeCount);
                 feature.saveInBackground();
-                tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                tvSubscriberCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
 
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        btnSubscribe.setText(SUBSCRIBE_TEXT);
+                        btnSubscribe.setText(getResources().getString(R.string.subscribe_button_text));
                     }
                 });
             } else {
@@ -233,12 +230,12 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
                 subscribeCount = feature.getSubscribeCount() + 1;
                 feature.setSubscribeCount(subscribeCount);
                 feature.saveInBackground();
-                tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                tvSubscriberCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
 
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        btnSubscribe.setText(SUBSCRIBED_TEXT);
+                        btnSubscribe.setText(getResources().getString(R.string.subscribed_button_text));
                     }
                 });
             }
@@ -253,12 +250,12 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
             subscribeCount = feature.getSubscribeCount() + 1;
             feature.setSubscribeCount(subscribeCount);
             feature.saveInBackground();
-            tvSubscriberCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+            tvSubscriberCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
 
             subscribe.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    btnSubscribe.setText(SUBSCRIBED_TEXT);
+                    btnSubscribe.setText(getResources().getString(R.string.subscribed_button_text));
                 }
             });
         }

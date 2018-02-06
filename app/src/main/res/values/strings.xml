@@ -72,4 +72,7 @@
     <string name="network_not_available">Please Check Your Network Connection and Try Again!</string>
     <string name="user_creation_failed">Something went wrong. Try Again? Thanks!</string>
     <string name="user_creation_failed_message">User information is invalid, please Try Again</string>
+    <string name="subscribe_button_text">follow</string>
+    <string name="subscribed_button_text">unfollow</string>
+    <string name="subscribers_button_text">followers</string>
 </resources>

@@ -42,10 +42,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EventDetailsActivity extends AppCompatActivity implements AddPostDialogFragment.OnSubmitPostListener {
-
-    private static final String SUBSCRIBED_TEXT = "unfollow";
-    private static final String SUBSCRIBE_TEXT = "follow";
-    private static final String SUBSCRIBERS_TEXT = " followers";
+    
     private TextView tvEventTitle;
     private TextView tvSubscribeCount;
     private Button btnSubscribeIcon;
@@ -125,7 +122,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 
                         // set up count
                         subscribeCount = event.getSubscribeCount();
-                        tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                        tvSubscribeCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
 
                         ParseQuery<Subscribe> subscribeParseQuery = ParseQuery.getQuery(Subscribe.class);
                         subscribeParseQuery.whereEqualTo(Subscribe.EVENT_KEY, event);
@@ -136,14 +133,14 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                                 if (sub != null) {
                                     subscribe = sub;
                                     if (sub.getSubscribed()) {
-                                        btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                                        btnSubscribeIcon.setText(getResources().getString(R.string.subscribed_button_text));
                                         ivEventImage.setImageResource(R.drawable.ic_calendar_check);
                                     } else {
-                                        btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
+                                        btnSubscribeIcon.setText(getResources().getString(R.string.subscribe_button_text));
                                         ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                     }
                                 } else {
-                                    btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
+                                    btnSubscribeIcon.setText(getResources().getString(R.string.subscribe_button_text));
                                     ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
                                 }
 
@@ -197,14 +194,14 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                 subscribeCount = event.getSubscribeCount() - 1;
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
-                tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                tvSubscribeCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
                 ivEventImage.setImageResource(R.drawable.ic_calendar_plus);
 
                 // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        btnSubscribeIcon.setText(SUBSCRIBE_TEXT);
+                        btnSubscribeIcon.setText(getResources().getString(R.string.subscribe_button_text));
                     }
                 });
             } else {
@@ -214,14 +211,14 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
                 subscribeCount = event.getSubscribeCount() + 1;
                 event.setSubscribeCount(subscribeCount);
                 event.saveInBackground();
-                tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+                tvSubscribeCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
                 ivEventImage.setImageResource(R.drawable.ic_calendar_check);
 
                 // update subscription
                 subscribe.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                        btnSubscribeIcon.setText(getResources().getString(R.string.subscribed_button_text));
                     }
                 });
             }
@@ -236,13 +233,13 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
             subscribeCount = event.getSubscribeCount() + 1;
             event.setSubscribeCount(subscribeCount);
             event.saveInBackground();
-            tvSubscribeCount.setText(String.valueOf(subscribeCount + SUBSCRIBERS_TEXT));
+            tvSubscribeCount.setText(String.valueOf(subscribeCount + getResources().getString(R.string.subscribers_button_text)));
             ivEventImage.setImageResource(R.drawable.ic_calendar_check);
 
             subscribe.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    btnSubscribeIcon.setText(SUBSCRIBED_TEXT);
+                    btnSubscribeIcon.setText(getResources().getString(R.string.subscribed_button_text));
                 }
             });
         }
