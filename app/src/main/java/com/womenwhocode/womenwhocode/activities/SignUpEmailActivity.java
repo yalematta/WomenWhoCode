@@ -2,17 +2,16 @@ package com.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -111,7 +110,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
                         }
                     }
                 });
-            }else{
+            } else{
                 Snackbar.make(msnackbar, R.string.network_not_available, Snackbar.LENGTH_LONG).show();
             }
 

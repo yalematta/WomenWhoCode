@@ -2,13 +2,14 @@ package com.womenwhocode.womenwhocode.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.womenwhocode.womenwhocode.R;
 import com.womenwhocode.womenwhocode.fragments.LogInFragment;
