@@ -55,7 +55,7 @@ import com.womenwhocode.womenwhocode.utils.ThemeUtils;
 
 import java.util.ArrayList;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class TimelineActivity extends AppCompatActivity implements
         EventsFragment.OnEventItemClickListener,
@@ -168,7 +168,7 @@ public class TimelineActivity extends AppCompatActivity implements
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

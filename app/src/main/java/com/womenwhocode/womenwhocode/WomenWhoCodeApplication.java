@@ -19,7 +19,9 @@ import com.womenwhocode.womenwhocode.models.Subscribe;
 import com.womenwhocode.womenwhocode.models.Tag;
 import com.womenwhocode.womenwhocode.models.UserNotification;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 
 /**
  * Created by zassmin on 10/15/15.
@@ -54,10 +56,18 @@ public class WomenWhoCodeApplication extends Application {
         // parse initialization
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Hind-Regular.ttf")
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
-        );
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                        .setDefaultFontPath("fonts/Hind-Regular.ttf")
+//                        .setFontAttrId(R.attr.fontPath)
+//                        .build()
+//        );
+
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Hind-Regular.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
 }

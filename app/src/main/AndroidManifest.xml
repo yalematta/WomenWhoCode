@@ -68,6 +68,16 @@
             android:screenOrientation="portrait"
             tools:ignore="Instantiatable" />
 
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="https://parseapi.back4app.com" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="twI2kWhB1ImLgnc5rDpA2F8b7TfRVImbZqsywWO1"/>
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="QpMOPn0fte0sdkY8GYKcpsSFhEY2rn3eoJxH73wO" />
+
     </application>
 
 </manifest>

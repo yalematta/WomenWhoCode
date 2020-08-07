@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.womenwhocode.womenwhocode.R;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by pnroy on 10/19/15.
@@ -80,12 +80,10 @@ public class PersonalizationActivity extends AppCompatActivity {
         ft.commit();
     }
 
-
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
-
 
     private void setFragmentData() {
         pq.build();

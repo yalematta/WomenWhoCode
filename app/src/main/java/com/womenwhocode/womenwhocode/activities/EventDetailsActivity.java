@@ -39,8 +39,7 @@ import com.womenwhocode.womenwhocode.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class EventDetailsActivity extends AppCompatActivity implements AddPostDialogFragment.OnSubmitPostListener {
     
@@ -80,7 +79,7 @@ public class EventDetailsActivity extends AppCompatActivity implements AddPostDi
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Nullable

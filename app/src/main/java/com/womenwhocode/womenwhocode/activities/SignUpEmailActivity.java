@@ -19,7 +19,7 @@ import com.womenwhocode.womenwhocode.R;
 import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 import com.womenwhocode.womenwhocode.utils.NetworkConnectivityReceiver;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by pnroy on 10/22/15.
@@ -57,7 +57,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     public void signUpUser(View view) {
@@ -101,7 +101,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             } catch (Exception ex) {
-
+                                Log.d(getResources().getString(R.string.user_creation_failed_message), e.toString());
                             }
                         } else {
                             // TODO: Provide feedback and next steps to user when creation fails
@@ -110,7 +110,7 @@ public class SignUpEmailActivity extends AppCompatActivity {
                         }
                     }
                 });
-            } else{
+            } else {
                 Snackbar.make(msnackbar, R.string.network_not_available, Snackbar.LENGTH_LONG).show();
             }
 

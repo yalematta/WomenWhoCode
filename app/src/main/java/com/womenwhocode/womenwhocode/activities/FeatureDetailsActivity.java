@@ -42,7 +42,7 @@ import com.womenwhocode.womenwhocode.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by shehba.shahab on 10/18/15.
@@ -105,10 +105,9 @@ public class FeatureDetailsActivity extends AppCompatActivity implements
         setUpView();
     }
 
-
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Nullable

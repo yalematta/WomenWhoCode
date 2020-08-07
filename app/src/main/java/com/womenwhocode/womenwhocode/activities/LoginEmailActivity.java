@@ -24,7 +24,7 @@ import com.womenwhocode.womenwhocode.utils.KeyBoardSupport;
 
 import java.util.List;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Created by pnroy on 10/19/15.
@@ -41,7 +41,7 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     public void Login(View view) {
